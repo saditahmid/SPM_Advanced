@@ -1,2 +1,2 @@
-# Student Performance Monitor System (SPSM)
+# Student Performance Monitor System (SPMS)
 Working on frontend
