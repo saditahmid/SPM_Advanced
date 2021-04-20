@@ -207,6 +207,104 @@ tr td:last-child{
     width:calc(100% - 70px);
     left:70px;
 }
+/* Three dashed bars */
+
+.glyphicon-nav {
+    width: 25px;
+    padding: 8px 0;
+    position: relative;
+    display: inline-block;
+}
+
+.glyphicon-nav:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    border-top: 2px solid rgb(0, 0, 0);
+    border-bottom: 2px solid rgb(0, 0, 0);
+    top: 0px;
+}
+
+.glyphicon-nav:after {
+    content: '';
+    position: absolute;
+    top: 55%;
+    left: 0px;
+    height: 2px;
+    width: 100%;
+    background: rgb(0, 0, 0);
+}
+/* Main body */
+
+.body {
+    display: block;
+    width: 100%;
+    padding: 0px;
+    padding-top: 59px;
+    padding-left: 250px;
+}
+
+.box {
+    margin: 5px;
+    margin-bottom: 10px;
+    padding: 20px;
+    flex: 1 1 0px;
+    border: 1px solid #dee4e9;
+    border-radius: 6px;
+    box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, .12);
+}
+
+.box-section {
+    flex: 1 1 0px;
+    margin: 5px;
+    /* margin-top: 0px; */
+    /* margin-bottom: 10px; */
+    padding: 0px;
+    border: 1px solid #dee4e9;
+    border-radius: 6px;
+    box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, .12);
+    text-align: left;
+}
+
+.box-section-head {
+    padding: 15px 30px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    background-color: rgba(70, 66, 66, 0.05);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.box-section-body {
+    padding: 0px 30px;
+    overflow: auto;
+}
+.marg-top {
+    margin-top: 30px;
+}
+
+.marg-bottom {
+    margin-bottom: 30px;
+}
+
+.chart {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 
