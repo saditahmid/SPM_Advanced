@@ -7,8 +7,6 @@
 * Farhan Ahsan Adib
 * Shakil Ahmed
 
-বি: দ্র:
-"চুরি করা থেকে বিরত থাকুন, 
+# বি: দ্র: "চুরি করা থেকে বিরত থাকুন, 
 নিজের মস্তিষ্ক ব্যাবহার করুন"
 
-Any form of Plagiarism will be highly punishable due to the commit date
