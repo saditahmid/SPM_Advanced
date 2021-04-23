@@ -1,35 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e43a457-2890-4a85-8719-b9d1e8639351" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/Dean.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/coursereport.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/coursereport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/dataentry.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/dataentry.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/dean.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/instructorreport.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/instructorreport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/mycourse.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/mycourse.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/studentreport.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dean/studentreport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/Vc.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/coursereport.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/coursereport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/dataentry.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/dataentry.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/instructorreport.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/instructorreport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/mycourse.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/mycourse.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/studentreport.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/studentreport.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VC/vc.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LOGIN/LoginPage v1/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/LOGIN/LoginPage v1/Index.html" afterDir="false" />
-    </list>
+    <list default="true" id="3e43a457-2890-4a85-8719-b9d1e8639351" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -68,7 +40,7 @@
       <updated>1618938386267</updated>
       <workItem from="1618938387621" duration="15000" />
       <workItem from="1619189640058" duration="1095000" />
-      <workItem from="1619191190028" duration="2438000" />
+      <workItem from="1619191190028" duration="3071000" />
     </task>
     <servers />
   </component>
