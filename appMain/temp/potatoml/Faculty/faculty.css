@@ -175,18 +175,18 @@ main{
 table{
   border-collapse: collapse;
 }
- thead tr{
-   border-top: 1px solid #f0f0f0;
-   border-bottom: 2px solid #f0f0f0;
- }
- thead td{
-   font-weight:700px;
- }
- td{
-    padding: .5rem 1rem;
-   font-size: .9rem;
-    color: #222;
- }
+thead tr{
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 2px solid #f0f0f0;
+}
+thead td{
+  font-weight:700px;
+}
+td{
+  padding: .5rem 1rem;
+  font-size: .9rem;
+  color: #222;
+}
 td .status{
   display: inline-block;
   height:20px;
@@ -210,3 +210,6 @@ tr td:last-child{
   width:calc(100% - 70px);
   left:70px;
 }
+
+
+
