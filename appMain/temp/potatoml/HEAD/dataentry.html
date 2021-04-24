@@ -138,7 +138,7 @@
                                         <label style="margin-right: 0px;" for="mapping${i + 1}" id="mappinglabel${i + 1}"><b>CO${i + 1}</b> maps to</label>
                                     </td>
                                     <td class="form-field" style="width: 110px;">
-                                         <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Number of COs to be mapped" />
+                                         <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="CO" />
                                         <select class="form-control" id="coMaps" name="coMaps">
                                             <option value="PLO01">PLO01</option>
                                             <option value="PLO02">PLO02</option>
@@ -153,8 +153,81 @@
                                             <option value="PLO11">PLO11</option>
                                             <option value="PLO12">PLO12</option>
                                             <option value="PLO13">PLO13</option>
-                                        </select>
+
+                                        <td class="form-field" style="width: 110px;">
+                                         <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="CO" />
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                        <td class="form-field" style="width: 110px;">
+                                         <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="CO" />
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
                                     </td>
+                                    <td class="form-field" style="width: 110px;">
+                                         <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="CO" />
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                    </td>
+                                    <td class="form-field" style="width: 110px;">
+                                         <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="CO" />
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                    </td>
+                                    </td>
+                                    </td>
+
                                      <td class="form-field" style="width: 150px;">
                                         <input type="text" id="coMark${i + 1}" name="coMarks" class="form-control" placeholder="Total Mark" />
                                     </td>
@@ -176,7 +249,7 @@
 <div class="flex-container blockwise">
     <!--Add Assessment-->
     <div class="box-section">
-        <div class="box-section-head">Assessment Data Entry</div>
+        <div class="box-section-head">Student Assessment Data Entry</div>
         <div id="coMapping" class="box-section-body">
             <form class="marg-top marg-bottom">
                 <table class="form-table">
@@ -205,6 +278,13 @@
                             <input type="text" id="noOfCOs-assessment" class="form-control" placeholder="Number of COs" />
                         </td>
 
+                    </tr>
+                    <tr>
+                        <td> <button class="btn btn-primary"> <a href="seeAllStudents.html"> See All Students : </button> </td>
+
+                        <td class="form-field">
+                            <input type="text"  class="form-control" placeholder="Total Students" />
+                        </td>
                     </tr>
                     <tr>
                         <td style="text-align: center;" class="last-row" colspan="3"><button class="btn btn-primary" onclick="createAssessment(); return false;">Submit</button></td>
@@ -263,7 +343,7 @@
 <div class="flex-container blockwise">
     <!--Add Evaluation-->
     <div class="box-section">
-        <div class="box-section-head">Evaluation Data Entry</div>
+        <div class="box-section-head">Semester Evaluation Data Entry</div>
         <div id="coMapping" class="box-section-body">
             <form class="marg-top marg-bottom">
                 <table class="form-table">
