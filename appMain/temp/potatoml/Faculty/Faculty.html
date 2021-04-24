@@ -68,11 +68,11 @@
       Dashboard
     </h2>
     <div class="user-wrapper">
-      <a href="https://imgbb.com/"><img src="https://i.ibb.co/BPT5tN5/Screenshot-1.png" alt="Sadita ahmed" width="30px" height="30px"></a>
+      <img src="https://i.ibb.co/BPT5tN5/Screenshot-1.png" alt="Sadita ahmed" width="30px" height="30px"></a>
       <div>
         <h4>Ms. Sadita Ahmed</h4>
 <!--        <small> 100001 </small>-->
-        <small> Faculty, CSE</small>
+        <small> Lecturer, CSE</small>
       </div>
     </div>
   </header>
@@ -192,7 +192,7 @@
         <div class="card">
           <div class="card-header">
             <h3>Department_Wise PLO</h3>
-            <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
+            <button> Go to IRAS <span class="las.la-arrow-right"></span> </button>
           </div>
           <div class="card-body">
             <div id="chartContainer2" style="width: 100%; height: 300px;display: inline-block;"></div>
@@ -201,6 +201,7 @@
       </div>
     </div>
   </main>
+
 </div>
 
 </body>
@@ -247,9 +248,18 @@
       ]
     },
     options:{
+      scales: {
+        ticks: {
+          min: 0
+        },
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]},
       title:{
         display:true,
-        text:'Average PLO of my courses',
+        text:'Average PLO of Courses',
         fontSize:25
       },
       legend:{
