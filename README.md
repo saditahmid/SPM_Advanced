@@ -1,4 +1,10 @@
 # Student Performance Monitoring System
+
+
+## Dependencies
+1. Node Js
+2. Express
+
 ## Contributers
 * Tahmid Hossain
 * Nawar Anzara
