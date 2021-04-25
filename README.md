@@ -4,6 +4,7 @@
 ## Dependencies
 1. Node Js
 2. Express
+3. EJS
 
 ## Contributers
 * Tahmid Hossain
