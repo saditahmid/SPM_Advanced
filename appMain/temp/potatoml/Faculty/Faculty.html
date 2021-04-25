@@ -77,10 +77,10 @@
     </div>
   </header>
   <main>
-    <div id="chartContainer1" style="width: 100%; height: 500px;display: inline-block;"></div>
-    <div>
-      <canvas id="layanan" width="100px" height="100px"></canvas>
-    </div>
+    <div id="PloColumn" style="width: 100%; height: 800px;display: inline-block;"></div>
+<!--    <div>-->
+<!--      <canvas id="layanan" width="100px" height="100px"></canvas>-->
+<!--    </div>-->
 
     <div class="recent-grid">
       <div class="projects">
@@ -354,38 +354,37 @@
 </script>
 
 
-<script>var chart = new CanvasJS.Chart("chartContainer1",
+<script>var chart = new CanvasJS.Chart("PloColumn",
         {
           animationEnabled: true,
+          theme: "light1",
           title: {
-            text: "Spline Area Chart"
+            text: "Program Learning Outcome"
           },
           axisX: {
-            interval: 10,
+            interval: 1,
           },
-          data: [
-            {
-              type: "splineArea",
-              color: "rgba(255,12,32,.3)",
-              dataPoints: [
-                { x: new Date(1992, 0), y: 2506000 },
-                { x: new Date(1993, 0), y: 2798000 },
-                { x: new Date(1994, 0), y: 3386000 },
-                { x: new Date(1995, 0), y: 6944000 },
-                { x: new Date(1996, 0), y: 6026000 },
-                { x: new Date(1997, 0), y: 2394000 },
-                { x: new Date(1998, 0), y: 1872000 },
-                { x: new Date(1999, 0), y: 2140000 },
-                { x: new Date(2000, 0), y: 7289000 },
-                { x: new Date(2001, 0), y: 4830000 },
-                { x: new Date(2002, 0), y: 2009000 },
-                { x: new Date(2003, 0), y: 2840000 },
-                { x: new Date(2004, 0), y: 2396000 },
-                { x: new Date(2005, 0), y: 1613000 },
-                { x: new Date(2006, 0), y: 2821000 }
-              ]
-            },
-          ]
+          data: [{
+            type: "column",
+            name: "companies",
+            axisYType: "primary",
+            // color: "#014D55",
+            dataPoints: [
+              { y: 80, label: "PLO1" },
+              { y: 70, label: "PLO2" },
+              { y: 55, label: "PLO3" },
+              { y: 95, label: "PLO4" },
+              { y: 77, label: "PLO5" },
+              { y: 57, label: "PLO6" },
+              { y: 79, label: "PLO7" },
+              { y: 69, label: "PLO8" },
+              { y: 88, label: "PLO9" },
+              { y: 60, label: "PLO10" },
+              { y: 50, label: "PLO11" },
+              { y: 60, label: "PLO12" },
+              { y: 90, label: "PLO13" }
+            ]
+          }]
         });
 chart.render();
 
