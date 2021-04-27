@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="/login.css" rel="stylesheet" type="text/css">
+    <script src ="/jquery.js"></script>
+
+</head>
+<body>
+
+<div class="login-reg-panel">
+    <div class="register-info-box">
+        <h2>Welcome to SPMS</h2>
+        <p>Use your authenticated id to signin</p>
+    </div>
+
+    <div class="white-panel">
+        <div class="login-show">
+            <h2>Login</h2>
+            <form action="/auth/login" method="POST">
+                <label>
+                    <input type="text" name="userId" id="userId" placeholder="Enter Id">
+                </label>
+                <label>
+                    <input type="password" name="password" id="password" placeholder="Password">
+                </label>
+                <input type="submit" value="Login">
+                <a href="">Forgot password?</a>
+            </form>
+        </div>
+    </div>
+</div>
+{{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+{{/if}}
+</body>
+</html>
