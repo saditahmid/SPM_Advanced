@@ -1508,508 +1508,513 @@
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="539" parent="173" name="sqlite_autoindex_Course_T_1">
+    <column id="539" parent="173" name="CourseType">
+      <Position>5</Position>
+      <DataType>VARCHAR|0s</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="540" parent="173" name="sqlite_autoindex_Course_T_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>CourseID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="540" parent="173" name="Course_T_PK">
+    <key id="541" parent="173" name="Course_T_PK">
       <ColNames>CourseID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Course_T_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="541" parent="173">
+    <foreign-key id="542" parent="173">
       <ColNames>ProgramID</ColNames>
       <RefTableName>Program_T</RefTableName>
       <RefKeyName>Program_T_PK</RefKeyName>
       <RefColNames>ProgramID</RefColNames>
     </foreign-key>
-    <column id="542" parent="174" name="DepartmentID">
+    <column id="543" parent="174" name="DepartmentID">
       <Position>1</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="543" parent="174" name="DepartmentName">
+    <column id="544" parent="174" name="DepartmentName">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="544" parent="174" name="SchoolID">
+    <column id="545" parent="174" name="SchoolID">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="545" parent="174" name="sqlite_autoindex_Department_T_1">
+    <index id="546" parent="174" name="sqlite_autoindex_Department_T_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>DepartmentID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="546" parent="174" name="Department_T_PK">
+    <key id="547" parent="174" name="Department_T_PK">
       <ColNames>DepartmentID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Department_T_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="547" parent="174">
+    <foreign-key id="548" parent="174">
       <ColNames>SchoolID</ColNames>
       <RefTableName>School_T</RefTableName>
       <RefKeyName>School_T_PK</RefKeyName>
       <RefColNames>SchoolID</RefColNames>
     </foreign-key>
-    <column id="548" parent="175" name="EnrolloredYear">
+    <column id="549" parent="175" name="EnrolloredYear">
       <Position>1</Position>
       <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="549" parent="175" name="EnrolloredSem">
+    <column id="550" parent="175" name="EnrolloredSem">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="550" parent="175" name="StudentID">
+    <column id="551" parent="175" name="StudentID">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="551" parent="175" name="ProgramID">
+    <column id="552" parent="175" name="ProgramID">
       <Position>4</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <foreign-key id="552" parent="175">
+    <foreign-key id="553" parent="175">
       <ColNames>StudentID</ColNames>
       <RefTableName>Student_T</RefTableName>
       <RefKeyName>Student_T_PK</RefKeyName>
       <RefColNames>StdentID</RefColNames>
     </foreign-key>
-    <foreign-key id="553" parent="175">
+    <foreign-key id="554" parent="175">
       <ColNames>ProgramID</ColNames>
       <RefTableName>Program_T</RefTableName>
       <RefKeyName>Program_T_PK</RefKeyName>
       <RefColNames>ProgramID</RefColNames>
     </foreign-key>
-    <column id="554" parent="176" name="AchievedMark">
+    <column id="555" parent="176" name="AchievedMark">
       <Position>1</Position>
       <DataType>Integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="555" parent="176" name="AssessmentID">
+    <column id="556" parent="176" name="AssessmentID">
       <Position>2</Position>
       <DataType>Integer|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="556" parent="176" name="RegistrationID">
+    <column id="557" parent="176" name="RegistrationID">
       <Position>3</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <foreign-key id="557" parent="176">
+    <foreign-key id="558" parent="176">
       <ColNames>AssessmentID</ColNames>
       <RefTableName>Assessment_T</RefTableName>
       <RefKeyName>Assessment_T_PK</RefKeyName>
       <RefColNames>AssessmentID</RefColNames>
     </foreign-key>
-    <foreign-key id="558" parent="176">
+    <foreign-key id="559" parent="176">
       <ColNames>RegistrationID</ColNames>
       <RefTableName>Registration_T</RefTableName>
       <RefKeyName>Registration_T_PK</RefKeyName>
       <RefColNames>RegistrationID</RefColNames>
     </foreign-key>
-    <column id="559" parent="177" name="FacultyID">
+    <column id="560" parent="177" name="FacultyID">
       <Position>1</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="560" parent="177" name="F_fname">
+    <column id="561" parent="177" name="F_fname">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="561" parent="177" name="F_lName">
+    <column id="562" parent="177" name="F_lName">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="562" parent="177" name="F_Gender">
+    <column id="563" parent="177" name="F_Gender">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="563" parent="177" name="F_DateOfBirth">
+    <column id="564" parent="177" name="F_DateOfBirth">
       <Position>5</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="564" parent="177" name="F_Email">
+    <column id="565" parent="177" name="F_Email">
       <Position>6</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="565" parent="177" name="F_Phone">
+    <column id="566" parent="177" name="F_Phone">
       <Position>7</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="566" parent="177" name="F_Address">
+    <column id="567" parent="177" name="F_Address">
       <Position>8</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="567" parent="177" name="FacultyProfile">
+    <column id="568" parent="177" name="FacultyProfile">
       <Position>9</Position>
       <DataType>BLOB|0s</DataType>
     </column>
-    <column id="568" parent="177" name="DepartmentID">
+    <column id="569" parent="177" name="DepartmentID">
       <Position>10</Position>
       <DataType>varchar|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="569" parent="177" name="sqlite_autoindex_Faculty_T_1">
+    <index id="570" parent="177" name="sqlite_autoindex_Faculty_T_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>FacultyID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="570" parent="177" name="Faculty_T_PK">
+    <key id="571" parent="177" name="Faculty_T_PK">
       <ColNames>FacultyID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Faculty_T_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="571" parent="177">
+    <foreign-key id="572" parent="177">
       <ColNames>DepartmentID</ColNames>
       <RefTableName>Department_T</RefTableName>
       <RefKeyName>Department_T_PK</RefKeyName>
       <RefColNames>DepartmentID</RefColNames>
     </foreign-key>
-    <column id="572" parent="178" name="HigherAuthorityID">
+    <column id="573" parent="178" name="HigherAuthorityID">
       <Position>1</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="573" parent="178" name="Term_start_date">
+    <column id="574" parent="178" name="Term_start_date">
       <Position>2</Position>
       <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="574" parent="178" name="Term_end_date">
+    <column id="575" parent="178" name="Term_end_date">
       <Position>3</Position>
       <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="575" parent="178" name="Position">
+    <column id="576" parent="178" name="Position">
       <Position>4</Position>
       <DataType>VARCHAR|0s</DataType>
     </column>
-    <column id="576" parent="178" name="FacultyID">
+    <column id="577" parent="178" name="FacultyID">
       <Position>5</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="577" parent="178" name="sqlite_autoindex_HigherAuthority_T_1">
+    <index id="578" parent="178" name="sqlite_autoindex_HigherAuthority_T_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>HigherAuthorityID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="578" parent="178" name="HigherAuthority_T_PK">
+    <key id="579" parent="178" name="HigherAuthority_T_PK">
       <ColNames>HigherAuthorityID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_HigherAuthority_T_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="579" parent="178">
+    <foreign-key id="580" parent="178">
       <ColNames>FacultyID</ColNames>
       <RefTableName>Faculty_T</RefTableName>
       <RefKeyName>Faculty_T_PK</RefKeyName>
       <RefColNames>FacultyID</RefColNames>
     </foreign-key>
-    <column id="580" parent="179" name="PLONo">
+    <column id="581" parent="179" name="PLONo">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="581" parent="179" name="PLOName">
+    <column id="582" parent="179" name="PLOName">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="582" parent="179" name="ProgramID">
+    <column id="583" parent="179" name="ProgramID">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="583" parent="179" name="PLO_T_PK">
+    <key id="584" parent="179" name="PLO_T_PK">
       <ColNames>PLONo</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="584" parent="179">
+    <foreign-key id="585" parent="179">
       <ColNames>ProgramID</ColNames>
       <RefTableName>Program_T</RefTableName>
       <RefKeyName>Program_T_PK</RefKeyName>
       <RefColNames>ProgramID</RefColNames>
     </foreign-key>
-    <column id="585" parent="180" name="ProgramID">
+    <column id="586" parent="180" name="ProgramID">
       <Position>1</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="586" parent="180" name="ProgramName">
+    <column id="587" parent="180" name="ProgramName">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="587" parent="180" name="DepartmentID">
+    <column id="588" parent="180" name="DepartmentID">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="588" parent="180" name="sqlite_autoindex_Program_T_1">
+    <index id="589" parent="180" name="sqlite_autoindex_Program_T_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>ProgramID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="589" parent="180" name="Program_T_PK">
+    <key id="590" parent="180" name="Program_T_PK">
       <ColNames>ProgramID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Program_T_1</UnderlyingIndexName>
     </key>
-    <foreign-key id="590" parent="180">
+    <foreign-key id="591" parent="180">
       <ColNames>DepartmentID</ColNames>
       <RefTableName>Department_T</RefTableName>
       <RefKeyName>Department_T_PK</RefKeyName>
       <RefColNames>DepartmentID</RefColNames>
     </foreign-key>
-    <column id="591" parent="181" name="RegistrationID">
+    <column id="592" parent="181" name="RegistrationID">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="592" parent="181" name="GradeBoundary">
+    <column id="593" parent="181" name="GradeBoundary">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="593" parent="181" name="Grade">
+    <column id="594" parent="181" name="Grade">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="594" parent="181" name="AchievedCredit">
+    <column id="595" parent="181" name="AchievedCredit">
       <Position>4</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="595" parent="181" name="StudentID">
+    <column id="596" parent="181" name="StudentID">
       <Position>5</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="596" parent="181" name="SectionID">
+    <column id="597" parent="181" name="SectionID">
       <Position>6</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="597" parent="181" name="Registration_T_PK">
+    <key id="598" parent="181" name="Registration_T_PK">
       <ColNames>RegistrationID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="598" parent="181">
+    <foreign-key id="599" parent="181">
       <ColNames>StudentID</ColNames>
       <RefTableName>Student_T</RefTableName>
       <RefKeyName>Student_T_PK</RefKeyName>
       <RefColNames>StdentID</RefColNames>
     </foreign-key>
-    <foreign-key id="599" parent="181">
+    <foreign-key id="600" parent="181">
       <ColNames>SectionID</ColNames>
       <RefTableName>Section_T</RefTableName>
       <RefKeyName>Section_T_PK</RefKeyName>
       <RefColNames>SectionID</RefColNames>
     </foreign-key>
-    <column id="600" parent="182" name="SchoolID">
+    <column id="601" parent="182" name="SchoolID">
       <Position>1</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="601" parent="182" name="SchoolName">
+    <column id="602" parent="182" name="SchoolName">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
     </column>
-    <index id="602" parent="182" name="sqlite_autoindex_School_T_1">
+    <index id="603" parent="182" name="sqlite_autoindex_School_T_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>SchoolID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="603" parent="182" name="School_T_PK">
+    <key id="604" parent="182" name="School_T_PK">
       <ColNames>SchoolID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_School_T_1</UnderlyingIndexName>
     </key>
-    <column id="604" parent="183" name="SectionID">
+    <column id="605" parent="183" name="SectionID">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="605" parent="183" name="SectionNo">
+    <column id="606" parent="183" name="SectionNo">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="606" parent="183" name="Year">
+    <column id="607" parent="183" name="Year">
       <Position>3</Position>
       <DataType>TEXT|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="607" parent="183" name="Semester">
+    <column id="608" parent="183" name="Semester">
       <Position>4</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="608" parent="183" name="FacultyID">
+    <column id="609" parent="183" name="FacultyID">
       <Position>5</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="609" parent="183" name="CourseID">
+    <column id="610" parent="183" name="CourseID">
       <Position>6</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="610" parent="183" name="Section_T_PK">
+    <key id="611" parent="183" name="Section_T_PK">
       <ColNames>SectionID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="611" parent="183">
+    <foreign-key id="612" parent="183">
       <ColNames>FacultyID</ColNames>
       <RefTableName>Faculty_T</RefTableName>
       <RefKeyName>Faculty_T_PK</RefKeyName>
       <RefColNames>FacultyID</RefColNames>
     </foreign-key>
-    <foreign-key id="612" parent="183">
+    <foreign-key id="613" parent="183">
       <ColNames>CourseID</ColNames>
       <RefTableName>Course_T</RefTableName>
       <RefKeyName>Course_T_PK</RefKeyName>
       <RefColNames>CourseID</RefColNames>
     </foreign-key>
-    <column id="613" parent="184" name="StdentID">
+    <column id="614" parent="184" name="StdentID">
       <Position>1</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="614" parent="184" name="S_fname">
+    <column id="615" parent="184" name="S_fname">
       <Position>2</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="615" parent="184" name="S_lName">
+    <column id="616" parent="184" name="S_lName">
       <Position>3</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="616" parent="184" name="S_Gender">
+    <column id="617" parent="184" name="S_Gender">
       <Position>4</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="617" parent="184" name="S_DateOfBirth">
+    <column id="618" parent="184" name="S_DateOfBirth">
       <Position>5</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="618" parent="184" name="S_Email">
+    <column id="619" parent="184" name="S_Email">
       <Position>6</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="619" parent="184" name="S_Phone">
+    <column id="620" parent="184" name="S_Phone">
       <Position>7</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="620" parent="184" name="S_Address">
+    <column id="621" parent="184" name="S_Address">
       <Position>8</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="621" parent="184" name="StudentProfile">
+    <column id="622" parent="184" name="StudentProfile">
       <Position>9</Position>
       <DataType>BLOB|0s</DataType>
     </column>
-    <column id="622" parent="184" name="Major">
+    <column id="623" parent="184" name="Major">
       <Position>10</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <column id="623" parent="184" name="Minor">
+    <column id="624" parent="184" name="Minor">
       <Position>11</Position>
       <DataType>varchar|0s</DataType>
     </column>
-    <index id="624" parent="184" name="sqlite_autoindex_Student_T_1">
+    <index id="625" parent="184" name="sqlite_autoindex_Student_T_1">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>StdentID</ColNames>
       <ColumnCollations></ColumnCollations>
       <Unique>1</Unique>
     </index>
-    <key id="625" parent="184" name="Student_T_PK">
+    <key id="626" parent="184" name="Student_T_PK">
       <ColNames>StdentID</ColNames>
       <Primary>1</Primary>
       <UnderlyingIndexName>sqlite_autoindex_Student_T_1</UnderlyingIndexName>
     </key>
-    <column id="626" parent="185" name="UserID">
+    <column id="627" parent="185" name="UserID">
       <Position>1</Position>
       <DataType>INTEGER|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="627" parent="185" name="UserType">
+    <column id="628" parent="185" name="UserType">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="628" parent="185" name="UserPass">
+    <column id="629" parent="185" name="UserPass">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="629" parent="185" name="AdminID">
+    <column id="630" parent="185" name="AdminID">
       <Position>4</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="630" parent="185" name="FacultyID">
+    <column id="631" parent="185" name="FacultyID">
       <Position>5</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="631" parent="185" name="StudentID">
+    <column id="632" parent="185" name="StudentID">
       <Position>6</Position>
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="632" parent="185" name="User_T_PK">
+    <key id="633" parent="185" name="User_T_PK">
       <ColNames>UserID</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="633" parent="185">
+    <foreign-key id="634" parent="185">
       <ColNames>AdminID</ColNames>
       <RefTableName>Admin_T</RefTableName>
       <RefKeyName>Admin_T_PK</RefKeyName>
       <RefColNames>AdminID</RefColNames>
     </foreign-key>
-    <foreign-key id="634" parent="185">
+    <foreign-key id="635" parent="185">
       <ColNames>FacultyID</ColNames>
       <RefTableName>Faculty_T</RefTableName>
       <RefKeyName>Faculty_T_PK</RefKeyName>
       <RefColNames>FacultyID</RefColNames>
     </foreign-key>
-    <foreign-key id="635" parent="185">
+    <foreign-key id="636" parent="185">
       <ColNames>StudentID</ColNames>
       <RefTableName>Student_T</RefTableName>
       <RefKeyName>Student_T_PK</RefKeyName>
       <RefColNames>StdentID</RefColNames>
     </foreign-key>
-    <column id="636" parent="186" name="type">
+    <column id="637" parent="186" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="637" parent="186" name="name">
+    <column id="638" parent="186" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="638" parent="186" name="tbl_name">
+    <column id="639" parent="186" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="639" parent="186" name="rootpage">
+    <column id="640" parent="186" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="640" parent="186" name="sql">
+    <column id="641" parent="186" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
