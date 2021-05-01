@@ -1948,7 +1948,7 @@
     </key>
     <column id="627" parent="185" name="UserID">
       <Position>1</Position>
-      <DataType>INTEGER|0s</DataType>
+      <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="628" parent="185" name="UserType">
@@ -1961,60 +1961,23 @@
       <DataType>VARCHAR|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="630" parent="185" name="AdminID">
-      <Position>4</Position>
-      <DataType>VARCHAR|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="631" parent="185" name="FacultyID">
-      <Position>5</Position>
-      <DataType>VARCHAR|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="632" parent="185" name="StudentID">
-      <Position>6</Position>
-      <DataType>VARCHAR|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <key id="633" parent="185" name="User_T_PK">
-      <ColNames>UserID</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <foreign-key id="634" parent="185">
-      <ColNames>AdminID</ColNames>
-      <RefTableName>Admin_T</RefTableName>
-      <RefKeyName>Admin_T_PK</RefKeyName>
-      <RefColNames>AdminID</RefColNames>
-    </foreign-key>
-    <foreign-key id="635" parent="185">
-      <ColNames>FacultyID</ColNames>
-      <RefTableName>Faculty_T</RefTableName>
-      <RefKeyName>Faculty_T_PK</RefKeyName>
-      <RefColNames>FacultyID</RefColNames>
-    </foreign-key>
-    <foreign-key id="636" parent="185">
-      <ColNames>StudentID</ColNames>
-      <RefTableName>Student_T</RefTableName>
-      <RefKeyName>Student_T_PK</RefKeyName>
-      <RefColNames>StdentID</RefColNames>
-    </foreign-key>
-    <column id="637" parent="186" name="type">
+    <column id="630" parent="186" name="type">
       <Position>1</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="638" parent="186" name="name">
+    <column id="631" parent="186" name="name">
       <Position>2</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="639" parent="186" name="tbl_name">
+    <column id="632" parent="186" name="tbl_name">
       <Position>3</Position>
       <DataType>text|0s</DataType>
     </column>
-    <column id="640" parent="186" name="rootpage">
+    <column id="633" parent="186" name="rootpage">
       <Position>4</Position>
       <DataType>int|0s</DataType>
     </column>
-    <column id="641" parent="186" name="sql">
+    <column id="634" parent="186" name="sql">
       <Position>5</Position>
       <DataType>text|0s</DataType>
     </column>
