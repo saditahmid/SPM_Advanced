@@ -4,117 +4,129 @@
     <meta charset="UTF-8">
     <title>SPM</title>
 
-  <style>
-    body, html {
-      height: 100%;
-      margin: 0;
-      font-family: Poppins;
-    }
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: Poppins;
+        }
 
-    * {
-      box-sizing: border-box;
-    }
 
-    .bg-image {
-      /* The image used */
-      background: black;
-      background-image: url("graphs.jpg");
-      /*background: -webkit-linear-gradient(rgba(186, 232, 158, 0.8), rgba(210, 119, 115, 0.8), rgba(96, 118, 198, 0.8)), url("https://bit.ly/2rlzaXi");*/
-      /*object-fit: cover;*/
-      opacity: 1;
-      /* Add the blur effect */
 
-      filter: blur(2px);
-      -webkit-filter: blur(8px);
-      -webkit-backdrop-filter: blur(5px); /* apply the blur */
-      backdrop-filter: blur(5px);
-      /*transform: scale(1.1);*/
+        .bg-image {
+            /* The image used */
+            background: -webkit-linear-gradient(rgba(186, 232, 158, 0.8), rgba(210, 119, 115, 0.8), rgba(96, 118, 198, 0.8)), url("https://bit.ly/2rlzaXi");
+            /*object-fit: cover;*/
+            opacity: 1;
+            /* Add the blur effect */
 
-      /* Full height */
-      height: 100%;
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px); /* apply the blur */
+            backdrop-filter: none;
+            /*transform: scale(1.1);*/
 
-      /* Center and scale the image nicely */
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
+            /* Full height */
+            height: 100%;
 
-    /* Position text in the middle of the page/image */
-    .bg-text {
-      /*background-color: rgb(201, 12, 12); !* Fallback color *!*/
-      /*background-color: rgba(0, 0, 0, 0.4); !* Black w/opacity/see-through *!*/
-      color: #d0dec9;
-      font-weight:bolder;
-      border: 3px solid #180808;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 2;
-      width: 60%;
-      padding: 80px;
-      text-align: center;
-      opacity: 1;
-    }
-    .tab {
-      overflow: hidden;
-      border: 3px solid #0b223b;
-      background-color: #0b223b;
-    }
+            /* Center and scale the image nicely */
+            background: black url("graphs.jpg") no-repeat center;
+            background-size: cover;
+        }
 
-    /* Style the buttons inside the tab */
-    .tab button {
-      background-color: inherit;
-      float: right;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      padding: 14px 16px;
-      transition: 0.3s;
-      font-size: 17px;
-      color: white;
-     }
+        /* Position text in the middle of the page/image */
+        .bg-text {
+            /*background-color: rgb(201, 12, 12); !* Fallback color *!*/
+            /*background-color: rgba(0, 0, 0, 0.4); !* Black w/opacity/see-through *!*/
+            color: #d0dec9;
+            font-weight:bolder;
+            border: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 60%;
+            padding: 80px;
+            text-align: center;
+            opacity: 1;
+        }
+        .tab {
+            overflow: hidden;
+            border: none;
+            background-color: #0b223b;
+        }
 
-    /* Change background color of buttons on hover */
-    .tab button:hover {
-      background-color: #ddd;
-      color:black;
-    }
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: right;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            color: white;
+        }
 
-    /* Create an active/current tablink class */
-    .tab button.active {
-      background-color: #ccc;
-    }
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+            color:#0b223b;
+        }
 
-    /* Style the tab content */
-    .tabcontent {
-      display: none;
-      padding: 6px 12px;
-      border: 1px solid #ccc;
-      border-top: none;
-    }
-  </style>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #0b223b;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
 
 </head>
 <body>
+<style>
+    a:link, a:visited {
 
+        color: white;
+
+        text-align: center;
+        text-decoration: none;
+
+    }
+
+    a:hover, a:active {
+        color: #0b223b;
+
+        text-align: center;
+        text-decoration: none;
+
+    }
+</style>
 
 <div class="tab">
-  <button class="tablinks" onclick="openCity(event, 'LOGIN')">LOGIN</button>
-  <button class="tablinks" onclick="openCity(event, 'REGISTER')">REGISTER</button>
-  <button class="tablinks" onclick="openCity(event, 'CONTACT US')">CONTACT US</button>
+    <button class="/login"  onclick="openCity(event, 'LOGIN')"><a href="/login">LOGIN</a></button>
+    <button class="/register" onclick="openCity(event, 'REGISTER')"><a href="/register">REGISTER</a></button>
+    <button class="tablinks" onclick="openCity(event, 'CONTACT US')">CONTACT US</button>
 </div>
 
 <!-- Tab content -->
 <div class="bg-image"></div>
 
 <div class="bg-text">
-<!--  <h2>Blurred Background</h2>-->
-  <h1 style="font-size:50px"><b>WELCOME TO SPM</b></h1>
-  <h4>A Cloud-based application to monitor student performance</h4>
-<!--  <p>And I'm a Photographer</p>-->
+    <!--  <h2>Blurred Background</h2>-->
+    <h1 style="font-size:50px"><b>WELCOME TO SPM</b></h1>
+    <h5>A Cloud-based application to monitor student performance</h5>
+    <!--  <p>And I'm a Photographer</p>-->
 </div>
 
 </body>
