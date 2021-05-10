@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+    <link href="/styleRegister.css" rel="stylesheet" type="text/css">
+    <script src ="/jqueryRegister.js"></script>
+
+</head>
+<body>
+<form action="/auth/register" method="POST">
+    <h2>Sign Up</h2>
+    <p>
+        <label for="FirstName" class="floatLabel">First Name:</label>
+        <input id="FirstName" name="FirstName" type="text">
+    </p>
+    <p>
+        <label for="LastName" class="floatLabel">Last Name</label>
+        <input id="LastName" name="LastName" type="text">
+    </p>
+    <p>
+        <label for="Gender" class="floatLabel">Select Gender: </label>
+
+        <select name="Gender" id="Gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+
+    </p>
+
+    <p>
+    <label for="BirthDate">Date of Birth:</label>
+    <input type="date" id="BirthDate" name="BirthDate">
+    </p>
+
+    <p>
+        <label for="Email" class="floatLabel">Email</label>
+        <input id=" Email" name="Email" type="text">
+    </p>
+
+    <p>
+        <label for="Phone" class="floatLabel">Phone Number:</label>
+        <input id="Phone" name="Phone" type="text">
+    </p>
+    <p>
+        <label for="Address" class="floatLabel">Address</label>
+        <input id="Address" name="Address" type="text">
+    </p>
+    <p>
+        <label for="UrlPic" class="floatLabel">Enter a image URL:</label>
+        <input id="UrlPic" name="UrlPic" type="text">
+    </p>
+
+    <p>
+        <label for="UserType" class="floatLabel">Select User Type: </label>
+
+        <select name="UserType" id="UserType">
+            <option value="Faculty">Faculty</option>
+            <option value="Higher Authority">Higher Authority</option>
+            <option value="Student">Student</option>
+            <option value="Admin">Admin</option>
+        </select>
+
+    </p>
+
+    <p>
+        <label for="Position" class="floatLabel">If you are a Higher Authority, then Select your Position: </label>
+
+        <select name="Position" id="Position">
+            <option value="Not higher Authority">Not higher Authority</option>
+            <option value="VC">VC</option>
+            <option value="Department Head">Department Head</option>
+            <option value="Dean">Dean</option>
+        </select>
+
+    </p>
+
+    <p>
+        <label for="Higher_Start_Term_Date">Enter your position's starting term date: </label>
+        <input type="date" id="Higher_Start_Term_Date" name="Higher_Start_Term_Date">
+    </p>
+    <p>
+        <label for="Higher_End_Term_Date">Enter your position's Ending term date: </label>
+        <input type="date" id="Higher_End_Term_Date" name="Higher_End_Term_Date">
+    </p>
+    <p>
+        <label for="DepartmentID" class="floatLabel">If you are a Faculty, then Select your Department: </label>
+
+        <select name="DepartmentID" id="DepartmentID">
+            <option value="Not a faculty">Not a faculty</option>
+            <option value="CSE">CSE</option>
+            <option value="EEE">EEE</option>
+            <option value="ENV">ENV</option>
+            <option value="ANT">ANT</option>
+            <option value="ENV">ENV</option>
+            <option value="BBA">BBA</option>
+            <option value="Eco">Eco</option>
+        </select>
+
+    </p>
+
+    <p>
+        <label for="Student_Major" class="floatLabel">If you are a student, then Select your Major: </label>
+
+        <select name="Student_Major" id="Student_Major">
+            <option value="Not a student">Not a student</option>
+            <option value="CSE">CSE</option>
+            <option value="EEE">EEE</option>
+            <option value="ENV">ENV</option>
+            <option value="ANT">ANT</option>
+            <option value="ENV">ENV</option>
+            <option value="BBA">BBA</option>
+            <option value="Eco">Eco</option>
+        </select>
+
+    </p>
+
+    <p>
+        <label for="Student_Minor" class="floatLabel">If you are a student, then Select your Minor: </label>
+
+        <select name="Student_Minor" id="Student_Minor">
+            <option value="Not a student">Not a student</option>
+            <option value="CSE">CSE</option>
+            <option value="EEE">EEE</option>
+            <option value="ENV">ENV</option>
+            <option value="ANT">ANT</option>
+            <option value="ENV">ENV</option>
+            <option value="BBA">BBA</option>
+            <option value="Eco">Eco</option>
+        </select>
+
+    </p>
+
+    <p>
+        <label for="User_ID" class="floatLabel">User_ID</label>
+        <input id="User_ID" name="User_ID" type="text">
+    </p>
+
+    <p>
+        <label for="password" class="floatLabel">Password</label>
+        <input id="password" name="password" type="password">
+
+    </p>
+    <p>
+        <label for="confirm_password" class="floatLabel">Confirm Password</label>
+        <input id="confirm_password" name="confirm_password" type="password">
+
+    </p>
+    <p>
+        <input type="submit" value="Create My Account" id="submit">
+    </p>
+</form>
+<h4><a href="/index">Go back home</a></h4>
+{{#if message}}
+    <h4 class="alert alert-danger mt-4">{{message}}</h4>
+    {{/if}}
+</body>
+</html>

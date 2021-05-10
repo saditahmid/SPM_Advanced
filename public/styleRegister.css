@@ -1,0 +1,21 @@
+
+body{
+    /* The image used */
+    background: -webkit-linear-gradient(rgba(186, 232, 158, 0.8), rgba(210, 119, 115, 0.8), rgba(96, 118, 198, 0.8)), url("https://bit.ly/2rlzaXi");
+    /*object-fit: cover;*/
+    opacity: 1;
+    /* Add the blur effect */
+
+    filter: none;
+    -webkit-filter: none;
+    -webkit-backdrop-filter: none; /* apply the blur */
+    backdrop-filter: none;
+    /*transform: scale(1.1);*/
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background: black url("/graphs5.jpg") no-repeat center;
+    background-size: cover;
+}
