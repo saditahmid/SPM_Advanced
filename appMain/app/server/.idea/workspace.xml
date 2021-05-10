@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="f912f71b-ffd2-42d5-bee4-528f6dbc83a5" name="Default Changelist" comment="add student server" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/student" />
+  </component>
+  <component name="ProjectId" id="1rkeBNI3umxP9WIxQLKLdY5Kf45" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.16.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.42" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../untitled1" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f912f71b-ffd2-42d5-bee4-528f6dbc83a5" name="Default Changelist" comment="" />
+      <created>1619524378880</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1619524378880</updated>
+      <workItem from="1619524380156" duration="26000" />
+      <workItem from="1619524411018" duration="4027000" />
+      <workItem from="1619543397573" duration="2132000" />
+      <workItem from="1619605676120" duration="10000" />
+      <workItem from="1619736742585" duration="600000" />
+      <workItem from="1619816453582" duration="3000" />
+      <workItem from="1619895437022" duration="728000" />
+      <workItem from="1619896245077" duration="5540000" />
+      <workItem from="1619902131707" duration="5307000" />
+      <workItem from="1620006816785" duration="21000" />
+      <workItem from="1620006862276" duration="43000" />
+      <workItem from="1620006920426" duration="547000" />
+      <workItem from="1620038347207" duration="638000" />
+      <workItem from="1620080599560" duration="599000" />
+      <workItem from="1620576230534" duration="605000" />
+      <workItem from="1620593303515" duration="599000" />
+      <workItem from="1620654483560" duration="602000" />
+    </task>
+    <task id="LOCAL-00001" summary="add student server">
+      <created>1619902554532</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1619902554532</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add student server">
+      <created>1619908093987</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1619908093987</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/student" />
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="add student server" />
+    <option name="LAST_COMMIT_MESSAGE" value="add student server" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
