@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="c9d39d88-bef9-4e9e-adc2-3956b2d906f4" name="Default Changelist" comment="add cjs">
-      <change beforePath="$PROJECT_DIR$/appMain/temp/potatoml/Faculty/mycourse.html" beforeDir="false" afterPath="$PROJECT_DIR$/appMain/temp/potatoml/Faculty/mycourse.html" afterDir="false" />
-    </list>
+    <list default="true" id="4364e6e7-0409-4395-81f2-45c6fa49c3d8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,29 +11,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="CSS File" />
         <option value="JavaScript File" />
       </list>
     </option>
   </component>
-  <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/master" />
-  </component>
-  <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitSEFilterConfiguration">
-    <file-type-list>
-      <filtered-out-file-type name="LOCAL_BRANCH" />
-      <filtered-out-file-type name="REMOTE_BRANCH" />
-      <filtered-out-file-type name="TAG" />
-      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
-    </file-type-list>
-  </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/appMain/temp/potatoml/Head_EJS/app.js" root0="SKIP_INSPECTION" />
-  </component>
-  <component name="ProjectId" id="1rCfU39wOkYzGRUUxmpuRowPAiJ" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectId" id="1rXO643dYTTrsfDV9XRm95BZ89M" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -43,201 +24,67 @@
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="RunOnceActivity.OpenDatabaseViewOnStart" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="database.data.extractors.current.export.id" value="Comma-separated (CSV)_id" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="javascript.nodejs.core.library.configured.version" value="14.16.0" />
+    <property name="javascript.nodejs.core.library.typings.version" value="14.14.41" />
+    <property name="js.last.introduce.type" value="LET" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SPM-NEW" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.sqlOptions" />
+    <property name="ts.external.directory.path" value="C:\Users\pc\AppData\Local\JetBrains\Toolbox\apps\WebStorm\ch-0\211.6693.108\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/appMain/temp/potatoml/STUDENT1" />
-      <recent name="$PROJECT_DIR$/appMain/base" />
+      <recent name="E:\Spring 2021 course work\nawar\public" />
+      <recent name="E:\Spring 2021 course work\nawar\views" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Spring 2021 course work\nawar" />
     </key>
   </component>
   <component name="RunManager">
-    <configuration name="mainapp.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="appMain/app/mainapp.js" working-dir="$PROJECT_DIR$">
-      <EXTENSION ID="com.jetbrains.nodejs.run.NodeJSStartBrowserRunConfigurationExtension">
-        <browser start="true" url="http://localhost:3000/" />
-      </EXTENSION>
+    <configuration name="app.js" type="NodeJSConfigurationType" nameIsGenerated="true" path-to-js-file="app.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="c9d39d88-bef9-4e9e-adc2-3956b2d906f4" name="Default Changelist" comment="update main.sq" />
-      <created>1618551042085</created>
+      <changelist id="4364e6e7-0409-4395-81f2-45c6fa49c3d8" name="Default Changelist" comment="" />
+      <created>1619118806314</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1618551042085</updated>
-      <workItem from="1618551043343" duration="27000" />
-      <workItem from="1618551082539" duration="253000" />
-      <workItem from="1618585154337" duration="911000" />
-      <workItem from="1618592807016" duration="19000" />
-      <workItem from="1618669635550" duration="3000" />
-      <workItem from="1618682669909" duration="264000" />
-      <workItem from="1618744605642" duration="641000" />
-      <workItem from="1618757422592" duration="606000" />
-      <workItem from="1618762174256" duration="681000" />
-      <workItem from="1618763790476" duration="614000" />
-      <workItem from="1618769890253" duration="5000" />
-      <workItem from="1618770103204" duration="207000" />
-      <workItem from="1618772717481" duration="6000" />
-      <workItem from="1618815279305" duration="281000" />
-      <workItem from="1618840941312" duration="549000" />
-      <workItem from="1618862056123" duration="2000" />
-      <workItem from="1619028940075" duration="8462000" />
-      <workItem from="1619092228398" duration="1267000" />
-      <workItem from="1619123909295" duration="6287000" />
-      <workItem from="1619166522785" duration="131000" />
-      <workItem from="1619166670669" duration="1227000" />
-      <workItem from="1619184369849" duration="3220000" />
-      <workItem from="1619198892402" duration="658000" />
-      <workItem from="1619201542293" duration="241000" />
-      <workItem from="1619201919141" duration="1412000" />
-      <workItem from="1619207378929" duration="5096000" />
-      <workItem from="1619223394818" duration="534000" />
-      <workItem from="1619223946242" duration="521000" />
-      <workItem from="1619254906714" duration="4110000" />
-      <workItem from="1619273532154" duration="1363000" />
-      <workItem from="1619285530023" duration="10622000" />
-      <workItem from="1619356062267" duration="6174000" />
-      <workItem from="1619384492237" duration="1323000" />
-      <workItem from="1619461625121" duration="5979000" />
-      <workItem from="1619522626825" duration="4186000" />
-      <workItem from="1619543515631" duration="1732000" />
-      <workItem from="1619816462690" duration="630000" />
-      <workItem from="1619894850202" duration="5407000" />
-      <workItem from="1619902132553" duration="1907000" />
-      <workItem from="1620006805322" duration="7000" />
-      <workItem from="1620038392453" duration="1484000" />
-      <workItem from="1620654488108" duration="705000" />
+      <updated>1619118806314</updated>
+      <workItem from="1619118812344" duration="3000000" />
+      <workItem from="1619182819791" duration="21446000" />
+      <workItem from="1619207636413" duration="16000" />
+      <workItem from="1619207701167" duration="4774000" />
+      <workItem from="1619290369814" duration="9959000" />
+      <workItem from="1619356682442" duration="23684000" />
+      <workItem from="1619463549150" duration="4542000" />
+      <workItem from="1619469493384" duration="762000" />
+      <workItem from="1619528833592" duration="2140000" />
+      <workItem from="1619531444021" duration="1172000" />
+      <workItem from="1619883179293" duration="4311000" />
+      <workItem from="1619890334580" duration="19579000" />
+      <workItem from="1619962521520" duration="19150000" />
+      <workItem from="1620031421045" duration="598000" />
+      <workItem from="1620052822177" duration="9414000" />
+      <workItem from="1620123185868" duration="1827000" />
+      <workItem from="1620143765853" duration="12459000" />
+      <workItem from="1620489557330" duration="19414000" />
+      <workItem from="1620522790841" duration="10111000" />
+      <workItem from="1620569018724" duration="17723000" />
+      <workItem from="1620630907260" duration="2364000" />
+      <workItem from="1620658649501" duration="163000" />
     </task>
-    <task id="LOCAL-00001" summary="test commit">
-      <created>1618551242756</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1618551242756</updated>
-    </task>
-    <task id="LOCAL-00002" summary="remove test.html">
-      <created>1618551304764</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1618551304764</updated>
-    </task>
-    <task id="LOCAL-00003" summary="modify table">
-      <created>1618744634344</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1618744634344</updated>
-    </task>
-    <task id="LOCAL-00004" summary="add sources">
-      <created>1618770187517</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1618770187517</updated>
-    </task>
-    <task id="LOCAL-00005" summary="modify file names">
-      <created>1618815353707</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1618815353707</updated>
-    </task>
-    <task id="LOCAL-00006" summary="modify files">
-      <created>1619032325704</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1619032325704</updated>
-    </task>
-    <task id="LOCAL-00007" summary="modify files">
-      <created>1619032372002</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1619032372002</updated>
-    </task>
-    <task id="LOCAL-00008" summary="modify files">
-      <created>1619032476322</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1619032476322</updated>
-    </task>
-    <task id="LOCAL-00009" summary="modify files">
-      <created>1619032498754</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1619032498754</updated>
-    </task>
-    <task id="LOCAL-00010" summary="modify files">
-      <created>1619136591949</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1619136591949</updated>
-    </task>
-    <task id="LOCAL-00011" summary="remove unnecessary files">
-      <created>1619137125310</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1619137125310</updated>
-    </task>
-    <task id="LOCAL-00012" summary="modify database">
-      <created>1619205797616</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1619205797616</updated>
-    </task>
-    <task id="LOCAL-00013" summary="add cjs">
-      <created>1619301227974</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1619301227974</updated>
-    </task>
-    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="update main.sq" />
-    <MESSAGE value="test commit" />
-    <MESSAGE value="remove test.html" />
-    <MESSAGE value="modify table" />
-    <MESSAGE value="add sources" />
-    <MESSAGE value="modify file names" />
-    <MESSAGE value="modify files" />
-    <MESSAGE value="remove unnecessary files" />
-    <MESSAGE value="modify database" />
-    <MESSAGE value="add cjs" />
-    <option name="LAST_COMMIT_MESSAGE" value="add cjs" />
   </component>
 </project>
