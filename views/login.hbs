@@ -26,8 +26,13 @@
                 <label>
                     <input type="password" name="password" id="password" placeholder="Password">
                 </label>
-                <input type="submit" value="Login" id="submit">
-                <a href="">Forgot password?</a>
+                    <input type="submit" value="Login" id="submit">
+                <small><a href="" onclick="forgotpassword();">Forgot your password?</a></small>
+                <script>
+                    function forgotpassword() {
+                        alert("Please contact the Registrar's Office.");
+                    }
+                </script>
             </form>
         </div>
     </div>
