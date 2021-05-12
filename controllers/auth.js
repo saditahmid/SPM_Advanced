@@ -7,7 +7,7 @@ const auth = express.Router();
 let User;
 
 
-let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/appMain/base/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:/SPM-Advanced/SPM_Advanced/DataSource/database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -54,7 +54,7 @@ exports.login = async(req, res) =>{
                             console.log(error)
                         }else{
                             console.log(results.StdentID);
-                            res.render("E:\\Spring 2021 course work\\nawar\\views\\student.hbs", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor});
+                            res.render("E:/SPM-Advanced/SPM_Advanced/views/student.hbs", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor});
 
 
                         }
@@ -79,7 +79,7 @@ exports.login = async(req, res) =>{
                             console.log(error)
                         }else{
                             console.log(results.FacultyID);
-                            res.render("E:\\Spring 2021 course work\\nawar\\views\\Faculty.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                            res.render("E:/SPM-Advanced/SPM_Advanced/views/Faculty.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
 
 
                         }
@@ -102,7 +102,7 @@ exports.login = async(req, res) =>{
                             console.log(error)
                         }else{
                             console.log(results.AdminID);
-                            res.render("E:\\Spring 2021 course work\\nawar\\views\\Admin.hbs", {AdminID:results.AdminID, A_F_Name:results.A_F_Name, A_L_Name:results.A_L_Name, A_Gender:results.A_Gender, A_DateOfBirth:results.A_DateOfBirth, A_Email:results.A_Email, A_Phone:results.A_Phone,A_Address:results.A_Address, AdminProfile:results.AdminProfile});
+                            res.render("E:/SPM-Advanced/SPM_Advanced/views/Admin.hbs", {AdminID:results.AdminID, A_F_Name:results.A_F_Name, A_L_Name:results.A_L_Name, A_Gender:results.A_Gender, A_DateOfBirth:results.A_DateOfBirth, A_Email:results.A_Email, A_Phone:results.A_Phone,A_Address:results.A_Address, AdminProfile:results.AdminProfile});
 
 
                         }
@@ -138,7 +138,7 @@ exports.login = async(req, res) =>{
                                     console.log(error)
                                 }else{
                                     console.log(results.FacultyID);
-                                    res.render("E:\\Spring 2021 course work\\nawar\\views\\VC.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    res.render("E:/SPM-Advanced/SPM_Advanced/views/VC.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
 
 
                                 }
@@ -161,7 +161,7 @@ exports.login = async(req, res) =>{
                                     console.log(error)
                                 }else{
                                     console.log(results.FacultyID);
-                                    res.render("E:\\Spring 2021 course work\\nawar\\views\\Head.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    res.render("E:/SPM-Advanced/SPM_Advanced/views/Head.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
 
 
                                 }
@@ -184,7 +184,7 @@ exports.login = async(req, res) =>{
                                     console.log(error)
                                 }else{
                                     console.log(results.FacultyID);
-                                    res.render("E:\\Spring 2021 course work\\nawar\\views\\Dean.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    res.render("E:/SPM-Advanced/SPM_Advanced/views/Dean.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
 
 
                                 }
