@@ -1,13 +1,14 @@
-const express = require("express");
+
 const sqlite3 = require("sqlite3").verbose();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const auth = express.Router();
 
-let User;
+let User = 12;
+module.exports.User = User;
 
+let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
 
-let db = new sqlite3.Database('E:/SPM-Advanced/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+//let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -15,20 +16,22 @@ let db = new sqlite3.Database('E:/SPM-Advanced/SPM_Advanced/DataSource/database.
 });
 
 exports.login = async(req, res) =>{
+
     try{
         console.log(User);
         console.log(req.body);
 
 
         const userId = req.body.userId;
-        User = req.body.userId;
+        module.exports.userId = userId;
+
         const password = req.body.password;
         console.log("The user has changed to " + User);
-      if(!userId || !password){
-          return res.status(400).render('login',{
-              message: 'Please provide an ID or password'
-          })
-      }
+        if(!userId || !password){
+            return res.status(400).render('login',{
+                message: 'Please provide an ID or password'
+            })
+        }
         db.serialize(function(){
 
             db.get("SELECT UserID,UserType,UserPass from User_T WHERE UserID = ?",[userId], async(error, results) => {
@@ -40,13 +43,13 @@ exports.login = async(req, res) =>{
                 });} else if((results.UserType) == "Student"){
                     const id = results.UserID;
                     const token = jwt.sign({id}, process.env.JWT_SECRET,{
-                         expiresIn: process.env.JWT_EXPIRES_IN
+                        expiresIn: process.env.JWT_EXPIRES_IN
 
                     });
                     console.log("The token is " + token);
                     const cookieOptions = {expires: new Date(
-                        Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
-                    ), httpOnly: true}
+                            Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
+                        ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
 
                     db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[results.UserID], async(error, results) => {
@@ -54,7 +57,18 @@ exports.login = async(req, res) =>{
                             console.log(error)
                         }else{
                             console.log(results.StdentID);
-                            res.render("E:/SPM-Advanced/SPM_Advanced/views/student.hbs", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor});
+                            module.exports.StdentID = results.StdentID;
+                            module.exports.S_fname = results.S_fname;
+                            module.exports.S_lName = results.S_lName;
+                            module.exports.S_Gender = results.S_Gender;
+                            module.exports.S_DateOfBirth = results.S_DateOfBirth;
+                            module.exports.S_Email = results.S_Email;
+                            module.exports.S_Phone = results.S_Phone;
+                            module.exports.S_Address = results.S_Address;
+                            module.exports.StudentProfile = results.StudentProfile;
+                            module.exports.Major = results.Major;
+                            module.exports.Minor = results.Minor;
+                            res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor});
 
 
                         }
@@ -79,7 +93,18 @@ exports.login = async(req, res) =>{
                             console.log(error)
                         }else{
                             console.log(results.FacultyID);
-                            res.render("E:/SPM-Advanced/SPM_Advanced/views/Faculty.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                            module.exports.FacultyID = results.FacultyID;
+                            module.exports.F_fname = results.F_fname;
+                            module.exports.F_lName = results.F_lName;
+                            module.exports.F_Gender = results.F_Gender;
+                            module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                            module.exports.F_Email = results.F_Email;
+                            module.exports.F_Phone = results.F_Phone;
+                            module.exports.F_Address = results.F_Address;
+                            module.exports.FacultyProfile = results.FacultyProfile;
+                            module.exports.DepartmentID = results.DepartmentID;
+
+                            res.render("\Faculty", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
 
 
                         }
@@ -102,7 +127,17 @@ exports.login = async(req, res) =>{
                             console.log(error)
                         }else{
                             console.log(results.AdminID);
-                            res.render("E:/SPM-Advanced/SPM_Advanced/views/Admin.hbs", {AdminID:results.AdminID, A_F_Name:results.A_F_Name, A_L_Name:results.A_L_Name, A_Gender:results.A_Gender, A_DateOfBirth:results.A_DateOfBirth, A_Email:results.A_Email, A_Phone:results.A_Phone,A_Address:results.A_Address, AdminProfile:results.AdminProfile});
+                            module.exports.AdminID = results.AdminID;
+                            module.exports.A_F_Name = results.A_F_Name;
+                            module.exports.A_L_Name = results.A_L_Name;
+                            module.exports.A_Gender = results.A_Gender;
+                            module.exports.A_DateOfBirth = results.A_DateOfBirth;
+                            module.exports.A_Email = results.A_Email;
+                            module.exports.A_Phone = results.A_Phone;
+                            module.exports.A_Address = results.A_Address;
+                            module.exports.AdminProfile = results.AdminProfile;
+
+                            res.render("\Admin", {AdminID:results.AdminID, A_F_Name:results.A_F_Name, A_L_Name:results.A_L_Name, A_Gender:results.A_Gender, A_DateOfBirth:results.A_DateOfBirth, A_Email:results.A_Email, A_Phone:results.A_Phone,A_Address:results.A_Address, AdminProfile:results.AdminProfile});
 
 
                         }
@@ -124,6 +159,10 @@ exports.login = async(req, res) =>{
                     db.get("SELECT HigherAuthorityID,Term_start_date, Term_end_date, H_Position, FacultyID from HigherAuthority_T WHERE FacultyID = ?",[results.UserID], async(error, results) => {
                         if(error){console.log(error);}else if(results.H_Position == "VC"){
                             const id = results.UserID;
+                            module.exports.Term_start_date = results.Term_start_date;
+                            module.exports.Term_end_date = results.Term_end_date;
+                            module.exports.H_Position = results.H_Position;
+
                             const token = jwt.sign({id}, process.env.JWT_SECRET,{
                                 expiresIn: process.env.JWT_EXPIRES_IN
 
@@ -138,7 +177,17 @@ exports.login = async(req, res) =>{
                                     console.log(error)
                                 }else{
                                     console.log(results.FacultyID);
-                                    res.render("E:/SPM-Advanced/SPM_Advanced/views/VC.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    module.exports.FacultyID = results.FacultyID;
+                                    module.exports.F_fname = results.F_fname;
+                                    module.exports.F_lName = results.F_lName;
+                                    module.exports.F_Gender = results.F_Gender;
+                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                    module.exports.F_Email = results.F_Email;
+                                    module.exports.F_Phone = results.F_Phone;
+                                    module.exports.F_Address = results.F_Address;
+                                    module.exports.FacultyProfile = results.FacultyProfile;
+                                    module.exports.DepartmentID = results.DepartmentID;
+                                    res.render("\VC", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
 
 
                                 }
@@ -147,6 +196,9 @@ exports.login = async(req, res) =>{
 
                         }else if(results.H_Position == "Department Head" ){
                             const id = results.UserID;
+                            module.exports.Term_start_date = results.Term_start_date;
+                            module.exports.Term_end_date = results.Term_end_date;
+                            module.exports.H_Position = results.H_Position;
                             const token = jwt.sign({id}, process.env.JWT_SECRET,{
                                 expiresIn: process.env.JWT_EXPIRES_IN
 
@@ -161,7 +213,17 @@ exports.login = async(req, res) =>{
                                     console.log(error)
                                 }else{
                                     console.log(results.FacultyID);
-                                    res.render("E:/SPM-Advanced/SPM_Advanced/views/Head.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    module.exports.FacultyID = results.FacultyID;
+                                    module.exports.F_fname = results.F_fname;
+                                    module.exports.F_lName = results.F_lName;
+                                    module.exports.F_Gender = results.F_Gender;
+                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                    module.exports.F_Email = results.F_Email;
+                                    module.exports.F_Phone = results.F_Phone;
+                                    module.exports.F_Address = results.F_Address;
+                                    module.exports.FacultyProfile = results.FacultyProfile;
+                                    module.exports.DepartmentID = results.DepartmentID;
+                                    res.render("\Head", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
 
 
                                 }
@@ -170,6 +232,9 @@ exports.login = async(req, res) =>{
 
                         }else if(results.H_Position == "Dean"){
                             const id = results.UserID;
+                            module.exports.Term_start_date = results.Term_start_date;
+                            module.exports.Term_end_date = results.Term_end_date;
+                            module.exports.H_Position = results.H_Position;
                             const token = jwt.sign({id}, process.env.JWT_SECRET,{
                                 expiresIn: process.env.JWT_EXPIRES_IN
 
@@ -184,7 +249,17 @@ exports.login = async(req, res) =>{
                                     console.log(error)
                                 }else{
                                     console.log(results.FacultyID);
-                                    res.render("E:/SPM-Advanced/SPM_Advanced/views/Dean.hbs", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    module.exports.FacultyID = results.FacultyID;
+                                    module.exports.F_fname = results.F_fname;
+                                    module.exports.F_lName = results.F_lName;
+                                    module.exports.F_Gender = results.F_Gender;
+                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                    module.exports.F_Email = results.F_Email;
+                                    module.exports.F_Phone = results.F_Phone;
+                                    module.exports.F_Address = results.F_Address;
+                                    module.exports.FacultyProfile = results.FacultyProfile;
+                                    module.exports.DepartmentID = results.DepartmentID;
+                                    res.render("\dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position});
 
 
                                 }
@@ -215,16 +290,17 @@ exports.login = async(req, res) =>{
 
         })
     }catch (error) {
-      console.log(error)
+        console.log(error)
     }
 
 }
 
-
 exports.student = (req, res)=>{
-console.log(req.body.SPM)
 
 }
+
+
+
 
 exports.StudentCourses  = (req, res)=>{
 
@@ -326,84 +402,84 @@ exports.register = (req, res) =>{
             console.log(hashedPassword);
 
             let run = db.run('INSERT INTO User_T(UserID, UserType, UserPass) VALUES(?,?,?)', [User_ID,UserType, hashedPassword]
-           , (error, results) => {
-                if (error) {
-                    console.log(error)
-                } else {
-                    console.log(results);
+                , (error, results) => {
+                    if (error) {
+                        console.log(error)
+                    } else {
+                        console.log(results);
 
-                }
-            })
-          if(UserType == "Faculty"){
-              let run1 = db.run('INSERT INTO Faculty_T(FacultyID, F_fname, F_lname, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID) VALUES(?,?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic, DepartmentID]
-                  , (error, results) => {
-                      if (error) {
-                          console.log(error)
-                      } else {
-                          console.log(results);
-                          return res.render('register', {
-                              message: "User registered"
-                          });
+                    }
+                })
+            if(UserType == "Faculty"){
+                let run1 = db.run('INSERT INTO Faculty_T(FacultyID, F_fname, F_lname, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID) VALUES(?,?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic, DepartmentID]
+                    , (error, results) => {
+                        if (error) {
+                            console.log(error)
+                        } else {
+                            console.log(results);
+                            return res.render('register', {
+                                message: "User registered"
+                            });
 
-                      }
-                  })
-          }else if(UserType == "Student"){
-              let run1 = db.run('INSERT INTO Student_T(StdentID, S_fname, S_lname, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor) VALUES(?,?,?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic, Student_Major, Student_Minor]
-                  , (error, results) => {
-                      if (error) {
-                          console.log(error)
-                      } else {
-                          console.log(results);
-                          return res.render('register', {
-                              message: "User registered"
-                          });
+                        }
+                    })
+            }else if(UserType == "Student"){
+                let run1 = db.run('INSERT INTO Student_T(StdentID, S_fname, S_lname, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor) VALUES(?,?,?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic, Student_Major, Student_Minor]
+                    , (error, results) => {
+                        if (error) {
+                            console.log(error)
+                        } else {
+                            console.log(results);
+                            return res.render('register', {
+                                message: "User registered"
+                            });
 
-                      }
-                  })
-
-
-          }else if(UserType == "Admin"){
-              let run1 = db.run('INSERT INTO Admin_T(AdminID, A_F_Name, A_L_Name, A_Gender, A_DateOfBirth, A_Email, A_Phone,A_Address, AdminProfile) VALUES(?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic]
-                  , (error, results) => {
-                      if (error) {
-                          console.log(error)
-                      } else {
-                          console.log(results);
-                          return res.render('register', {
-                              message: "User registered"
-                          });
-
-                      }
-                  })
-
-          }else if(UserType == "Higher Authority"){
-              let run1 = db.run('INSERT INTO Faculty_T(FacultyID, F_fname, F_lname, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID) VALUES(?,?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic, DepartmentID]
-                  , (error, results) => {
-                      if (error) {
-                          console.log(error)
-                      } else {
-                          console.log(results);
+                        }
+                    })
 
 
-                      }
-                  })
-              let run2 = db.run('INSERT INTO HigherAuthority_T(Term_start_date, Term_end_date, H_Position, FacultyID) VALUES(?,?,?,?)', [Higher_Start_Term_Date, Higher_End_Term_Date, Position, User_ID]
-                  , (error, results) => {
-                      if (error) {
-                          console.log(error)
-                      } else {
-                          console.log(results);
-                          return res.render('register', {
-                              message: "User registered"
-                          });
+            }else if(UserType == "Admin"){
+                let run1 = db.run('INSERT INTO Admin_T(AdminID, A_F_Name, A_L_Name, A_Gender, A_DateOfBirth, A_Email, A_Phone,A_Address, AdminProfile) VALUES(?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic]
+                    , (error, results) => {
+                        if (error) {
+                            console.log(error)
+                        } else {
+                            console.log(results);
+                            return res.render('register', {
+                                message: "User registered"
+                            });
 
-                      }
-                  })
+                        }
+                    })
+
+            }else if(UserType == "Higher Authority"){
+                let run1 = db.run('INSERT INTO Faculty_T(FacultyID, F_fname, F_lname, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID) VALUES(?,?,?,?,?,?,?,?,?,?)', [User_ID, FirstName, LastName, Gender, BirthDate, Email, Phone, Address, UrlPic, DepartmentID]
+                    , (error, results) => {
+                        if (error) {
+                            console.log(error)
+                        } else {
+                            console.log(results);
+
+
+                        }
+                    })
+                let run2 = db.run('INSERT INTO HigherAuthority_T(Term_start_date, Term_end_date, H_Position, FacultyID) VALUES(?,?,?,?)', [Higher_Start_Term_Date, Higher_End_Term_Date, Position, User_ID]
+                    , (error, results) => {
+                        if (error) {
+                            console.log(error)
+                        } else {
+                            console.log(results);
+                            return res.render('register', {
+                                message: "User registered"
+                            });
+
+                        }
+                    })
 
 
 
 
-          }
+            }
         })
 
     })
