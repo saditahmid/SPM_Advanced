@@ -1503,7 +1503,6 @@
     <column id="539" parent="173" name="CourseName">
       <Position>2</Position>
       <DataType>VARCHAR|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="540" parent="173" name="TotalCredit">
       <Position>3</Position>
@@ -1843,17 +1842,14 @@
     <column id="606" parent="182" name="GradeBoundary">
       <Position>2</Position>
       <DataType>INTEGER|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="607" parent="182" name="Grade">
       <Position>3</Position>
       <DataType>VARCHAR|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="608" parent="182" name="AchievedCredit">
       <Position>4</Position>
       <DataType>INTEGER|0s</DataType>
-      <NotNull>1</NotNull>
     </column>
     <column id="609" parent="182" name="StudentID">
       <Position>5</Position>
