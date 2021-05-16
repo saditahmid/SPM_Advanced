@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="../controllers/views.js"></script>
+  <title>My Chart.js Chart</title>
+</head>
+<h2>graph 14</h2>
+
+<body>
+<div style="width: 1000px; height: 500px;display: inline-block;" class="chart">
+  <canvas id="FacultyProgressView" width="1000" height="500"></canvas>
+</div>
+<script>
+
+  let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO09',  'PLO10',  'PLO11',  'PLO12', ];
+  datasetlist = [{
+    label: 'C01',
+    data: [19, 7, 48, 0, 12, 0, 0, 0, 3, 33,8, 17],
+    backgroundColor: '#094480'
+
+  }, {
+    label: 'C02',
+    data: [20, 60, 12, 24, 29, 23, 5, 0, 0, 19, 1, 5],
+    backgroundColor: '#962323'
+  },
+    {
+      label: 'C03',
+      data: [10, 15, 20, 14, 0, 9, 15, 9, 30,18,5,10],
+      backgroundColor: '#22aa99'
+    },
+    {
+      label: 'CO4',
+      data: [9, 10, 20, 4, 9, 3, 40, 4, 15,9,1,12],
+      backgroundColor: '#dd4477'
+    },
+    {
+      label: 'CO5',
+      data: [0, 0, 0, 44, 29, 0, 15, 84, 10,10,20,20],
+      backgroundColor: '#66aa00'
+    },
+    {
+      label: 'CO6',
+      data: [0, 0, 0, 14, 19, 63, 15, 1, 10,0,30,35],
+      backgroundColor: '#316395'
+    }];
+  stackedChart("FacultyProgressView", plo2, datasetlist, true );
+</script>
+</body>
+</html>
