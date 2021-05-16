@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="../controllers/views.js"></script>
+    <title>My Chart.js Chart</title>
 </head>
 <body>
+
+<h2>(1)Enrollment Trends</h2>
+
+<!--<div id="PloColumn" style="width: 100%; height: 800px;display: inline-block;"></div>-->
+<div style="width: 500px; height: 500px;display: inline-block;" class="chart">
+    <canvas id="ProgramWise" width="300" height="200"></canvas>
+</div>
+
+
+<h2>Student Progress </h2>
+
+<script>
+    let PchartName= ["CSC", "CSE", "CEN"];
+    let PchartLabel = [500,1000,200];
+    pieChart("ProgramWise","Program Wise Student Enrollment", PchartName ,PchartLabel)
+</script>
+
+
 
 </body>
 </html>

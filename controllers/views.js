@@ -34,7 +34,48 @@ function barChart(ctx,
         }
     });
 }
+function pieChart(ctx,
+                  labelName,
+                  labelList,
+                  dataList,
+                  bdcolor = '#094480',
+                  bgcolor = '#d9e2ec') {
+    Chart.defaults.global.defaultFontColor = "black";
+    var chart = new chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labelList,
+            datasets: [{
+                label: labelName,
+                backgroundColor: bgcolor,
+                borderColor: bdcolor,
+                data: dataList,
+                borderWidth: [1, 1, 1, 1, 1],
+                hoverOffset: 4
+            }],
 
+        },
+        options: {
+            responsive: true,
+            title: {
+                display: true,
+                position: "top",
+                text: "Pie Chart",
+                fontSize: 18,
+                fontColor: "#111"
+            },
+            legend: {
+                display: true,
+                position: "bottom",
+                labels: {
+                    fontColor: "#333",
+                    fontSize: 16
+                }
+            }
+        }
+    })
+
+}
 
 function lineChart(ctx,
                    labelName,
