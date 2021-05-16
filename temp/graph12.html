@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="../controllers/views.js"></script>
+  <title>My Chart.js Chart</title>
+</head>
+<body>
+
+<h2>InstructorWise student performance trend (Highest PLO )</h2>
+
+<div style="width: 500px; height: 500px;display: inline-block;" class="chart">
+  <canvas id="SemesterWisePLO" width="300" height="200"></canvas>
+</div>
+<script>
+  let SemesterNo= ['Spring',  'Summer',  'Autumn',];
+  let GPA = [12,10,6];
+  barChart("SemesterWisePLO","PLO", SemesterNo ,GPA,"","#962323")
+
+</script>
+
+
+</body>
+</html>
