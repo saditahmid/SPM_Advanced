@@ -69,6 +69,54 @@
     </header>
     <main>
         OVERALL REPORT
+
+        <div style="width: 500px; height: 500px;display: inline-block;" class="chart">
+            <canvas id="ProgramWiseCGPA" width="300" height="200"></canvas>
+        </div>
+
+        <script>
+            let PchartName= ["CSC", "CSE", "CEN",];
+            let PchartLabel = [3.4,3.35,3.2];
+            barChart("ProgramWiseCGPA","ProgramWise Student CGPA", PchartName ,PchartLabel)
+            function barChart(ctx,
+                              labelName,
+                              labelList,
+                              dataList,
+                              bdcolor = '#094480',
+                              bgcolor = '#d9e2ec') {
+                //Chart.defaults.global.defaultFontFamily = "Oxygen";
+                Chart.defaults.global.defaultFontColor = "black";
+
+                let chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'bar',
+
+                    // The data for our dataset
+                    data: {
+                        labels: labelList,
+                        datasets: [{
+                            label: labelName,
+                            backgroundColor: bgcolor,
+                            borderColor: bdcolor,
+                            data: dataList
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+        </script>
+
     </main>
 
 
