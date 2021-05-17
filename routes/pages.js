@@ -1,7 +1,13 @@
+const sqlite3 = require("sqlite3").verbose();
 const express = require("express");
 const Router = express.Router();
 let User = require('../controllers/auth');
-
+let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+});
 
 
 Router.get("/", (req,res) => {
@@ -50,8 +56,19 @@ Router.get("/index", (req,res) => {
     res.render(`index`)
 });
 Router.get("/StudentCourses", (req,res) => {
+    db.all("SELECT DISTINCT(e.EnrolledSem),p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID GROUP BY e.EnrolledSem,p.ProgramID", async(error, results) => {
+        console.log(results)
+        let sem = []
+        let countStudents = []
+        for(let i=0;i<results.length;++i){
+            sem[i] = results[i].EnrolledSem;
+            countStudents[i]=results[i].c;
 
-    res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor})
+        }
+        console.log(sem)
+        res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents })
+    })
+
 });
 Router.get("/studentReports", (req,res) => {
 
@@ -74,7 +91,7 @@ Router.get("/contactUs", (req,res) => {
 
 Router.get("/facultyCourses", (req,res) => {
 
-    res.render(`facultyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+    res.render(`facultyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, sem: User.semester.EnrolledSem})
 });
 Router.get("/facultyDataEntry", (req,res) => {
 

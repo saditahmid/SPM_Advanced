@@ -5,6 +5,7 @@
     <title> SPM Independent University,Dhaka  </title>
     <link rel="stylesheet" href = "/studentCourses.css">
     <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
 </head>
 
@@ -67,7 +68,64 @@
         </div>
     </header>
     <main>
-        MY COURSE REPORT ADD BUTTON TO SEE PREV REPORTS{{Minor}}
+        MY COURSE REPORT ADD BUTTON TO SEE PREV REPORTS{{Minor}}{{#each data}}{{@index}}{{this}}{{/each}}
+
+        <h2>Course Wise Student CGPA{{Major}}</h2>
+        <div style="width: 1000px; height: 1000px;display: inline-block;" class="chart">
+            <canvas id="CourseWiseCGPA" width="1000" height="500"></canvas>
+        </div>
+
+        <script>
+
+            let CchartName= [{{#each data}}"{{this}}",{{/each}}];
+
+
+
+            let CchartLabel = [{{#each count}}{{this}},{{/each}}];
+            barChart("CourseWiseCGPA","Course Wise Student CGPA", CchartName ,CchartLabel,"","#5582FA")
+
+            function barChart(ctx,
+                              labelName,
+                              labelList,
+                              dataList,
+                              bdcolor = '#094480',
+                              bgcolor = '#d9e2ec') {
+                //Chart.defaults.global.defaultFontFamily = "Oxygen";
+                Chart.defaults.global.defaultFontColor = "black";
+
+                var chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'bar',
+
+                    // The data for our dataset
+                    data: {
+                        labels: labelList,
+                        datasets: [{
+                            label: labelName,
+                            backgroundColor: bgcolor,
+                            borderColor: bdcolor,
+                            data: dataList
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+
+        </script>
+
+
+
     </main>
 </div>
 
