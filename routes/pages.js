@@ -2,9 +2,7 @@ const sqlite3 = require("sqlite3").verbose();
 const express = require("express");
 const Router = express.Router();
 let User = require('../controllers/auth');
-let db = new sqlite3.Database('C:/Users/Asus/Desktop/Black cat/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -90,14 +88,10 @@ Router.get("/contactUs", (req,res) => {
 });
 
 
-//FACULTY
-Router.get("/Faculty", (req,res) => {
 
-    res.render(`Faculty`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, sem: User.semester.EnrolledSem})
-});
 Router.get("/facultyCourses", (req,res) => {
 
-    res.render(`facultyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID })
+    res.render(`facultyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 Router.get("/facultyDataEntry", (req,res) => {
 

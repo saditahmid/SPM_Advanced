@@ -5,11 +5,10 @@ const bcrypt = require('bcryptjs');
 
 let User = 12;
 module.exports.User = User;
-let db = new sqlite3.Database('C:/Users/Asus/Desktop/Black cat/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+//let db = new sqlite3.Database('C:/Users/Asus/Desktop/Black cat/SPM_Advanced/DataSource/database.sqlite3', (err) => {
 //let db = new sqlite3.Database('/home/tahmid/GIt/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//E:\SPM_Advanced\DataSource\database.sqlite3
-//let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+
+let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -80,6 +79,7 @@ exports.login = async(req, res) =>{
 
                 }else if((results.UserType) == "Faculty" ){
                     const id = results.UserID;
+                    let bla = [13, 11, 12];
                     const token = jwt.sign({id}, process.env.JWT_SECRET,{
                         expiresIn: process.env.JWT_EXPIRES_IN
                     });
@@ -89,27 +89,41 @@ exports.login = async(req, res) =>{
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
 
-                    db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[results.UserID], async(error, results) => {
-                        if(error){
-                            console.log(error)
-                        }else{
-                            console.log(results.FacultyID);
-                            module.exports.FacultyID = results.FacultyID;
-                            module.exports.F_fname = results.F_fname;
-                            module.exports.F_lName = results.F_lName;
-                            module.exports.F_Gender = results.F_Gender;
-                            module.exports.F_DateOfBirth = results.F_DateOfBirth;
-                            module.exports.F_Email = results.F_Email;
-                            module.exports.F_Phone = results.F_Phone;
-                            module.exports.F_Address = results.F_Address;
-                            module.exports.FacultyProfile = results.FacultyProfile;
-                            module.exports.DepartmentID = results.DepartmentID;
-
-                            res.render("\Faculty", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
-
+                    db.all("SELECT DISTINCT(e.EnrolledSem),p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID GROUP BY e.EnrolledSem,p.ProgramID", async(error, results) => {
+                        console.log(results)
+                        let sem = []
+                        let countStudents = []
+                        for(let i=0;i<results.length;++i){
+                            sem[i] = results[i].EnrolledSem;
+                            countStudents[i]=results[i].c;
 
                         }
+                        console.log(sem)
 
+
+                        db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
+                            if(error){
+                                console.log(error)
+                            }else{
+                                console.log("This is inside another fuction: " + sem)
+                                console.log(results.FacultyID);
+                                module.exports.FacultyID = results.FacultyID;
+                                module.exports.F_fname = results.F_fname;
+                                module.exports.F_lName = results.F_lName;
+                                module.exports.F_Gender = results.F_Gender;
+                                module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                module.exports.F_Email = results.F_Email;
+                                module.exports.F_Phone = results.F_Phone;
+                                module.exports.F_Address = results.F_Address;
+                                module.exports.FacultyProfile = results.FacultyProfile;
+                                module.exports.DepartmentID = results.DepartmentID;
+
+                                res.render("\Faculty", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, sem: sem});
+
+
+                            }
+
+                        })
                     })
 
                 }else if((results.UserType) == "Admin" ){
@@ -173,10 +187,11 @@ exports.login = async(req, res) =>{
                                     Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                                 ), httpOnly: true}
                             res.cookie('jwt', token, cookieOptions);
-                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[results.FacultyID], async(error, results) => {
+                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[results.FacultyID], async(error, results, id) => {
                                 if(error){
                                     console.log(error)
                                 }else{
+
                                     console.log(results.FacultyID);
                                     module.exports.FacultyID = results.FacultyID;
                                     module.exports.F_fname = results.F_fname;
