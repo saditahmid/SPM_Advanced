@@ -119,7 +119,6 @@ Router.get("/facultyStudentReport", (req,res) => {
     db.all("SELECT E.ProgramID,AVG(CGPAofAllStudent.CGPA) AS a FROM (SELECT SUM(r.GradePoint*r.AchievedCredit) x,SUM(r.AchievedCredit) CreditEarned, (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) CGPA , r.StudentID,e.ProgramID FROM Registration_T r,Enrollment_T e WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CSE' GROUP BY r.StudentID) CGPAofAllStudent,Registration_T R,Enrollment_T E WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CSE'", async(error, results) => {
         console.log(results)
         let CSEAvgCgpa = results[0].a;
-
         console.log(CSEAvgCgpa)
         db.all("SELECT E.ProgramID,AVG(CGPAofAllStudent.CGPA) AS a FROM (SELECT SUM(r.GradePoint*r.AchievedCredit) x,SUM(r.AchievedCredit) CreditEarned, (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) CGPA , r.StudentID,e.ProgramID FROM Registration_T r,Enrollment_T e WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CEN' GROUP BY r.StudentID) CGPAofAllStudent,Registration_T R,Enrollment_T E WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CEN'", async(error, results) => {
             console.log(results)
