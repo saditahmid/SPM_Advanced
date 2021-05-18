@@ -224,7 +224,7 @@
             <div class="customers">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Department_Wise PLO</h3>
+                        <h3>Program_Wise Student Enrollment from 2017-Recent</h3>
                         <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
                     </div>
                     <div class="card-body">
@@ -429,8 +429,8 @@
         });
     }
 
-    let PchartName = ["CSC", "CSE", "CEN"];
-    let PchartLabel = [500, 1000, 200];
+    let PchartName = [{{#each program}}"{{this}}",{{/each}}];
+    let PchartLabel = [{{#each countStudents}}{{this}},{{/each}}];
     pieChart("ProgramWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
 
     function pieChart(ctx,

@@ -35,8 +35,18 @@ Router.get("/student", (req,res) => {
 });
 
 Router.get("/Faculty", (req,res) => {
+    db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+        console.log(results)
+        let sem = []
+        let countStudents = []
+        for(let i=0;i<results.length;++i){
+            sem[i] = results[i].EnrolledSem;
+            countStudents[i]=results[i].c;
 
-    res.render(`Faculty`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+        }
+        console.log(sem)
+        res.render(`Faculty`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+    })
 });
 Router.get("/Admin", (req,res) => {
 
