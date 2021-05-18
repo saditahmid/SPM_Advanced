@@ -78,15 +78,110 @@
             </div>
         </div>
     </header>
+
     <main>
+        <h2>School of Engineering, Technology & Science (SETS) Progress</h2>
+
+        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <canvas id="CourseProgressView" width="800" height="500"></canvas>
+        </div>
+        <h2>SETS School Progress View </h2>
 
 
+        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <canvas id="CSEProgressView" width="800" height="500"></canvas>
+        </div>
+<!--        <h2>EEE Department Progress View </h2>-->
+
+
+<!--        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">-->
+<!--            <canvas id="CSCProgressView" width="800" height="500"></canvas>-->
+<!--        </div>-->
+<!--        <h2>PHY Department Progress View </h2>-->
+
+
+<!--        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">-->
+<!--            <canvas id="CENProgressView" width="800" height="500"></canvas>-->
+<!--        </div>-->
+
+<!--        <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">-->
+<!--            <h2>SETS School Student Performance</h2>-->
+<!--            <canvas id="CSEWiseCGPA" width="1000" height="500"></canvas>-->
+<!--        </div>-->
+<!--        <div style="width: 100px; height: 150px;display: inline-block;" class="chart"></div>-->
+<!--        <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">-->
+<!--            <h2>EEE Department Student Performance</h2>-->
+
+<!--            <canvas id="CSCWiseCGPA" width="1000" height="500"></canvas>-->
+<!--        </div>-->
+<!--        <div style="width: 100px; height: 150px;display: inline-block;" class="chart"></div>-->
+
+<!--        <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">-->
+<!--            <h2>PHY Department Student Performance</h2>-->
+<!--            <canvas id="CENWiseCGPA" width="1000" height="500"></canvas>-->
+<!--        </div>-->
+        <div style="width: 100px; height: 200px;display: inline-block;" class="chart"></div>
+
+
+
+        <div style="width: 2000px; height: 500px;display: inline-block;" class="chart">
+            <h2>Student Report Of CSE401</h2>
+            <canvas id="DBMSProgressView" width="2000" height="500"></canvas>
+        </div>
         <div style="width: 1500px; height: 500px;display: inline-block;" class="chart">
             <canvas id="FacultyProgressView" width="1500" height="500"></canvas>
         </div>
+
     </main>
+
 </div>
 <script>
+
+    let semester1 = [ 'Spring',  'Summer',  'Autumn', ];
+    let semesterActual = [3, 6, 6];
+    let semesterAttempted = [4, 7, 8];
+    chartObjects = [{
+        label: 'Actual',
+        backgroundColor: '#E9F0FE',
+        borderColor: '#094480',
+        data: semesterActual
+    }, {
+        label: 'Expected',
+        backgroundColor: '#FEE9F3',
+        borderColor: '#962323',
+        data: semesterAttempted
+    }];
+    lineChartObject("CSEProgressView", semester1, chartObjects);
+    lineChartObject("CSCProgressView", semester1, chartObjects);
+    lineChartObject("CENProgressView", semester1, chartObjects);
+
+
+    let plo1 = ["1820220", "1720694", "1830256", "1711075", "1822302", "1722302", "1820221", "1720691", "1830251", "1711071", "1822301", "1722301", "1820222", "1720692", "1830252", "1711072", "1822322", "1722303", "1820223", "1720693", "1830253", "1711073", "1822303", "1722303", "1820224", "1720644", "1830254", "1711074", "1822304", "1722304"];
+    datasetlist = [{
+        label: 'Achieved',
+        data: [3, 4, 3, 2, 5, 5, 2, 1, 2, 1, 4, 5, 3, 2, 5, 1, 2, 2, 3, 4, 5, 5, 2, 1, 0, 2, 3, 2, 1, 4,],
+        backgroundColor: '#962323'
+    },
+        {
+            label: 'Expected',
+            data: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,],
+            backgroundColor: '#094480'
+
+        }];
+    stackedChart("DBMSProgressView", plo1, datasetlist, false);
+
+
+    let CSEchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
+    let CSEchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    barChart("CSEWiseCGPA", "Average PLO", CSEchartName, CSEchartLabel)
+    let CSCchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
+    let CSCchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    barChart("CSCWiseCGPA", "Average PLO", CSCchartName, CSCchartLabel)
+    let CENchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
+    let CENchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    barChart("CENWiseCGPA", "Average PLO", CENchartName, CENchartLabel)
+
+
     let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO09',  'PLO10',  'PLO11',  'PLO12', ];
     datasetlist = [{
         label: 'Faculty A',
@@ -104,9 +199,106 @@
     }];
 
     stackedChart("FacultyProgressView", plo2, datasetlist, false );
-    function stackedChart(ctx, labelName, datasetlist, isTrue) {
+    let semester=['Spring','Summer', 'Autumn']
+    let semesterActualCourse = [[0, 0, 0], [0, 43, 43], [0, 46, 46], [0, 31, 31], [0, 0, 0], [0, 56, 56], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+    let semesterAttemptedCourse = [0, 352, 352];
+    let PLO = [ 'PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13', ];
+    // let PLOActual = [50,60,55,71,63,69,74,85,68,76,66,55,73];
+    // let PLOAttempted = [88,88,88,88,88,88,88,88,88,88,88,88,88];
+    colorpalette = ['purple', 'brown', 'cyan', 'orange', 'yellow', '#094480', 'blue','red', 'green', 'violet', 'magenta', 'lime']
+
+    chartObjects = []
+    for (let i = 0; i < 12; i++) {
+        let l = `PLO0${i + 1}`
+        if (i + 1 >= 10) {
+            l = `PLO${i + 1}`
+        }
+
+        chartObjects.push({
+            label: l,
+            backgroundColor: 'white',
+            borderColor: colorpalette[i],
+            data: semesterActualCourse[i]
+        });
+    }
+    chartObjects.push({
+        label: 'Overall',
+        backgroundColor: 'white',
+        borderColor: 'black',
+        data: semesterAttemptedCourse
+    });
+    lineChartObject("CourseProgressView", semester, chartObjects);
+    function barChart(ctx,
+                      labelName,
+                      labelList,
+                      dataList,
+                      bdcolor = '#094480',
+                      bgcolor = '#33C7FF') {
+        //Chart.defaults.global.defaultFontFamily = "Oxygen";
+        Chart.defaults.global.defaultFontColor = "black";
 
         var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: labelList,
+                datasets: [{
+                    label: labelName,
+                    backgroundColor: bgcolor,
+                    borderColor: bdcolor,
+                    data: dataList
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+
+    function lineChartObject(ctx,
+                             labelList,
+                             chartObjects) {
+        Chart.defaults.global.defaultFontFamily = "Oxygen";
+        Chart.defaults.global.defaultFontColor = "black";
+
+        let chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: labelList,
+                datasets: chartObjects
+            },
+
+            // Configuration options go here
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+
+
+    function stackedChart(ctx, labelName, datasetlist, isTrue) {
+
+        let chart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: labelName, // responsible for how many bars are gonna show on the chart
@@ -131,7 +323,6 @@
             }
         });
     }
-
 </script>
 
 </body>
