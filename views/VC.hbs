@@ -266,11 +266,11 @@
     let SchchartName = [{{#each school}}"{{this}}",{{/each}}];
     let SchchartLabel = [{{#each schoolcountStudents}}{{this}},{{/each}}];
     pieChart("SchWise", "Program Wise Student Enrollment", SchchartName, SchchartLabel)
-    let DpchartName = ["CSE","EEE","PHY"];
-    let DpchartLabel = [1500, 2000, 800, 1000];
+    let DpchartName = [{{#each department}}"{{this}}",{{/each}}];
+    let DpchartLabel = [{{#each DeptcountStudents}}{{this}},{{/each}}];
     pieChart("DeptWise", "Program Wise Student Enrollment", DpchartName, DpchartLabel)
-    let PchartName = ["CSE","CSC","CEN"];
-    let PchartLabel = [1500, 2000, 800, 1000];
+    let PchartName = [{{#each program}}"{{this}}",{{/each}}];
+    let PchartLabel = [{{#each progcountStudents}}{{this}},{{/each}}];
     pieChart("ProgWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
 
     function pieChart(ctx,

@@ -130,6 +130,32 @@ Router.get("/Head", (req,res) => {
     })
 });
 Router.get("/VC", (req,res) => {
+    db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+        console.log(results)
+        let program = []
+        let progcountStudents = []
+        for(let i=0;i<results.length;++i){
+            program[i] = results[i].ProgramID;
+            progcountStudents[i]=results[i].c;
+
+        }
+        console.log(program)
+        console.log(progcountStudents)
+
+
+    db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+        console.log(results)
+        let department = []
+        let DeptcountStudents = []
+        for(let i=0;i<results.length;++i){
+            department[i] = results[i].DepartmentID;
+            DeptcountStudents[i]=results[i].c;
+
+        }
+        console.log(department)
+        console.log(DeptcountStudents)
+
+
     db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c  FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
         console.log(results)
         let school = []
@@ -156,9 +182,16 @@ Router.get("/VC", (req,res) => {
             Term_end_date: User.Term_end_date,
             H_Position: User.H_Position,
             school: school,
-            schoolcountStudents: schoolcountStudents
+            schoolcountStudents: schoolcountStudents,
+            program: program,
+            progcountStudents: progcountStudents,
+            department: department,
+            DeptcountStudents: DeptcountStudents
         })
     })
+        })
+              })
+
 });
 Router.get("/index", (req,res) => {
 
