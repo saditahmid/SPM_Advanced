@@ -51,8 +51,12 @@ exports.login = async(req, res) =>{
                             Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
+                    db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+                        console.log(results)
+                        let CurrentCgPA = Math.round(results[0].CGPA*100)/100;
+                        console.log(CurrentCgPA)
 
-                    db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[results.UserID], async(error, results) => {
+                    db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[id], async(error, results) => {
                         if(error){
                             console.log(error)
                         }else{
@@ -68,12 +72,12 @@ exports.login = async(req, res) =>{
                             module.exports.StudentProfile = results.StudentProfile;
                             module.exports.Major = results.Major;
                             module.exports.Minor = results.Minor;
-                            res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor});
+                            res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor, CurrentCgPA:CurrentCgPA});
 
 
                         }
 
-                    })
+                    }) })
 
 
 

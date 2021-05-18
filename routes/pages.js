@@ -30,8 +30,25 @@ Router.get("/users", (req,res) => {
     res.render(`users`)
 });
 Router.get("/student", (req,res) => {
-
-    res.render(`student`, {StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor})
+    db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+        console.log(results)
+        let CurrentCgPA = Math.round(results[0].CGPA * 100) / 100;
+        console.log(CurrentCgPA)
+        res.render(`student`, {
+            StdentID: User.StdentID,
+            S_fname: User.S_fname,
+            S_lName: User.S_lName,
+            S_Gender: User.S_Gender,
+            S_DateOfBirth: User.S_DateOfBirth,
+            S_Email: User.S_Email,
+            S_Phone: User.S_Phone,
+            S_Address: User.S_Address,
+            StudentProfile: User.StudentProfile,
+            Major: User.Major,
+            Minor: User.Minor,
+            CurrentCgPA:CurrentCgPA
+        })
+    })
 });
 
 Router.get("/Faculty", (req,res) => {
@@ -54,6 +71,18 @@ Router.get("/Admin", (req,res) => {
     res.render(`Admin`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
 });
 Router.get("/Dean", (req,res) => {
+
+    db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+        console.log(results)
+        let program = []
+        let progcountStudents = []
+        for(let i=0;i<results.length;++i){
+            program[i] = results[i].ProgramID;
+            progcountStudents[i]=results[i].c;
+
+        }
+        console.log(program)
+        console.log(progcountStudents)
     db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
         console.log(results)
         let department = []
@@ -80,9 +109,11 @@ Router.get("/Dean", (req,res) => {
             Term_end_date: User.Term_end_date,
             H_Position: User.H_Position,
             department: department,
-            DeptcountStudents: DeptcountStudents
+            DeptcountStudents: DeptcountStudents,
+            program: program,
+            progcountStudents: progcountStudents
         })
-    })
+    })})
 });
 Router.get("/Head", (req,res) => {
     db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
