@@ -77,17 +77,57 @@
         <div style="width: 600px; height: 500px;display: inline-block;" class="chart">
         </div>
         <div style="width: 600px; height: 500px;display: inline-block;" class="chart">
-            <canvas id="ProgramWiseCGPA" width="300" height="200"></canvas>
+            <canvas id="DepartmentProgressView" width="300" height="200"></canvas>
             <canvas id="ProgramWiseGPA" width="300" height="200"></canvas>
 
         </div>
         <script>
-            let PchartName= ["Summer", "Autumn", "Spring",];
-            let PchartLabel = [3.4,3.35,3.2];
-            barChart("ProgramWiseGPA","SemestermWise Student GPA", PchartName ,PchartLabel)
+            // let PchartName= ["Summer", "Autumn", "Spring",];
+            // let PchartLabel = [3.4,3.35,3.2];
+            // barChart("ProgramWiseGPA","SemestermWise Student GPA", PchartName ,PchartLabel)
             let SchartName= ["Summer", "Autumn", "Spring",];
             let SchartLabel = [3.4,3.35,3.2];
             barChart("ProgramWiseCGPA","SemestermWise Student CGPA", SchartName ,SchartLabel)
+
+            let semester = [ 'Spring18',  'Summer18',  'Autumn18','Spring19',  'Summer19',  'Autumn19','Spring20',  'Summer20',  'Autumn20', ];
+            let semesterAttempted = [3.9, 3.6,3.5, 2.8,3.1, 3.12,3.20, 3.33,3.4];
+            chartObjects = [{
+                label: 'CGPA',
+                backgroundColor: '#FEE9F3',
+                borderColor: '#962323',
+                data: semesterAttempted
+            }];
+            lineChartObject("DepartmentProgressView", semester, chartObjects);
+
+            function lineChartObject(ctx,
+                                     labelList,
+                                     chartObjects) {
+                Chart.defaults.global.defaultFontFamily = "Oxygen";
+                Chart.defaults.global.defaultFontColor = "black";
+
+                let chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
+
+                    // The data for our dataset
+                    data: {
+                        labels: labelList,
+                        datasets: chartObjects
+                    },
+
+                    // Configuration options go here
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
             function barChart(ctx,
                               labelName,
                               labelList,
