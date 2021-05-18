@@ -94,7 +94,7 @@
     <script>
         let CchartName = ['PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13',];
         let CchartLabel = [80, 70, 85, 50, 64, 49, 50, 66, 65, 43, 52, 46, 75];
-        barChart("CourseWisePLO", "Average PLO of my courses", CchartName, CchartLabel)
+        barChart("CourseWisePLO", "Average PLO of my courses", CchartName, CchartLabel,"","#0ACBE2")
 
         let DchartName = ['PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13',];
         let DchartLabel = [90, 78, 95, 45, 23, 89, 58, 76, 60, 33, 42, 36, 65];
@@ -102,30 +102,31 @@
 
         let BchartName = ['PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13',];
         let BchartLabel = [50, 40, 45, 65, 61, 79, 55, 96, 35, 31, 41, 46, 75];
-        barChart("DiscretePLO", "Average PLO of Discrete Mathematics", BchartName, BchartLabel)
+        barChart("DiscretePLO", "Average PLO of Discrete Mathematics", BchartName, BchartLabel,"","#00B09B")
 
-        let semester=['Spring','Summer', 'Autumn']
-        let PLO = [ 'PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13'];
-        let DBMSPLOActual = [50,60,55,71,63,69,74,85,68,76,66,55,73];
-        let DisPLOActual = [55,66,75,79,43,89,65,95,78,66,65,51,78];
-        let PLOAttempted = [88,88,88,88,88,88,88,88,88,88,88,88,88];
-        chartObjects = [{
-            label: 'DBMS Actual',
-            backgroundColor: '#FFFFFF',
-            borderColor: '#094480',
-            data: DBMSPLOActual
-        },{
-                label: 'Discrete Mathematics Actual',
-                backgroundColor: '#FFFFFF',
-                borderColor: '#EA4EA5',
-                data: DisPLOActual
-            },{
-            label: 'Expected',
-            backgroundColor: '#FFFFFF',
-            borderColor: '#962323',
-            data: PLOAttempted
-        }];
-        lineChartObject("CourseProgressView", semester, chartObjects);
+
+        // let semester=['Spring','Summer', 'Autumn']
+        // let PLO = [ 'PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13'];
+        // let DBMSPLOActual = [50,60,55,71,63,69,74,85,68,76,66,55,73];
+        // let DisPLOActual = [55,66,75,79,43,89,65,95,78,66,65,51,78];
+        // let PLOAttempted = [88,88,88,88,88,88,88,88,88,88,88,88,88];
+        // chartObjects = [{
+        //     label: 'DBMS Actual',
+        //     backgroundColor: '#FFFFFF',
+        //     borderColor: '#094480',
+        //     data: DBMSPLOActual
+        // },{
+        //         label: 'Discrete Mathematics Actual',
+        //         backgroundColor: '#FFFFFF',
+        //         borderColor: '#EA4EA5',
+        //         data: DisPLOActual
+        //     },{
+        //     label: 'Expected',
+        //     backgroundColor: '#FFFFFF',
+        //     borderColor: '#962323',
+        //     data: PLOAttempted
+        // }];
+        // lineChartObject("CourseProgressView", semester, chartObjects);
 
         function barChart(ctx,
                           labelName,
@@ -194,35 +195,35 @@
         }
 
 
-        // let semester=['Spring','Summer', 'Autumn']
-        // let semesterActualCourse = [[0, 0, 0], [0, 43, 43], [0, 46, 46], [0, 31, 31], [0, 0, 0], [0, 56, 56], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
-        // let semesterAttemptedCourse = [0, 352, 352];
-        // let PLO = [ 'PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13', ];
-        // // let PLOActual = [50,60,55,71,63,69,74,85,68,76,66,55,73];
-        // // let PLOAttempted = [88,88,88,88,88,88,88,88,88,88,88,88,88];
-        // colorpalette = ['purple', 'brown', 'cyan', 'orange', 'yellow', '#094480', 'blue','red', 'green', 'violet', 'magenta', 'lime']
-        //
-        // chartObjects = []
-        // for (let i = 0; i < 12; i++) {
-        //     let l = `PLO0${i + 1}`
-        //     if (i + 1 >= 10) {
-        //         l = `PLO${i + 1}`
-        //     }
-        //
-        //     chartObjects.push({
-        //         label: l,
-        //         backgroundColor: 'white',
-        //         borderColor: colorpalette[i],
-        //         data: semesterActualCourse[i]
-        //     });
-        // }
-        // chartObjects.push({
-        //     label: 'Overall',
-        //     backgroundColor: 'white',
-        //     borderColor: 'black',
-        //     data: semesterAttemptedCourse
-        // });
-        // lineChartObject("CourseProgressView", semester, chartObjects);
+        let semester=['Spring','Summer', 'Autumn']
+        let semesterActualCourse = [[0, 0, 0], [0, 43, 43], [0, 46, 46], [0, 31, 31], [0, 0, 0], [0, 56, 56], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
+        let semesterAttemptedCourse = [0, 352, 352];
+        let PLO = [ 'PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13', ];
+        // let PLOActual = [50,60,55,71,63,69,74,85,68,76,66,55,73];
+        // let PLOAttempted = [88,88,88,88,88,88,88,88,88,88,88,88,88];
+        colorpalette = ['purple', 'brown', 'cyan', 'orange', 'yellow', '#094480', 'blue','red', 'green', 'violet', 'magenta', 'lime']
+
+        chartObjects = []
+        for (let i = 0; i < 12; i++) {
+            let l = `PLO0${i + 1}`
+            if (i + 1 >= 10) {
+                l = `PLO${i + 1}`
+            }
+
+            chartObjects.push({
+                label: l,
+                backgroundColor: 'white',
+                borderColor: colorpalette[i],
+                data: semesterActualCourse[i]
+            });
+        }
+        chartObjects.push({
+            label: 'Overall',
+            backgroundColor: 'white',
+            borderColor: 'black',
+            data: semesterAttemptedCourse
+        });
+        lineChartObject("CourseProgressView", semester, chartObjects);
     </script>
 </div>
 
