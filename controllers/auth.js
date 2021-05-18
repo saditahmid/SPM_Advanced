@@ -6,9 +6,9 @@ const bcrypt = require('bcryptjs');
 let User = 12;
 module.exports.User = User;
 //let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
-//let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
 
-let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
+//let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -277,7 +277,7 @@ exports.login = async(req, res) =>{
                                     module.exports.F_Address = results.F_Address;
                                     module.exports.FacultyProfile = results.FacultyProfile;
                                     module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position});
+                                    res.render("\Dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position});
 
 
                                 }

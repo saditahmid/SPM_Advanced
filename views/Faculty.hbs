@@ -228,11 +228,13 @@
                         <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
                     </div>
                     <div class="card-body">
-                        <!--                        <div id="" style="width: 100%; height: 300px;display: inline-block;"></div>-->
-                        <canvas id="ProgramWise" width="400" height="400"></canvas>
+                        <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
+                            <canvas id="ProgramWise" width="300" height="300"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
     </main>
 
 </div>
@@ -390,7 +392,7 @@
 <script>
     let CchartName = ['PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13',];
     let CchartLabel = [80, 70, 85, 50, 64, 49, 50, 66, 65, 43, 52, 46, 75];
-    barChart("CourseWisePLO", "Course Wise Student CGPA", CchartName, CchartLabel)
+    barChart("CourseWisePLO", "Course Student Performance", CchartName, CchartLabel)
 
     function barChart(ctx,
                       labelName,
