@@ -260,13 +260,13 @@
             }
         });
     }
-    let DchartName = ["CSE", "EEE", "PHY"];
-    let DchartLabel = [1500, 1000, 800];
+    let DchartName = [{{#each department}}"{{this}}",{{/each}}];
+    let DchartLabel = [{{#each DeptcountStudents}}{{this}},{{/each}}];
     pieChart("DeptWise", "Program Wise Student Enrollment", DchartName, DchartLabel)
 
 
-    let PchartName = ["CSE", "CSC", "CEN"];
-    let PchartLabel = [1000, 700, 400];
+    let PchartName = [{{#each program}}"{{this}}",{{/each}}];
+    let PchartLabel = [{{#each progcountStudents}}{{this}},{{/each}}];
     pieChart("ProgramWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
 
     function pieChart(ctx,

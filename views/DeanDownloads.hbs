@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> SPM Independent University,Dhaka  </title>
+    <link rel="stylesheet" href = "/DeanDownloads.css">
+    <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+</head>
+
+<body>
+<input type="checkbox" id="nav-toggle">
+<<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2> <span class="lab la-accusoft"> </span> <span> SPM</span></h2>
+
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="/Dean" ><span class="las la-igloo"></span>
+                    <span>Student Performance Monitor</span></a>
+            </li>
+            <li>
+                <a href="/DeanMyCourses"><span  class="las la-school"></span>
+                    <span> My Courses</span></a>
+            </li>
+            <li>
+                <a href="/DeanDataEntry"><span  class="las la-database"></span>
+                    <span> Data Entry</span></a>
+            </li>
+            <li>
+                <a href="/DeanDepartmentReports"><span class="las la-clipboard-list"></span>
+                    <span> Department Reports</span></a>
+            </li>
+            <li>
+                <a href="/DeanProgramReports"><span class="las la-clipboard-list"></span>
+                    <span> Program Reports</span></a>
+            </li>
+
+            <li>
+                <a href="/DeanSchoolReports"><span class="las la-chalkboard-teacher"></span>
+                    <span> School Reports</span></a>
+            </li>
+            <li>
+                <a href="/DeanDownloads" class="active"><span class="las la-download"></span>
+                    <span> Downloads</span></a>
+            </li>
+            <li>
+                <a href="/DeanMyAccount"><span class="las la-user"></span>
+                    <span> My Account </span></a>
+            </li>
+            <li>
+                <a href="/login"><span class="las la-sign-out-alt"></span>
+                    <span> Sign-Out</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main-content">
+    <header>
+        <h2>
+            <label for="nav-toggle">
+                <span class="las la-bars"></span>
+            </label>
+            Dashboard
+        </h2>
+        <div class="user-wrapper">
+            <img src="{{FacultyProfile}}" alt="Sadita ahmed" width="30px" height="30px"></a>
+            <div>
+                <h4>{{F_fname}} {{F_lName}} </h4>
+                <!--        <small> 100001 </small>-->
+                <small> Lecturer, {{DepartmentID}}</small>
+            </div>
+        </div>
+    </header>
+    <main>
+
+        ALL STUDENT REPORT OF  HIS DEPARTMENT
+
+    </main>
+</div>
+
+</body>
+
+</html>

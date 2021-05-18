@@ -54,16 +54,111 @@ Router.get("/Admin", (req,res) => {
     res.render(`Admin`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
 });
 Router.get("/Dean", (req,res) => {
+    db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+        console.log(results)
+        let department = []
+        let DeptcountStudents = []
+        for (let i = 0; i < results.length; ++i) {
+            department[i] = results[i].DepartmentID;
+            DeptcountStudents[i] = results[i].c;
 
-    res.render(`Dean`,{FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
+        }
+        console.log(department)
+        console.log(DeptcountStudents)
+        res.render(`Dean`, {
+            FacultyID: User.FacultyID,
+            F_fname: User.F_fname,
+            F_lName: User.F_lName,
+            F_Gender: User.F_Gender,
+            F_DateOfBirth: User.F_DateOfBirth,
+            F_Email: User.F_Email,
+            F_Phone: User.F_Phone,
+            F_Address: User.F_Address,
+            FacultyProfile: User.FacultyProfile,
+            DepartmentID: User.DepartmentID,
+            Term_start_date: User.Term_start_date,
+            Term_end_date: User.Term_end_date,
+            H_Position: User.H_Position,
+            department: department,
+            DeptcountStudents: DeptcountStudents
+        })
+    })
 });
 Router.get("/Head", (req,res) => {
+    db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+        console.log(results)
+        let program = []
+        let progcountStudents = []
+        for(let i=0;i<results.length;++i){
+            program[i] = results[i].ProgramID;
+            progcountStudents[i]=results[i].c;
 
-    res.render(`Head`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
+        }
+        console.log(program)
+        console.log(progcountStudents)
+        db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+            console.log(results)
+            let department = []
+            let DeptcountStudents = []
+            for (let i = 0; i < results.length; ++i) {
+                department[i] = results[i].DepartmentID;
+                DeptcountStudents[i] = results[i].c;
+
+            }
+            console.log(department)
+            console.log(DeptcountStudents)
+            res.render(`Head`, {
+                FacultyID: User.FacultyID,
+                F_fname: User.F_fname,
+                F_lName: User.F_lName,
+                F_Gender: User.F_Gender,
+                F_DateOfBirth: User.F_DateOfBirth,
+                F_Email: User.F_Email,
+                F_Phone: User.F_Phone,
+                F_Address: User.F_Address,
+                FacultyProfile: User.FacultyProfile,
+                DepartmentID: User.DepartmentID,
+                Term_start_date: User.Term_start_date,
+                Term_end_date: User.Term_end_date,
+                H_Position: User.H_Position,
+                program: program,
+                progcountStudents: progcountStudents,
+                department: department,
+                DeptcountStudents: DeptcountStudents
+            })
+        })
+    })
 });
 Router.get("/VC", (req,res) => {
+    db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c  FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
+        console.log(results)
+        let school = []
+        let schoolcountStudents = []
+        for (let i = 0; i < results.length; ++i) {
+            school[i] = results[i].SchoolID;
+            schoolcountStudents[i] = results[i].c;
 
-    res.render(`VC`,{FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
+        }
+        console.log(school)
+        console.log(schoolcountStudents)
+        res.render(`VC`, {
+            FacultyID: User.FacultyID,
+            F_fname: User.F_fname,
+            F_lName: User.F_lName,
+            F_Gender: User.F_Gender,
+            F_DateOfBirth: User.F_DateOfBirth,
+            F_Email: User.F_Email,
+            F_Phone: User.F_Phone,
+            F_Address: User.F_Address,
+            FacultyProfile: User.FacultyProfile,
+            DepartmentID: User.DepartmentID,
+            Term_start_date: User.Term_start_date,
+            Term_end_date: User.Term_end_date,
+            H_Position: User.H_Position,
+            school: school,
+            schoolcountStudents: schoolcountStudents
+        })
+    })
 });
 Router.get("/index", (req,res) => {
 
@@ -100,6 +195,65 @@ Router.get("/contactUs", (req,res) => {
 
     res.render(`contactUs`)
 });
+
+
+Router.get("/DeanSchoolReports", (req,res) => {
+
+    res.render(`DeanSchoolReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/DeanDataEntry", (req,res) => {
+
+    res.render(`DeanDataEntry`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/DeanDepartmentReports", (req,res) => {
+
+    res.render(`DeanDepartmentReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/DeanDownloads", (req,res) => {
+
+    res.render(`DeanDownloads`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/DeanMyAccount", (req,res) => {
+
+    res.render(`DeanMyAccount`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/DeanMyCourses", (req,res) => {
+
+    res.render(`DeanMyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/DeanProgramReports", (req,res) => {
+
+    res.render(`DeanProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/VCDataEntry", (req,res) => {
+
+    res.render(`VCDataEntry`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/VCDepartmentReports", (req,res) => {
+
+    res.render(`VCDepartmentReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/VCDownloads", (req,res) => {
+
+    res.render(`VCDownloads`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/VCMyAccount", (req,res) => {
+
+    res.render(`VCMyAccount`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/VCMyCourses", (req,res) => {
+
+    res.render(`VCMyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/VCProgramReports", (req,res) => {
+
+    res.render(`VCProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+Router.get("/VCSchoolReports", (req,res) => {
+
+    res.render(`VCSchoolReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
+
 
 
 
