@@ -82,36 +82,26 @@
 
     <script>
 
-        let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06', 'PLO07', 'PLO08', 'PLO09', 'PLO10', 'PLO11', 'PLO12',];
+        let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06'];
         datasetlist = [{
             label: 'C01',
-            data: [19, 7, 48, 0, 12, 0, 0, 0, 3, 33, 8, 17],
+            data: [{{#each co1}}{{this}},{{/each}}],
             backgroundColor: '#094480'
 
         }, {
             label: 'C02',
-            data: [20, 60, 12, 24, 29, 23, 5, 0, 0, 19, 1, 5],
+            data: [{{#each co2}}{{this}},{{/each}}],
             backgroundColor: '#962323'
         },
             {
                 label: 'C03',
-                data: [10, 15, 20, 14, 0, 9, 15, 9, 30, 18, 5, 10],
+                data: [{{#each co3}}{{this}},{{/each}}],
                 backgroundColor: '#22aa99'
             },
             {
                 label: 'CO4',
-                data: [9, 10, 20, 4, 9, 3, 40, 4, 15, 9, 1, 12],
+                data: [{{#each co4}}{{this}},{{/each}}],
                 backgroundColor: '#dd4477'
-            },
-            {
-                label: 'CO5',
-                data: [0, 0, 0, 44, 29, 0, 15, 84, 10, 10, 20, 20],
-                backgroundColor: '#66aa00'
-            },
-            {
-                label: 'CO6',
-                data: [0, 0, 0, 14, 19, 63, 15, 1, 10, 0, 30, 35],
-                backgroundColor: '#316395'
             }];
         stackedChart("FacultyProgressView", plo2, datasetlist, true);
 

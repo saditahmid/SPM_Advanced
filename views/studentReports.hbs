@@ -89,10 +89,10 @@
             let SchartLabel = [3.4,3.35,3.2];
             barChart("ProgramWiseCGPA","SemestermWise Student CGPA", SchartName ,SchartLabel)
 
-            let semester = [ 'Spring18',  'Summer18',  'Autumn18','Spring19',  'Summer19',  'Autumn19','Spring20',  'Summer20',  'Autumn20', ];
-            let semesterAttempted = [3.9, 3.6,3.5, 2.8,3.1, 3.12,3.20, 3.33,3.4];
+            let semester = [{{#each semYear}}"{{this}}",{{/each}}];
+            let semesterAttempted = [{{#each GPA}}{{this}},{{/each}}];
             chartObjects = [{
-                label: 'CGPA',
+                label: 'GPA',
                 backgroundColor: '#FEE9F3',
                 borderColor: '#962323',
                 data: semesterAttempted

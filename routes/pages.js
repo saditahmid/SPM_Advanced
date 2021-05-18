@@ -229,6 +229,31 @@ Router.get("/index", (req,res) => {
     res.render(`index`)
 });
 Router.get("/StudentCourses", (req,res) => {
+    db.all("SELECT partOne.PLONo,SUM(partOne.CoPercentage) sumofCOPercentage, partOne.CONo FROM (SELECT COResult.CourseID,COResult.StudentID,COResult.CONo,COResult.total,COResult.achievedMark,p.PLONo  ,COResult.CoPercentage FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLONo GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) partOne GROUP BY partOne.PLONo,partOne.CONo", async(error, results) => {
+        console.log(results)
+        let co1 = []
+        let co2 = []
+        let co3 = []
+        let co4 = []
+for(let i=0;i<results.length;++i){
+    if(results[i].CONo == 1){
+        co1.push(results[i].sumofCOPercentage)
+    } else if(results[i].CONo == 2){
+        co2.push(results[i].sumofCOPercentage)
+
+    }else if(results[i].CONo == 3){
+        co3.push(results[i].sumofCOPercentage)
+
+    }else if(results[i].CONo == 4){
+        co4.push(results[i].sumofCOPercentage)
+
+    }
+}
+console.log(co1)
+        console.log(co2)
+        console.log(co3)
+        console.log(co4)
+
     db.all("SELECT DISTINCT(e.EnrolledSem),p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID GROUP BY e.EnrolledSem,p.ProgramID", async(error, results) => {
         console.log(results)
         let sem = []
@@ -239,13 +264,37 @@ Router.get("/StudentCourses", (req,res) => {
 
         }
         console.log(sem)
-        res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents })
-    })
+        res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents, co1: co1, co2:co2, co3:co3, co4:co4 })
+    }) })
 
 });
 Router.get("/studentReports", (req,res) => {
-
-    res.render(`studentReports`, {StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor})
+    db.all("SELECT (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) GPA ,s.Year,s.Semester FROM Registration_T r,Enrollment_T e,Section_T s WHERE r.SectionID =s.SectionID AND r.StudentID=100 GROUP BY s.Year,s.Semester,s.CourseID", async(error, results) => {
+        console.log(results)
+       let semYear = []
+        let GPA = []
+        for(let i=0;i<results.length;++i){
+            semYear[i] = results[i].Semester + results[i].Year
+            GPA[i] = results[i].GPA
+        }
+        console.log(semYear)
+        console.log(GPA)
+        res.render(`studentReports`, {
+            StdentID: User.StdentID,
+            S_fname: User.S_fname,
+            S_lName: User.S_lName,
+            S_Gender: User.S_Gender,
+            S_DateOfBirth: User.S_DateOfBirth,
+            S_Email: User.S_Email,
+            S_Phone: User.S_Phone,
+            S_Address: User.S_Address,
+            StudentProfile: User.StudentProfile,
+            Major: User.Major,
+            Minor: User.Minor,
+            semYear:semYear,
+            GPA:GPA
+        })
+    })
 });
 Router.get("/studentDownloads", (req,res) => {
 
