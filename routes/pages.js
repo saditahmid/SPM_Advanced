@@ -116,8 +116,25 @@ Router.get("/seeAllStudents", (req,res) => {
     res.render(`seeAllStudents`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 Router.get("/facultyStudentReport", (req,res) => {
+    db.all("SELECT E.ProgramID,AVG(CGPAofAllStudent.CGPA) AS a FROM (SELECT SUM(r.GradePoint*r.AchievedCredit) x,SUM(r.AchievedCredit) CreditEarned, (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) CGPA , r.StudentID,e.ProgramID FROM Registration_T r,Enrollment_T e WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CSE' GROUP BY r.StudentID) CGPAofAllStudent,Registration_T R,Enrollment_T E WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CSE'", async(error, results) => {
+        console.log(results)
+        let CSEAvgCgpa = results[0].a;
 
-    res.render(`facultyStudentReport`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+        console.log(CSEAvgCgpa)
+        db.all("SELECT E.ProgramID,AVG(CGPAofAllStudent.CGPA) AS a FROM (SELECT SUM(r.GradePoint*r.AchievedCredit) x,SUM(r.AchievedCredit) CreditEarned, (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) CGPA , r.StudentID,e.ProgramID FROM Registration_T r,Enrollment_T e WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CEN' GROUP BY r.StudentID) CGPAofAllStudent,Registration_T R,Enrollment_T E WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CEN'", async(error, results) => {
+            console.log(results)
+            let CENAvgCgpa = results[0].a;
+
+            console.log(CENAvgCgpa)
+            db.all("SELECT E.ProgramID,AVG(CGPAofAllStudent.CGPA) AS a FROM (SELECT SUM(r.GradePoint*r.AchievedCredit) x,SUM(r.AchievedCredit) CreditEarned, (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) CGPA , r.StudentID,e.ProgramID FROM Registration_T r,Enrollment_T e WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CSC' GROUP BY r.StudentID) CGPAofAllStudent,Registration_T R,Enrollment_T E WHERE r.StudentID=e.StudentID AND e.ProgramID='B.SC. in CSC'", async(error, results) => {
+                console.log(results)
+                let CSCAvgCgpa = results[0].a;
+
+                console.log(CSCAvgCgpa)
+                res.render(`facultyStudentReport`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, CSCAvgCgpa: CSCAvgCgpa, CENAvgCgpa: CENAvgCgpa, CSEAvgCgpa: CSEAvgCgpa})
+            })
+        })
+    })
 });
 Router.get("/facultyDownloads", (req,res) => {
 

@@ -277,7 +277,7 @@ exports.login = async(req, res) =>{
                                     module.exports.F_Address = results.F_Address;
                                     module.exports.FacultyProfile = results.FacultyProfile;
                                     module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position});
+                                    res.render("\Dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position});
 
 
                                 }
