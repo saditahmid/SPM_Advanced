@@ -2,9 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> SPM Independent University,Dhaka  </title>
-    <link rel="stylesheet" href = "/studentCourses.css">
-    <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <title> SPM Independent University,Dhaka </title>
+    <link rel="stylesheet" href="/studentCourses.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
 </head>
@@ -13,7 +14,7 @@
 <input type="checkbox" id="nav-toggle">
 <div class="sidebar">
     <div class="sidebar-brand">
-        <h2> <span class="lab la-accusoft"> </span> <span> SPM</span></h2>
+        <h2><span class="lab la-accusoft"> </span> <span> SPM</span></h2>
         <p>
 
         </p>
@@ -21,11 +22,11 @@
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="\student" ><span class="las la-igloo"></span>
+                <a href="\student"><span class="las la-igloo"></span>
                     <span>Student Performance Monitor</span></a>
             </li>
             <li>
-                <a href="\StudentCourses" class="active"><span  class="las la-user-graduate"></span>
+                <a href="\StudentCourses" class="active"><span class="las la-user-graduate"></span>
                     <span> My Courses</span></a>
             </li>
             <li>
@@ -76,123 +77,121 @@
             <h2> Graph no 14
             </h2>
         </div>
-            <canvas id="FacultyProgressView" width="800" height="500"></canvas>
+        <canvas id="FacultyProgressView" width="800" height="500"></canvas>
     </main>
-</div>
-        <script>
 
-            let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO09',  'PLO10',  'PLO11',  'PLO12', ];
-            datasetlist = [{
-                label: 'C01',
-                data: [19, 7, 48, 0, 12, 0, 0, 0, 3, 33,8, 17],
-                backgroundColor: '#094480'
+    <script>
 
-            }, {
-                label: 'C02',
-                data: [20, 60, 12, 24, 29, 23, 5, 0, 0, 19, 1, 5],
-                backgroundColor: '#962323'
+        let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06', 'PLO07', 'PLO08', 'PLO09', 'PLO10', 'PLO11', 'PLO12',];
+        datasetlist = [{
+            label: 'C01',
+            data: [19, 7, 48, 0, 12, 0, 0, 0, 3, 33, 8, 17],
+            backgroundColor: '#094480'
+
+        }, {
+            label: 'C02',
+            data: [20, 60, 12, 24, 29, 23, 5, 0, 0, 19, 1, 5],
+            backgroundColor: '#962323'
+        },
+            {
+                label: 'C03',
+                data: [10, 15, 20, 14, 0, 9, 15, 9, 30, 18, 5, 10],
+                backgroundColor: '#22aa99'
             },
-                {
-                    label: 'C03',
-                    data: [10, 15, 20, 14, 0, 9, 15, 9, 30,18,5,10],
-                    backgroundColor: '#22aa99'
-                },
-                {
-                    label: 'CO4',
-                    data: [9, 10, 20, 4, 9, 3, 40, 4, 15,9,1,12],
-                    backgroundColor: '#dd4477'
-                },
-                {
-                    label: 'CO5',
-                    data: [0, 0, 0, 44, 29, 0, 15, 84, 10,10,20,20],
-                    backgroundColor: '#66aa00'
-                },
-                {
-                    label: 'CO6',
-                    data: [0, 0, 0, 14, 19, 63, 15, 1, 10,0,30,35],
-                    backgroundColor: '#316395'
-                }];
-            stackedChart("FacultyProgressView", plo2, datasetlist, true );
+            {
+                label: 'CO4',
+                data: [9, 10, 20, 4, 9, 3, 40, 4, 15, 9, 1, 12],
+                backgroundColor: '#dd4477'
+            },
+            {
+                label: 'CO5',
+                data: [0, 0, 0, 44, 29, 0, 15, 84, 10, 10, 20, 20],
+                backgroundColor: '#66aa00'
+            },
+            {
+                label: 'CO6',
+                data: [0, 0, 0, 14, 19, 63, 15, 1, 10, 0, 30, 35],
+                backgroundColor: '#316395'
+            }];
+        stackedChart("FacultyProgressView", plo2, datasetlist, true);
 
 
-            function stackedChart(ctx, labelName, datasetlist, isTrue) {
+        function stackedChart(ctx, labelName, datasetlist, isTrue) {
 
-                let chart = new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: labelName, // responsible for how many bars are gonna show on the chart
-                        // create 12 datasets, since we have 12 items
-                        // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
-                        // put 0, if there is no data for the particular bar
-                        datasets: datasetlist
+            let chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labelName, // responsible for how many bars are gonna show on the chart
+                    // create 12 datasets, since we have 12 items
+                    // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
+                    // put 0, if there is no data for the particular bar
+                    datasets: datasetlist
+                },
+                options: {
+                    responsive: false,
+                    legend: {
+                        position: 'right' // place legend on the right side of chart
                     },
-                    options: {
-                        responsive: false,
-                        legend: {
-                            position: 'right' // place legend on the right side of chart
-                        },
-                        scales: {
-                            xAxes: [{
-                                stacked: isTrue // this should be set to make the bars stacked
-                            }],
-                            yAxes: [{
-                                stacked: isTrue // this also..
-                            }]
-                        }
-                    }
-                });
-            }
-        </script>
-
-        <script>
-
-            let CchartName= [{{#each data}}"{{this}}",{{/each}}];
-
-
-
-            let CchartLabel = [{{#each count}}{{this}},{{/each}}];
-            barChart("CourseWiseCGPA","Course Wise Student CGPA", CchartName ,CchartLabel,"","#5582FA")
-
-            function barChart(ctx,
-                              labelName,
-                              labelList,
-                              dataList,
-                              bdcolor = '#094480',
-                              bgcolor = '#d9e2ec') {
-                //Chart.defaults.global.defaultFontFamily = "Oxygen";
-                Chart.defaults.global.defaultFontColor = "black";
-
-                var chart = new Chart(ctx, {
-                    // The type of chart we want to create
-                    type: 'bar',
-
-                    // The data for our dataset
-                    data: {
-                        labels: labelList,
-                        datasets: [{
-                            label: labelName,
-                            backgroundColor: bgcolor,
-                            borderColor: bdcolor,
-                            data: dataList
+                    scales: {
+                        xAxes: [{
+                            stacked: isTrue // this should be set to make the bars stacked
+                        }],
+                        yAxes: [{
+                            stacked: isTrue // this also..
                         }]
-                    },
-
-                    // Configuration options go here
-                    options: {
-                        scales: {
-                            yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                        }
                     }
-                });
-            }
+                }
+            });
+        }
+    </script>
+
+    <script>
+
+        let CchartName = [{{#each data}}"{{this}}",{{/each}}];
 
 
-        </script>
+        let CchartLabel = [{{#each count}}{{this}},{{/each}}];
+        barChart("CourseWiseCGPA", "Course Wise Student CGPA", CchartName, CchartLabel, "", "#5582FA")
 
+        function barChart(ctx,
+                          labelName,
+                          labelList,
+                          dataList,
+                          bdcolor = '#094480',
+                          bgcolor = '#d9e2ec') {
+            //Chart.defaults.global.defaultFontFamily = "Oxygen";
+            Chart.defaults.global.defaultFontColor = "black";
+
+            var chart = new Chart(ctx, {
+                // The type of chart we want to create
+                type: 'bar',
+
+                // The data for our dataset
+                data: {
+                    labels: labelList,
+                    datasets: [{
+                        label: labelName,
+                        backgroundColor: bgcolor,
+                        borderColor: bdcolor,
+                        data: dataList
+                    }]
+                },
+
+                // Configuration options go here
+                options: {
+                    scales: {
+                        yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                    }
+                }
+            });
+        }
+
+
+    </script>
 
 
     </main>
