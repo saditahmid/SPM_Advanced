@@ -2,7 +2,7 @@ const sqlite3 = require("sqlite3").verbose();
 const express = require("express");
 const Router = express.Router();
 let User = require('../controllers/auth');
-let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
