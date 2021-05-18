@@ -164,4 +164,3 @@ function stackedChart(ctx, labelName, datasetlist, isTrue) {
         }
     });
 }
-``
