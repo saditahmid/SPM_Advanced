@@ -80,6 +80,22 @@
         </div>
     </header>
     <main>
+        <div style="width: 2000px; height: 500px;display: inline-block;" class="chart">
+            <h2>Student Report Of CSE401</h2>
+            <canvas id="DBMSProgressView" width="2000" height="500"></canvas>
+        </div>
+        <div style="width: 50px; height: 50px;display: inline-block;" class="chart"></div>
+        <div style="width: 2000px; height: 500px;display: inline-block;" class="chart">
+            <h2>Student Report Of CSE201</h2>
+            <canvas id="DiscreteProgressView" width="2000" height="500"></canvas>
+        </div>
+        <div style="width: 50px; height: 50px;display: inline-block;" class="chart"></div>
+        <div style="width: 50px; height: 50px;display: inline-block;" class="chart"></div>
+
+        <div style="width: 500px; height: 300px;display: inline-block;" class="chart">
+            <h2>Program-Wise Student Performance</h2>
+            <canvas id="ProgWiseCGPA" width="500" height="300"></canvas>
+        </div>
 
         <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">
             <h2>CSE Program Student Performance</h2>
@@ -101,6 +117,10 @@
     </main>
 </div>
 <script>
+    let PrchartName = ['CSE','CSC','CEN'];
+    let PrchartLabel = [3.5,4,3.3];
+    barChart("ProgWiseCGPA", "Program-Wise Student Performance", PrchartName, PrchartLabel)
+
     let CSEchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
     let CSEchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
     barChart("CSEWiseCGPA", "Average PLO", CSEchartName, CSEchartLabel)
@@ -110,6 +130,60 @@
     let CENchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
     let CENchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
     barChart("CENWiseCGPA", "Average PLO", CENchartName, CENchartLabel)
+    let plo1 = ["1820220", "1720694", "1830256", "1711075", "1822302", "1722302", "1820221", "1720691", "1830251", "1711071", "1822301", "1722301", "1820222", "1720692", "1830252", "1711072", "1822322", "1722303", "1820223", "1720693", "1830253", "1711073", "1822303", "1722303", "1820224", "1720644", "1830254", "1711074", "1822304", "1722304"];
+    datasetlist = [{
+        label: 'Achieved',
+        data: [3, 4, 3, 2, 5, 5, 2, 1, 2, 1, 4, 5, 3, 2, 5, 1, 2, 2, 3, 4, 5, 5, 2, 1, 0, 2, 3, 2, 1, 4,],
+        backgroundColor: '#962323'
+    },
+        {
+            label: 'Expected',
+            data: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,],
+            backgroundColor: '#094480'
+
+        }];
+    stackedChart("DBMSProgressView", plo1, datasetlist, false);
+    let plo2 = ["1820220", "1720694", "1830256", "1711075", "1822302", "1722302", "1820221", "1720691", "1830251", "1711071", "1822301", "1722301", "1820222", "1720692", "1830252", "1711072", "1822322", "1722303", "1820223", "1720693", "1830253", "1711073", "1822303", "1722303", "1820224", "1720644", "1830254", "1711074", "1822304", "1722304"];
+    datasetlist = [{
+        label: 'Achieved',
+        data: [3, 4, 3, 2, 6, 5, 2, 1, 2, 1, 4, 5, 3, 2, 5, 1, 2, 2, 3, 6, 5, 5, 2, 1, 0, 2, 3, 2, 1, 4,],
+        backgroundColor: '#962323'
+    },
+        {
+            label: 'Expected',
+            data: [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+            backgroundColor: '#094480'
+
+        }];
+    stackedChart("DiscreteProgressView", plo2, datasetlist, false);
+
+    function stackedChart(ctx, labelName, datasetlist, isTrue) {
+
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelName, // responsible for how many bars are gonna show on the chart
+                // create 12 datasets, since we have 12 items
+                // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
+                // put 0, if there is no data for the particular bar
+                datasets: datasetlist
+            },
+            options: {
+                responsive: false,
+                legend: {
+                    position: 'right' // place legend on the right side of chart
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: isTrue // this should be set to make the bars stacked
+                    }],
+                    yAxes: [{
+                        stacked: isTrue // this also..
+                    }]
+                }
+            }
+        });
+    }
     function barChart(ctx,
                       labelName,
                       labelList,

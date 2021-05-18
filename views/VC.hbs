@@ -77,9 +77,10 @@
         </div>
     </header>
     <main>
-        <div class="cards">
-            GRAPHS
+        <div style="width: 1350px; height: 500px;display: inline-block;" class="chart">
+            <canvas id="CourseWisePLO" width="1350" height="500"></canvas>
         </div>
+
         <div class="recent-grid">
             <div class="projects">
                 <div class="card">
@@ -207,6 +208,47 @@
 </div>
 
 <script>
+    let CchartName = ['PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13',];
+    let CchartLabel = [80, 70, 85, 50, 64, 49, 50, 66, 65, 43, 52, 46, 75];
+    barChart("CourseWisePLO", "Course Student Performance", CchartName, CchartLabel)
+
+
+    function barChart(ctx,
+                      labelName,
+                      labelList,
+                      dataList,
+                      bdcolor = '#094480',
+                      bgcolor = '#33C7FF') {
+        //Chart.defaults.global.defaultFontFamily = "Oxygen";
+        Chart.defaults.global.defaultFontColor = "black";
+
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'bar',
+
+            // The data for our dataset
+            data: {
+                labels: labelList,
+                datasets: [{
+                    label: labelName,
+                    backgroundColor: bgcolor,
+                    borderColor: bdcolor,
+                    data: dataList
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    }
     let DchartName = ["SETS", "SB", "SLASS","SESM"];
     let DchartLabel = [1500, 2000, 800, 1000];
     pieChart("DeptWise", "Program Wise Student Enrollment", DchartName, DchartLabel)
