@@ -190,14 +190,28 @@
             <div class="customers">
                 <div class="card">
                     <div class="card-header">
-                        <h3>School-Wise Enrollment Trend</h3>
+                        <h3>Enrollment Analysis</h3>
+                        <h3>(2017-Recent)</h3>
                         <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
                     </div>
 
                     <div class="card-body">
+
+                        <h3>School-Wise Enrollment Trend</h3>
+                        <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
+                            <canvas id="SchWise" width="300" height="300"></canvas>
+                        </div>
+
+                        <h3>Department-Wise Enrollment Trend</h3>
                         <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
                             <canvas id="DeptWise" width="300" height="300"></canvas>
                         </div>
+
+                        <h3>Program-Wise Enrollment Trend</h3>
+                        <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
+                            <canvas id="ProgWise" width="300" height="300"></canvas>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -249,9 +263,15 @@
             }
         });
     }
-    let DchartName = ["SETS", "SB", "SLASS","SESM"];
-    let DchartLabel = [1500, 2000, 800, 1000];
-    pieChart("DeptWise", "Program Wise Student Enrollment", DchartName, DchartLabel)
+    let SchchartName = ["SETS", "SB", "SLASS","SESM"];
+    let SchchartLabel = [1500, 2000, 800, 1000];
+    pieChart("SchWise", "Program Wise Student Enrollment", SchchartName, SchchartLabel)
+    let DpchartName = ["CSE","EEE","PHY"];
+    let DpchartLabel = [1500, 2000, 800, 1000];
+    pieChart("DeptWise", "Program Wise Student Enrollment", DpchartName, DpchartLabel)
+    let PchartName = ["CSE","CSC","CEN"];
+    let PchartLabel = [1500, 2000, 800, 1000];
+    pieChart("ProgWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
 
     function pieChart(ctx,
                       labelName,
@@ -284,8 +304,8 @@
                 title: {
                     display: true,
                     position: "top",
-                    text: "Pie Chart",
-                    fontSize: 18,
+                    text: "Student Enrollment",
+                    fontSize: 14,
                     fontColor: "#111"
                 },
                 legend: {

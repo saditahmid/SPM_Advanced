@@ -190,13 +190,21 @@
             <div class="customers">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Department-Wise Enrollment Trends</h3>
+                        <h3>Enrollment Analysis</h3>
+                        <h3>(2017-Recent)</h3>
                         <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
                     </div>
+                    <h3>Department-Wise Enrollment Trends</h3>
+
                     <div class="card-body">
                             <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
                                 <canvas id="DeptWise" width="300" height="300"></canvas>
                             </div>
+                        <h3>Program-Wise Enrollment Trends</h3>
+
+                        <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
+                            <canvas id="ProgramWise" width="300" height="300"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -246,9 +254,15 @@
             }
         });
     }
+
+
+
+    let PchartName = ["CSE", "CSC", "CEN"];
+    let PchartLabel = [1000, 700, 400];
+    pieChart("ProgramWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
     let DchartName = ["CSE", "EEE", "PHY"];
     let DchartLabel = [1500, 1000, 800];
-    pieChart("DeptWise", "Program Wise Student Enrollment", DchartName, DchartLabel)
+    pieChart("DeptWise", "Department Wise Student Enrollment", DchartName, DchartLabel)
 
     function pieChart(ctx,
                       labelName,
@@ -280,8 +294,8 @@
                 title: {
                     display: true,
                     position: "top",
-                    text: "Pie Chart",
-                    fontSize: 18,
+                    text: "Student Enrollment",
+                    fontSize: 14,
                     fontColor: "#111"
                 },
                 legend: {

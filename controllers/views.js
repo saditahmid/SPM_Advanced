@@ -77,6 +77,9 @@ function pieChart(ctx,
 
 }
 
+
+
+
 function lineChart(ctx,
                    labelName,
                    labelList,
