@@ -4,8 +4,8 @@ const Router = express.Router();
 let User = require('../controllers/auth');
 
 //let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
-let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
+//let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -28,6 +28,10 @@ Router.get("/login", (req,res) => {
 Router.get("/users", (req,res) => {
 
     res.render(`users`)
+});
+Router.get("/headProgramReports", (req,res) => {
+
+    res.render(`headProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
 });
 Router.get("/student", (req,res) => {
     db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
@@ -366,7 +370,10 @@ Router.get("/VCSchoolReports", (req,res) => {
 
     res.render(`VCSchoolReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
+Router.get("/VCInstructorReports", (req,res) => {
 
+    res.render(`VCInstructorReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+});
 
 
 
