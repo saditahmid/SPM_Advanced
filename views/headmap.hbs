@@ -8,5 +8,456 @@
 
 </head>
 
+<body>
+<input type="checkbox" id="nav-toggle">
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2> <span class="lab la-accusoft"> </span> <span> SPM</span></h2>
 
-    map koro
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="/Head" class="active"><span class="las la-igloo"></span>
+                    <span>Student Performance Monitor</span></a>
+            </li>
+            <li>
+                <a href="/headProgramReports"><span class="las la-clipboard-list"></span>
+                    <span> Program Reports</span></a>
+            </li>
+            <li>
+                <a href="/headMyCourse"><span  class="las la-school"></span>
+                    <span> My Courses</span></a>
+            </li>
+            <li>
+                <a href="/headDataEntry"><span  class="las la-database"></span>
+                    <span> Data Entry</span></a>
+            </li>
+
+
+            <li>
+                <a href="/headInstructorReport"><span class="las la-chalkboard-teacher"></span>
+                    <span> Department Instructor Report</span></a>
+            </li>
+            <li>
+                <a href="/headDownloads"><span class="las la-download"></span>
+                    <span> Downloads</span></a>
+            </li>
+            <li>
+                <a href="/headMyAccount"><span class="las la-user"></span>
+                    <span> My Account </span></a>
+            </li>
+            <li>
+                <a href="/login"><span class="las la-sign-out-alt"></span>
+                    <span> Sign-Out</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main-content">
+    <header>
+        <h2>
+            <label for="nav-toggle">
+                <span class="las la-bars"></span>
+            </label>
+            Dashboard
+        </h2>
+        <div class="user-wrapper">
+            <img src="{{FacultyProfile}}" alt="Mahady-Hasan"  width="30px" height="30px">
+            <div>
+                <h4>{{F_fname}} {{F_lName}} </h4>
+                <small> {{FacultyID}} </small>
+                <small> {{H_Position}}, {{DepartmentID}}</small>
+            </div>
+        </div>
+    </header>
+    <main>
+</div>
+</div>
+</div>
+
+<div class="flex-container blockwise">
+    <!--CO Mapping-->
+    <div class="box-section">
+        <div class="box-section-head">PLO to CO Mapping</div>
+        <div id="coMapping" class="box-section-body">
+            <!-- <p>The following is a sample placeholder form for the template.</p> -->
+            <form class="marg-top marg-bottom">
+                <!-- <div class="form-group">
+                    <div class="form-group row">
+                        <label for="first-name" class="col-sm-3 col-form-label">First Name</label>
+                        <input type="text" id="first-name" class="form-control col-sm-5" />
+                    </div>
+                </div> -->
+                <table class="form-table">
+                    <tr>
+                        <!-- <td>
+                            <label for="full-name">Full Name</label>
+                        </td> -->
+                        <td class="form-field">
+                            <datalist id="course-id">
+                                <option value="{{ i }}" />
+                            </datalist>
+                            <input type="text" id="course-id" name="course-id" list="course-id" class="form-control" placeholder="Course ID" />
+                        </td>
+                        <td>
+                            <input type="text" id="course-id" name="course-id" list="course-id" class="form-control" placeholder="Section ID" />
+                        </td>
+                        <td class="form-field">
+                            <input type="text" id="noOfCO" class="form-control" placeholder=" Map CO" />
+                        </td>
+
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" class="last-row" colspan="5"><button class="btn btn-primary" onclick="submitCONo(); return false;">Submit</button></td>
+                    </tr>
+
+                </table>
+            </form>
+            <form id="mappingSection" class="marg-top marg-bottom" action="{% url 'mapping' %}" method="post"></form>
+            <script>
+                function submitCONo() {
+                    let courseID = document.querySelector('input#course-id').value;
+                    let noOfCO = document.querySelector('input#noOfCO').value;
+
+                    let mappingSection = document.querySelector('#mappingSection');
+                    mappingSection.innerHTML = '';
+
+                    let formTable = document.createElement('table');
+                    formTable.className = 'form-table';
+                    formTable.innerHTML = `
+
+                            <input type="hidden" name="course-id" value="${courseID}" />
+                        `;
+                    for (let i = 0; i < parseInt(noOfCO); i++) {
+
+                        let inputForm = document.createElement('tr')
+                        inputForm.innerHTML = `
+                                    <td class="form-field" style="width: 120px;">
+                                        <label style="margin-right: 0px;" for="mapping${i + 1}" id="mappinglabel${i + 1}"><b>CO${i + 1}</b> maps </label>
+                                    </td>
+                                    <td class="form-field" style="width: 100px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+
+                                        <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                        <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                    </td>
+                                    <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                    </td>
+                                    <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                    </td>
+
+                                    <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="PLO01">PLO01</option>
+                                            <option value="PLO02">PLO02</option>
+                                            <option value="PLO03">PLO03</option>
+                                            <option value="PLO04">PLO04</option>
+                                            <option value="PLO05">PLO05</option>
+                                            <option value="PLO06">PLO06</option>
+                                            <option value="PLO07">PLO07</option>
+                                            <option value="PLO08">PLO08</option>
+                                            <option value="PLO09">PLO09</option>
+                                            <option value="PLO10">PLO10</option>
+                                            <option value="PLO11">PLO11</option>
+                                            <option value="PLO12">PLO12</option>
+                                            <option value="PLO13">PLO13</option>
+                                        </select >
+                                    </td>
+                                    </td>
+                                    </td>
+
+                                     <td class="form-field" style="width: 100px;">
+                                        <input type="text" id="coMark${i + 1}" name="coMarks" class="form-control" placeholder="Threshold %" />
+                                    </td>
+                            `;
+                        formTable.appendChild(inputForm);
+                    }
+                    let inputButton = document.createElement('tr');
+                    inputButton.innerHTML = `<td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Submit Mapping</button></td>`;
+
+                    formTable.appendChild(inputButton);
+                    mappingSection.appendChild(formTable);
+                    return false;
+
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+</html>
+
+
+<div class="flex-container blockwise">
+    <!--Add Assessment-->
+    <div class="box-section">
+        <div class="box-section-head">Question to CO Mapping</div>
+        <div id="coMapping" class="box-section-body">
+            <form class="marg-top marg-bottom">
+                <table class="form-table">
+                    <tr>
+                        <!-- <td>
+                            <label for="full-name">Full Name</label>
+                        </td> -->
+                        <td class="form-field">
+                            <datalist id="course-id-assessment-list">
+                                <option value="{{ i }}" />
+                            </datalist>
+                            <input list="course-id-assessment-list" id="course-id-assessment" name="course-id-assessment" class="form-control" placeholder="Course ID" />
+                            <input type="text" class="form-control" id="section-id-assessment" placeholder="Section ID" name="section-id-assessment" />
+                        </td>
+                        <td class="form-field">
+                            <select class="form-control" id="section-id-assessment" name="section-id-assessment">
+
+                                <option style="display: none;" value="" disabled selected>Semester</option>
+                                <option value="1">Spring</option>
+                                <option value="2">Summer</option>
+                                <option value="3">Autumn</option>
+                            </select>
+
+                        </td>
+                        <td class="form-field">
+                            <select class="form-control" id="section-id-assessment" name="section-id-assessment">
+
+                                <option style="display: none;" value="" disabled selected>Question Type :</option>
+                                <option value="1">Mid-Term</option>
+                                <option value="2">Final</option>
+                                <option value="3">Project</option>
+                                <option value="3">Quiz 1</option>
+                                <option value="3">Quiz-2</option>
+                                <option value="3">Assignment 1</option>
+                                <option value="3">Assignment 2</option>
+                                <option value="3">Create New</option>
+
+                            </select></td></td>
+                        <td class="form-field">
+                            <input type="text" id="noOfCOs-assessment" class="form-control" placeholder="Number of Questions" />
+                        </td>
+
+                    </tr>
+                    <tr>
+
+
+
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" class="last-row" colspan="3"><button class="btn btn-primary" onclick="createAssessment(); return false;">Submit</button></td>
+                    </tr>
+
+                </table>
+            </form>
+            <form id="assessmentSection" class="marg-top marg-bottom" action="{% url 'assessment' %}" method="post"></form>
+            <script>
+                function createAssessment() {
+                    let courseName = document.querySelector('input#course-id-assessment').value;
+                    let noOfCOs = document.querySelector('input#noOfCOs-assessment').value;
+                    let section = document.querySelector('input#section-id-assessment').value;
+
+                    let assessmentSection = document.querySelector('#assessmentSection');
+                    assessmentSection.innerHTML = '';
+
+                    let formTable = document.createElement('table');
+                    formTable.className = 'form-table';
+                    formTable.innerHTML = `
+                            <input type="hidden" name="course-id" value="${courseName}" />
+                            <input type="hidden" name="section" value="${section}" />
+                        `;
+                    for (let i = 0; i < parseInt(noOfCOs); i++) {
+
+                        let inputForm = document.createElement('tr')
+                        inputForm.innerHTML = `
+                                    <td class="form-field" style="width: 120px;">
+                                        <label style="margin-right: 0px;" for="co-assessment-mark${i + 1}" id="co-assessment-label${i + 1}"><b>Question${i + 1}</b> </label>
+                                    </td>
+                                    <td class="form-field" style="width: 110px;">
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                            <option value="CO-01">CO</option>
+                                            <option value="CO-02">CO-01</option>
+                                            <option value="CO-02">CO-02</option>
+                                            <option value="CO-03">CO-03</option>
+                                            <option value="CO-04">CO-04</option>
+                                            <option value="CO-05">CO-05</option>
+                                            <option value="CO-06">CO-06</option>
+
+
+                                        <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                        <option value="CO-01">CO</option>
+                                          <option value="CO-02">CO-01</option>
+                                        <option value="CO-02">CO-02</option>
+                                        <option value="CO-03">CO-03</option>
+                                        <option value="CO-04">CO-04</option>
+                                        <option value="CO-05">CO-05</option>
+                                        <option value="CO-06">CO-06</option>
+
+                                        </select >
+                                        <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                        <option value="CO-01">CO</option>
+                                          <option value="CO-02">CO-01</option>
+                                        <option value="CO-02">CO-02</option>
+                                        <option value="CO-03">CO-03</option>
+                                        <option value="CO-04">CO-04</option>
+                                        <option value="CO-05">CO-05</option>
+                                        <option value="CO-06">CO-06</option>
+
+                                        </select >
+
+                                    </td>
+ <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                        <option value="CO-01">CO</option>
+                                          <option value="CO-02">CO-01</option>
+                                        <option value="CO-02">CO-02</option>
+                                        <option value="CO-03">CO-03</option>
+                                        <option value="CO-04">CO-04</option>
+                                        <option value="CO-05">CO-05</option>
+                                        <option value="CO-06">CO-06</option>
+
+                                        </select >
+ <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                        <option value="CO-01">CO</option>
+                                          <option value="CO-02">CO-01</option>
+                                        <option value="CO-02">CO-02</option>
+                                        <option value="CO-03">CO-03</option>
+                                        <option value="CO-04">CO-04</option>
+                                        <option value="CO-05">CO-05</option>
+                                        <option value="CO-06">CO-06</option>
+
+                                        </select >
+ <td class="form-field" style="width: 110px;">
+
+                                        <select class="form-control" id="coMaps" name="coMaps">
+                                        <option value="CO-01">CO</option>
+                                          <option value="CO-02">CO-01</option>
+                                        <option value="CO-02">CO-02</option>
+                                        <option value="CO-03">CO-03</option>
+                                        <option value="CO-04">CO-04</option>
+                                        <option value="CO-05">CO-05</option>
+                                        <option value="CO-06">CO-06</option>
+
+                                        </select >
+                                    <td class="form-field" style="width: 150px;">
+                                        <input type="text" id="coMark${i + 1}" name="coMarks" class="form-control" placeholder="Mark Allocation" />
+                                    </td>
+                            `;
+                        formTable.appendChild(inputForm);
+                    }
+                    let inputButton = document.createElement('tr');
+                    inputButton.innerHTML = `<td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Submit</button></td>`;
+
+                    formTable.appendChild(inputButton);
+                    assessmentSection.appendChild(formTable);
+                    return false;
+
+                }
+            </script>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    highlightCurrentPage('dataentry');
+</script>
+
+
+
+
+</main>
+</div>
+
+</body>
+
+</html>
+
+
