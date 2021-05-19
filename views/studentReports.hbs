@@ -294,6 +294,14 @@
                 </div>
             </div>
         </div>
+        <div style="width: 600px; height: 100px;display: inline-block;" class="chart">
+
+        <h2> Course-Wise PLO Analysis</h2>
+        <div style="width: 600px; height: 500px;display: inline-block;" class="chart">
+            <canvas id="FacultyProgressView" width="800" height="500"></canvas>
+    </main>
+
+    </main>
 </div>
 
 
@@ -309,7 +317,73 @@ OVERALL REPORT
     <canvas id="ProgramWiseGPA" width="300" height="200"></canvas>
 </div>
 
+
 <script>
+    let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06','PLO07', 'PLO08', 'PLO09', 'PLO10', 'PLO11', 'PLO12',];
+    datasetlist = [{
+        label: 'CSC101',
+        data: [100,52,27,41,0,0,0,0,0,0,0,0,],
+        backgroundColor: '#094480'
+
+    }, {
+        label: 'CSE203',
+        data: [0,23,36,30,70,0,0,0,0,0,0,0],
+        backgroundColor: '#962323'
+    },
+        {
+            label: 'CSE211',
+            data: [0,25,37,29,0,42,0,0,0,0,0,0],
+            backgroundColor: '#22aa99'
+        },
+        {
+            label: 'CSE213',
+            data: [0,0,0,0,0,0,0,29,30,100,100,100],
+            backgroundColor: '#dd4477'
+        },
+        {
+            label: 'CSE104',
+            data: [0,0,0,0,30,29,42,41,0,0,0,0],
+            backgroundColor: '#5881BD'
+        },
+        {
+            label: 'CSC401',
+            data: [0,0,0,0,0,29,58,30,70,0,0,0,],
+            backgroundColor: '#B4B615'
+        }
+    ];
+    stackedChart("FacultyProgressView", plo2, datasetlist, true);
+
+
+    function stackedChart(ctx, labelName, datasetlist, isTrue) {
+
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelName, // responsible for how many bars are gonna show on the chart
+                // create 12 datasets, since we have 12 items
+                // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
+                // put 0, if there is no data for the particular bar
+                datasets: datasetlist
+            },
+            options: {
+                responsive: false,
+                legend: {
+                    position: 'right' // place legend on the right side of chart
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: isTrue // this should be set to make the bars stacked
+                    }],
+                    yAxes: [{
+                        stacked: isTrue // this also..
+                    }]
+                }
+            }
+        });
+    }
+
+
+
     // let PchartName= ["Summer", "Autumn", "Spring",];
     // let PchartLabel = [3.4,3.35,3.2];
     // barChart("ProgramWiseGPA","SemestermWise Student GPA", PchartName ,PchartLabel)

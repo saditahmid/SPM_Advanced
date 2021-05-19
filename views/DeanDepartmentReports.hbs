@@ -77,7 +77,7 @@
         </div>
     </header>
     <main>
-        <h2>CSE Department Overall Progress </h2>
+        <h2>SETS School Overall Progress </h2>
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
             <canvas id="CourseProgressView" width="800" height="500"></canvas>
@@ -143,25 +143,6 @@
     let PrchartLabel = [3.5,4,3.3];
     barChart("DeptWiseCGPA", "Dept-Wise Student Performance", PrchartName, PrchartLabel,"","#EB5057")
 
-    let semester1 = [ 'Spring',  'Summer',  'Autumn', ];
-    let semesterActual = [3, 6, 6];
-    let semesterAttempted = [4, 7, 8];
-    chartObjects = [{
-        label: 'Actual',
-        backgroundColor: '#E9F0FE',
-        borderColor: '#094480',
-        data: semesterActual
-    }, {
-        label: 'Expected',
-        backgroundColor: '#FEE9F3',
-        borderColor: '#962323',
-        data: semesterAttempted
-    }];
-    lineChartObject("CSEProgressView", semester1, chartObjects);
-    lineChartObject("CSCProgressView", semester1, chartObjects);
-    lineChartObject("CENProgressView", semester1, chartObjects);
-
-
 
     let semester2 = [ 'Spring',  'Summer',  'Autumn', ];
 
@@ -187,6 +168,26 @@
 
         }];
     stackedChart("comp", semester2, datasetlist, false);
+
+
+    let semester1 = [ 'Spring',  'Summer',  'Autumn', ];
+    let semesterActual = [3, 6, 6];
+    let semesterAttempted = [4, 7, 8];
+    chartObjects = [{
+        label: 'Actual',
+        backgroundColor: '#E9F0FE',
+        borderColor: '#094480',
+        data: semesterActual
+    }, {
+        label: 'Expected',
+        backgroundColor: '#FEE9F3',
+        borderColor: '#962323',
+        data: semesterAttempted
+    }];
+    lineChartObject("CSEProgressView", semester1, chartObjects);
+    lineChartObject("CSCProgressView", semester1, chartObjects);
+    lineChartObject("CENProgressView", semester1, chartObjects);
+
 
 
     let plo1 = ["1820220", "1720694", "1830256", "1711075", "1822302", "1722302", "1820221", "1720691", "1830251", "1711071", "1822301", "1722301", "1820222", "1720692", "1830252", "1711072", "1822322", "1722303", "1820223", "1720693", "1830253", "1711073", "1822303", "1722303", "1820224", "1720644", "1830254", "1711074", "1822304", "1722304"];
