@@ -294,20 +294,22 @@ Router.get("/index", (req,res) => {
     res.render(`index`)
 });
 Router.get("/StudentCourses", (req,res) => {
-    db.all("SELECT partOne.PLONo,SUM(partOne.CoPercentage) sumofCOPercentage, partOne.CONo FROM (SELECT COResult.CourseID,COResult.StudentID,COResult.CONo,COResult.total,COResult.achievedMark,p.PLONo  ,COResult.CoPercentage FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLONo GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) partOne GROUP BY partOne.PLONo,partOne.CONo", async(error, results) => {
+    db.all("SELECT partTwo.PLONo, (partTwo.sumofCOPercentage/1000) percentageOfCO , partTwo.CONo FROM(SELECT partOne.PLONo,SUM(partOne.CoPercentage) sumofCOPercentage, partOne.CONo FROM (SELECT COResult.CourseID,COResult.StudentID,COResult.CONo,COResult.total,COResult.achievedMark,p.PLONo ,COResult.CoPercentage FROM(SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,    ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID    GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) partOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =partOne.coNo AND pl.PLONo=partOne.PLONo GROUP BY partOne.PLONo,partOne.CONo) partTwo,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =partTwo.coNo AND pl.PLONo=partTwo.PLONo GROUP BY partTwo.PLONo,partTwo.CONo", async(error, results) => {
         console.log(results)
         let co1 = []
         let co2 = []
         let co3 = []
         let co4 = []
+        let PLONo = []
         for(let i=0;i<results.length;++i){
+            PLONo[i] = results[i].PLONo
             if(results[i].CONo == 1){
-                co1.push(results[i].sumofCOPercentage)
+                co1.push(results[i].percentageOfCO)
             } else if(results[i].CONo == 2){
-                co2.push(results[i].sumofCOPercentage)
+                co2.push(results[i].percentageOfCO)
 
             }else if(results[i].CONo == 3){
-                co3.push(results[i].sumofCOPercentage)
+                co3.push(results[i].percentageOfCO)
 
             }else if(results[i].CONo == 4){
                 co4.push(results[i].sumofCOPercentage)
@@ -329,7 +331,7 @@ Router.get("/StudentCourses", (req,res) => {
 
             }
             console.log(sem)
-            res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents, co1: co1, co2:co2, co3:co3, co4:co4 })
+            res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents, co1: co1, co2:co2, co3:co3, co4:co4, PLONo: PLONo })
         }) })
 
 });
