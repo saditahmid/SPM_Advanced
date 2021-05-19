@@ -265,11 +265,11 @@
             type: 'radar',
             data: {
                 labels: [
-                    'PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13'
+                    {{#each PLONo}}"{{this}}",{{/each}}
                 ],
                 datasets: [{
                     label: 'Achieved PLO',
-                    data: [65, 59, 90, 81, 56, 55, 40,30,50,43,23,35,75],
+                    data: [{{#each PLOpercentage}}{{this}},{{/each}}],
                     fill: true,
                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
                     borderColor: 'rgb(255, 99, 132)',
@@ -279,7 +279,7 @@
                     pointHoverBorderColor: 'rgb(255, 99, 132)'
                 }, {
                     label: 'Attempted',
-                    data: [100,100,100,100,100,100,100,100,100,100,100,100,100],
+                    data: [100,100,100,100,100,100,100,100,100],
                     fill: true,
                     backgroundColor: 'rgba(54, 162, 235, 0.2)',
                     borderColor: 'rgb(54, 162, 235)',

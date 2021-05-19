@@ -7,7 +7,7 @@ let User = 12;
 module.exports.User = User;
 //let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
 //let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW3\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW3\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
 
 //let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
     if (err) {
@@ -52,6 +52,18 @@ exports.login = async(req, res) =>{
                             Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
+
+                    db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,  COResult.achievedMark achievedMark ,p.PLONo  FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
+                        console.log("hello, the results: ")
+                        console.log(results)
+                        let PLONo = []
+                        let PLOpercentage = []
+                        for(let i=0;i<results.length;++i){
+                            PLONo[i] = results[i].PLONo;
+                            PLOpercentage[i]=results[i].PLOpercentage;
+
+                        }
+
 
 
 
@@ -116,6 +128,8 @@ exports.login = async(req, res) =>{
                                                     MinPloName: MinPloName,
                                                     MaxPloNo: MaxPloNo,
                                                     MaxPloName: MaxPloName,
+                                                    PLONo:PLONo,
+                                                    PLOpercentage:PLOpercentage
 
 
 
@@ -130,7 +144,7 @@ exports.login = async(req, res) =>{
 
                                             }
 
-                                        }) }) }) }) }) })
+                                        }) }) }) }) }) }) })
 
 
 
