@@ -255,15 +255,15 @@
 
 <script>
 
-    let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06','PLO07','PLO08','PLO09','PLO010','PLO011','PLO012','PLO013'];
+    let plo2 = [{{#each PLONo}}"{{this}}",{{/each}}];
     datasetlist = [{
-        label: 'Program Average',
-        data: ['80','85','81','50','60','70','81','71','65','83','40','77','70',],
+        label: 'Department Average',
+        data: [{{#each deptPLOPercentage}}{{this}},{{/each}}],
         backgroundColor: '#094480'
 
     }, {
         label: 'Achieved',
-        data: ['81','65','61','40','45','47','68','47','56','78','64','17','66',],
+        data: [{{#each studPLOPercentage}}{{this}},{{/each}}],
         backgroundColor: '#E74A4A'
 
     },];

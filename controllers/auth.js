@@ -53,6 +53,26 @@ exports.login = async(req, res) =>{
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
 
+                    db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,    ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage   FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
+                        console.log(results)
+                        let studPLOPercentage = [];
+                        for(let i=0;i<results.length;++i){
+                            studPLOPercentage[i] = results[i].PLOpercentage
+                        }
+                        console.log(studPLOPercentage)
+
+                    db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Enrollment_T en,Program_T pr   WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID   AND r.StudentID=en.StudentID  AND en.ProgramID=pr.ProgramID   AND pr.DepartmentID='CSE'     GROUP BY r.StudentID,c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p,Registration_T R,  Enrollment_T EN,Program_T PR,Evaluation_T EV  WHERE m.PLOID=p.PLOID  AND EV.RegistrationID=R.RegistrationID AND R.StudentID=EN.StudentID  AND EN.ProgramID=PR.ProgramID  AND PR.DepartmentID='CSE'  GROUP BY COResult.StudentID,m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,  Mapping_T M,PLO_T pl,Registration_T reg,Enrollment_T enr,Program_T pro,Evaluation_T eva WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo AND eva.RegistrationID=reg.RegistrationID  AND reg.StudentID=enr.StudentID AND enr.ProgramID=pro.ProgramID AND pro.DepartmentID='CSE' GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
+                        console.log(results)
+                      let deptPLOPercentage = [];
+                        let PLONo = [];
+                        for(let i=0;i<results.length;++i){
+                            deptPLOPercentage[i] = results[i].PLOpercentage
+                            PLONo[i] = results[i].PLONo;
+                        }
+
+                        console.log(deptPLOPercentage)
+                        console.log(PLONo)
+
                     db.all("SELECT COUNT(CountOfAchieved.PLONo) AS c FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo HAVING (PLOpercentage>=40)) CountOfAchieved", async(error, results) => {
                         console.log(results)
                         let achievedPLO = results[0].c;
@@ -113,7 +133,13 @@ exports.login = async(req, res) =>{
                                                     MinPloNo: MinPloNo,
                                                     MinPloName: MinPloName,
                                                     MaxPloNo: MaxPloNo,
-                                                    MaxPloName: MaxPloName
+                                                    MaxPloName: MaxPloName,
+                                                    deptPLOPercentage:deptPLOPercentage,
+                                                    PLONo:PLONo,
+                                                    studPLOPercentage:studPLOPercentage
+
+
+
 
 
 
@@ -124,7 +150,7 @@ exports.login = async(req, res) =>{
 
                                             }
 
-                                        }) }) }) }) }) })
+                                        }) }) }) }) }) }) }) })
 
 
 
