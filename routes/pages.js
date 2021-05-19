@@ -456,8 +456,32 @@ Router.get("/VCInstructorReports", (req,res) => {
 
 
 Router.get("/facultyCourses", (req,res) => {
+    db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
+        console.log(results)
+         let PLONo = []
+         let avgPloPercentage = []
+        for(let i=0;i<results.length;++i){
+          PLONo[i] = Math.round(results[i].PLONo*100)/100;
+            avgPloPercentage[i] = Math.round(results[i].c*100)/100;
+        }
+        console.log(PLONo)
+        console.log(avgPloPercentage)
+        res.render(`facultyCourses`, {
+            FacultyID: User.FacultyID,
+            F_fname: User.F_fname,
+            F_lName: User.F_lName,
+            F_Gender: User.F_Gender,
+            F_DateOfBirth: User.F_DateOfBirth,
+            F_Email: User.F_Email,
+            F_Phone: User.F_Phone,
+            F_Address: User.F_Address,
+            FacultyProfile: User.FacultyProfile,
+            DepartmentID: User.DepartmentID,
+            PLONo:PLONo,
+            avgPloPercentage:avgPloPercentage
 
-    res.render(`facultyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+        })
+    })
 });
 Router.get("/facultyDataEntry", (req,res) => {
 
