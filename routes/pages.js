@@ -31,8 +31,59 @@ Router.get("/users", (req,res) => {
     res.render(`users`)
 });
 Router.get("/headProgramReports", (req,res) => {
+    db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+        console.log(results)
+        let students309 = []
+        let achievedNOPLO309 =[]
 
-    res.render(`headProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
+        for(let i=0;i<results.length;++i){
+            students309[i] = results[i].StudentID;
+            achievedNOPLO309[i] = results[i].achievedNoPlo;
+        }
+
+
+
+        db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE309' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+            console.log(results)
+            let attempted309 = results[0].c
+
+            db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE303' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+                console.log(results)
+                let students303 = [];
+                let achievedNOPLO303 = [];
+
+                for(let i=0;i<results.length;++i){
+                    students303[i] = results[i].StudentID;
+                    achievedNOPLO303[i] = results[i].achievedNoPlo;
+                }
+                console.log(achievedNOPLO303)
+
+
+                db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE303' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+                    console.log(results)
+                    let attempted303 = results[0].c
+                    res.render(`headProgramReports`, {
+                        FacultyID: User.FacultyID,
+                        F_fname: User.F_fname,
+                        F_lName: User.F_lName,
+                        F_Gender: User.F_Gender,
+                        F_DateOfBirth: User.F_DateOfBirth,
+                        F_Email: User.F_Email,
+                        F_Phone: User.F_Phone,
+                        F_Address: User.F_Address,
+                        FacultyProfile: User.FacultyProfile,
+                        DepartmentID: User.DepartmentID,
+                        Term_start_date: User.Term_start_date,
+                        Term_end_date: User.Term_end_date,
+                        H_Position: User.H_Position,
+                        students309:students309,
+                        achievedNOPLO309:achievedNOPLO309,
+                        attempted309:attempted309,
+                        students303:students303,
+                        achievedNOPLO303:achievedNOPLO303,
+                        attempted303:attempted303
+                    })
+                }) }) }) })
 });
 Router.get("/student", (req,res) => {
 
@@ -417,8 +468,56 @@ Router.get("/DeanMyCourses", (req,res) => {
     res.render(`DeanMyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 Router.get("/DeanProgramReports", (req,res) => {
+    db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE450' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+        console.log(results)
+        let students450 = []
+        let achievedNOPLO450 =[]
 
-    res.render(`DeanProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+        for(let i=0;i<results.length;++i){
+            students450[i] = results[i].StudentID;
+            achievedNOPLO450[i] = results[i].achievedNoPlo;
+        }
+
+
+
+        db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE450' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+            console.log(results)
+            let attempted450 = results[0].c
+
+            db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE303' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+                console.log(results)
+                let students303 = [];
+                let achievedNOPLO303 = [];
+
+                for(let i=0;i<results.length;++i){
+                    students303[i] = results[i].StudentID;
+                    achievedNOPLO303[i] = results[i].achievedNoPlo;
+                }
+                console.log(achievedNOPLO303)
+
+
+                db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE303' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+                    console.log(results)
+                    let attempted303 = results[0].c
+                    res.render(`DeanProgramReports`, {
+                        FacultyID: User.FacultyID,
+                        F_fname: User.F_fname,
+                        F_lName: User.F_lName,
+                        F_Gender: User.F_Gender,
+                        F_DateOfBirth: User.F_DateOfBirth,
+                        F_Email: User.F_Email,
+                        F_Phone: User.F_Phone,
+                        F_Address: User.F_Address,
+                        FacultyProfile: User.FacultyProfile,
+                        DepartmentID: User.DepartmentID,
+                        students450:students450,
+                        achievedNOPLO450:achievedNOPLO450,
+                        attempted450:attempted450,
+                        students303:students303,
+                        achievedNOPLO303:achievedNOPLO303,
+                        attempted303:attempted303
+                    })
+                }) }) }) })
 });
 Router.get("/VCDataEntry", (req,res) => {
 
@@ -441,8 +540,56 @@ Router.get("/VCMyCourses", (req,res) => {
     res.render(`VCMyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 Router.get("/VCProgramReports", (req,res) => {
+    db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+        console.log(results)
+        let students343 = []
+        let achievedNOPLO343 =[]
 
-    res.render(`VCProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
+        for(let i=0;i<results.length;++i){
+            students343[i] = results[i].StudentID;
+            achievedNOPLO343[i] = results[i].achievedNoPlo;
+        }
+
+
+
+        db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE309' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+            console.log(results)
+            let attempted343 = results[0].c
+
+            db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE303' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+                console.log(results)
+                let students460 = [];
+                let achievedNOPLO460 = [];
+
+                for(let i=0;i<results.length;++i){
+                    students460[i] = results[i].StudentID;
+                    achievedNOPLO460[i] = results[i].achievedNoPlo;
+                }
+                console.log(achievedNOPLO460)
+
+
+                db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE303' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+                    console.log(results)
+                    let attempted460 = results[0].c
+    res.render(`VCProgramReports`, {
+        FacultyID: User.FacultyID,
+        F_fname: User.F_fname,
+        F_lName: User.F_lName,
+        F_Gender: User.F_Gender,
+        F_DateOfBirth: User.F_DateOfBirth,
+        F_Email: User.F_Email,
+        F_Phone: User.F_Phone,
+        F_Address: User.F_Address,
+        FacultyProfile: User.FacultyProfile,
+        DepartmentID: User.DepartmentID,
+        students343:students343,
+        achievedNOPLO343:achievedNOPLO343,
+        attempted343:attempted343,
+        students460:students460,
+        achievedNOPLO460:achievedNOPLO460,
+        attempted460:attempted460
+    })
+}) }) }) })
 });
 Router.get("/VCSchoolReports", (req,res) => {
 
@@ -456,6 +603,40 @@ Router.get("/VCInstructorReports", (req,res) => {
 
 
 Router.get("/facultyCourses", (req,res) => {
+
+    db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE464' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+        console.log(results)
+        let students464 = []
+        let achievedNOPLO464 =[]
+
+        for(let i=0;i<results.length;++i){
+            students464[i] = results[i].StudentID;
+            achievedNOPLO464[i] = results[i].achievedNoPlo;
+        }
+
+
+
+        db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE464' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+            console.log(results)
+            let attempted464 = results[0].c
+
+    db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE303' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
+        console.log(results)
+        let students303 = [];
+        let achievedNOPLO303 = [];
+
+        for(let i=0;i<results.length;++i){
+            students303[i] = results[i].StudentID;
+            achievedNOPLO303[i] = results[i].achievedNoPlo;
+        }
+        console.log(achievedNOPLO303)
+
+
+        db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM (SELECT stepOne.PLONo FROM (SELECT c.CourseID,c.CONo,r.StudentID,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND m.PLOID=p.PLOID AND m.COID=c.COID  AND c.CourseID='CSE303' GROUP BY m.PLOID,r.StudentID,c.CONo )stepOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =stepOne.coNo AND pl.PLONo=stepOne.PLONo GROUP BY stepOne.PLONo) PLOCount", async(error, results) => {
+        console.log(results)
+            let attempted303 = results[0].c
+
+
     db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
         console.log(results)
          let PLONo = []
@@ -478,10 +659,17 @@ Router.get("/facultyCourses", (req,res) => {
             FacultyProfile: User.FacultyProfile,
             DepartmentID: User.DepartmentID,
             PLONo:PLONo,
-            avgPloPercentage:avgPloPercentage
+            avgPloPercentage:avgPloPercentage,
+            students464:students464,
+            achievedNOPLO464:achievedNOPLO464,
+            attempted464:attempted464,
+            students303:students303,
+            achievedNOPLO303:achievedNOPLO303,
+            attempted303:attempted303
+
 
         })
-    })
+    }) }) }) }) })
 });
 Router.get("/facultyDataEntry", (req,res) => {
 

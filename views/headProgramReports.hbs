@@ -133,13 +133,13 @@
 
 
         <div style="width: 2000px; height: 500px;display: inline-block;" class="chart">
-            <h2>Student Report Of CSC401</h2>
+            <h2>Student Report Of CSC303</h2>
             <canvas id="DBMSProgressView" width="2000" height="500"></canvas>
         </div>
         <div style="width: 2000px; height: 100px;display: inline-block;" class="chart">
         </div>
         <div style="width: 2000px; height: 500px;display: inline-block;" class="chart">
-            <h2>Student Report Of CSE201</h2>
+            <h2>Student Report Of CSE309</h2>
             <canvas id="DiscreteProgressView" width="2000" height="500"></canvas>
         </div>
 
@@ -171,27 +171,27 @@
     let CENchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
     let CENchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
     barChart("CENWiseCGPA", "Average PLO", CENchartName, CENchartLabel,"","#C7B78C")
-    let plo1 = ["1820220", "1720694", "1830256", "1711075", "1822302", "1722302", "1820221", "1720691", "1830251", "1711071", "1822301", "1722301", "1820222", "1720692", "1830252", "1711072", "1822322", "1722303", "1820223", "1720693", "1830253", "1711073", "1822303", "1722303", "1820224", "1720644", "1830254", "1711074", "1822304", "1722304"];
+    let plo1 = [{{#each students303}}"{{this}}",{{/each}}];
     datasetlist = [{
         label: 'Achieved',
-        data: [3, 4, 3, 2, 5, 5, 2, 1, 2, 1, 4, 5, 3, 2, 5, 1, 2, 2, 3, 4, 5, 5, 2, 1, 0, 2, 3, 2, 1, 4,],
+        data: [{{#each achievedNOPLO303}}{{this}},{{/each}}],
         backgroundColor: '#962323'
     },
         {
             label: 'Expected',
-            data: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,],
+            data: [{{attempted303}},{{attempted303}},{{attempted303}},{{attempted303}},{{attempted303}},{{attempted303}},{{attempted303}}],
             backgroundColor: '#094480'
         }];
     stackedChart("DBMSProgressView", plo1, datasetlist, false);
-    let plo2 = ["1820220", "1720694", "1830256", "1711075", "1822302", "1722302", "1820221", "1720691", "1830251", "1711071", "1822301", "1722301", "1820222", "1720692", "1830252", "1711072", "1822322", "1722303", "1820223", "1720693", "1830253", "1711073", "1822303", "1722303", "1820224", "1720644", "1830254", "1711074", "1822304", "1722304"];
+    let plo2 = [{{#each students309}}"{{this}}",{{/each}}];
     datasetlist = [{
         label: 'Achieved',
-        data: [3, 4, 3, 2, 6, 5, 2, 1, 2, 1, 4, 5, 3, 2, 5, 1, 2, 2, 3, 6, 5, 5, 2, 1, 0, 2, 3, 2, 1, 4,],
+        data: [{{#each achievedNOPLO309}}{{this}},{{/each}}],
         backgroundColor: '#962323'
     },
         {
             label: 'Expected',
-            data: [7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7],
+            data: [{{attempted309}},{{attempted309}},{{attempted309}}],
             backgroundColor: '#094480'
         }];
     stackedChart("DiscreteProgressView", plo2, datasetlist, false);
