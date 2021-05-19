@@ -255,6 +255,7 @@ exports.login = async(req, res) =>{
                             module.exports.Term_start_date = results.Term_start_date;
                             module.exports.Term_end_date = results.Term_end_date;
                             module.exports.H_Position = results.H_Position;
+                            let H_Position = results.H_Position;
                             const token = jwt.sign({id}, process.env.JWT_SECRET,{
                                 expiresIn: process.env.JWT_EXPIRES_IN
 
@@ -302,7 +303,7 @@ exports.login = async(req, res) =>{
                                     module.exports.F_Address = results.F_Address;
                                     module.exports.FacultyProfile = results.FacultyProfile;
                                     module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\Head", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents });
+                                    res.render("\Head", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents, H_Position: H_Position });
 
 
                                 }
