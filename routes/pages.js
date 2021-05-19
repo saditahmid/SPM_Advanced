@@ -4,7 +4,7 @@ const Router = express.Router();
 let User = require('../controllers/auth');
 
 //let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
-let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
 //let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
@@ -420,6 +420,18 @@ Router.get("/headCourseReport", (req,res) => {
 Router.get("/headDataEntry", (req,res) => {
 
     res.render(`headDataEntry`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
+});
+Router.get("/headmap", (req,res) => {
+
+    res.render(`headmap`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
+});
+Router.get("/headevaluation", (req,res) => {
+
+    res.render(`headevaluation`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
+});
+Router.get("/headassesment", (req,res) => {
+
+    res.render(`headassesment`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
 });
 Router.get("/headDownloads", (req,res) => {
 
