@@ -299,6 +299,16 @@
         <h2> Course-Wise PLO Analysis</h2>
         <div style="width: 600px; height: 500px;display: inline-block;" class="chart">
             <canvas id="FacultyProgressView" width="800" height="500"></canvas>
+        </div>
+        </div>
+        <h2> Achieved PLO Analysis</h2>
+        <div style="width: 600px; height: 500px;display: inline-block;" class="chart">
+            <canvas id="StudProgressView" width="800" height="500"></canvas>
+        </div>
+
+    </main>
+</div>
+
     </main>
 
     </main>
@@ -318,7 +328,28 @@ OVERALL REPORT
 </div>
 
 
+
+
 <script>
+
+    let plo3 = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12',
+    ];
+    datasetlist = [{
+        label: 'Department Average',
+        data: [100,100,100,100,100,100,100,100,100,100,100,100,100,],
+
+        <!--data: [{{#each deptPLOPercentage}}{{this}},{{/each}}],-->
+        backgroundColor: '#094480'
+
+    }, {
+        label: 'Achieved',
+        data: [100,100,100,100,100,100,100,100,100,100,100,100,100,],
+        <!--data: [{{#each studPLOPercentage}}{{this}},{{/each}}],-->
+        backgroundColor: '#E74A4A'
+
+    },];
+    stackedChart("StudProgressView", plo3, datasetlist, false);    // radarChart("radar")
+
     let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06','PLO07', 'PLO08', 'PLO09', 'PLO10', 'PLO11', 'PLO12',];
     datasetlist = [{
         label: 'CSC101',

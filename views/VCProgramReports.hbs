@@ -424,7 +424,10 @@
                         stacked: isTrue // this should be set to make the bars stacked
                     }],
                     yAxes: [{
-                        stacked: isTrue // this also..
+                        stacked: isTrue, // this also..
+                        ticks: {
+                            beginAtZero: true
+                        }
                     }]
                 }
             }
