@@ -74,8 +74,28 @@
         <div class="cards">
             <div class="card-single">
                 <div>
-                    <h1> 12</h1>
-                    <span> PLO Achieved</span>
+                    <h1> {{achievedPLO}}</h1>
+                    <span> No.of  PLO Achieved</span>
+                </div>
+                <div>
+                    <span class="las la-chart-bar"></span>
+                </div>
+            </div>
+
+            <div class="card-single">
+                <div>
+                    <h1> {{attemptedPLO}}</h1>
+                    <span> No. of PLO Attempted</span>
+                </div>
+                <div>
+                    <span class="las la-chart-bar"></span>
+                </div>
+            </div>
+
+            <div class="card-single">
+                <div>
+                    <h1> {{MaxPloNo}}</h1>
+                    <span> Highest PLO Achieved: {{MaxPloName}}</span>
                 </div>
                 <div>
                     <span class="las la-chart-bar"></span>
@@ -83,13 +103,14 @@
             </div>
             <div class="card-single">
                 <div>
-                    <h1> 13</h1>
-                    <span> PLO Attempted</span>
+                    <h1> {{MinPloNo}}</h1>
+                    <span> Lowest PLO Achieved: {{MinPloName}} </span>
                 </div>
                 <div>
                     <span class="las la-chart-bar"></span>
                 </div>
             </div>
+
             <div class="card-single">
                 <div>
                     <h1> {{CurrentCgPA}}</h1>
@@ -101,7 +122,7 @@
             </div>
             <div class="card-single">
                 <div>
-                    <h1> 91.0%</h1>
+                    <h1> {{successRate}}%</h1>
                     <span>Success Rate</span>
                 </div>
                 <div>

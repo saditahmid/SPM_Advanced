@@ -8,7 +8,7 @@ module.exports.User = User;
 //let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
 //let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
 
-let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW3\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -51,33 +51,79 @@ exports.login = async(req, res) =>{
                             Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
-                    db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+
+                    db.all("SELECT COUNT(CountOfAchieved.PLONo) AS c FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo HAVING (PLOpercentage>=40)) CountOfAchieved", async(error, results) => {
                         console.log(results)
-                        let CurrentCgPA = Math.round(results[0].CGPA*100)/100;
-                        console.log(CurrentCgPA)
+                        let achievedPLO = results[0].c;
+                        console.log(achievedPLO)
 
-                    db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[id], async(error, results) => {
-                        if(error){
-                            console.log(error)
-                        }else{
-                            console.log(results.StdentID);
-                            module.exports.StdentID = results.StdentID;
-                            module.exports.S_fname = results.S_fname;
-                            module.exports.S_lName = results.S_lName;
-                            module.exports.S_Gender = results.S_Gender;
-                            module.exports.S_DateOfBirth = results.S_DateOfBirth;
-                            module.exports.S_Email = results.S_Email;
-                            module.exports.S_Phone = results.S_Phone;
-                            module.exports.S_Address = results.S_Address;
-                            module.exports.StudentProfile = results.StudentProfile;
-                            module.exports.Major = results.Major;
-                            module.exports.Minor = results.Minor;
-                            res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor, CurrentCgPA:CurrentCgPA});
+                        db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM(SELECT PLOrawMarks.PLONo FROM (SELECT COResult.CourseID courseID,COResult.CONo coNo,p.PLONo FROM (SELECT c.CourseID,c.CONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOCount", async(error, results) => {
+                            console.log(results)
+                            let attemptedPLO = results[0].c;
+                            console.log(attemptedPLO)
+                            let successRate = (achievedPLO/attemptedPLO)*100;
+                            console.log(successRate + "%");
+
+                            db.all("SELECT minT.PLONo,MIN(minT.PLOpercentage),ploT.PLOName FROM (SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A  FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID  AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) minT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=minT.PLONo", async(error, results) => {
+                                console.log(results)
+                                let MinPloNo = results[0].PLONo;
+                                let MinPloName = results[0].PLOName;
+                                console.log(MinPloNo)
+                                console.log(MinPloName)
+
+                                db.all("SELECT maxT.PLONo,Max(maxT.PLOpercentage),ploT.PLOName FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) maxT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=maxT.PLONo", async(error, results) => {
+                                    console.log(results)
+                                    let MaxPloNo = results[0].PLONo;
+                                    let MaxPloName = results[0].PLOName;
+                                    console.log(MaxPloNo)
+                                    console.log(MaxPloName)
 
 
-                        }
+                                    db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+                                        console.log(results)
+                                        let CurrentCgPA = Math.round(results[0].CGPA*100)/100;
+                                        console.log(CurrentCgPA)
 
-                    }) })
+                                        db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[id], async(error, results) => {
+                                            if(error){
+                                                console.log(error)
+                                            }else{
+                                                console.log(results.StdentID);
+                                                module.exports.StdentID = results.StdentID;
+                                                module.exports.S_fname = results.S_fname;
+                                                module.exports.S_lName = results.S_lName;
+                                                module.exports.S_Gender = results.S_Gender;
+                                                module.exports.S_DateOfBirth = results.S_DateOfBirth;
+                                                module.exports.S_Email = results.S_Email;
+                                                module.exports.S_Phone = results.S_Phone;
+                                                module.exports.S_Address = results.S_Address;
+                                                module.exports.StudentProfile = results.StudentProfile;
+                                                module.exports.Major = results.Major;
+                                                module.exports.Minor = results.Minor;
+                                                res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName,
+                                                    S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth,
+                                                    S_Email:results.S_Email, S_Phone:results.S_Phone,
+                                                    S_Address:results.S_Address, StudentProfile:results.StudentProfile,
+                                                    Major:results.Major, Minor:results.Minor,
+                                                    CurrentCgPA:CurrentCgPA,
+                                                    achievedPLO: achievedPLO,
+                                                    attemptedPLO: attemptedPLO,
+                                                    successRate: successRate,
+                                                    MinPloNo: MinPloNo,
+                                                    MinPloName: MinPloName,
+                                                    MaxPloNo: MaxPloNo,
+                                                    MaxPloName: MaxPloName
+
+
+
+
+
+                                                });
+
+
+                                            }
+
+                                        }) }) }) }) }) })
 
 
 
@@ -215,40 +261,40 @@ exports.login = async(req, res) =>{
                                     }
                                     console.log(department)
                                     console.log(DeptcountStudents)
-                            db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
-                                console.log(results)
-                                let school = []
-                                let schoolcountStudents = []
-                                for (let i = 0; i < results.length; ++i) {
-                                    school[i] = results[i].SchoolID;
-                                    schoolcountStudents[i] = results[i].c;
+                                    db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
+                                        console.log(results)
+                                        let school = []
+                                        let schoolcountStudents = []
+                                        for (let i = 0; i < results.length; ++i) {
+                                            school[i] = results[i].SchoolID;
+                                            schoolcountStudents[i] = results[i].c;
 
-                                }
-                                console.log(school)
-                                console.log(schoolcountStudents)
-                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results, id) => {
-                                if(error){
-                                    console.log(error)
-                                }else{
+                                        }
+                                        console.log(school)
+                                        console.log(schoolcountStudents)
+                                        db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results, id) => {
+                                            if(error){
+                                                console.log(error)
+                                            }else{
 
-                                    console.log(results.FacultyID);
-                                    module.exports.FacultyID = results.FacultyID;
-                                    module.exports.F_fname = results.F_fname;
-                                    module.exports.F_lName = results.F_lName;
-                                    module.exports.F_Gender = results.F_Gender;
-                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
-                                    module.exports.F_Email = results.F_Email;
-                                    module.exports.F_Phone = results.F_Phone;
-                                    module.exports.F_Address = results.F_Address;
-                                    module.exports.FacultyProfile = results.FacultyProfile;
-                                    module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\VC", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, school: school, schoolcountStudents: schoolcountStudents,program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents});
+                                                console.log(results.FacultyID);
+                                                module.exports.FacultyID = results.FacultyID;
+                                                module.exports.F_fname = results.F_fname;
+                                                module.exports.F_lName = results.F_lName;
+                                                module.exports.F_Gender = results.F_Gender;
+                                                module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                                module.exports.F_Email = results.F_Email;
+                                                module.exports.F_Phone = results.F_Phone;
+                                                module.exports.F_Address = results.F_Address;
+                                                module.exports.FacultyProfile = results.FacultyProfile;
+                                                module.exports.DepartmentID = results.DepartmentID;
+                                                res.render("\VC", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, school: school, schoolcountStudents: schoolcountStudents,program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents});
 
 
-                                }
+                                            }
 
-                            })
-                            }) }) })
+                                        })
+                                    }) }) })
 
                         }else if(results.H_Position == "Department Head" ){
                             const id = results.FacultyID;
@@ -276,39 +322,39 @@ exports.login = async(req, res) =>{
                                 }
                                 console.log(program)
                                 console.log(progcountStudents)
-                            db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
-                                console.log(results)
-                                let department = []
-                                let DeptcountStudents = []
-                                for(let i=0;i<results.length;++i){
-                                    department[i] = results[i].DepartmentID;
-                                    DeptcountStudents[i]=results[i].c;
+                                db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                    console.log(results)
+                                    let department = []
+                                    let DeptcountStudents = []
+                                    for(let i=0;i<results.length;++i){
+                                        department[i] = results[i].DepartmentID;
+                                        DeptcountStudents[i]=results[i].c;
 
-                                }
-                                console.log(department)
-                                console.log(DeptcountStudents)
+                                    }
+                                    console.log(department)
+                                    console.log(DeptcountStudents)
 
-                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
-                                if(error){
-                                    console.log(error)
-                                }else{
-                                    console.log(results.FacultyID);
-                                    module.exports.FacultyID = results.FacultyID;
-                                    module.exports.F_fname = results.F_fname;
-                                    module.exports.F_lName = results.F_lName;
-                                    module.exports.F_Gender = results.F_Gender;
-                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
-                                    module.exports.F_Email = results.F_Email;
-                                    module.exports.F_Phone = results.F_Phone;
-                                    module.exports.F_Address = results.F_Address;
-                                    module.exports.FacultyProfile = results.FacultyProfile;
-                                    module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\Head", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents, H_Position: H_Position });
+                                    db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
+                                        if(error){
+                                            console.log(error)
+                                        }else{
+                                            console.log(results.FacultyID);
+                                            module.exports.FacultyID = results.FacultyID;
+                                            module.exports.F_fname = results.F_fname;
+                                            module.exports.F_lName = results.F_lName;
+                                            module.exports.F_Gender = results.F_Gender;
+                                            module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                            module.exports.F_Email = results.F_Email;
+                                            module.exports.F_Phone = results.F_Phone;
+                                            module.exports.F_Address = results.F_Address;
+                                            module.exports.FacultyProfile = results.FacultyProfile;
+                                            module.exports.DepartmentID = results.DepartmentID;
+                                            res.render("\Head", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents, H_Position: H_Position });
 
 
-                                }
+                                        }
 
-                            })  }) })
+                                    })  }) })
 
                         }else if(results.H_Position == "Dean"){
                             const id = results.FacultyID;
@@ -335,39 +381,39 @@ exports.login = async(req, res) =>{
                                 }
                                 console.log(program)
                                 console.log(progcountStudents)
-                            db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
-                                console.log(results)
-                                let department = []
-                                let DeptcountStudents = []
-                                for (let i = 0; i < results.length; ++i) {
-                                    department[i] = results[i].DepartmentID;
-                                    DeptcountStudents[i] = results[i].c;
+                                db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                    console.log(results)
+                                    let department = []
+                                    let DeptcountStudents = []
+                                    for (let i = 0; i < results.length; ++i) {
+                                        department[i] = results[i].DepartmentID;
+                                        DeptcountStudents[i] = results[i].c;
 
-                                }
-                                console.log(department)
-                                console.log(DeptcountStudents)
-                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
-                                if(error){
-                                    console.log(error)
-                                }else{
-                                    console.log(results.FacultyID);
-                                    module.exports.FacultyID = results.FacultyID;
-                                    module.exports.F_fname = results.F_fname;
-                                    module.exports.F_lName = results.F_lName;
-                                    module.exports.F_Gender = results.F_Gender;
-                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
-                                    module.exports.F_Email = results.F_Email;
-                                    module.exports.F_Phone = results.F_Phone;
-                                    module.exports.F_Address = results.F_Address;
-                                    module.exports.FacultyProfile = results.FacultyProfile;
-                                    module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\Dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position, department: department, DeptcountStudents: DeptcountStudents, program: program, progcountStudents: progcountStudents});
+                                    }
+                                    console.log(department)
+                                    console.log(DeptcountStudents)
+                                    db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
+                                        if(error){
+                                            console.log(error)
+                                        }else{
+                                            console.log(results.FacultyID);
+                                            module.exports.FacultyID = results.FacultyID;
+                                            module.exports.F_fname = results.F_fname;
+                                            module.exports.F_lName = results.F_lName;
+                                            module.exports.F_Gender = results.F_Gender;
+                                            module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                            module.exports.F_Email = results.F_Email;
+                                            module.exports.F_Phone = results.F_Phone;
+                                            module.exports.F_Address = results.F_Address;
+                                            module.exports.FacultyProfile = results.FacultyProfile;
+                                            module.exports.DepartmentID = results.DepartmentID;
+                                            res.render("\Dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position, department: department, DeptcountStudents: DeptcountStudents, program: program, progcountStudents: progcountStudents});
 
 
-                                }
+                                        }
 
-                            })
-                            })
+                                    })
+                                })
                             })
 
                         }
