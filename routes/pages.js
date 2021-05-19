@@ -312,7 +312,7 @@ Router.get("/StudentCourses", (req,res) => {
                 co3.push(results[i].percentageOfCO)
 
             }else if(results[i].CONo == 4){
-                co4.push(results[i].sumofCOPercentage)
+                co4.push(results[i].percentageOfCO)
 
             }
         }
@@ -336,6 +336,26 @@ Router.get("/StudentCourses", (req,res) => {
 
 });
 Router.get("/studentReports", (req,res) => {
+    db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,    ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage   FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
+        console.log(results)
+        let studPLOPercentage = [];
+        for(let i=0;i<results.length;++i){
+            studPLOPercentage[i] = results[i].PLOpercentage
+        }
+        console.log(studPLOPercentage)
+
+        db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Enrollment_T en,Program_T pr   WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID   AND r.StudentID=en.StudentID  AND en.ProgramID=pr.ProgramID   AND pr.DepartmentID='CSE'     GROUP BY r.StudentID,c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p,Registration_T R,  Enrollment_T EN,Program_T PR,Evaluation_T EV  WHERE m.PLOID=p.PLOID  AND EV.RegistrationID=R.RegistrationID AND R.StudentID=EN.StudentID  AND EN.ProgramID=PR.ProgramID  AND PR.DepartmentID='CSE'  GROUP BY COResult.StudentID,m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,  Mapping_T M,PLO_T pl,Registration_T reg,Enrollment_T enr,Program_T pro,Evaluation_T eva WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo AND eva.RegistrationID=reg.RegistrationID  AND reg.StudentID=enr.StudentID AND enr.ProgramID=pro.ProgramID AND pro.DepartmentID='CSE' GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
+            console.log(results)
+            let deptPLOPercentage = [];
+            let PLONo = [];
+            for(let i=0;i<results.length;++i){
+                deptPLOPercentage[i] = results[i].PLOpercentage
+                PLONo[i] = results[i].PLONo;
+            }
+
+            console.log(deptPLOPercentage)
+            console.log(PLONo)
+
     db.all("SELECT (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) GPA ,s.Year,s.Semester FROM Registration_T r,Enrollment_T e,Section_T s WHERE r.SectionID =s.SectionID AND r.StudentID=100 GROUP BY s.Year,s.Semester,s.CourseID", async(error, results) => {
         console.log(results)
         let semYear = []
@@ -359,9 +379,12 @@ Router.get("/studentReports", (req,res) => {
             Major: User.Major,
             Minor: User.Minor,
             semYear:semYear,
-            GPA:GPA
+            GPA:GPA,
+            deptPLOPercentage:deptPLOPercentage,
+            PLONo:PLONo,
+            studPLOPercentage:studPLOPercentage
         })
-    })
+    }) }) })
 });
 Router.get("/studentDownloads", (req,res) => {
 

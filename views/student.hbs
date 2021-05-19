@@ -242,9 +242,10 @@
                         <h3>PLO Analysis</h3>
                         <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
                     </div>
+
                     <div class="card-body">
                         <div style="width: 600px; height: 400px;display: inline-block;" class="chart">
-                            <canvas id="ProgressView" width="600" height="400"></canvas>
+                            <canvas id="radar" width="600" height="400"></canvas>
                         </div>
                     </div>
                 </div>
@@ -255,48 +256,50 @@
 
 <script>
 
-    let plo2 = [{{#each PLONo}}"{{this}}",{{/each}}];
-    datasetlist = [{
-        label: 'Department Average',
-        data: [{{#each deptPLOPercentage}}{{this}},{{/each}}],
-        backgroundColor: '#094480'
 
-    }, {
-        label: 'Achieved',
-        data: [{{#each studPLOPercentage}}{{this}},{{/each}}],
-        backgroundColor: '#E74A4A'
-
-    },];
-    stackedChart("ProgressView", plo2, datasetlist, false);
-
-
-    function stackedChart(ctx, labelName, datasetlist, isTrue) {
-
-        let chart = new Chart(ctx, {
-            type: 'bar',
+    radarChart("radar")
+    function radarChart(ctx) {
+        Chart.defaults.global.defaultFontFamily = "Oxygen";
+        Chart.defaults.global.defaultFontColor = "black";
+        var chart = new Chart(ctx, {
+            type: 'radar',
             data: {
-                labels: labelName, // responsible for how many bars are gonna show on the chart
-                // create 12 datasets, since we have 12 items
-                // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
-                // put 0, if there is no data for the particular bar
-                datasets: datasetlist
+                labels: [
+                    'PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13'
+                ],
+                datasets: [{
+                    label: 'Achieved PLO',
+                    data: [65, 59, 90, 81, 56, 55, 40,30,50,43,23,35,75],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }, {
+                    label: 'Attempted',
+                    data: [100,100,100,100,100,100,100,100,100,100,100,100,100],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
             },
             options: {
-                responsive: false,
-                legend: {
-                    position: 'right' // place legend on the right side of chart
-                },
-                scales: {
-                    xAxes: [{
-                        stacked: isTrue // this should be set to make the bars stacked
-                    }],
-                    yAxes: [{
-                        stacked: isTrue // this also..
-                    }]
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
                 }
-            }
+            },
         });
     }
+
+
 </script>
 </body>
 
