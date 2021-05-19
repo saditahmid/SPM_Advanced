@@ -5,7 +5,7 @@ let User = require('../controllers/auth');
 
 //let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
 //let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -34,25 +34,61 @@ Router.get("/headProgramReports", (req,res) => {
     res.render(`headProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
 });
 Router.get("/student", (req,res) => {
-    db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+    db.all("SELECT COUNT(CountOfAchieved.PLONo) AS c FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo HAVING (PLOpercentage>=40)) CountOfAchieved", async(error, results) => {
         console.log(results)
-        let CurrentCgPA = Math.round(results[0].CGPA * 100) / 100;
-        console.log(CurrentCgPA)
-        res.render(`student`, {
-            StdentID: User.StdentID,
-            S_fname: User.S_fname,
-            S_lName: User.S_lName,
-            S_Gender: User.S_Gender,
-            S_DateOfBirth: User.S_DateOfBirth,
-            S_Email: User.S_Email,
-            S_Phone: User.S_Phone,
-            S_Address: User.S_Address,
-            StudentProfile: User.StudentProfile,
-            Major: User.Major,
-            Minor: User.Minor,
-            CurrentCgPA:CurrentCgPA
-        })
-    })
+        let achievedPLO = results[0].c;
+        console.log(achievedPLO)
+
+        db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM(SELECT PLOrawMarks.PLONo FROM (SELECT COResult.CourseID courseID,COResult.CONo coNo,p.PLONo FROM (SELECT c.CourseID,c.CONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOCount", async(error, results) => {
+            console.log(results)
+            let attemptedPLO = results[0].c;
+            console.log(attemptedPLO)
+            let successRate = (achievedPLO/attemptedPLO)*100;
+            console.log(successRate + "%");
+
+            db.all("SELECT minT.PLONo,MIN(minT.PLOpercentage),ploT.PLOName FROM (SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A  FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID  AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) minT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=minT.PLONo", async(error, results) => {
+                console.log(results)
+                let MinPloNo = results[0].PLONo;
+                let MinPloName = results[0].PLOName;
+                console.log(MinPloNo)
+                console.log(MinPloName)
+
+                db.all("SELECT maxT.PLONo,Max(maxT.PLOpercentage),ploT.PLOName FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) maxT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=maxT.PLONo", async(error, results) => {
+                    console.log(results)
+                    let MaxPloNo = results[0].PLONo;
+                    let MaxPloName = results[0].PLOName;
+                    console.log(MaxPloNo)
+                    console.log(MaxPloName)
+
+
+
+
+                    db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+                        console.log(results)
+                        let CurrentCgPA = Math.round(results[0].CGPA * 100) / 100;
+                        console.log(CurrentCgPA)
+                        res.render(`student`, {
+                            StdentID: User.StdentID,
+                            S_fname: User.S_fname,
+                            S_lName: User.S_lName,
+                            S_Gender: User.S_Gender,
+                            S_DateOfBirth: User.S_DateOfBirth,
+                            S_Email: User.S_Email,
+                            S_Phone: User.S_Phone,
+                            S_Address: User.S_Address,
+                            StudentProfile: User.StudentProfile,
+                            Major: User.Major,
+                            Minor: User.Minor,
+                            CurrentCgPA:CurrentCgPA,
+                            achievedPLO: achievedPLO,
+                            attemptedPLO: attemptedPLO,
+                            successRate: successRate,
+                            MinPloNo: MinPloNo,
+                            MinPloName: MinPloName,
+                            MaxPloNo: MaxPloNo,
+                            MaxPloName: MaxPloName
+                        })
+                    }) }) }) }) })
 });
 
 Router.get("/Faculty", (req,res) => {
@@ -87,37 +123,37 @@ Router.get("/Dean", (req,res) => {
         }
         console.log(program)
         console.log(progcountStudents)
-    db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
-        console.log(results)
-        let department = []
-        let DeptcountStudents = []
-        for (let i = 0; i < results.length; ++i) {
-            department[i] = results[i].DepartmentID;
-            DeptcountStudents[i] = results[i].c;
+        db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+            console.log(results)
+            let department = []
+            let DeptcountStudents = []
+            for (let i = 0; i < results.length; ++i) {
+                department[i] = results[i].DepartmentID;
+                DeptcountStudents[i] = results[i].c;
 
-        }
-        console.log(department)
-        console.log(DeptcountStudents)
-        res.render(`Dean`, {
-            FacultyID: User.FacultyID,
-            F_fname: User.F_fname,
-            F_lName: User.F_lName,
-            F_Gender: User.F_Gender,
-            F_DateOfBirth: User.F_DateOfBirth,
-            F_Email: User.F_Email,
-            F_Phone: User.F_Phone,
-            F_Address: User.F_Address,
-            FacultyProfile: User.FacultyProfile,
-            DepartmentID: User.DepartmentID,
-            Term_start_date: User.Term_start_date,
-            Term_end_date: User.Term_end_date,
-            H_Position: User.H_Position,
-            department: department,
-            DeptcountStudents: DeptcountStudents,
-            program: program,
-            progcountStudents: progcountStudents
-        })
-    })})
+            }
+            console.log(department)
+            console.log(DeptcountStudents)
+            res.render(`Dean`, {
+                FacultyID: User.FacultyID,
+                F_fname: User.F_fname,
+                F_lName: User.F_lName,
+                F_Gender: User.F_Gender,
+                F_DateOfBirth: User.F_DateOfBirth,
+                F_Email: User.F_Email,
+                F_Phone: User.F_Phone,
+                F_Address: User.F_Address,
+                FacultyProfile: User.FacultyProfile,
+                DepartmentID: User.DepartmentID,
+                Term_start_date: User.Term_start_date,
+                Term_end_date: User.Term_end_date,
+                H_Position: User.H_Position,
+                department: department,
+                DeptcountStudents: DeptcountStudents,
+                program: program,
+                progcountStudents: progcountStudents
+            })
+        })})
 });
 Router.get("/Head", (req,res) => {
     db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
@@ -178,54 +214,54 @@ Router.get("/VC", (req,res) => {
         console.log(progcountStudents)
 
 
-    db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
-        console.log(results)
-        let department = []
-        let DeptcountStudents = []
-        for(let i=0;i<results.length;++i){
-            department[i] = results[i].DepartmentID;
-            DeptcountStudents[i]=results[i].c;
+        db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+            console.log(results)
+            let department = []
+            let DeptcountStudents = []
+            for(let i=0;i<results.length;++i){
+                department[i] = results[i].DepartmentID;
+                DeptcountStudents[i]=results[i].c;
 
-        }
-        console.log(department)
-        console.log(DeptcountStudents)
+            }
+            console.log(department)
+            console.log(DeptcountStudents)
 
 
-    db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c  FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
-        console.log(results)
-        let school = []
-        let schoolcountStudents = []
-        for (let i = 0; i < results.length; ++i) {
-            school[i] = results[i].SchoolID;
-            schoolcountStudents[i] = results[i].c;
+            db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c  FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
+                console.log(results)
+                let school = []
+                let schoolcountStudents = []
+                for (let i = 0; i < results.length; ++i) {
+                    school[i] = results[i].SchoolID;
+                    schoolcountStudents[i] = results[i].c;
 
-        }
-        console.log(school)
-        console.log(schoolcountStudents)
-        res.render(`VC`, {
-            FacultyID: User.FacultyID,
-            F_fname: User.F_fname,
-            F_lName: User.F_lName,
-            F_Gender: User.F_Gender,
-            F_DateOfBirth: User.F_DateOfBirth,
-            F_Email: User.F_Email,
-            F_Phone: User.F_Phone,
-            F_Address: User.F_Address,
-            FacultyProfile: User.FacultyProfile,
-            DepartmentID: User.DepartmentID,
-            Term_start_date: User.Term_start_date,
-            Term_end_date: User.Term_end_date,
-            H_Position: User.H_Position,
-            school: school,
-            schoolcountStudents: schoolcountStudents,
-            program: program,
-            progcountStudents: progcountStudents,
-            department: department,
-            DeptcountStudents: DeptcountStudents
+                }
+                console.log(school)
+                console.log(schoolcountStudents)
+                res.render(`VC`, {
+                    FacultyID: User.FacultyID,
+                    F_fname: User.F_fname,
+                    F_lName: User.F_lName,
+                    F_Gender: User.F_Gender,
+                    F_DateOfBirth: User.F_DateOfBirth,
+                    F_Email: User.F_Email,
+                    F_Phone: User.F_Phone,
+                    F_Address: User.F_Address,
+                    FacultyProfile: User.FacultyProfile,
+                    DepartmentID: User.DepartmentID,
+                    Term_start_date: User.Term_start_date,
+                    Term_end_date: User.Term_end_date,
+                    H_Position: User.H_Position,
+                    school: school,
+                    schoolcountStudents: schoolcountStudents,
+                    program: program,
+                    progcountStudents: progcountStudents,
+                    department: department,
+                    DeptcountStudents: DeptcountStudents
+                })
+            })
         })
     })
-        })
-              })
 
 });
 Router.get("/index", (req,res) => {
@@ -239,43 +275,43 @@ Router.get("/StudentCourses", (req,res) => {
         let co2 = []
         let co3 = []
         let co4 = []
-for(let i=0;i<results.length;++i){
-    if(results[i].CONo == 1){
-        co1.push(results[i].sumofCOPercentage)
-    } else if(results[i].CONo == 2){
-        co2.push(results[i].sumofCOPercentage)
+        for(let i=0;i<results.length;++i){
+            if(results[i].CONo == 1){
+                co1.push(results[i].sumofCOPercentage)
+            } else if(results[i].CONo == 2){
+                co2.push(results[i].sumofCOPercentage)
 
-    }else if(results[i].CONo == 3){
-        co3.push(results[i].sumofCOPercentage)
+            }else if(results[i].CONo == 3){
+                co3.push(results[i].sumofCOPercentage)
 
-    }else if(results[i].CONo == 4){
-        co4.push(results[i].sumofCOPercentage)
+            }else if(results[i].CONo == 4){
+                co4.push(results[i].sumofCOPercentage)
 
-    }
-}
-console.log(co1)
+            }
+        }
+        console.log(co1)
         console.log(co2)
         console.log(co3)
         console.log(co4)
 
-    db.all("SELECT DISTINCT(e.EnrolledSem),p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID GROUP BY e.EnrolledSem,p.ProgramID", async(error, results) => {
-        console.log(results)
-        let sem = []
-        let countStudents = []
-        for(let i=0;i<results.length;++i){
-            sem[i] = results[i].EnrolledSem;
-            countStudents[i]=results[i].c;
+        db.all("SELECT DISTINCT(e.EnrolledSem),p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID GROUP BY e.EnrolledSem,p.ProgramID", async(error, results) => {
+            console.log(results)
+            let sem = []
+            let countStudents = []
+            for(let i=0;i<results.length;++i){
+                sem[i] = results[i].EnrolledSem;
+                countStudents[i]=results[i].c;
 
-        }
-        console.log(sem)
-        res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents, co1: co1, co2:co2, co3:co3, co4:co4 })
-    }) })
+            }
+            console.log(sem)
+            res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents, co1: co1, co2:co2, co3:co3, co4:co4 })
+        }) })
 
 });
 Router.get("/studentReports", (req,res) => {
     db.all("SELECT (SUM(r.GradePoint*r.AchievedCredit)/SUM(r.AchievedCredit)) GPA ,s.Year,s.Semester FROM Registration_T r,Enrollment_T e,Section_T s WHERE r.SectionID =s.SectionID AND r.StudentID=100 GROUP BY s.Year,s.Semester,s.CourseID", async(error, results) => {
         console.log(results)
-       let semYear = []
+        let semYear = []
         let GPA = []
         for(let i=0;i<results.length;++i){
             semYear[i] = results[i].Semester + results[i].Year
