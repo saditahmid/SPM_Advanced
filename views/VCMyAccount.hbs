@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> SPM Independent University,Dhaka  </title>
+    <link rel="stylesheet" href = "/VCMyAccount.css">
+    <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+
+</head>
+
+<body>
+<input type="checkbox" id="nav-toggle">
+<div class="sidebar">
+    <div class="sidebar-brand">
+        <h2> <span class="lab la-accusoft"> </span> <span> SPM</span></h2>
+        <p>
+
+        </p>
+    </div>
+    <div class="sidebar-menu">
+        <ul>
+            <li>
+                <a href="/VC" ><span class="las la-igloo"></span>
+                    <span>Student Performance Monitor</span></a>
+            </li>
+            <li>
+                <a href="/VCMyCourses"><span  class="las la-school"></span>
+                    <span> My Courses</span></a>
+            </li>
+            <li>
+                <a href="/VCDataEntry"><span  class="las la-database"></span>
+                    <span> Data Entry</span></a>
+            </li>
+            <li>
+                <a href="/VCDepartmentReports"><span class="las la-clipboard-list"></span>
+                    <span> Department Reports</span></a>
+            </li>
+            <li>
+                <a href="/VCProgramReports"><span class="las la-clipboard-list"></span>
+                    <span> Program Reports</span></a>
+            </li>
+
+            <li>
+                <a href="/VCSchoolReports"><span class="las la-chalkboard-teacher"></span>
+                    <span> School Reports</span></a>
+            </li>
+            <li>
+                <a href="/VCDownloads"><span class="las la-download"></span>
+                    <span> Downloads</span></a>
+            </li>
+            <li>
+                <a href="/VCMyAccount" class="active"><span class="las la-user"></span>
+                    <span> My Account </span></a>
+            </li>
+            <li>
+                <a href="/login"><span class="las la-sign-out-alt"></span>
+                    <span> Sign-Out</span></a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="main-content">
+    <header>
+        <h2>
+            <label for="nav-toggle">
+                <span class="las la-bars"></span>
+            </label>
+            Dashboard
+        </h2>
+        <div class="user-wrapper">
+            <a href="https://ibb.co/ckB79jy"><img src="{{FacultyProfile}}" alt="1505967226-5-Mahady-Hasan"  width="30px" height="30px"></a>
+            <div>
+                <h4>{{F_fname}} {{F_lName}} </h4>
+                <small> {{FacultyID}} </small>
+                <small> VC, {{DepartmentID}}</small>
+            </div>
+        </div>
+    </header>
+    <main>
+
+        Account Info
+
+    </main>
+</div>
+
+</body>
+
+</html>

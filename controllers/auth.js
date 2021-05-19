@@ -5,15 +5,14 @@ const bcrypt = require('bcryptjs');
 
 let User = 12;
 module.exports.User = User;
-let db = new sqlite3.Database('C:/Users/Asus/Desktop/Black cat/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//let db = new sqlite3.Database('/home/tahmid/GIt/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//E:\SPM_Advanced\DataSource\database.sqlite3
-//let db = new sqlite3.Database('E:/Spring 2021 course work/SPM-NEW/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-//let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+//let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
+//let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+
+let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
-    console.log('Connected to the in-memory SQlite database.');
+    console.log('auth:Connected to the in-memory SQlite database.');
 });
 
 exports.login = async(req, res) =>{
@@ -52,8 +51,12 @@ exports.login = async(req, res) =>{
                             Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
+                    db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+                        console.log(results)
+                        let CurrentCgPA = Math.round(results[0].CGPA*100)/100;
+                        console.log(CurrentCgPA)
 
-                    db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[results.UserID], async(error, results) => {
+                    db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[id], async(error, results) => {
                         if(error){
                             console.log(error)
                         }else{
@@ -69,17 +72,18 @@ exports.login = async(req, res) =>{
                             module.exports.StudentProfile = results.StudentProfile;
                             module.exports.Major = results.Major;
                             module.exports.Minor = results.Minor;
-                            res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor});
+                            res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName, S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth, S_Email:results.S_Email, S_Phone:results.S_Phone,S_Address:results.S_Address, StudentProfile:results.StudentProfile, Major:results.Major, Minor:results.Minor, CurrentCgPA:CurrentCgPA});
 
 
                         }
 
-                    })
+                    }) })
 
 
 
                 }else if((results.UserType) == "Faculty" ){
                     const id = results.UserID;
+                    let bla = [13, 11, 12];
                     const token = jwt.sign({id}, process.env.JWT_SECRET,{
                         expiresIn: process.env.JWT_EXPIRES_IN
                     });
@@ -89,27 +93,43 @@ exports.login = async(req, res) =>{
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
 
-                    db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[results.UserID], async(error, results) => {
-                        if(error){
-                            console.log(error)
-                        }else{
-                            console.log(results.FacultyID);
-                            module.exports.FacultyID = results.FacultyID;
-                            module.exports.F_fname = results.F_fname;
-                            module.exports.F_lName = results.F_lName;
-                            module.exports.F_Gender = results.F_Gender;
-                            module.exports.F_DateOfBirth = results.F_DateOfBirth;
-                            module.exports.F_Email = results.F_Email;
-                            module.exports.F_Phone = results.F_Phone;
-                            module.exports.F_Address = results.F_Address;
-                            module.exports.FacultyProfile = results.FacultyProfile;
-                            module.exports.DepartmentID = results.DepartmentID;
-
-                            res.render("\Faculty", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
-
+                    db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+                        console.log(results)
+                        let program = []
+                        let countStudents = []
+                        for(let i=0;i<results.length;++i){
+                            program[i] = results[i].ProgramID;
+                            countStudents[i]=results[i].c;
 
                         }
+                        console.log(program)
+                        console.log(countStudents)
 
+
+
+                        db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
+                            if(error){
+                                console.log(error)
+                            }else{
+                                console.log("This is inside another fuction: " + program)
+                                console.log(results.FacultyID);
+                                module.exports.FacultyID = results.FacultyID;
+                                module.exports.F_fname = results.F_fname;
+                                module.exports.F_lName = results.F_lName;
+                                module.exports.F_Gender = results.F_Gender;
+                                module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                module.exports.F_Email = results.F_Email;
+                                module.exports.F_Phone = results.F_Phone;
+                                module.exports.F_Address = results.F_Address;
+                                module.exports.FacultyProfile = results.FacultyProfile;
+                                module.exports.DepartmentID = results.DepartmentID;
+
+                                res.render("\Faculty", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, program: program, countStudents: countStudents});
+
+
+                            }
+
+                        })
                     })
 
                 }else if((results.UserType) == "Admin" ){
@@ -159,7 +179,7 @@ exports.login = async(req, res) =>{
                     res.cookie('jwt', token, cookieOptions);
                     db.get("SELECT HigherAuthorityID,Term_start_date, Term_end_date, H_Position, FacultyID from HigherAuthority_T WHERE FacultyID = ?",[results.UserID], async(error, results) => {
                         if(error){console.log(error);}else if(results.H_Position == "VC"){
-                            const id = results.UserID;
+                            const id = results.FacultyID;
                             module.exports.Term_start_date = results.Term_start_date;
                             module.exports.Term_end_date = results.Term_end_date;
                             module.exports.H_Position = results.H_Position;
@@ -173,10 +193,44 @@ exports.login = async(req, res) =>{
                                     Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                                 ), httpOnly: true}
                             res.cookie('jwt', token, cookieOptions);
-                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[results.FacultyID], async(error, results) => {
+                            db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+                                console.log(results)
+                                let program = []
+                                let progcountStudents = []
+                                for(let i=0;i<results.length;++i){
+                                    program[i] = results[i].ProgramID;
+                                    progcountStudents[i]=results[i].c;
+
+                                }
+                                console.log(program)
+                                console.log(progcountStudents)
+                                db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                    console.log(results)
+                                    let department = []
+                                    let DeptcountStudents = []
+                                    for(let i=0;i<results.length;++i){
+                                        department[i] = results[i].DepartmentID;
+                                        DeptcountStudents[i]=results[i].c;
+
+                                    }
+                                    console.log(department)
+                                    console.log(DeptcountStudents)
+                            db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
+                                console.log(results)
+                                let school = []
+                                let schoolcountStudents = []
+                                for (let i = 0; i < results.length; ++i) {
+                                    school[i] = results[i].SchoolID;
+                                    schoolcountStudents[i] = results[i].c;
+
+                                }
+                                console.log(school)
+                                console.log(schoolcountStudents)
+                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results, id) => {
                                 if(error){
                                     console.log(error)
                                 }else{
+
                                     console.log(results.FacultyID);
                                     module.exports.FacultyID = results.FacultyID;
                                     module.exports.F_fname = results.F_fname;
@@ -188,18 +242,20 @@ exports.login = async(req, res) =>{
                                     module.exports.F_Address = results.F_Address;
                                     module.exports.FacultyProfile = results.FacultyProfile;
                                     module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\VC", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    res.render("\VC", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, school: school, schoolcountStudents: schoolcountStudents,program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents});
 
 
                                 }
 
                             })
+                            }) }) })
 
                         }else if(results.H_Position == "Department Head" ){
-                            const id = results.UserID;
+                            const id = results.FacultyID;
                             module.exports.Term_start_date = results.Term_start_date;
                             module.exports.Term_end_date = results.Term_end_date;
                             module.exports.H_Position = results.H_Position;
+                            let H_Position = results.H_Position;
                             const token = jwt.sign({id}, process.env.JWT_SECRET,{
                                 expiresIn: process.env.JWT_EXPIRES_IN
 
@@ -209,7 +265,30 @@ exports.login = async(req, res) =>{
                                     Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                                 ), httpOnly: true}
                             res.cookie('jwt', token, cookieOptions);
-                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[results.FacultyID], async(error, results) => {
+                            db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+                                console.log(results)
+                                let program = []
+                                let progcountStudents = []
+                                for(let i=0;i<results.length;++i){
+                                    program[i] = results[i].ProgramID;
+                                    progcountStudents[i]=results[i].c;
+
+                                }
+                                console.log(program)
+                                console.log(progcountStudents)
+                            db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                console.log(results)
+                                let department = []
+                                let DeptcountStudents = []
+                                for(let i=0;i<results.length;++i){
+                                    department[i] = results[i].DepartmentID;
+                                    DeptcountStudents[i]=results[i].c;
+
+                                }
+                                console.log(department)
+                                console.log(DeptcountStudents)
+
+                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
                                 if(error){
                                     console.log(error)
                                 }else{
@@ -224,47 +303,71 @@ exports.login = async(req, res) =>{
                                     module.exports.F_Address = results.F_Address;
                                     module.exports.FacultyProfile = results.FacultyProfile;
                                     module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\Head", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID});
+                                    res.render("\Head", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, program: program, progcountStudents: progcountStudents, department: department, DeptcountStudents: DeptcountStudents, H_Position: H_Position });
+
+
+                                }
+
+                            })  }) })
+
+                        }else if(results.H_Position == "Dean"){
+                            const id = results.FacultyID;
+                            module.exports.Term_start_date = results.Term_start_date;
+                            module.exports.Term_end_date = results.Term_end_date;
+                            module.exports.H_Position = results.H_Position;
+                            const token = jwt.sign({id}, process.env.JWT_SECRET,{
+                                expiresIn: process.env.JWT_EXPIRES_IN
+
+                            });
+                            console.log("The token is " + token);
+                            const cookieOptions = {expires: new Date(
+                                    Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
+                                ), httpOnly: true}
+                            res.cookie('jwt', token, cookieOptions);
+                            db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+                                console.log(results)
+                                let program = []
+                                let progcountStudents = []
+                                for(let i=0;i<results.length;++i){
+                                    program[i] = results[i].ProgramID;
+                                    progcountStudents[i]=results[i].c;
+
+                                }
+                                console.log(program)
+                                console.log(progcountStudents)
+                            db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                console.log(results)
+                                let department = []
+                                let DeptcountStudents = []
+                                for (let i = 0; i < results.length; ++i) {
+                                    department[i] = results[i].DepartmentID;
+                                    DeptcountStudents[i] = results[i].c;
+
+                                }
+                                console.log(department)
+                                console.log(DeptcountStudents)
+                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
+                                if(error){
+                                    console.log(error)
+                                }else{
+                                    console.log(results.FacultyID);
+                                    module.exports.FacultyID = results.FacultyID;
+                                    module.exports.F_fname = results.F_fname;
+                                    module.exports.F_lName = results.F_lName;
+                                    module.exports.F_Gender = results.F_Gender;
+                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
+                                    module.exports.F_Email = results.F_Email;
+                                    module.exports.F_Phone = results.F_Phone;
+                                    module.exports.F_Address = results.F_Address;
+                                    module.exports.FacultyProfile = results.FacultyProfile;
+                                    module.exports.DepartmentID = results.DepartmentID;
+                                    res.render("\Dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position, department: department, DeptcountStudents: DeptcountStudents, program: program, progcountStudents: progcountStudents});
 
 
                                 }
 
                             })
-
-                        }else if(results.H_Position == "Dean"){
-                            const id = results.UserID;
-                            module.exports.Term_start_date = results.Term_start_date;
-                            module.exports.Term_end_date = results.Term_end_date;
-                            module.exports.H_Position = results.H_Position;
-                            const token = jwt.sign({id}, process.env.JWT_SECRET,{
-                                expiresIn: process.env.JWT_EXPIRES_IN
-
-                            });
-                            console.log("The token is " + token);
-                            const cookieOptions = {expires: new Date(
-                                    Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
-                                ), httpOnly: true}
-                            res.cookie('jwt', token, cookieOptions);
-                            db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[results.FacultyID], async(error, results) => {
-                                if(error){
-                                    console.log(error)
-                                }else{
-                                    console.log(results.FacultyID);
-                                    module.exports.FacultyID = results.FacultyID;
-                                    module.exports.F_fname = results.F_fname;
-                                    module.exports.F_lName = results.F_lName;
-                                    module.exports.F_Gender = results.F_Gender;
-                                    module.exports.F_DateOfBirth = results.F_DateOfBirth;
-                                    module.exports.F_Email = results.F_Email;
-                                    module.exports.F_Phone = results.F_Phone;
-                                    module.exports.F_Address = results.F_Address;
-                                    module.exports.FacultyProfile = results.FacultyProfile;
-                                    module.exports.DepartmentID = results.DepartmentID;
-                                    res.render("\dean", {FacultyID: results.FacultyID,  F_fname: results.F_fname, F_lName:results.F_lName, F_Gender:results.F_Gender, F_DateOfBirth:results.F_DateOfBirth, F_Email:results.F_Email, F_Phone:results.F_Phone,F_Address:results.F_Address, FacultyProfile:results.FacultyProfile, DepartmentID:results.DepartmentID, Term_start_date: results.Term_start_date,Term_end_date: results.Term_end_date, H_Position: results.H_Position});
-
-
-                                }
-
+                            })
                             })
 
                         }

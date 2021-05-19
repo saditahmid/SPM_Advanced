@@ -77,6 +77,9 @@ function pieChart(ctx,
 
 }
 
+
+
+
 function lineChart(ctx,
                    labelName,
                    labelList,
@@ -164,4 +167,3 @@ function stackedChart(ctx, labelName, datasetlist, isTrue) {
         }
     });
 }
-``

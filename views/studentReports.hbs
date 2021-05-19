@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title> SPM Independent University,Dhaka  </title>
-    <link rel="stylesheet" href = "/studentReports.css">
+    <link rel="stylesheet" href = "/studentCourses.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
     <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 </head>
@@ -55,7 +57,7 @@
             </label>
 
 
-            Dashboard
+            Reports
         </h2>
         <div class="user-wrapper">
             <img src={{StudentProfile}}" width="30px" height="30px" alt="">
@@ -69,9 +71,106 @@
     </header>
     <main>
         OVERALL REPORT
-    </main>
+        <div style="width: 500px; height: 500px;display: inline-block;" class="chart">
+        </div>
 
+        <div style="width: 600px; height: 500px;display: inline-block;" class="chart">
+        </div>
+        <div style="width: 600px; height: 500px;display: inline-block;" class="chart">
+            <canvas id="DepartmentProgressView" width="300" height="200"></canvas>
+            <canvas id="ProgramWiseGPA" width="300" height="200"></canvas>
+
+        </div>
+        <script>
+            // let PchartName= ["Summer", "Autumn", "Spring",];
+            // let PchartLabel = [3.4,3.35,3.2];
+            // barChart("ProgramWiseGPA","SemestermWise Student GPA", PchartName ,PchartLabel)
+            let SchartName= ["Summer", "Autumn", "Spring",];
+            let SchartLabel = [3.4,3.35,3.2];
+            barChart("ProgramWiseCGPA","SemestermWise Student CGPA", SchartName ,SchartLabel)
+
+            let semester = [{{#each semYear}}"{{this}}",{{/each}}];
+            let semesterAttempted = [{{#each GPA}}{{this}},{{/each}}];
+            chartObjects = [{
+                label: 'GPA',
+                backgroundColor: '#FEE9F3',
+                borderColor: '#962323',
+                data: semesterAttempted
+            }];
+            lineChartObject("DepartmentProgressView", semester, chartObjects);
+
+            function lineChartObject(ctx,
+                                     labelList,
+                                     chartObjects) {
+                Chart.defaults.global.defaultFontFamily = "Oxygen";
+                Chart.defaults.global.defaultFontColor = "black";
+
+                let chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'line',
+
+                    // The data for our dataset
+                    data: {
+                        labels: labelList,
+                        datasets: chartObjects
+                    },
+
+                    // Configuration options go here
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+            function barChart(ctx,
+                              labelName,
+                              labelList,
+                              dataList,
+                              bdcolor = '#094480',
+                              bgcolor = '#d9e2ec') {
+                //Chart.defaults.global.defaultFontFamily = "Oxygen";
+                Chart.defaults.global.defaultFontColor = "black";
+
+                let chart = new Chart(ctx, {
+                    // The type of chart we want to create
+                    type: 'bar',
+
+                    // The data for our dataset
+                    data: {
+                        labels: labelList,
+                        datasets: [{
+                            label: labelName,
+                            backgroundColor: bgcolor,
+                            borderColor: bdcolor,
+                            data: dataList
+                        }]
+                    },
+
+                    // Configuration options go here
+                    options: {
+                        scales: {
+                            yAxes: [{
+                                ticks: {
+                                    beginAtZero: true
+                                }
+                            }]
+                        }
+                    }
+                });
+            }
+
+        </script>
+
+    </main>
+</div>
 
 </body>
+
 
 </html>
