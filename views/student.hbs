@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title> SPM Independent University,Dhaka  </title>
     <link rel="stylesheet" href = "/studentCSS.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
     <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 </head>
@@ -216,16 +218,65 @@
             <div class="customers">
                 <div class="card">
                     <div class="card-header">
-                        <h3>Department_Wise PLO</h3>
+                        <h3>PLO Analysis</h3>
                         <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
                     </div>
                     <div class="card-body">
-
+                        <div style="width: 600px; height: 400px;display: inline-block;" class="chart">
+                            <canvas id="ProgressView" width="600" height="400"></canvas>
+                        </div>
                     </div>
-
+                </div>
+            </div>
+        </div>
     </main>
 </div>
 
+<script>
+
+    let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06','PLO07','PLO08','PLO09','PLO010','PLO011','PLO012','PLO013'];
+    datasetlist = [{
+        label: 'Program Average',
+        data: ['80','85','81','50','60','70','81','71','65','83','40','77','70',],
+        backgroundColor: '#094480'
+
+    }, {
+        label: 'Achieved',
+        data: ['81','65','61','40','45','47','68','47','56','78','64','17','66',],
+        backgroundColor: '#E74A4A'
+
+    },];
+    stackedChart("ProgressView", plo2, datasetlist, false);
+
+
+    function stackedChart(ctx, labelName, datasetlist, isTrue) {
+
+        let chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labelName, // responsible for how many bars are gonna show on the chart
+                // create 12 datasets, since we have 12 items
+                // data[0] = labels[0] (data for first bar - 'Standing costs') | data[1] = labels[1] (data for second bar - 'Running costs')
+                // put 0, if there is no data for the particular bar
+                datasets: datasetlist
+            },
+            options: {
+                responsive: false,
+                legend: {
+                    position: 'right' // place legend on the right side of chart
+                },
+                scales: {
+                    xAxes: [{
+                        stacked: isTrue // this should be set to make the bars stacked
+                    }],
+                    yAxes: [{
+                        stacked: isTrue // this also..
+                    }]
+                }
+            }
+        });
+    }
+</script>
 </body>
 
 </html>

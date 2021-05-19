@@ -4,9 +4,8 @@ const Router = express.Router();
 let User = require('../controllers/auth');
 
 //let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
-//let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
-
-let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+//let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW2\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
@@ -310,7 +309,6 @@ Router.get("/contactUs", (req,res) => {
     res.render(`contactUs`)
 });
 
-//DEAN
 
 Router.get("/DeanSchoolReports", (req,res) => {
 
@@ -340,8 +338,6 @@ Router.get("/DeanProgramReports", (req,res) => {
 
     res.render(`DeanProgramReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
-
-//VC
 Router.get("/VCDataEntry", (req,res) => {
 
     res.render(`VCDataEntry`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
@@ -372,7 +368,7 @@ Router.get("/VCSchoolReports", (req,res) => {
 });
 
 
-//FACULTY
+
 
 Router.get("/facultyCourses", (req,res) => {
 
@@ -415,7 +411,7 @@ Router.get("/facultyMyAccount", (req,res) => {
     res.render(`facultyMyAccount`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 
-//HEAD
+
 
 Router.get("/headCourseReport", (req,res) => {
 
@@ -424,18 +420,6 @@ Router.get("/headCourseReport", (req,res) => {
 Router.get("/headDataEntry", (req,res) => {
 
     res.render(`headDataEntry`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
-});
-Router.get("/headevaluation", (req,res) => {
-
-    res.render(`headevaluation`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
-});
-Router.get("/headmap", (req,res) => {
-
-    res.render(`headmap`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
-});
-Router.get("/headassesment", (req,res) => {
-
-    res.render(`headassesment`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
 });
 Router.get("/headDownloads", (req,res) => {
 
@@ -465,8 +449,6 @@ Router.get("/headDownloads", (req,res) => {
 
     res.render(`headDownloads`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
 });
-
-//ADMIN
 Router.get("/adminRegister", (req,res) => {
 
     res.render(`adminRegister`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
