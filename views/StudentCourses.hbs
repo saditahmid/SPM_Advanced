@@ -68,16 +68,25 @@
             </div>
         </div>
     </header>
-    <main>
-        MY COURSE REPORT ADD BUTTON TO SEE PREV REPORTS
 
-        <h2>Course Wise Student CGPA{{Major}}</h2>
+    <main>
+
+<!--        <h2>Course Wise Student CGPA{{Major}}</h2>-->
         <div style="width: 500px; height: 500px;display: inline-block;" class="chart">
-            <canvas id="CourseWiseCGPA" width="800px" height="800px"></canvas>
             <h2> PLO-CO Performance Trend
             </h2>
+<!--            <canvas id="CourseWiseCGPA" width="800px" height="800px"></canvas>-->
+            <canvas id="FacultyProgressView" width="800" height="500"></canvas>
         </div>
-        <canvas id="FacultyProgressView" width="800" height="500"></canvas>
+        <div>
+            <div style="width: 500px; height: 500px;display: inline-block;" class="chart">
+                <h2>        MY COURSE REPORT ADD BUTTON TO SEE PREV REPORTS
+                </h2>
+            </div>
+        </div>
+
+
+
     </main>
 
     <script>
@@ -137,11 +146,11 @@
 
     <script>
 
-        let CchartName = [{{#each data}}"{{this}}",{{/each}}];
+        <!--let CchartName = [{{#each data}}"{{this}}",{{/each}}];-->
 
 
-        let CchartLabel = [{{#each count}}{{this}},{{/each}}];
-        barChart("CourseWiseCGPA", "Course Wise Student CGPA", CchartName, CchartLabel, "", "#5582FA")
+        <!--let CchartLabel = [{{#each count}}{{this}},{{/each}}];-->
+        <!--barChart("CourseWiseCGPA", "Course Wise Student CGPA", CchartName, CchartLabel, "", "#5582FA")-->
 
         function barChart(ctx,
                           labelName,
