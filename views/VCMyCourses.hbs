@@ -88,12 +88,12 @@
     <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">
         <canvas id="CourseWisePLO" width="800px" height="500px"></canvas>
     </div>
-    <h2>Average PLO of CSC464</h2>
+    <h2>Average PLO of CSC460</h2>
 
     <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">
         <canvas id="DBMSPLO" width="800" height="500"></canvas>
     </div>
-    <h2>Average PLO of CSC303 </h2>
+    <h2>Average PLO of CSC343 </h2>
 
     <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">
         <canvas id="DiscretePLO" width="800" height="500"></canvas>
@@ -110,13 +110,13 @@
     let CchartLabel = [80, 70, 85, 50, 64, 49, 50, 66, 65, 43, 52, 46, 75];
     barChart("CourseWisePLO", "Average PLO of my courses", CchartName, CchartLabel,"","#0ACBE2")
 
-    let DchartName = [{{#each PLONo464}} "PLO{{this}}",{{/each}}];
-    let DchartLabel = [{{#each avgPloPercentage464}} {{this}},{{/each}}];
-    barChart("DBMSPLO", "Average PLO of  CSC464", DchartName, DchartLabel)
+    let DchartName = [{{#each PLONo460}} "PLO{{this}}",{{/each}}];
+    let DchartLabel = [{{#each avgPloPercentage460}} {{this}},{{/each}}];
+    barChart("DBMSPLO", "Average PLO of  CSC460", DchartName, DchartLabel)
 
-    let BchartName = [{{#each PLONo303}} "PLO{{this}}",{{/each}}];
-    let BchartLabel = [{{#each avgPloPercentage303}} {{this}},{{/each}}];
-    barChart("DiscretePLO", "Average PLO of CSC303", BchartName, BchartLabel,"","#00B09B")
+    let BchartName = [{{#each PLONo343}} "PLO{{this}}",{{/each}}];
+    let BchartLabel = [{{#each avgPloPercentage343}} {{this}},{{/each}}];
+    barChart("DiscretePLO", "Average PLO of CSC343", BchartName, BchartLabel,"","#00B09B")
 
 
     // let semester=['Spring','Summer', 'Autumn']

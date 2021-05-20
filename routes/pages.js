@@ -529,13 +529,13 @@ Router.get("/DeanMyCourses", (req,res) => {
         console.log(PLONo303)
         console.log(avgPloPercentage303)
 
-        db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE464' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
+        db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE450' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
             console.log(results)
-            let PLONo464 = []
-            let avgPloPercentage464 = []
+            let PLONo450 = []
+            let avgPloPercentage450 = []
             for (let i = 0; i < results.length; ++i) {
-                PLONo464[i] = Math.round(results[i].PLONo * 100) / 100;
-                avgPloPercentage464[i] = Math.round(results[i].c * 100) / 100;
+                PLONo450[i] = Math.round(results[i].PLONo * 100) / 100;
+                avgPloPercentage450[i] = Math.round(results[i].c * 100) / 100;
             }
             res.render(`DeanMyCourses`, {
                 FacultyID: User.FacultyID,
@@ -550,8 +550,8 @@ Router.get("/DeanMyCourses", (req,res) => {
                 DepartmentID: User.DepartmentID,
                 PLONo303:PLONo303,
                 avgPloPercentage303:avgPloPercentage303,
-                PLONo464:PLONo464,
-                avgPloPercentage464:avgPloPercentage464,
+                PLONo450:PLONo450,
+                avgPloPercentage450:avgPloPercentage450,
             })
         }) })
 });
@@ -680,24 +680,24 @@ Router.get("/VCMyAccount", (req,res) => {
     res.render(`VCMyAccount`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 Router.get("/VCMyCourses", (req,res) => {
-    db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE303' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
+    db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE343' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
         console.log(results)
-        let PLONo303 = []
-        let avgPloPercentage303 = []
+        let PLONo343 = []
+        let avgPloPercentage343 = []
         for(let i=0;i<results.length;++i){
-            PLONo303[i] = Math.round(results[i].PLONo*100)/100;
-            avgPloPercentage303[i] = Math.round(results[i].c*100)/100;
+            PLONo343[i] = Math.round(results[i].PLONo*100)/100;
+            avgPloPercentage343[i] = Math.round(results[i].c*100)/100;
         }
-        console.log(PLONo303)
-        console.log(avgPloPercentage303)
+        console.log(PLONo343)
+        console.log(avgPloPercentage343)
 
-        db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE464' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
+        db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE460' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
             console.log(results)
-            let PLONo464 = []
-            let avgPloPercentage464 = []
+            let PLONo460 = []
+            let avgPloPercentage460 = []
             for (let i = 0; i < results.length; ++i) {
-                PLONo464[i] = Math.round(results[i].PLONo * 100) / 100;
-                avgPloPercentage464[i] = Math.round(results[i].c * 100) / 100;
+                PLONo460[i] = Math.round(results[i].PLONo * 100) / 100;
+                avgPloPercentage460[i] = Math.round(results[i].c * 100) / 100;
             }
             res.render(`VCMyCourses`, {
                 FacultyID: User.FacultyID,
@@ -710,10 +710,10 @@ Router.get("/VCMyCourses", (req,res) => {
                 F_Address: User.F_Address,
                 FacultyProfile: User.FacultyProfile,
                 DepartmentID: User.DepartmentID,
-                PLONo303:PLONo303,
-                avgPloPercentage303:avgPloPercentage303,
-                PLONo464:PLONo464,
-                avgPloPercentage464:avgPloPercentage464
+                PLONo343:PLONo343,
+                avgPloPercentage343:avgPloPercentage343,
+                PLONo460:PLONo460,
+                avgPloPercentage460:avgPloPercentage460
             })
         }) })
 });
@@ -994,13 +994,13 @@ Router.get("/headMyCourse", (req,res) => {
         console.log(PLONo303)
         console.log(avgPloPercentage303)
 
-        db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE464' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
+        db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
             console.log(results)
-            let PLONo464 = []
-            let avgPloPercentage464 = []
+            let PLONo309 = []
+            let avgPloPercentage309 = []
             for (let i = 0; i < results.length; ++i) {
-                PLONo464[i] = Math.round(results[i].PLONo * 100) / 100;
-                avgPloPercentage464[i] = Math.round(results[i].c * 100) / 100;
+                PLONo309[i] = Math.round(results[i].PLONo * 100) / 100;
+                avgPloPercentage309[i] = Math.round(results[i].c * 100) / 100;
             }
             res.render(`headMyCourse`, {
                 FacultyID: User.FacultyID,
@@ -1018,8 +1018,8 @@ Router.get("/headMyCourse", (req,res) => {
                 H_Position: User.H_Position,
                 PLONo303:PLONo303,
                 avgPloPercentage303:avgPloPercentage303,
-                PLONo464:PLONo464,
-                avgPloPercentage464:avgPloPercentage464,
+                PLONo309:PLONo309,
+                avgPloPercentage309:avgPloPercentage309,
             })
         }) })
 
