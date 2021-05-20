@@ -69,12 +69,12 @@
         </div>
     </header>
     <main>
-        MY COURSE REPORT ADD BUTTON TO SEE PREV REPORTS{{Minor}}{{#each data}}{{@index}}{{this}}{{/each}}
+        MY COURSE REPORT ADD BUTTON TO SEE PREV REPORTS
 
         <h2>Course Wise Student CGPA{{Major}}</h2>
         <div style="width: 500px; height: 500px;display: inline-block;" class="chart">
             <canvas id="CourseWiseCGPA" width="800px" height="800px"></canvas>
-            <h2> Graph no 14
+            <h2> PLO-CO Performance Trend
             </h2>
         </div>
         <canvas id="FacultyProgressView" width="800" height="500"></canvas>
@@ -82,7 +82,7 @@
 
     <script>
 
-        let plo2 = ["1","2","3","4","5","6","7","8","12"];
+        let plo2 = ["PLO1","PLO2","PLO3","PLO4","PLO5","PLO6","PLO7","PLO8","PLO12"];
         datasetlist = [{
             label: 'C01',
             data: [{{#each co1}}{{this}},{{/each}}],
