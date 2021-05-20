@@ -800,17 +800,27 @@ Router.get("/facultyCourses", (req,res) => {
         console.log(results)
             let attempted303 = results[0].c
 
+            db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE303' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
+                console.log(results)
+                let PLONo303 = []
+                let avgPloPercentage303 = []
+                for(let i=0;i<results.length;++i){
+                    PLONo303[i] = Math.round(results[i].PLONo*100)/100;
+                    avgPloPercentage303[i] = Math.round(results[i].c*100)/100;
+                }
+                console.log(PLONo303)
+                console.log(avgPloPercentage303)
 
-    db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
+    db.all("SELECT stepOne.PLONo, SUM(stepOne.Total) T,SUM(stepOne.Achieved) A ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) c FROM (SELECT c.CourseID,e.RegistrationID,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved ,p.PLONo FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND c.CourseID='CSE464' AND m.COID=c.COID AND m.PLOID=p.PLOID GROUP BY p.PLONo,c.CONo ,e.RegistrationID)stepOne GROUP BY stepOne.PLONo", async(error, results) => {
         console.log(results)
-         let PLONo = []
-         let avgPloPercentage = []
+         let PLONo464 = []
+         let avgPloPercentage464 = []
         for(let i=0;i<results.length;++i){
-          PLONo[i] = Math.round(results[i].PLONo*100)/100;
-            avgPloPercentage[i] = Math.round(results[i].c*100)/100;
+          PLONo464[i] = Math.round(results[i].PLONo*100)/100;
+            avgPloPercentage464[i] = Math.round(results[i].c*100)/100;
         }
-        console.log(PLONo)
-        console.log(avgPloPercentage)
+        console.log(PLONo464)
+        console.log(avgPloPercentage464)
         res.render(`facultyCourses`, {
             FacultyID: User.FacultyID,
             F_fname: User.F_fname,
@@ -822,8 +832,10 @@ Router.get("/facultyCourses", (req,res) => {
             F_Address: User.F_Address,
             FacultyProfile: User.FacultyProfile,
             DepartmentID: User.DepartmentID,
-            PLONo:PLONo,
-            avgPloPercentage:avgPloPercentage,
+            PLONo303:PLONo303,
+            avgPloPercentage303:avgPloPercentage303,
+            PLONo464:PLONo464,
+            avgPloPercentage464:avgPloPercentage464,
             students464:students464,
             achievedNOPLO464:achievedNOPLO464,
             attempted464:attempted464,
@@ -833,7 +845,7 @@ Router.get("/facultyCourses", (req,res) => {
 
 
         })
-    }) }) }) }) })
+    }) }) }) }) }) })
 });
 Router.get("/facultyDataEntry", (req,res) => {
 
