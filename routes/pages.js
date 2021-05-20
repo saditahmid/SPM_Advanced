@@ -433,6 +433,19 @@ Router.get("/StudentCourses", (req,res) => {
 
 });
 Router.get("/studentReports", (req,res) => {
+    db.all(`SELECT c.CourseID,c.CONo,
+                   ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage
+            FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r
+            WHERE c.AssessmentID=a.AssessmentID
+              AND c.AssessmentID= e.AssessmentID
+              AND e.RegistrationID=r.RegistrationID
+              AND r.StudentID=100
+            GROUP BY c.CourseID ,c.CONo
+    `, async(error, results) => {
+        console.log(results)
+
+
+
     db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,    ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage   FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
         console.log(results)
         let studPLOPercentage = [];
@@ -481,7 +494,7 @@ Router.get("/studentReports", (req,res) => {
             PLONo:PLONo,
             studPLOPercentage:studPLOPercentage
         })
-    }) }) })
+    }) }) }) })
 });
 Router.get("/studentDownloads", (req,res) => {
 
