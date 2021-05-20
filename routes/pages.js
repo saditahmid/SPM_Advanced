@@ -3,14 +3,14 @@ const express = require("express");
 const Router = express.Router();
 let User = require('../controllers/auth');
 
-let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
-//let db = new sqlite3.Database('E:/SPM_Advanced/DataSource/database.sqlite3', (err) => {
+//let db = new sqlite3.Database('C:\\Users\\Asus\\Desktop\\Black cat\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
+let db = new sqlite3.Database('./DataSource/database.sqlite3', (err) => {
 //let db = new sqlite3.Database('E:\\Spring 2021 course work\\SPM_NEW4\\SPM_Advanced\\DataSource\\database.sqlite3', (err) => {
 //let db = new sqlite3.Database('/home/tahmid/Git/SPM_Advanced/DataSource/database.sqlite3', (err) => {
     if (err) {
         return console.error(err.message);
     }
-    console.log('pages: Connected to the in-memory SQlite database.');
+    console.log('pages: Connected to the in-memory SQlite .');
 });
 
 
