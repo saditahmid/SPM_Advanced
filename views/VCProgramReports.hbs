@@ -141,7 +141,7 @@
         <div style="width: 100px; height: 200px;display: inline-block;" class="chart"></div>
 
         <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
-            <h2>Program-Wise Student Performance (GPA)</h2>
+            <h2>Program-Wise Student Performance (CGPA)</h2>
             <canvas id="ProgWiseCGPA" width="300" height="300"></canvas>
         </div>
 
@@ -247,7 +247,7 @@
         }];
     stackedChart("comp", semester2, datasetlist, false);
     let PrchartName = ['CSE','CEN','CSC'];
-    let PrchartLabel = [3.5,4,3.3];
+    let PrchartLabel = [{{CSECGPA}}, {{CENCGPA}}, {{CSCCGPA}}];
     barChart("ProgWiseCGPA", "Program-Wise Student Performance", PrchartName, PrchartLabel,"","#EB5057")
 
 

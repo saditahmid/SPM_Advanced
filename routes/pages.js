@@ -31,6 +31,57 @@ Router.get("/users", (req,res) => {
     res.render(`users`)
 });
 Router.get("/headProgramReports", (req,res) => {
+    db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CSC'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+        console.log(results)
+
+        let CSCCGPA = results[0].CGPA;
+
+
+        db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CEN'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+            console.log(results)
+
+
+            let CENCGPA = results[0].CGPA;
+
+
+            db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CSE'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                console.log(results)
+                let CSECGPA = results[0].CGPA;
+
+
+
+
+
     db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
         console.log(results)
         let students309 = []
@@ -81,9 +132,12 @@ Router.get("/headProgramReports", (req,res) => {
                         attempted309:attempted309,
                         students303:students303,
                         achievedNOPLO303:achievedNOPLO303,
-                        attempted303:attempted303
+                        attempted303:attempted303,
+                        CSECGPA: CSECGPA,
+                        CENCGPA: CENCGPA,
+                        CSCCGPA: CSCCGPA
                     })
-                }) }) }) })
+                }) }) }) }) }) }) })
 });
 Router.get("/student", (req,res) => {
 
@@ -468,6 +522,57 @@ Router.get("/DeanMyCourses", (req,res) => {
     res.render(`DeanMyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 Router.get("/DeanProgramReports", (req,res) => {
+
+    db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CSC'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+        console.log(results)
+
+let CSCCGPA = results[0].CGPA;
+
+
+    db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CEN'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+        console.log(results)
+
+
+        let CENCGPA = results[0].CGPA;
+
+
+        db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CSE'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+            console.log(results)
+            let CSECGPA = results[0].CGPA;
+
+
+
+
     db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE450' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
         console.log(results)
         let students450 = []
@@ -515,9 +620,14 @@ Router.get("/DeanProgramReports", (req,res) => {
                         attempted450:attempted450,
                         students303:students303,
                         achievedNOPLO303:achievedNOPLO303,
-                        attempted303:attempted303
+                        attempted303:attempted303,
+                        CSECGPA: CSECGPA,
+                        CENCGPA: CENCGPA,
+                        CSCCGPA: CSCCGPA
+
+
                     })
-                }) }) }) })
+                }) }) }) }) }) }) })
 });
 Router.get("/VCDataEntry", (req,res) => {
 
@@ -540,6 +650,56 @@ Router.get("/VCMyCourses", (req,res) => {
     res.render(`VCMyCourses`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 Router.get("/VCProgramReports", (req,res) => {
+    db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CSC'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+        console.log(results)
+
+        let CSCCGPA = results[0].CGPA;
+
+
+        db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CEN'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+            console.log(results)
+
+
+            let CENCGPA = results[0].CGPA;
+
+
+            db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
+      (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4) CGPA
+      FROM
+(SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+FROM(
+       SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+       FROM Registration_T r,Enrollment_T e
+       WHERE r.StudentID=e.StudentID
+       AND e.ProgramID='B.SC. in CSE'
+   ) stepOne,Registration_T R,Enrollment_T E
+GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                console.log(results)
+                let CSECGPA = results[0].CGPA;
+
+
+
+
     db.all("SELECT stepTwo.CourseID course,stepTwo.StudentID,COUNT(stepTwo.PLONo) achievedNoPlo FROM (SELECT stepOne.CourseID,stepOne.RegistrationID,stepOne.StudentID,stepOne.PLONo  ,(SUM(stepOne.Achieved)/SUM(stepOne.Total)*100) ploPercentage FROM (SELECT c.CourseID,e.RegistrationID,r.StudentID ,c.CONo,SUM(a.AllocatedMark) Total,SUM(e.AchievedMark) Achieved  ,p.PLONo  FROM Evaluation_T e, CO_T c,Assessment_T a,PLO_T p,Mapping_T  m,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND c.CourseID='CSE309' AND m.COID=c.COID AND m.PLOID=p.PLOID  GROUP BY e.RegistrationID,p.PLONo,c.CONo)stepOne GROUP BY stepOne.RegistrationID,stepOne.PLONo  HAVING (ploPercentage>=40)) stepTwo GROUP BY stepTwo.RegistrationID", async(error, results) => {
         console.log(results)
         let students343 = []
@@ -587,9 +747,13 @@ Router.get("/VCProgramReports", (req,res) => {
         attempted343:attempted343,
         students460:students460,
         achievedNOPLO460:achievedNOPLO460,
-        attempted460:attempted460
+        attempted460:attempted460,
+        CSECGPA: CSECGPA,
+        CENCGPA: CENCGPA,
+        CSCCGPA: CSCCGPA
+
     })
-}) }) }) })
+}) }) }) }) }) }) })
 });
 Router.get("/VCSchoolReports", (req,res) => {
 
