@@ -164,12 +164,12 @@ main{
 }
 
 .card-header button{
-    background :var(--main-color);
+    background :var(#484f4f);
     border-radius:10px;
     color:#fff;
     font-size:.8rem;
     padding:.5rem 1rem;
-    border: 1px solid var(--main-color);
+    border: 1px solid var( #0000);
 }
 table{
     border-collapse: collapse;
