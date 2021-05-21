@@ -203,12 +203,11 @@ tr td:last-child{
 
 
 #nav-toggle:checked ~ .main-content {
-    margin-left:70px;
+    margin-left:10px;
 }
+
 #nav-toggle:checked ~ .main-content header{
-    width:calc(100% - 70px);
-    left:70px;
+
+    width:calc(100% - 10px);
+    left:10px;
 }
-
-
-
