@@ -676,6 +676,8 @@ GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                     })
                 }) }) }) }) }) }) })
 });
+
+//VC
 Router.get("/VCDataEntry", (req,res) => {
 
     res.render(`VCDataEntry`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
@@ -845,7 +847,7 @@ Router.get("/VCInstructorReports", (req,res) => {
     res.render(`VCInstructorReports`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
 });
 
-
+//FACULTY
 
 Router.get("/facultyCourses", (req,res) => {
 
@@ -966,6 +968,7 @@ Router.get("/facultyMyAccount", (req,res) => {
 });
 
 
+// HEAD
 
 Router.get("/headCourseReport", (req,res) => {
 
@@ -1053,6 +1056,9 @@ Router.get("/headDownloads", (req,res) => {
 
     res.render(`headDownloads`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID, Term_start_date: User.Term_start_date,Term_end_date: User.Term_end_date, H_Position: User.H_Position})
 });
+
+
+//ADMIN
 Router.get("/adminRegister", (req,res) => {
 
     res.render(`adminRegister`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})

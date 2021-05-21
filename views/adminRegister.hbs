@@ -60,7 +60,7 @@
             <label for="nav-toggle">
                 <span class="las la-bars"></span>
             </label>
-            Dashboard
+            Register New Account
         </h2>
         <div class="user-wrapper">
             <img src="{{AdminProfile}}" alt="Sadita ahmed" width="30px" height="30px"></a>
@@ -71,7 +71,7 @@
         </div>
     </header>
     <main>
-        Bar chart for enrolled students in each Department
+
         <form action="/auth/register" method="POST">
             <h2>Sign Up</h2>
             <p>
@@ -214,7 +214,7 @@
                 <input type="submit" value="Create My Account" id="submit">
             </p>
         </form>
-        <h4><a href="/index">Go back home</a></h4>
+
         {{#if message}}
             <h4 class="alert alert-danger mt-4">{{message}}</h4>
         {{/if}}
