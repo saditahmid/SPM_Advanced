@@ -124,11 +124,11 @@ main{
 
 .flex-container {
     display:flex;
-    width:auto;
+    width:calc(100% - 40px);
 }
 
 .box {
-    align: right;
+    align: left;
     margin: 5px;
     margin-bottom: 10px;
     padding: 20px;
@@ -159,16 +159,16 @@ main{
 }
 
 .box-section-body {
-    padding: 0px 30px;
+    padding: 0px 10px;
     overflow: auto;
 }
 
 .marg-top {
-    margin-top: 30px;
+    margin-top: auto;
 }
 
 .marg-bottom {
-    margin-bottom: 30px;
+    margin-bottom: auto;
 }
 
 .chart {
@@ -177,11 +177,7 @@ main{
     margin-right: auto;
 }
 
-.form-table {
-    /* width: 100%; */
-    margin-left: auto;
-    margin-right: auto;
-}
+
 
 .form-table input,
 .form-table label {
@@ -197,7 +193,5 @@ main{
     padding-left: 5px;
     padding-right: 5px;
 }
-
-
 
 
