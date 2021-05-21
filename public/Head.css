@@ -210,5 +210,39 @@ tr td:last-child{
     left:70px;
 }
 
+.card-body1{
+
+    color:  #132c33;
+    text-align: left;
+    font-weight: bold;
+    display: flex;
+    justify-content:space-between;
+    background:#fff;
+    padding:2rem;
+    border-radius:3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+
+
+}
+.card-body2{
+    color:  #132c33;
+    text-align: left;
+    font-weight: bold;
+    display: flex;
+    justify-content:space-between;
+    background:#fff;
+    padding:2rem;
+    border-radius:3px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+
+
+}
+
+.head{
+    color:  #132c33;
+    text-align: left;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+}
 
 
