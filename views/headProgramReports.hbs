@@ -63,7 +63,7 @@
             <label for="nav-toggle">
                 <span class="las la-bars"></span>
             </label>
-            Dashboard
+           Program Reports
         </h2>
         <div class="user-wrapper">
             <a href="https://ibb.co/ckB79jy"><img src="{{FacultyProfile}}" alt="1505967226-5-Mahady-Hasan" width="30px"
@@ -76,72 +76,153 @@
         </div>
     </header>
     <main>
-        <h2>CSE Department Overall Progress </h2>
+
+        <
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <h>CSE Department Overall Progress </h>
             <canvas id="CourseProgressView" width="800" height="500"></canvas>
         </div>
 
-        <h2>CSE Program Progress View </h2>
+
 
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+
             <canvas id="CSEProgressView" width="800" height="500"></canvas>
+            <h>CSE Program Progress View </h>
         </div>
-        <h2>CSC Program Progress View </h2>
+
+
+
+
+
 
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
             <canvas id="CSCProgressView" width="800" height="500"></canvas>
+            <h2>CSC Program Progress View </h2>
         </div>
-        <h2>CEN Program Progress View </h2>
+
 
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <h2>CEN Program Progress View </h2>
             <canvas id="CENProgressView" width="800" height="500"></canvas>
         </div>
-        <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">
-            <h2>CSE Program Student Performance</h2>
-            <canvas id="CSEWiseCGPA" width="1000" height="500"></canvas>
-        </div>
-        <div style="width: 100px; height: 150px;display: inline-block;" class="chart"></div>
-        <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">
-            <h2>CSC Program Student Performance</h2>
 
+        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <h2>CSE Program Student Performance</h2>
+            <canvas id="CSEWiseCGPA" width="800" height="500"></canvas>
+        </div>
+
+<!--        /<div style="width: 100px; height: 150px;display: inline-block;" class="chart"></div>-->
+        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <h2>CSC Program Student Performance</h2>
             <canvas id="CSCWiseCGPA" width="1000" height="500"></canvas>
         </div>
-        <div style="width: 100px; height: 150px;display: inline-block;" class="chart"></div>
 
 
-        <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">
+
+        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
             <h2>CEN Program Student Performance</h2>
             <canvas id="CENWiseCGPA" width="1000" height="500"></canvas>
         </div>
-        <div style="width: 100px; height: 200px;display: inline-block;" class="chart"></div>
 
-        <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
-            <h2>Program-Wise Student Performance (CGPA)</h2>
-            <canvas id="ProgWiseCGPA" width="300" height="300"></canvas>
-        </div>
 
-        <h2>Program Comparison Progress View </h2>
 
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <h2>Program-Wise Student Performance (CGPA)</h2>
+            <canvas id="ProgWiseCGPA" width="1000" height="500"></canvas>
+        </div>
+
+
+
+
+        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+            <h>Program Comparison Progress View </h>
             <canvas id="comp" width="800" height="500"></canvas>
         </div>
 
 
-        <div style="width: 2000px; height: 500px;display: inline-block;" class="chart">
-            <h2>Student Report Of CSC303</h2>
-            <canvas id="DBMSProgressView" width="2000" height="500"></canvas>
-        </div>
-        <div style="width: 2000px; height: 100px;display: inline-block;" class="chart">
-        </div>
-        <div style="width: 2000px; height: 500px;display: inline-block;" class="chart">
-            <h2>Student Report Of CSE309</h2>
-            <canvas id="DiscreteProgressView" width="2000" height="500"></canvas>
-        </div>
+
+
+
+
+            <div class="flex-container blockwise">
+                <!--CO Mapping-->
+                <div class="box-section">
+                    <div class="box-section-head"> SEARCH COURSES
+                        <input type="text" class="form-control" placeholder=" Course ID" />
+
+                    </div>
+
+                </div>
+
+                <style>
+                        .content-table {
+                            border-collapse: collapse;
+                            margin: px 0;
+                            font-size: 0.9em;
+                            min-width: 400px;
+                            border-radius: 2px 2px 0 0;
+                            overflow: hidden;
+                            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                        }
+
+                        .content-table thead tr {
+                            background-color: #132c33;
+                            color: #ffffff;
+                            text-align: left;
+                            font-weight: bold;
+                        }
+
+                        .content-table th,
+                        .content-table td {
+                            padding: 8px 8px;
+                        }
+
+                        .content-table tbody tr {
+                            border-bottom: 1px solid #dddddd;
+                        }
+
+                        .content-table tbody tr:nth-of-type(even) {
+                            background-color: #f3f3f3;
+                        }
+
+                        .content-table tbody tr:last-of-type {
+                            border-bottom: 2px solid #009879;
+                        }
+
+                        .content-table tbody tr.active-row {
+                            font-weight: bold;
+                            color: #009879;
+                        }
+
+
+
+                    </style>
+
+
+
+
+
+                        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+                            <h2>Student Report Of CSC303</h2>
+                            <canvas id="DBMSProgressView" width="800" height="500"></canvas>
+                        </div>
+
+                        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+                            <h2>Student Report Of CSE309</h2>
+                            <canvas id="DiscreteProgressView" width="800" height="500"></canvas>
+                        </div>
+
+
+
+
+
+
 
     </main>
 </div><script>
