@@ -63,7 +63,7 @@
             <label for="nav-toggle">
                 <span class="las la-bars"></span>
             </label>
-            Dashboard
+          My Courses
         </h2>
         <div class="user-wrapper">
             <a href="https://ibb.co/ckB79jy"><img src="{{FacultyProfile}}" alt="1505967226-5-Mahady-Hasan"  width="30px" height="30px"></a>
@@ -81,21 +81,45 @@
 <!--        <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">-->
 <!--            <canvas id="CourseWisePLO" width="800px" height="500px"></canvas>-->
 <!--        </div>-->
-        <h2>Average PLO of CSC309</h2>
+        <div class="flex-container blockwise">
 
-        <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">
-            <canvas id="DBMSPLO" width="800" height="500"></canvas>
-        </div>
-        <h2>Average PLO of CSC303 </h2>
+            <div class="box-section">
+                <div class="box-section-head"> SEARCH COURSES
+                    <input type="text" class="form-control" placeholder=" Course ID" />
+                    <input type="text" class="form-control" placeholder=" Section ID" />
+                    <input type="text" class="form-control" placeholder=" Student ID" />
+                </div>
 
-        <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">
-            <canvas id="DiscretePLO" width="800" height="500"></canvas>
-        </div>
-        <h2>Course Progress View </h2>
+            </div>
+
+            <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
+                <h2>Average Course Progress View </h2>
+                <canvas id="CourseProgressView" width="800" height="500"></canvas>
+            </div>
+
+            <div class="box-section">
+                <div class="box-section-head"> SEARCH MY  COURSES
+                    <input type="text" class="form-control" placeholder=" Course ID" />
+                    <input type="text" class="form-control" placeholder=" Section ID" />
+
+                </div>
+
+            </div>
+
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
-            <canvas id="CourseProgressView" width="800" height="500"></canvas>
+            <h2>Average PLO of CSC309</h2>
+            <canvas id="DBMSPLO" width="800" height="500"></canvas>
         </div>
+
+
+        <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">
+            <h2>Average PLO of CSC303 </h2>
+            <canvas id="DiscretePLO" width="800" height="500"></canvas>
+        </div>
+
+
+
     </main>
 </div>
 <script>

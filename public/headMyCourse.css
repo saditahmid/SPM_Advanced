@@ -225,3 +225,13 @@ tr td:last-child{
     box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, .12);
 
 }
+
+.chart{
+    width: 300px;
+    border: 15px ;
+    padding: 80px;
+    margin: 20px;
+}
+.box-section-head{
+    font: bold;
+}

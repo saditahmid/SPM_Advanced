@@ -213,7 +213,7 @@ tr td:last-child{
 
 .chart{
     width: 300px;
-    border: 15px #24b9e3;
+    border: 15px solid green;
     padding: 80px;
     margin: 20px;
 }
