@@ -212,3 +212,17 @@ tr td:last-child{
 
 
 
+.Student-info {
+
+    font-size: 18px;
+    font-weight: bold;
+    align: right;
+    margin: 5px;
+    margin-bottom: 10px;
+    padding: 20px;
+    flex: 1 1 0px;
+    border: 1px solid #dee4e9;
+    border-radius: 6px;
+    box-shadow: 0rem 0rem 0.5rem rgba(0, 0, 0, .12);
+
+}
