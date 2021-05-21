@@ -194,49 +194,7 @@
             <div class="customers">
                 <div class="card">
                     <div class="card-header">
-                        <style>
-                            .content-table {
-                                border-collapse: collapse;
-                                margin: px 0;
-                                font-size: 0.9em;
-                                min-width: 400px;
-                                border-radius: 2px 2px 0 0;
-                                overflow: hidden;
-                                box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-                            }
 
-                            .content-table thead tr {
-                                background-color: #132c33;
-                                color: #ffffff;
-                                text-align: left;
-                                font-weight: bold;
-                            }
-
-                            .content-table th,
-                            .content-table td {
-                                padding: 8px 8px;
-                            }
-
-                            .content-table tbody tr {
-                                border-bottom: 1px solid #dddddd;
-                            }
-
-                            .content-table tbody tr:nth-of-type(even) {
-                                background-color: #f3f3f3;
-                            }
-
-                            .content-table tbody tr:last-of-type {
-                                border-bottom: 2px solid #009879;
-                            }
-
-                            .content-table tbody tr.active-row {
-                                font-weight: bold;
-                                color: #009879;
-                            }
-
-
-
-                        </style>
 <div class="head">
     <h>Enrollment Analysis</h>
     <h>(2017-Recent)</h>
@@ -246,15 +204,16 @@
 
                     </div>
 
-
+                    <div class="flex-container blockwise">
                     <div class="card-body1">
                         <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
                             <h>Department-Wise Enrollment Trend</h>
                             <canvas id="DeptWise" width="300" height="300"></canvas>
                         </div>
                     </div>
+                    </div>
 
-
+                    <div class="flex-container blockwise">
                     <div class="card-body2">
                         <div style="width: 300px; height: 300px;display: inline-block;" class="chart">
 
@@ -262,6 +221,7 @@
                             <canvas id="ProgramWise" width="300" height="300"></canvas>
                         </div>
 
+                    </div>
                     </div>
                 </div>
             </div>
