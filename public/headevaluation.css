@@ -1,4 +1,6 @@
 
+
+
 :root{
     --main-color:#132c33;
     --color-dark:#d8e3e7;
@@ -119,7 +121,6 @@ main{
     margin-top:1rem;
 }
 .card-single{
-    font-size: 1rem;
     display: flex;
     justify-content:space-between;
     background:#fff;
@@ -127,7 +128,7 @@ main{
     border-radius:2px;
 }
 .card-single div:last-child span{
-    font-size: 1rem;
+    font-size: 2rem;
     color:var(--main-color);
 }
 .card-single div:first-child span{
@@ -202,9 +203,10 @@ tr td:last-child{
 #nav-toggle:checked ~ .main-content {
     margin-left:10px;
 }
-
 #nav-toggle:checked ~ .main-content header{
-
     width:calc(100% - 10px);
     left:10px;
 }
+
+
+
