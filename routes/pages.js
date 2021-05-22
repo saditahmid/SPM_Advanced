@@ -48,25 +48,25 @@ Router.get("/headProgramReports", (req,res) => {
 
 
         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSC'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                 FROM
+                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                             p.PLONo
+                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                      WHERE c.AssessmentID=a.AssessmentID
+                        AND c.AssessmentID= e.AssessmentID
+                        AND e.RegistrationID=r.RegistrationID
+                        AND m.PLOID=p.PLOID
+                        AND r.StudentID=en.StudentID
+                        AND s.SectionID=a.SectionID
+                        AND en.ProgramID='B.SC. in CSC'
+                        AND s.Year =2021
+                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                 WHERE M.COID=C.COID
+                   AND M.PLOID=pl.PLOID
+                   AND C.CONo =stepOne.coNo
+                   AND pl.PLONo=stepOne.PLONo
+                 GROUP BY stepOne.PLONo
+                 HAVING (PloPercentage>=40)`, async(error, results) => {
             console.log(results)
             let CSCPLOPERCENTAGE
             let sum = 0
@@ -80,25 +80,25 @@ Router.get("/headProgramReports", (req,res) => {
 
 
             db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSE'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                     FROM
+                         (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                 p.PLONo
+                          FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                          WHERE c.AssessmentID=a.AssessmentID
+                            AND c.AssessmentID= e.AssessmentID
+                            AND e.RegistrationID=r.RegistrationID
+                            AND m.PLOID=p.PLOID
+                            AND r.StudentID=en.StudentID
+                            AND s.SectionID=a.SectionID
+                            AND en.ProgramID='B.SC. in CSE'
+                            AND s.Year =2021
+                          GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                     WHERE M.COID=C.COID
+                       AND M.PLOID=pl.PLOID
+                       AND C.CONo =stepOne.coNo
+                       AND pl.PLONo=stepOne.PLONo
+                     GROUP BY stepOne.PLONo
+                     HAVING (PloPercentage>=40)`, async(error, results) => {
                 console.log(results)
                 let CSEPLOPERCENTAGE
                 let summ = 0
@@ -115,25 +115,25 @@ Router.get("/headProgramReports", (req,res) => {
 
 
                 db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CEN'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                         FROM
+                             (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                     p.PLONo
+                              FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                              WHERE c.AssessmentID=a.AssessmentID
+                                AND c.AssessmentID= e.AssessmentID
+                                AND e.RegistrationID=r.RegistrationID
+                                AND m.PLOID=p.PLOID
+                                AND r.StudentID=en.StudentID
+                                AND s.SectionID=a.SectionID
+                                AND en.ProgramID='B.SC. in CEN'
+                                AND s.Year =2021
+                              GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                         WHERE M.COID=C.COID
+                           AND M.PLOID=pl.PLOID
+                           AND C.CONo =stepOne.coNo
+                           AND pl.PLONo=stepOne.PLONo
+                         GROUP BY stepOne.PLONo
+                         HAVING (PloPercentage>=40)`, async(error, results) => {
                     console.log(results)
                     let CENPLOPERCENTAGE
                     let sum3 = 0
@@ -149,24 +149,24 @@ Router.get("/headProgramReports", (req,res) => {
 
 
                     db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSC'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                             FROM
+                                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                         p.PLONo
+                                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                  WHERE c.AssessmentID=a.AssessmentID
+                                    AND c.AssessmentID= e.AssessmentID
+                                    AND e.RegistrationID=r.RegistrationID
+                                    AND m.PLOID=p.PLOID
+                                    AND r.StudentID=en.StudentID
+                                    AND s.SectionID=a.SectionID
+                                    AND en.ProgramID='B.SC. in CSC'
+                                    AND s.Year =2021
+                                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                             WHERE M.COID=C.COID
+                               AND M.PLOID=pl.PLOID
+                               AND C.CONo =stepOne.coNo
+                               AND pl.PLONo=stepOne.PLONo
+                             GROUP BY stepOne.PLONo`, async(error, results) => {
                         console.log(results)
 
                         let CSCPLONO = []
@@ -181,24 +181,24 @@ Router.get("/headProgramReports", (req,res) => {
 
 
                         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CEN'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                                 FROM
+                                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                             p.PLONo
+                                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                      WHERE c.AssessmentID=a.AssessmentID
+                                        AND c.AssessmentID= e.AssessmentID
+                                        AND e.RegistrationID=r.RegistrationID
+                                        AND m.PLOID=p.PLOID
+                                        AND r.StudentID=en.StudentID
+                                        AND s.SectionID=a.SectionID
+                                        AND en.ProgramID='B.SC. in CEN'
+                                        AND s.Year =2021
+                                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                 WHERE M.COID=C.COID
+                                   AND M.PLOID=pl.PLOID
+                                   AND C.CONo =stepOne.coNo
+                                   AND pl.PLONo=stepOne.PLONo
+                                 GROUP BY stepOne.PLONo`, async(error, results) => {
                             console.log(results)
 
                             let CENPLONO = []
@@ -211,24 +211,24 @@ Router.get("/headProgramReports", (req,res) => {
 
 
                             db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSE'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                                     FROM
+                                         (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                                 p.PLONo
+                                          FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                          WHERE c.AssessmentID=a.AssessmentID
+                                            AND c.AssessmentID= e.AssessmentID
+                                            AND e.RegistrationID=r.RegistrationID
+                                            AND m.PLOID=p.PLOID
+                                            AND r.StudentID=en.StudentID
+                                            AND s.SectionID=a.SectionID
+                                            AND en.ProgramID='B.SC. in CSE'
+                                            AND s.Year =2021
+                                          GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                     WHERE M.COID=C.COID
+                                       AND M.PLOID=pl.PLOID
+                                       AND C.CONo =stepOne.coNo
+                                       AND pl.PLONo=stepOne.PLONo
+                                     GROUP BY stepOne.PLONo`, async(error, results) => {
                                 console.log(results)
                                 let CSEPLONO = []
                                 let CSEPLOPERCENT = []
@@ -239,32 +239,32 @@ Router.get("/headProgramReports", (req,res) => {
                                 }
 
                                 db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                   (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-            FROM
-                (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                 FROM(
-                         SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                         FROM Registration_T r,Enrollment_T e
-                         WHERE r.StudentID=e.StudentID
-                           AND e.ProgramID='B.SC. in CSC'
-                     ) stepOne,Registration_T R,Enrollment_T E
-                 GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                               (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                        FROM
+                                            (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                             FROM(
+                                                     SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                     FROM Registration_T r,Enrollment_T e
+                                                     WHERE r.StudentID=e.StudentID
+                                                       AND e.ProgramID='B.SC. in CSC'
+                                                 ) stepOne,Registration_T R,Enrollment_T E
+                                             GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                     console.log(results)
 
                                     let CSCCGPA = results[0].CGPA;
 
 
                                     db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                       (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                FROM
-                    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                     FROM(
-                             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                             FROM Registration_T r,Enrollment_T e
-                             WHERE r.StudentID=e.StudentID
-                               AND e.ProgramID='B.SC. in CEN'
-                         ) stepOne,Registration_T R,Enrollment_T E
-                     GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                                   (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                            FROM
+                                                (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                                 FROM(
+                                                         SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                         FROM Registration_T r,Enrollment_T e
+                                                         WHERE r.StudentID=e.StudentID
+                                                           AND e.ProgramID='B.SC. in CEN'
+                                                     ) stepOne,Registration_T R,Enrollment_T E
+                                                 GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                         console.log(results)
 
 
@@ -272,16 +272,16 @@ Router.get("/headProgramReports", (req,res) => {
 
 
                                         db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                           (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                    FROM
-                        (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                         FROM(
-                                 SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                                 FROM Registration_T r,Enrollment_T e
-                                 WHERE r.StudentID=e.StudentID
-                                   AND e.ProgramID='B.SC. in CSE'
-                             ) stepOne,Registration_T R,Enrollment_T E
-                         GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                                       (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                                FROM
+                                                    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                                     FROM(
+                                                             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                             FROM Registration_T r,Enrollment_T e
+                                                             WHERE r.StudentID=e.StudentID
+                                                               AND e.ProgramID='B.SC. in CSE'
+                                                         ) stepOne,Registration_T R,Enrollment_T E
+                                                     GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                             console.log(results)
                                             let CSECGPA = results[0].CGPA;
 
@@ -363,9 +363,9 @@ Router.get("/headProgramReports", (req,res) => {
 Router.get("/student", (req,res) => {
 
     db.all(`SELECT MAX(s.Year) AS currentyear,s.Semester currentSem
-                            FROM Section_T s,Registration_T r
-                            WHERE r.StudentID=100
-                              AND s.SectionID=r.SectionID`, async(error, results) => {
+            FROM Section_T s,Registration_T r
+            WHERE r.StudentID=100
+              AND s.SectionID=r.SectionID`, async(error, results) => {
         console.log("hello, the results: ")
         console.log(results)
         let currentyear = results[0].currentyear
@@ -375,110 +375,110 @@ Router.get("/student", (req,res) => {
 
 
         db.all(`SELECT COUNT(s1.SectionID) noOfSem
-                            FROM
-                                (SELECT s.SectionID,s.Year,s.Semester
-                                 FROM Section_T s,Registration_T r
-                                 WHERE r.StudentID=100
-                                   AND s.SectionID=r.SectionID
-                                 GROUP BY s.Semester,s.Year) s1`, async(error, results) => {
+                FROM
+                    (SELECT s.SectionID,s.Year,s.Semester
+                     FROM Section_T s,Registration_T r
+                     WHERE r.StudentID=100
+                       AND s.SectionID=r.SectionID
+                     GROUP BY s.Semester,s.Year) s1`, async(error, results) => {
             console.log("hello, the results: ")
             console.log(results)
             let noOfSem = results[0].noOfSem
 
 
 
-    db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,  COResult.achievedMark achievedMark ,p.PLONo  FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
+            db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,  COResult.achievedMark achievedMark ,p.PLONo  FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
 
 
-        let PLONo = []
-        let PLOpercentage = []
-        for(let i=0;i<results.length;++i){
-            PLONo[i] = results[i].PLONo;
-            PLOpercentage[i]=results[i].PLOpercentage;
+                let PLONo = []
+                let PLOpercentage = []
+                for(let i=0;i<results.length;++i){
+                    PLONo[i] = results[i].PLONo;
+                    PLOpercentage[i]=results[i].PLOpercentage;
 
-        }
+                }
 
-        db.all("SELECT COUNT(CountOfAchieved.PLONo) AS c FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo HAVING (PLOpercentage>=40)) CountOfAchieved", async(error, results) => {
+                db.all("SELECT COUNT(CountOfAchieved.PLONo) AS c FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo HAVING (PLOpercentage>=40)) CountOfAchieved", async(error, results) => {
 
-            let achievedPLO = results[0].c;
-
-
-            db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM(SELECT PLOrawMarks.PLONo FROM (SELECT COResult.CourseID courseID,COResult.CONo coNo,p.PLONo FROM (SELECT c.CourseID,c.CONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOCount", async(error, results) => {
-
-                let attemptedPLO = results[0].c;
-
-                let successRate = (achievedPLO/attemptedPLO)*100;
+                    let achievedPLO = results[0].c;
 
 
-                db.all("SELECT minT.PLONo,MIN(minT.PLOpercentage),ploT.PLOName FROM (SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A  FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID  AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) minT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=minT.PLONo", async(error, results) => {
+                    db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM(SELECT PLOrawMarks.PLONo FROM (SELECT COResult.CourseID courseID,COResult.CONo coNo,p.PLONo FROM (SELECT c.CourseID,c.CONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOCount", async(error, results) => {
 
-                    let MinPloNo = results[0].PLONo;
-                    let MinPloName = results[0].PLOName;
+                        let attemptedPLO = results[0].c;
 
-
-                    db.all("SELECT maxT.PLONo,Max(maxT.PLOpercentage),ploT.PLOName FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) maxT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=maxT.PLONo", async(error, results) => {
-
-                        let MaxPloNo = results[0].PLONo;
-                        let MaxPloName = results[0].PLOName;
+                        let successRate = (achievedPLO/attemptedPLO)*100;
 
 
+                        db.all("SELECT minT.PLONo,MIN(minT.PLOpercentage),ploT.PLOName FROM (SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A  FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID  AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) minT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=minT.PLONo", async(error, results) => {
+
+                            let MinPloNo = results[0].PLONo;
+                            let MinPloName = results[0].PLOName;
+
+
+                            db.all("SELECT maxT.PLONo,Max(maxT.PLOpercentage),ploT.PLOName FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) maxT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=maxT.PLONo", async(error, results) => {
+
+                                let MaxPloNo = results[0].PLONo;
+                                let MaxPloName = results[0].PLOName;
 
 
 
-                        db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
-                            console.log(results)
-                            let CurrentCgPA = Math.round(results[0].CGPA * 100) / 100;
-                            console.log(CurrentCgPA)
-                            res.render(`student`, {
-                                StdentID: User.StdentID,
-                                S_fname: User.S_fname,
-                                S_lName: User.S_lName,
-                                S_Gender: User.S_Gender,
-                                S_DateOfBirth: User.S_DateOfBirth,
-                                S_Email: User.S_Email,
-                                S_Phone: User.S_Phone,
-                                S_Address: User.S_Address,
-                                StudentProfile: User.StudentProfile,
-                                Major: User.Major,
-                                Minor: User.Minor,
-                                CurrentCgPA:CurrentCgPA,
-                                achievedPLO: achievedPLO,
-                                attemptedPLO: attemptedPLO,
-                                successRate: successRate,
-                                MinPloNo: MinPloNo,
-                                MinPloName: MinPloName,
-                                MaxPloNo: MaxPloNo,
-                                MaxPloName: MaxPloName,
-                                PLONo:PLONo,
-                                PLOpercentage:PLOpercentage,
-                                ScholarshipPercentage:User.ScholarshipPercentage,
-                                currentyear:currentyear,
-                                currentSem: currentSem,
-                                noOfSem: noOfSem
 
-                            })
-                        }) }) }) }) }) }) }) })
+
+                                db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+                                    console.log(results)
+                                    let CurrentCgPA = Math.round(results[0].CGPA * 100) / 100;
+                                    console.log(CurrentCgPA)
+                                    res.render(`student`, {
+                                        StdentID: User.StdentID,
+                                        S_fname: User.S_fname,
+                                        S_lName: User.S_lName,
+                                        S_Gender: User.S_Gender,
+                                        S_DateOfBirth: User.S_DateOfBirth,
+                                        S_Email: User.S_Email,
+                                        S_Phone: User.S_Phone,
+                                        S_Address: User.S_Address,
+                                        StudentProfile: User.StudentProfile,
+                                        Major: User.Major,
+                                        Minor: User.Minor,
+                                        CurrentCgPA:CurrentCgPA,
+                                        achievedPLO: achievedPLO,
+                                        attemptedPLO: attemptedPLO,
+                                        successRate: successRate,
+                                        MinPloNo: MinPloNo,
+                                        MinPloName: MinPloName,
+                                        MaxPloNo: MaxPloNo,
+                                        MaxPloName: MaxPloName,
+                                        PLONo:PLONo,
+                                        PLOpercentage:PLOpercentage,
+                                        ScholarshipPercentage:User.ScholarshipPercentage,
+                                        currentyear:currentyear,
+                                        currentSem: currentSem,
+                                        noOfSem: noOfSem
+
+                                    })
+                                }) }) }) }) }) }) }) })
 });
 
 Router.get("/Faculty", (req,res) => {
 
     db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-                            FROM
-                                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                                        SUM(e.AchievedMark) achievedMark,
-                                        p.PLONo
-                                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                                      Mapping_T m,PLO_T p,Enrollment_T en
-                                 WHERE s.FacultyID=4321
-                                   AND s.Year=2021
-                                   AND s.SectionID=r.SectionID
-                                   AND c.AssessmentID=a.AssessmentID
-                                   AND c.AssessmentID= e.AssessmentID
-                                   AND m.PLOID=p.PLOID
-                                   AND c.COID=m.COID
-                                   AND en.StudentID=r.StudentID
-                                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-                            GROUP BY stepOne.PLONo`, async(error, results) => {
+            FROM
+                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                        SUM(e.AchievedMark) achievedMark,
+                        p.PLONo
+                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                      Mapping_T m,PLO_T p,Enrollment_T en
+                 WHERE s.FacultyID=4321
+                   AND s.Year=2021
+                   AND s.SectionID=r.SectionID
+                   AND c.AssessmentID=a.AssessmentID
+                   AND c.AssessmentID= e.AssessmentID
+                   AND m.PLOID=p.PLOID
+                   AND c.COID=m.COID
+                   AND en.StudentID=r.StudentID
+                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+            GROUP BY stepOne.PLONo`, async(error, results) => {
         console.log(results)
         let PLONo = []
         let PLOPercentage = []
@@ -512,22 +512,22 @@ Router.get("/Admin", (req,res) => {
 });
 Router.get("/Dean", (req,res) => {
     db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-                            FROM
-                                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                                        SUM(e.AchievedMark) achievedMark,
-                                        p.PLONo
-                                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                                      Mapping_T m,PLO_T p,Enrollment_T en
-                                 WHERE s.FacultyID=5678
-                                   AND s.Year=2021
-                                   AND s.SectionID=r.SectionID
-                                   AND c.AssessmentID=a.AssessmentID
-                                   AND c.AssessmentID= e.AssessmentID
-                                   AND m.PLOID=p.PLOID
-                                   AND c.COID=m.COID
-                                   AND en.StudentID=r.StudentID
-                                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-                            GROUP BY stepOne.PLONo`, async(error, results) => {
+            FROM
+                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                        SUM(e.AchievedMark) achievedMark,
+                        p.PLONo
+                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                      Mapping_T m,PLO_T p,Enrollment_T en
+                 WHERE s.FacultyID=5678
+                   AND s.Year=2021
+                   AND s.SectionID=r.SectionID
+                   AND c.AssessmentID=a.AssessmentID
+                   AND c.AssessmentID= e.AssessmentID
+                   AND m.PLOID=p.PLOID
+                   AND c.COID=m.COID
+                   AND en.StudentID=r.StudentID
+                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+            GROUP BY stepOne.PLONo`, async(error, results) => {
         console.log(results)
         let PLONo = []
         let PLOPercentage = []
@@ -584,22 +584,22 @@ Router.get("/Dean", (req,res) => {
 });
 Router.get("/Head", (req,res) => {
     db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-                            FROM
-                                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                                        SUM(e.AchievedMark) achievedMark,
-                                        p.PLONo
-                                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                                      Mapping_T m,PLO_T p,Enrollment_T en
-                                 WHERE s.FacultyID=1234
-                                   AND s.Year=2021
-                                   AND s.SectionID=r.SectionID
-                                   AND c.AssessmentID=a.AssessmentID
-                                   AND c.AssessmentID= e.AssessmentID
-                                   AND m.PLOID=p.PLOID
-                                   AND c.COID=m.COID
-                                   AND en.StudentID=r.StudentID
-                                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-                            GROUP BY stepOne.PLONo`, async(error, results) => {
+            FROM
+                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                        SUM(e.AchievedMark) achievedMark,
+                        p.PLONo
+                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                      Mapping_T m,PLO_T p,Enrollment_T en
+                 WHERE s.FacultyID=1234
+                   AND s.Year=2021
+                   AND s.SectionID=r.SectionID
+                   AND c.AssessmentID=a.AssessmentID
+                   AND c.AssessmentID= e.AssessmentID
+                   AND m.PLOID=p.PLOID
+                   AND c.COID=m.COID
+                   AND en.StudentID=r.StudentID
+                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+            GROUP BY stepOne.PLONo`, async(error, results) => {
         console.log(results)
         let PLONo = []
         let PLOPercentage = []
@@ -661,22 +661,22 @@ Router.get("/Head", (req,res) => {
 });
 Router.get("/VC", (req,res) => {
     db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-                            FROM
-                                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                                        SUM(e.AchievedMark) achievedMark,
-                                        p.PLONo
-                                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                                      Mapping_T m,PLO_T p,Enrollment_T en
-                                 WHERE s.FacultyID=1011
-                                   AND s.Year=2021
-                                   AND s.SectionID=r.SectionID
-                                   AND c.AssessmentID=a.AssessmentID
-                                   AND c.AssessmentID= e.AssessmentID
-                                   AND m.PLOID=p.PLOID
-                                   AND c.COID=m.COID
-                                   AND en.StudentID=r.StudentID
-                                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-                            GROUP BY stepOne.PLONo`, async(error, results) => {
+            FROM
+                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                        SUM(e.AchievedMark) achievedMark,
+                        p.PLONo
+                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                      Mapping_T m,PLO_T p,Enrollment_T en
+                 WHERE s.FacultyID=1011
+                   AND s.Year=2021
+                   AND s.SectionID=r.SectionID
+                   AND c.AssessmentID=a.AssessmentID
+                   AND c.AssessmentID= e.AssessmentID
+                   AND m.PLOID=p.PLOID
+                   AND c.COID=m.COID
+                   AND en.StudentID=r.StudentID
+                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+            GROUP BY stepOne.PLONo`, async(error, results) => {
         console.log(results)
         let PLONo = []
         let PLOPercentage = []
@@ -822,32 +822,381 @@ Router.get("/studentReports", (req,res) => {
         console.log('Etai ki sheta?')
         console.log(results)
         let CSE101PLO = [], CSE104PLO = [], CSE203PLO= [], CSE204PLO= [], CSE211PLO= [], CSE213PLO= [], CSE214PLO= [], CSE303PLO= [], CSE309PLO= [], CSE450PLO= [], CSE460PLO= [], CSE464PLO= []
+        let sumPLO1 = 0, sumPLO2= 0 ,sumPLO3= 0 ,sumPLO4= 0 ,sumPLO5= 0 ,sumPLO6= 0 ,sumPLO7= 0 ,sumPLO8= 0 ,sumPLO12= 0
+        for(let i=0;i<results.length; ++i){
+            if(results[i].PLONo == 1){
+                sumPLO1 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 2){
+                sumPLO2 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 3){
+                sumPLO3 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 4){
+                sumPLO4 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 5){
+                sumPLO5 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 6){
+                sumPLO6 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 7){
+                sumPLO7 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 8){
+                sumPLO8 = sumPLO1 + results[i].PloPercentage
+            }else if(results[i].PLONo == 12){
+                sumPLO12 = sumPLO1 + results[i].PloPercentage
+            }
+        }
+
+
         for(let i=0;i<results.length; ++i){
 
             if(results[i].CourseID == 'CSE101'){
-                CSE101PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                else  if(results[i].PLONo == 2){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                else  if(results[i].PLONo == 3){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                else if(results[i].PLONo == 4){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                else if(results[i].PLONo == 5){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                else if(results[i].PLONo == 6){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                else  if(results[i].PLONo == 7){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                else   if(results[i].PLONo == 8){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                else    if(results[i].PLONo == 12){
+                    CSE101PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
+
             } else if(results[i].CourseID == 'CSE104'){
-                CSE104PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                else  if(results[i].PLONo == 2){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                else if(results[i].PLONo == 3){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                else if(results[i].PLONo == 4){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                else if(results[i].PLONo == 5){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                else if(results[i].PLONo == 6){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                else  if(results[i].PLONo == 7){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                else if(results[i].PLONo == 8){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                else if(results[i].PLONo == 12){
+                    CSE104PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE203'){
-                CSE203PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                else if(results[i].PLONo == 2){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                else  if(results[i].PLONo == 3){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                else  if(results[i].PLONo == 4){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                else  if(results[i].PLONo == 5){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                else  if(results[i].PLONo == 6){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                else  if(results[i].PLONo == 7){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                else  if(results[i].PLONo == 8){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                else  if(results[i].PLONo == 12){
+                    CSE203PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE204'){
-                CSE204PLO[i] =results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                else if(results[i].PLONo == 2){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                else  if(results[i].PLONo == 3){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                else  if(results[i].PLONo == 4){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                else   if(results[i].PLONo == 5){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                else  if(results[i].PLONo == 6){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                else if(results[i].PLONo == 7){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                else  if(results[i].PLONo == 8){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                else if(results[i].PLONo == 12){
+                    CSE204PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE211'){
-                CSE211PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE211PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE213'){
-                CSE213PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE213PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE214'){
-                CSE214PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE214PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE303'){
-                CSE303PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE303PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE309'){
-                CSE309PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE450'){
-                CSE450PLO[i] =results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             }  else if(results[i].CourseID == 'CSE460'){
-                CSE460PLO[i] =results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE460PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             } else if(results[i].CourseID == 'CSE464'){
-                CSE464PLO[i] = results[i].PloPercentage
+                if(results[i].PLONo == 1){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO2)*100
+                }
+                if(results[i].PLONo == 3){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO3)*100
+                }
+                if(results[i].PLONo == 4){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO4)*100
+                }
+                if(results[i].PLONo == 5){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO5)*100
+                }
+                if(results[i].PLONo == 6){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO6)*100
+                }
+                if(results[i].PLONo == 7){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO7)*100
+                }
+                if(results[i].PLONo == 8){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO8)*100
+                }
+                if(results[i].PLONo == 12){
+                    CSE464PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
+                }
+
             }
 
         }
@@ -1068,26 +1417,26 @@ Router.get("/DeanDataEntry", (req,res) => {
 });
 Router.get("/DeanDepartmentReports", (req,res) => {
     db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-FROM
-   (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-           p.PLONo
-    FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
-         Program_T pr
-    WHERE c.AssessmentID=a.AssessmentID
-      AND c.AssessmentID= e.AssessmentID
-      AND e.RegistrationID=r.RegistrationID
-      AND m.PLOID=p.PLOID
-      AND r.StudentID=en.StudentID
-      AND s.SectionID=a.SectionID
-      AND en.ProgramID=pr.ProgramID
-      AND pr.DepartmentID='EEE'
-      AND s.Year =2021
-    GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-WHERE M.COID=C.COID
- AND M.PLOID=pl.PLOID
- AND C.CONo =stepOne.coNo
- AND pl.PLONo=stepOne.PLONo
-GROUP BY stepOne.PLONo`, async(error, results) => {
+             FROM
+                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                         p.PLONo
+                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
+                       Program_T pr
+                  WHERE c.AssessmentID=a.AssessmentID
+                    AND c.AssessmentID= e.AssessmentID
+                    AND e.RegistrationID=r.RegistrationID
+                    AND m.PLOID=p.PLOID
+                    AND r.StudentID=en.StudentID
+                    AND s.SectionID=a.SectionID
+                    AND en.ProgramID=pr.ProgramID
+                    AND pr.DepartmentID='EEE'
+                    AND s.Year =2021
+                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+             WHERE M.COID=C.COID
+               AND M.PLOID=pl.PLOID
+               AND C.CONo =stepOne.coNo
+               AND pl.PLONo=stepOne.PLONo
+             GROUP BY stepOne.PLONo`, async(error, results) => {
         console.log(results)
         let EEEPLOPERCENTAGE
         let summ = 0
@@ -1104,26 +1453,26 @@ GROUP BY stepOne.PLONo`, async(error, results) => {
 
 
         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-FROM
-   (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-           p.PLONo
-    FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
-         Program_T pr
-    WHERE c.AssessmentID=a.AssessmentID
-      AND c.AssessmentID= e.AssessmentID
-      AND e.RegistrationID=r.RegistrationID
-      AND m.PLOID=p.PLOID
-      AND r.StudentID=en.StudentID
-      AND s.SectionID=a.SectionID
-      AND en.ProgramID=pr.ProgramID
-      AND pr.DepartmentID='CSE'
-      AND s.Year =2021
-    GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-WHERE M.COID=C.COID
- AND M.PLOID=pl.PLOID
- AND C.CONo =stepOne.coNo
- AND pl.PLONo=stepOne.PLONo
-GROUP BY stepOne.PLONo`, async(error, results) => {
+                 FROM
+                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                             p.PLONo
+                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
+                           Program_T pr
+                      WHERE c.AssessmentID=a.AssessmentID
+                        AND c.AssessmentID= e.AssessmentID
+                        AND e.RegistrationID=r.RegistrationID
+                        AND m.PLOID=p.PLOID
+                        AND r.StudentID=en.StudentID
+                        AND s.SectionID=a.SectionID
+                        AND en.ProgramID=pr.ProgramID
+                        AND pr.DepartmentID='CSE'
+                        AND s.Year =2021
+                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                 WHERE M.COID=C.COID
+                   AND M.PLOID=pl.PLOID
+                   AND C.CONo =stepOne.coNo
+                   AND pl.PLONo=stepOne.PLONo
+                 GROUP BY stepOne.PLONo`, async(error, results) => {
             console.log(results)
             let CSEPLOPERCENTAGE
             let sum3 = 0
@@ -1138,35 +1487,35 @@ GROUP BY stepOne.PLONo`, async(error, results) => {
 
 
             db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-       ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
-FROM
-    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-     FROM(
-             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
-             FROM Registration_T r,Enrollment_T e,Program_T p
-             WHERE r.StudentID=e.StudentID
-               AND e.ProgramID=p.ProgramID
-               AND p.DepartmentID='CSE'
-         ) stepOne,Registration_T R,Enrollment_T E
-     GROUP BY stepOne.StudentID) stepTwo
-`, async(error, results) => {
+                           ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
+                    FROM
+                        (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                         FROM(
+                                 SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
+                                 FROM Registration_T r,Enrollment_T e,Program_T p
+                                 WHERE r.StudentID=e.StudentID
+                                   AND e.ProgramID=p.ProgramID
+                                   AND p.DepartmentID='CSE'
+                             ) stepOne,Registration_T R,Enrollment_T E
+                         GROUP BY stepOne.StudentID) stepTwo
+            `, async(error, results) => {
                 let CGPACSE = results[0].CGPA
 
 
 
                 db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-       ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
-FROM
-    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-     FROM(
-             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
-             FROM Registration_T r,Enrollment_T e,Program_T p
-             WHERE r.StudentID=e.StudentID
-               AND e.ProgramID=p.ProgramID
-               AND p.DepartmentID='EEE'
-         ) stepOne,Registration_T R,Enrollment_T E
-     GROUP BY stepOne.StudentID) stepTwo
-`, async(error, results) => {
+                               ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
+                        FROM
+                            (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                             FROM(
+                                     SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
+                                     FROM Registration_T r,Enrollment_T e,Program_T p
+                                     WHERE r.StudentID=e.StudentID
+                                       AND e.ProgramID=p.ProgramID
+                                       AND p.DepartmentID='EEE'
+                                 ) stepOne,Registration_T R,Enrollment_T E
+                             GROUP BY stepOne.StudentID) stepTwo
+                `, async(error, results) => {
                     let  CGPAEEE = results[0].CGPA
 
 
@@ -1174,27 +1523,27 @@ FROM
 
 
                     db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-            FROM
-                (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                        p.PLONo
-                 FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
-                    ,Section_T s,Program_T pr,Course_T course
-                 WHERE c.AssessmentID=a.AssessmentID
-                   AND c.AssessmentID= e.AssessmentID
-                   AND e.RegistrationID=r.RegistrationID
-                   AND m.PLOID=p.PLOID
-                   AND r.StudentID=en.StudentID
-                   AND s.SectionID=a.SectionID
-                   AND en.ProgramID=course.ProgramID
-                   AND course.ProgramID=pr.ProgramID
-                   AND pr.DepartmentID ='EEE'
-                   AND s.Year =2021
-                 GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-            WHERE M.COID=C.COID
-              AND M.PLOID=pl.PLOID
-              AND C.CONo =stepOne.coNo
-              AND pl.PLONo=stepOne.PLONo
-            GROUP BY stepOne.PLONo`, async(error, results) => {
+                            FROM
+                                (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                        p.PLONo
+                                 FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
+                                    ,Section_T s,Program_T pr,Course_T course
+                                 WHERE c.AssessmentID=a.AssessmentID
+                                   AND c.AssessmentID= e.AssessmentID
+                                   AND e.RegistrationID=r.RegistrationID
+                                   AND m.PLOID=p.PLOID
+                                   AND r.StudentID=en.StudentID
+                                   AND s.SectionID=a.SectionID
+                                   AND en.ProgramID=course.ProgramID
+                                   AND course.ProgramID=pr.ProgramID
+                                   AND pr.DepartmentID ='EEE'
+                                   AND s.Year =2021
+                                 GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                            WHERE M.COID=C.COID
+                              AND M.PLOID=pl.PLOID
+                              AND C.CONo =stepOne.coNo
+                              AND pl.PLONo=stepOne.PLONo
+                            GROUP BY stepOne.PLONo`, async(error, results) => {
                         let PLONoEEE = []
                         let PLOPercentageEEE = []
 
@@ -1207,27 +1556,27 @@ FROM
 
 
                         db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-            FROM
-                (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                        p.PLONo
-                 FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
-                    ,Section_T s,Program_T pr,Course_T course
-                 WHERE c.AssessmentID=a.AssessmentID
-                   AND c.AssessmentID= e.AssessmentID
-                   AND e.RegistrationID=r.RegistrationID
-                   AND m.PLOID=p.PLOID
-                   AND r.StudentID=en.StudentID
-                   AND s.SectionID=a.SectionID
-                   AND en.ProgramID=course.ProgramID
-                   AND course.ProgramID=pr.ProgramID
-                   AND pr.DepartmentID ='CSE'
-                   AND s.Year =2021
-                 GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-            WHERE M.COID=C.COID
-              AND M.PLOID=pl.PLOID
-              AND C.CONo =stepOne.coNo
-              AND pl.PLONo=stepOne.PLONo
-            GROUP BY stepOne.PLONo`, async(error, results) => {
+                                FROM
+                                    (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                            p.PLONo
+                                     FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
+                                        ,Section_T s,Program_T pr,Course_T course
+                                     WHERE c.AssessmentID=a.AssessmentID
+                                       AND c.AssessmentID= e.AssessmentID
+                                       AND e.RegistrationID=r.RegistrationID
+                                       AND m.PLOID=p.PLOID
+                                       AND r.StudentID=en.StudentID
+                                       AND s.SectionID=a.SectionID
+                                       AND en.ProgramID=course.ProgramID
+                                       AND course.ProgramID=pr.ProgramID
+                                       AND pr.DepartmentID ='CSE'
+                                       AND s.Year =2021
+                                     GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                WHERE M.COID=C.COID
+                                  AND M.PLOID=pl.PLOID
+                                  AND C.CONo =stepOne.coNo
+                                  AND pl.PLONo=stepOne.PLONo
+                                GROUP BY stepOne.PLONo`, async(error, results) => {
                             let PLONoCSE = []
                             let PLOPercentageCSE = []
 
@@ -1266,26 +1615,26 @@ Router.get("/VCDepartmentReports", (req,res) => {
 
 
     db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-FROM
-   (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-           p.PLONo
-    FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
-         Program_T pr
-    WHERE c.AssessmentID=a.AssessmentID
-      AND c.AssessmentID= e.AssessmentID
-      AND e.RegistrationID=r.RegistrationID
-      AND m.PLOID=p.PLOID
-      AND r.StudentID=en.StudentID
-      AND s.SectionID=a.SectionID
-      AND en.ProgramID=pr.ProgramID
-      AND pr.DepartmentID='EEE'
-      AND s.Year =2021
-    GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-WHERE M.COID=C.COID
- AND M.PLOID=pl.PLOID
- AND C.CONo =stepOne.coNo
- AND pl.PLONo=stepOne.PLONo
-GROUP BY stepOne.PLONo`, async(error, results) => {
+             FROM
+                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                         p.PLONo
+                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
+                       Program_T pr
+                  WHERE c.AssessmentID=a.AssessmentID
+                    AND c.AssessmentID= e.AssessmentID
+                    AND e.RegistrationID=r.RegistrationID
+                    AND m.PLOID=p.PLOID
+                    AND r.StudentID=en.StudentID
+                    AND s.SectionID=a.SectionID
+                    AND en.ProgramID=pr.ProgramID
+                    AND pr.DepartmentID='EEE'
+                    AND s.Year =2021
+                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+             WHERE M.COID=C.COID
+               AND M.PLOID=pl.PLOID
+               AND C.CONo =stepOne.coNo
+               AND pl.PLONo=stepOne.PLONo
+             GROUP BY stepOne.PLONo`, async(error, results) => {
         console.log(results)
         let EEEPLOPERCENTAGE
         let summ = 0
@@ -1302,26 +1651,26 @@ GROUP BY stepOne.PLONo`, async(error, results) => {
 
 
         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-FROM
-   (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-           p.PLONo
-    FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
-         Program_T pr
-    WHERE c.AssessmentID=a.AssessmentID
-      AND c.AssessmentID= e.AssessmentID
-      AND e.RegistrationID=r.RegistrationID
-      AND m.PLOID=p.PLOID
-      AND r.StudentID=en.StudentID
-      AND s.SectionID=a.SectionID
-      AND en.ProgramID=pr.ProgramID
-      AND pr.DepartmentID='CSE'
-      AND s.Year =2021
-    GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-WHERE M.COID=C.COID
- AND M.PLOID=pl.PLOID
- AND C.CONo =stepOne.coNo
- AND pl.PLONo=stepOne.PLONo
-GROUP BY stepOne.PLONo`, async(error, results) => {
+                 FROM
+                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                             p.PLONo
+                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s,
+                           Program_T pr
+                      WHERE c.AssessmentID=a.AssessmentID
+                        AND c.AssessmentID= e.AssessmentID
+                        AND e.RegistrationID=r.RegistrationID
+                        AND m.PLOID=p.PLOID
+                        AND r.StudentID=en.StudentID
+                        AND s.SectionID=a.SectionID
+                        AND en.ProgramID=pr.ProgramID
+                        AND pr.DepartmentID='CSE'
+                        AND s.Year =2021
+                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                 WHERE M.COID=C.COID
+                   AND M.PLOID=pl.PLOID
+                   AND C.CONo =stepOne.coNo
+                   AND pl.PLONo=stepOne.PLONo
+                 GROUP BY stepOne.PLONo`, async(error, results) => {
             console.log(results)
             let CSEPLOPERCENTAGE
             let sum3 = 0
@@ -1336,35 +1685,35 @@ GROUP BY stepOne.PLONo`, async(error, results) => {
 
 
             db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-       ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
-FROM
-    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-     FROM(
-             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
-             FROM Registration_T r,Enrollment_T e,Program_T p
-             WHERE r.StudentID=e.StudentID
-               AND e.ProgramID=p.ProgramID
-               AND p.DepartmentID='CSE'
-         ) stepOne,Registration_T R,Enrollment_T E
-     GROUP BY stepOne.StudentID) stepTwo
-`, async(error, results) => {
+                           ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
+                    FROM
+                        (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                         FROM(
+                                 SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
+                                 FROM Registration_T r,Enrollment_T e,Program_T p
+                                 WHERE r.StudentID=e.StudentID
+                                   AND e.ProgramID=p.ProgramID
+                                   AND p.DepartmentID='CSE'
+                             ) stepOne,Registration_T R,Enrollment_T E
+                         GROUP BY stepOne.StudentID) stepTwo
+            `, async(error, results) => {
                 let CGPACSE = results[0].CGPA
 
 
 
                 db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-       ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
-FROM
-    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-     FROM(
-             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
-             FROM Registration_T r,Enrollment_T e,Program_T p
-             WHERE r.StudentID=e.StudentID
-               AND e.ProgramID=p.ProgramID
-               AND p.DepartmentID='EEE'
-         ) stepOne,Registration_T R,Enrollment_T E
-     GROUP BY stepOne.StudentID) stepTwo
-`, async(error, results) => {
+                               ((SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4) AS CGPA
+                        FROM
+                            (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                             FROM(
+                                     SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID,p.DepartmentID
+                                     FROM Registration_T r,Enrollment_T e,Program_T p
+                                     WHERE r.StudentID=e.StudentID
+                                       AND e.ProgramID=p.ProgramID
+                                       AND p.DepartmentID='EEE'
+                                 ) stepOne,Registration_T R,Enrollment_T E
+                             GROUP BY stepOne.StudentID) stepTwo
+                `, async(error, results) => {
                     let  CGPAEEE = results[0].CGPA
 
 
@@ -1372,27 +1721,27 @@ FROM
 
 
                     db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-            FROM
-                (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                        p.PLONo
-                 FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
-                    ,Section_T s,Program_T pr,Course_T course
-                 WHERE c.AssessmentID=a.AssessmentID
-                   AND c.AssessmentID= e.AssessmentID
-                   AND e.RegistrationID=r.RegistrationID
-                   AND m.PLOID=p.PLOID
-                   AND r.StudentID=en.StudentID
-                   AND s.SectionID=a.SectionID
-                   AND en.ProgramID=course.ProgramID
-                   AND course.ProgramID=pr.ProgramID
-                   AND pr.DepartmentID ='EEE'
-                   AND s.Year =2021
-                 GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-            WHERE M.COID=C.COID
-              AND M.PLOID=pl.PLOID
-              AND C.CONo =stepOne.coNo
-              AND pl.PLONo=stepOne.PLONo
-            GROUP BY stepOne.PLONo`, async(error, results) => {
+                            FROM
+                                (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                        p.PLONo
+                                 FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
+                                    ,Section_T s,Program_T pr,Course_T course
+                                 WHERE c.AssessmentID=a.AssessmentID
+                                   AND c.AssessmentID= e.AssessmentID
+                                   AND e.RegistrationID=r.RegistrationID
+                                   AND m.PLOID=p.PLOID
+                                   AND r.StudentID=en.StudentID
+                                   AND s.SectionID=a.SectionID
+                                   AND en.ProgramID=course.ProgramID
+                                   AND course.ProgramID=pr.ProgramID
+                                   AND pr.DepartmentID ='EEE'
+                                   AND s.Year =2021
+                                 GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                            WHERE M.COID=C.COID
+                              AND M.PLOID=pl.PLOID
+                              AND C.CONo =stepOne.coNo
+                              AND pl.PLONo=stepOne.PLONo
+                            GROUP BY stepOne.PLONo`, async(error, results) => {
                         let PLONoEEE = []
                         let PLOPercentageEEE = []
 
@@ -1405,27 +1754,27 @@ FROM
 
 
                         db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-            FROM
-                (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                        p.PLONo
-                 FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
-                    ,Section_T s,Program_T pr,Course_T course
-                 WHERE c.AssessmentID=a.AssessmentID
-                   AND c.AssessmentID= e.AssessmentID
-                   AND e.RegistrationID=r.RegistrationID
-                   AND m.PLOID=p.PLOID
-                   AND r.StudentID=en.StudentID
-                   AND s.SectionID=a.SectionID
-                   AND en.ProgramID=course.ProgramID
-                   AND course.ProgramID=pr.ProgramID
-                   AND pr.DepartmentID ='CSE'
-                   AND s.Year =2021
-                 GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-            WHERE M.COID=C.COID
-              AND M.PLOID=pl.PLOID
-              AND C.CONo =stepOne.coNo
-              AND pl.PLONo=stepOne.PLONo
-            GROUP BY stepOne.PLONo`, async(error, results) => {
+                                FROM
+                                    (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                            p.PLONo
+                                     FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en
+                                        ,Section_T s,Program_T pr,Course_T course
+                                     WHERE c.AssessmentID=a.AssessmentID
+                                       AND c.AssessmentID= e.AssessmentID
+                                       AND e.RegistrationID=r.RegistrationID
+                                       AND m.PLOID=p.PLOID
+                                       AND r.StudentID=en.StudentID
+                                       AND s.SectionID=a.SectionID
+                                       AND en.ProgramID=course.ProgramID
+                                       AND course.ProgramID=pr.ProgramID
+                                       AND pr.DepartmentID ='CSE'
+                                       AND s.Year =2021
+                                     GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                WHERE M.COID=C.COID
+                                  AND M.PLOID=pl.PLOID
+                                  AND C.CONo =stepOne.coNo
+                                  AND pl.PLONo=stepOne.PLONo
+                                GROUP BY stepOne.PLONo`, async(error, results) => {
                             let PLONoCSE = []
                             let PLOPercentageCSE = []
 
@@ -1522,25 +1871,25 @@ Router.get("/DeanProgramReports", (req,res) => {
 
 
         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSC'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                 FROM
+                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                             p.PLONo
+                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                      WHERE c.AssessmentID=a.AssessmentID
+                        AND c.AssessmentID= e.AssessmentID
+                        AND e.RegistrationID=r.RegistrationID
+                        AND m.PLOID=p.PLOID
+                        AND r.StudentID=en.StudentID
+                        AND s.SectionID=a.SectionID
+                        AND en.ProgramID='B.SC. in CSC'
+                        AND s.Year =2021
+                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                 WHERE M.COID=C.COID
+                   AND M.PLOID=pl.PLOID
+                   AND C.CONo =stepOne.coNo
+                   AND pl.PLONo=stepOne.PLONo
+                 GROUP BY stepOne.PLONo
+                 HAVING (PloPercentage>=40)`, async(error, results) => {
             console.log(results)
             let CSCPLOPERCENTAGE
             let sum = 0
@@ -1554,25 +1903,25 @@ Router.get("/DeanProgramReports", (req,res) => {
 
 
             db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSE'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                     FROM
+                         (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                 p.PLONo
+                          FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                          WHERE c.AssessmentID=a.AssessmentID
+                            AND c.AssessmentID= e.AssessmentID
+                            AND e.RegistrationID=r.RegistrationID
+                            AND m.PLOID=p.PLOID
+                            AND r.StudentID=en.StudentID
+                            AND s.SectionID=a.SectionID
+                            AND en.ProgramID='B.SC. in CSE'
+                            AND s.Year =2021
+                          GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                     WHERE M.COID=C.COID
+                       AND M.PLOID=pl.PLOID
+                       AND C.CONo =stepOne.coNo
+                       AND pl.PLONo=stepOne.PLONo
+                     GROUP BY stepOne.PLONo
+                     HAVING (PloPercentage>=40)`, async(error, results) => {
                 console.log(results)
                 let CSEPLOPERCENTAGE
                 let summ = 0
@@ -1589,25 +1938,25 @@ Router.get("/DeanProgramReports", (req,res) => {
 
 
                 db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CEN'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                         FROM
+                             (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                     p.PLONo
+                              FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                              WHERE c.AssessmentID=a.AssessmentID
+                                AND c.AssessmentID= e.AssessmentID
+                                AND e.RegistrationID=r.RegistrationID
+                                AND m.PLOID=p.PLOID
+                                AND r.StudentID=en.StudentID
+                                AND s.SectionID=a.SectionID
+                                AND en.ProgramID='B.SC. in CEN'
+                                AND s.Year =2021
+                              GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                         WHERE M.COID=C.COID
+                           AND M.PLOID=pl.PLOID
+                           AND C.CONo =stepOne.coNo
+                           AND pl.PLONo=stepOne.PLONo
+                         GROUP BY stepOne.PLONo
+                         HAVING (PloPercentage>=40)`, async(error, results) => {
                     console.log(results)
                     let CENPLOPERCENTAGE
                     let sum3 = 0
@@ -1624,24 +1973,24 @@ Router.get("/DeanProgramReports", (req,res) => {
 
 
                     db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSC'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                             FROM
+                                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                         p.PLONo
+                                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                  WHERE c.AssessmentID=a.AssessmentID
+                                    AND c.AssessmentID= e.AssessmentID
+                                    AND e.RegistrationID=r.RegistrationID
+                                    AND m.PLOID=p.PLOID
+                                    AND r.StudentID=en.StudentID
+                                    AND s.SectionID=a.SectionID
+                                    AND en.ProgramID='B.SC. in CSC'
+                                    AND s.Year =2021
+                                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                             WHERE M.COID=C.COID
+                               AND M.PLOID=pl.PLOID
+                               AND C.CONo =stepOne.coNo
+                               AND pl.PLONo=stepOne.PLONo
+                             GROUP BY stepOne.PLONo`, async(error, results) => {
                         console.log(results)
 
                         let CSCPLONO = []
@@ -1656,24 +2005,24 @@ Router.get("/DeanProgramReports", (req,res) => {
 
 
                         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CEN'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                                 FROM
+                                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                             p.PLONo
+                                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                      WHERE c.AssessmentID=a.AssessmentID
+                                        AND c.AssessmentID= e.AssessmentID
+                                        AND e.RegistrationID=r.RegistrationID
+                                        AND m.PLOID=p.PLOID
+                                        AND r.StudentID=en.StudentID
+                                        AND s.SectionID=a.SectionID
+                                        AND en.ProgramID='B.SC. in CEN'
+                                        AND s.Year =2021
+                                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                 WHERE M.COID=C.COID
+                                   AND M.PLOID=pl.PLOID
+                                   AND C.CONo =stepOne.coNo
+                                   AND pl.PLONo=stepOne.PLONo
+                                 GROUP BY stepOne.PLONo`, async(error, results) => {
                             console.log(results)
 
                             let CENPLONO = []
@@ -1686,24 +2035,24 @@ Router.get("/DeanProgramReports", (req,res) => {
 
 
                             db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSE'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                                     FROM
+                                         (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                                 p.PLONo
+                                          FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                          WHERE c.AssessmentID=a.AssessmentID
+                                            AND c.AssessmentID= e.AssessmentID
+                                            AND e.RegistrationID=r.RegistrationID
+                                            AND m.PLOID=p.PLOID
+                                            AND r.StudentID=en.StudentID
+                                            AND s.SectionID=a.SectionID
+                                            AND en.ProgramID='B.SC. in CSE'
+                                            AND s.Year =2021
+                                          GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                     WHERE M.COID=C.COID
+                                       AND M.PLOID=pl.PLOID
+                                       AND C.CONo =stepOne.coNo
+                                       AND pl.PLONo=stepOne.PLONo
+                                     GROUP BY stepOne.PLONo`, async(error, results) => {
                                 console.log(results)
                                 let CSEPLONO = []
                                 let CSEPLOPERCENT = []
@@ -1714,32 +2063,32 @@ Router.get("/DeanProgramReports", (req,res) => {
                                 }
 
                                 db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                               (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                        FROM
-                            (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                             FROM(
-                                     SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                                     FROM Registration_T r,Enrollment_T e
-                                     WHERE r.StudentID=e.StudentID
-                                       AND e.ProgramID='B.SC. in CSC'
-                                 ) stepOne,Registration_T R,Enrollment_T E
-                             GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                               (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                        FROM
+                                            (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                             FROM(
+                                                     SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                     FROM Registration_T r,Enrollment_T e
+                                                     WHERE r.StudentID=e.StudentID
+                                                       AND e.ProgramID='B.SC. in CSC'
+                                                 ) stepOne,Registration_T R,Enrollment_T E
+                                             GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                     console.log(results)
 
                                     let CSCCGPA = results[0].CGPA;
 
 
                                     db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                       (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                FROM
-                    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                     FROM(
-                             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                             FROM Registration_T r,Enrollment_T e
-                             WHERE r.StudentID=e.StudentID
-                               AND e.ProgramID='B.SC. in CEN'
-                         ) stepOne,Registration_T R,Enrollment_T E
-                     GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                                   (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                            FROM
+                                                (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                                 FROM(
+                                                         SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                         FROM Registration_T r,Enrollment_T e
+                                                         WHERE r.StudentID=e.StudentID
+                                                           AND e.ProgramID='B.SC. in CEN'
+                                                     ) stepOne,Registration_T R,Enrollment_T E
+                                                 GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                         console.log(results)
 
 
@@ -1747,16 +2096,16 @@ Router.get("/DeanProgramReports", (req,res) => {
 
 
                                         db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                           (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                    FROM
-                        (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                         FROM(
-                                 SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                                 FROM Registration_T r,Enrollment_T e
-                                 WHERE r.StudentID=e.StudentID
-                                   AND e.ProgramID='B.SC. in CSE'
-                             ) stepOne,Registration_T R,Enrollment_T E
-                         GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                                       (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                                FROM
+                                                    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                                     FROM(
+                                                             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                             FROM Registration_T r,Enrollment_T e
+                                                             WHERE r.StudentID=e.StudentID
+                                                               AND e.ProgramID='B.SC. in CSE'
+                                                         ) stepOne,Registration_T R,Enrollment_T E
+                                                     GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                             console.log(results)
                                             let CSECGPA = results[0].CGPA;
 
@@ -1900,25 +2249,25 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSC'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                 FROM
+                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                             p.PLONo
+                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                      WHERE c.AssessmentID=a.AssessmentID
+                        AND c.AssessmentID= e.AssessmentID
+                        AND e.RegistrationID=r.RegistrationID
+                        AND m.PLOID=p.PLOID
+                        AND r.StudentID=en.StudentID
+                        AND s.SectionID=a.SectionID
+                        AND en.ProgramID='B.SC. in CSC'
+                        AND s.Year =2021
+                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                 WHERE M.COID=C.COID
+                   AND M.PLOID=pl.PLOID
+                   AND C.CONo =stepOne.coNo
+                   AND pl.PLONo=stepOne.PLONo
+                 GROUP BY stepOne.PLONo
+                 HAVING (PloPercentage>=40)`, async(error, results) => {
             console.log(results)
             let CSCPLOPERCENTAGE
             let sum = 0
@@ -1932,25 +2281,25 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
             db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSE'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                     FROM
+                         (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                 p.PLONo
+                          FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                          WHERE c.AssessmentID=a.AssessmentID
+                            AND c.AssessmentID= e.AssessmentID
+                            AND e.RegistrationID=r.RegistrationID
+                            AND m.PLOID=p.PLOID
+                            AND r.StudentID=en.StudentID
+                            AND s.SectionID=a.SectionID
+                            AND en.ProgramID='B.SC. in CSE'
+                            AND s.Year =2021
+                          GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                     WHERE M.COID=C.COID
+                       AND M.PLOID=pl.PLOID
+                       AND C.CONo =stepOne.coNo
+                       AND pl.PLONo=stepOne.PLONo
+                     GROUP BY stepOne.PLONo
+                     HAVING (PloPercentage>=40)`, async(error, results) => {
                 console.log(results)
                 let CSEPLOPERCENTAGE
                 let summ = 0
@@ -1967,25 +2316,25 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
                 db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CEN'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo
-             HAVING (PloPercentage>=40)`, async(error, results) => {
+                         FROM
+                             (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                     p.PLONo
+                              FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                              WHERE c.AssessmentID=a.AssessmentID
+                                AND c.AssessmentID= e.AssessmentID
+                                AND e.RegistrationID=r.RegistrationID
+                                AND m.PLOID=p.PLOID
+                                AND r.StudentID=en.StudentID
+                                AND s.SectionID=a.SectionID
+                                AND en.ProgramID='B.SC. in CEN'
+                                AND s.Year =2021
+                              GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                         WHERE M.COID=C.COID
+                           AND M.PLOID=pl.PLOID
+                           AND C.CONo =stepOne.coNo
+                           AND pl.PLONo=stepOne.PLONo
+                         GROUP BY stepOne.PLONo
+                         HAVING (PloPercentage>=40)`, async(error, results) => {
                     console.log(results)
                     let CENPLOPERCENTAGE
                     let sum3 = 0
@@ -2001,24 +2350,24 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
                     db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSC'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                             FROM
+                                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                         p.PLONo
+                                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                  WHERE c.AssessmentID=a.AssessmentID
+                                    AND c.AssessmentID= e.AssessmentID
+                                    AND e.RegistrationID=r.RegistrationID
+                                    AND m.PLOID=p.PLOID
+                                    AND r.StudentID=en.StudentID
+                                    AND s.SectionID=a.SectionID
+                                    AND en.ProgramID='B.SC. in CSC'
+                                    AND s.Year =2021
+                                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                             WHERE M.COID=C.COID
+                               AND M.PLOID=pl.PLOID
+                               AND C.CONo =stepOne.coNo
+                               AND pl.PLONo=stepOne.PLONo
+                             GROUP BY stepOne.PLONo`, async(error, results) => {
                         console.log(results)
 
                         let CSCPLONO = []
@@ -2033,24 +2382,24 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
                         db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CEN'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                                 FROM
+                                     (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                             p.PLONo
+                                      FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                      WHERE c.AssessmentID=a.AssessmentID
+                                        AND c.AssessmentID= e.AssessmentID
+                                        AND e.RegistrationID=r.RegistrationID
+                                        AND m.PLOID=p.PLOID
+                                        AND r.StudentID=en.StudentID
+                                        AND s.SectionID=a.SectionID
+                                        AND en.ProgramID='B.SC. in CEN'
+                                        AND s.Year =2021
+                                      GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                 WHERE M.COID=C.COID
+                                   AND M.PLOID=pl.PLOID
+                                   AND C.CONo =stepOne.coNo
+                                   AND pl.PLONo=stepOne.PLONo
+                                 GROUP BY stepOne.PLONo`, async(error, results) => {
                             console.log(results)
 
                             let CENPLONO = []
@@ -2063,24 +2412,24 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
                             db.all(` SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-             FROM
-                 (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-                         p.PLONo
-                  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
-                  WHERE c.AssessmentID=a.AssessmentID
-                    AND c.AssessmentID= e.AssessmentID
-                    AND e.RegistrationID=r.RegistrationID
-                    AND m.PLOID=p.PLOID
-                    AND r.StudentID=en.StudentID
-                    AND s.SectionID=a.SectionID
-                    AND en.ProgramID='B.SC. in CSE'
-                    AND s.Year =2021
-                  GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
-             WHERE M.COID=C.COID
-               AND M.PLOID=pl.PLOID
-               AND C.CONo =stepOne.coNo
-               AND pl.PLONo=stepOne.PLONo
-             GROUP BY stepOne.PLONo`, async(error, results) => {
+                                     FROM
+                                         (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                                                 p.PLONo
+                                          FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Mapping_T m,PLO_T p,Enrollment_T en,Section_T s
+                                          WHERE c.AssessmentID=a.AssessmentID
+                                            AND c.AssessmentID= e.AssessmentID
+                                            AND e.RegistrationID=r.RegistrationID
+                                            AND m.PLOID=p.PLOID
+                                            AND r.StudentID=en.StudentID
+                                            AND s.SectionID=a.SectionID
+                                            AND en.ProgramID='B.SC. in CSE'
+                                            AND s.Year =2021
+                                          GROUP BY m.PLOID,c.CONo,c.CourseID,r.StudentID) stepOne,CO_T C,Mapping_T M,PLO_T pl
+                                     WHERE M.COID=C.COID
+                                       AND M.PLOID=pl.PLOID
+                                       AND C.CONo =stepOne.coNo
+                                       AND pl.PLONo=stepOne.PLONo
+                                     GROUP BY stepOne.PLONo`, async(error, results) => {
                                 console.log(results)
                                 let CSEPLONO = []
                                 let CSEPLOPERCENT = []
@@ -2093,32 +2442,32 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
                                 db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                       (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                FROM
-                    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                     FROM(
-                             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                             FROM Registration_T r,Enrollment_T e
-                             WHERE r.StudentID=e.StudentID
-                               AND e.ProgramID='B.SC. in CSC'
-                         ) stepOne,Registration_T R,Enrollment_T E
-                     GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                               (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                        FROM
+                                            (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                             FROM(
+                                                     SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                     FROM Registration_T r,Enrollment_T e
+                                                     WHERE r.StudentID=e.StudentID
+                                                       AND e.ProgramID='B.SC. in CSC'
+                                                 ) stepOne,Registration_T R,Enrollment_T E
+                                             GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                     console.log(results)
 
                                     let CSCCGPA = results[0].CGPA;
 
 
                                     db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                       (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                FROM
-                    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                     FROM(
-                             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                             FROM Registration_T r,Enrollment_T e
-                             WHERE r.StudentID=e.StudentID
-                               AND e.ProgramID='B.SC. in CEN'
-                         ) stepOne,Registration_T R,Enrollment_T E
-                     GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                                   (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                            FROM
+                                                (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                                 FROM(
+                                                         SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                         FROM Registration_T r,Enrollment_T e
+                                                         WHERE r.StudentID=e.StudentID
+                                                           AND e.ProgramID='B.SC. in CEN'
+                                                     ) stepOne,Registration_T R,Enrollment_T E
+                                                 GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                         console.log(results)
 
 
@@ -2126,16 +2475,16 @@ Router.get("/VCProgramReports", (req,res) => {
 
 
                                         db.all(`SELECT SUM(stepTwo.CGPAofCSE) sumofCGPA, COUNT(stepTwo.StudentID) noofStudent,
-                           (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
-                    FROM
-                        (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
-                         FROM(
-                                 SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
-                                 FROM Registration_T r,Enrollment_T e
-                                 WHERE r.StudentID=e.StudentID
-                                   AND e.ProgramID='B.SC. in CSE'
-                             ) stepOne,Registration_T R,Enrollment_T E
-                         GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
+                                                       (SUM(stepTwo.CGPAofCSE)/COUNT(stepTwo.StudentID)*4)/4 CGPA
+                                                FROM
+                                                    (SELECT SUM(stepOne.calOne)/SUM(R.AchievedCredit) CGPAofCSE, stepOne.StudentID ,stepOne.ProgramID
+                                                     FROM(
+                                                             SELECT (r.GradePoint*r.AchievedCredit) calOne ,r.StudentID,e.ProgramID
+                                                             FROM Registration_T r,Enrollment_T e
+                                                             WHERE r.StudentID=e.StudentID
+                                                               AND e.ProgramID='B.SC. in CSE'
+                                                         ) stepOne,Registration_T R,Enrollment_T E
+                                                     GROUP BY stepOne.StudentID) stepTwo`, async(error, results) => {
                                             console.log(results)
                                             let CSECGPA = results[0].CGPA;
 
@@ -2244,22 +2593,22 @@ Router.get("/VCInstructorReports", (req,res) => {
 
 
         db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-            FROM
-                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                        SUM(e.AchievedMark) achievedMark,
-                        p.PLONo
-                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                      Mapping_T m,PLO_T p,Enrollment_T en
-                 WHERE s.FacultyID=1234
-                   AND s.Year=2021
-                   AND s.SectionID=r.SectionID
-                   AND c.AssessmentID=a.AssessmentID
-                   AND c.AssessmentID= e.AssessmentID
-                   AND m.PLOID=p.PLOID
-                   AND c.COID=m.COID
-                   AND en.StudentID=r.StudentID
-                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-            GROUP BY stepOne.PLONo`, async(error, results) => {
+                FROM
+                    (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                            SUM(e.AchievedMark) achievedMark,
+                            p.PLONo
+                     FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                          Mapping_T m,PLO_T p,Enrollment_T en
+                     WHERE s.FacultyID=1234
+                       AND s.Year=2021
+                       AND s.SectionID=r.SectionID
+                       AND c.AssessmentID=a.AssessmentID
+                       AND c.AssessmentID= e.AssessmentID
+                       AND m.PLOID=p.PLOID
+                       AND c.COID=m.COID
+                       AND en.StudentID=r.StudentID
+                     GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+                GROUP BY stepOne.PLONo`, async(error, results) => {
             let PLOPercentage1234 = []
 
             for (let i = 0; i < results.length; ++i) {
@@ -2271,22 +2620,22 @@ Router.get("/VCInstructorReports", (req,res) => {
 
 
             db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-            FROM
-                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                        SUM(e.AchievedMark) achievedMark,
-                        p.PLONo
-                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                      Mapping_T m,PLO_T p,Enrollment_T en
-                 WHERE s.FacultyID=4321
-                   AND s.Year=2021
-                   AND s.SectionID=r.SectionID
-                   AND c.AssessmentID=a.AssessmentID
-                   AND c.AssessmentID= e.AssessmentID
-                   AND m.PLOID=p.PLOID
-                   AND c.COID=m.COID
-                   AND en.StudentID=r.StudentID
-                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-            GROUP BY stepOne.PLONo`, async(error, results) => {
+                    FROM
+                        (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                                SUM(e.AchievedMark) achievedMark,
+                                p.PLONo
+                         FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                              Mapping_T m,PLO_T p,Enrollment_T en
+                         WHERE s.FacultyID=4321
+                           AND s.Year=2021
+                           AND s.SectionID=r.SectionID
+                           AND c.AssessmentID=a.AssessmentID
+                           AND c.AssessmentID= e.AssessmentID
+                           AND m.PLOID=p.PLOID
+                           AND c.COID=m.COID
+                           AND en.StudentID=r.StudentID
+                         GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+                    GROUP BY stepOne.PLONo`, async(error, results) => {
                 let PLOPercentage4321 = []
 
                 for (let i = 0; i < results.length; ++i) {
