@@ -7,7 +7,6 @@
 
     <link rel="stylesheet" href = "/DeanSchoolReports.css">
     <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-        <link rel="stylesheet" href = "/cardstyle.css">
 
 </head>
 
@@ -92,16 +91,16 @@
     datasetlist = [{
         label: 'Sabrina Masum',
         data: [{{#each PLOPercentage1234}}{{this}},{{/each}}],
-        backgroundColor: '#2222DC'
+        backgroundColor: '#1D6C48'
 
     }, {
         label: 'Shakil Ahmed',
         data: [{{#each PLOPercentage5678}}{{this}},{{/each}}],
-        backgroundColor: '#298AD2'
+        backgroundColor: '#094480'
     },    {
         label: 'Nawar Anzara',
         data: [{{#each PLOPercentage4321}}{{this}},{{/each}}],
-        backgroundColor: '#1DD3F3'
+        backgroundColor: '#962323'
     }];
 
     stackedChart("FacultyProgressView", plo2, datasetlist, false );
