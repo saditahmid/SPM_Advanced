@@ -80,11 +80,8 @@
             </div>
         </div>
     </header>
-    <main>
-
-
-
-
+    {{!-- <main> --}}
+        <br><br><br><br><br>
         <div class="chart customcard">
             <h2>Individual Student Overall Progress </h2>
             <canvas id="radar" width="800" height="500"></canvas>
@@ -92,37 +89,37 @@
 
         <div class="chart customcard">
             <h2>CSE Program Student Performance</h2>
-            <canvas id="CSEWiseCGPA" width="1000" height="500"></canvas>
+            <canvas id="CSEWiseCGPA" width="800" height="500"></canvas>
         </div>
          <div  class="chart customcard">
             <h2>CSC Program Student Performance</h2>
-            <canvas id="CSCWiseCGPA" width="1000" height="500"></canvas>
+            <canvas id="CSCWiseCGPA" width="800" height="500"></canvas>
         </div>
         <div  class="chart customcard">
             <h2>CEN Program Student Performance</h2>
-            <canvas id="CENWiseCGPA" width="1000" height="500"></canvas>
+            <canvas id="CENWiseCGPA" width="800" height="500"></canvas>
         </div>
       
         <div class="chart customcard">
             <h2>Program-Wise Student Performance (CGPA)</h2>
-            <canvas id="ProgWiseCGPA" width="300" height="300"></canvas>
+            <canvas id="ProgWiseCGPA" width="800" height="540"></canvas>
         </div>
         <div class="chart customcard">
             <h2>Program Comparison Progress View </h2>
-            <canvas id="comp" width="800" height="500"></canvas>
+            <canvas id="comp" width="720" height="500"></canvas>
         </div>
 
 
         <div class="chart customcard">
             <h2>Student Report Of CSC303</h2>
-            <canvas id="DBMSProgressView" width="2000" height="500"></canvas>
+            <canvas id="DBMSProgressView" width="710" height="500"></canvas>
         </div>
         <div class="chart customcard">
             <h2>Student Report Of CSE309</h2>
-            <canvas id="DiscreteProgressView" width="2000" height="500"></canvas>
+            <canvas id="DiscreteProgressView" width="710" height="500"></canvas>
         </div>
 
-    </main>
+    {{!-- </main> --}}
 </div><script>
     radarChart("radar")
     function radarChart(ctx) {
