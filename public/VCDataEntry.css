@@ -1,6 +1,4 @@
 
-
-
 :root{
     --main-color:#132c33;
     --color-dark:#d8e3e7;
@@ -135,9 +133,7 @@ main{
     color:#126e82;
 }
 
-.card-single:last-child{
-    background:var(--main-color)
-}
+
 .card-single:last-child h1,
 .card-single :last-child div:first-child span,
 .card-single :last-child div:last-child span{

@@ -42,7 +42,7 @@
     padding-left:1rem;
 }
 .sidebar-menu a {
-    padding-left:1rem;
+    padding-left:0rem;
     display:block;
     color:#fff;
     font-size: 1.1rem;
@@ -60,7 +60,7 @@
     padding-top:1rem;
     padding-bottom:1rem;
     color:var(--main-color);
-    border-radius:30px 0 0 30px;
+    border-radius:0px 0 0 30px;
 }
 
 
@@ -146,8 +146,8 @@ main{
 .recent-grid{
     margin-top:3.5rem;
     display:grid;
-    grid-gap:2rem;
-    grid-template-columns:65% auto;
+    grid-gap:4rem;
+    grid-template-columns:62% auto;
 }
 .card{
     background:#fff;
@@ -164,12 +164,12 @@ main{
 }
 
 .card-header button{
-    background :var(--main-color);
+    background :var(#484f4f);
     border-radius:10px;
     color:#fff;
     font-size:.8rem;
     padding:.5rem 1rem;
-    border: 1px solid var(--main-color);
+    border: 1px solid var( #0000);
 }
 table{
     border-collapse: collapse;
@@ -211,3 +211,45 @@ tr td:last-child{
     width:calc(100% - 10px);
     left:10px;
 }
+
+.card-body1{
+
+    width: 400 400 px;
+    border: 15px #8ca3a3;
+
+    margin: 20px;
+    color:  #132c33;
+    text-align: left;
+    font-weight: bold;
+    display: flex;
+    justify-content:space-between;
+    background:#fff;
+    padding:1rem;
+    border-radius:6px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15)
+
+
+}
+.card-body2{
+    width: 300 300 px;
+    border: 15px #8ca3a3;
+
+    margin: 20px;
+    color:  #132c33;
+    text-align: left;
+    font-weight: bold;
+    display: flex;
+    justify-content:space-between;
+    background:#fff;
+    padding:1rem;
+    border-radius:6px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.15)
+}
+
+.head{
+    color:  #132c33;
+    text-align: left;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15)
+
+
