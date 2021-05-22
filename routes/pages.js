@@ -508,7 +508,65 @@ Router.get("/Faculty", (req,res) => {
 });
 Router.get("/Admin", (req,res) => {
 
-    res.render(`Admin`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
+
+    db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+        console.log(results)
+        let program = []
+        let progcountStudents = []
+        for(let i=0;i<results.length;++i){
+            program[i] = results[i].ProgramID;
+            progcountStudents[i]=results[i].c;
+
+        }
+        console.log(program)
+        console.log(progcountStudents)
+
+
+        db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+            console.log(results)
+            let department = []
+            let DeptcountStudents = []
+            for(let i=0;i<results.length;++i){
+                department[i] = results[i].DepartmentID;
+                DeptcountStudents[i]=results[i].c;
+
+            }
+            console.log(department)
+            console.log(DeptcountStudents)
+
+
+            db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c  FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
+                console.log(results)
+                let school = []
+                let schoolcountStudents = []
+                for (let i = 0; i < results.length; ++i) {
+                    school[i] = results[i].SchoolID;
+                    schoolcountStudents[i] = results[i].c;
+
+                }
+                console.log(school)
+                console.log(schoolcountStudents)
+
+
+                res.render(`Admin`, {
+                    AdminID: User.AdminID,
+                    A_F_Name: User.A_F_Name,
+                    A_L_Name: User.A_L_Name,
+                    A_Gender: User.A_Gender,
+                    A_DateOfBirth: User.A_DateOfBirth,
+                    A_Email: User.A_Email,
+                    A_Phone: User.A_Phone,
+                    A_Address: User.A_Address,
+                    AdminProfile: User.AdminProfile,
+                    schoolcountStudents:schoolcountStudents,
+                    school:school,
+                    department:department,
+                    DeptcountStudents:DeptcountStudents,
+                    program:program,
+                    progcountStudents:progcountStudents
+
+                })
+            }) }) })
 });
 Router.get("/Dean", (req,res) => {
     db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
@@ -761,14 +819,14 @@ Router.get("/index", (req,res) => {
     res.render(`index`)
 });
 Router.get("/StudentCourses", (req,res) => {
-    db.all(`SELECT s.CourseID 
-FROM Registration_T r,Student_T st,Enrollment_T e,Section_T s
-WHERE st.StdentID=100
-AND st.StdentID=r.StudentID
-AND r.SectionID=s.SectionID
-GROUP BY s.CourseID`, async(error, results) => {
+    db.all(`SELECT s.CourseID
+            FROM Registration_T r,Student_T st,Enrollment_T e,Section_T s
+            WHERE st.StdentID=100
+              AND st.StdentID=r.StudentID
+              AND r.SectionID=s.SectionID
+            GROUP BY s.CourseID`, async(error, results) => {
         console.log('Etai ki sheta?')
-let listCourses=[]
+        let listCourses=[]
         for(let i=0;i<results.length;++i){
             listCourses[i]=results[i].CourseID
         }
@@ -782,46 +840,46 @@ let listCourses=[]
 
 
 
-    db.all("SELECT partTwo.PLONo, (partTwo.sumofCOPercentage/1000) percentageOfCO , partTwo.CONo FROM(SELECT partOne.PLONo,SUM(partOne.CoPercentage) sumofCOPercentage, partOne.CONo FROM (SELECT COResult.CourseID,COResult.StudentID,COResult.CONo,COResult.total,COResult.achievedMark,p.PLONo ,COResult.CoPercentage FROM(SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,    ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID    GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) partOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =partOne.coNo AND pl.PLONo=partOne.PLONo GROUP BY partOne.PLONo,partOne.CONo) partTwo,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =partTwo.coNo AND pl.PLONo=partTwo.PLONo GROUP BY partTwo.PLONo,partTwo.CONo", async(error, results) => {
-        console.log(results)
-        let co1 = []
-        let co2 = []
-        let co3 = []
-        let co4 = []
-        let PLONo = []
-
-        for(let i=0;i<results.length;++i){
-            PLONo[i] = results[i].PLONo
-            if(results[i].CONo == 1){
-                co1.push(Math.round(results[i].percentageOfCO*100)/100)
-            } else if(results[i].CONo == 2){
-                co2.push(Math.round(results[i].percentageOfCO*100)/100)
-
-            }else if(results[i].CONo == 3){
-                co3.push(Math.round(results[i].percentageOfCO*100)/100)
-
-            }else if(results[i].CONo == 4){
-                co4.push(Math.round(results[i].percentageOfCO*100)/100)
-
-            }
-        }
-        console.log(co1)
-        console.log(co2)
-        console.log(co3)
-        console.log(co4)
-
-        db.all("SELECT DISTINCT(e.EnrolledSem),p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID GROUP BY e.EnrolledSem,p.ProgramID", async(error, results) => {
+        db.all("SELECT partTwo.PLONo, (partTwo.sumofCOPercentage/1000) percentageOfCO , partTwo.CONo FROM(SELECT partOne.PLONo,SUM(partOne.CoPercentage) sumofCOPercentage, partOne.CONo FROM (SELECT COResult.CourseID,COResult.StudentID,COResult.CONo,COResult.total,COResult.achievedMark,p.PLONo ,COResult.CoPercentage FROM(SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,    ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID    GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) partOne,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =partOne.coNo AND pl.PLONo=partOne.PLONo GROUP BY partOne.PLONo,partOne.CONo) partTwo,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =partTwo.coNo AND pl.PLONo=partTwo.PLONo GROUP BY partTwo.PLONo,partTwo.CONo", async(error, results) => {
             console.log(results)
-            let sem = []
-            let countStudents = []
-            for(let i=0;i<results.length;++i){
-                sem[i] = results[i].EnrolledSem;
-                countStudents[i]=results[i].c;
+            let co1 = []
+            let co2 = []
+            let co3 = []
+            let co4 = []
+            let PLONo = []
 
+            for(let i=0;i<results.length;++i){
+                PLONo[i] = results[i].PLONo
+                if(results[i].CONo == 1){
+                    co1.push(Math.round(results[i].percentageOfCO*100)/100)
+                } else if(results[i].CONo == 2){
+                    co2.push(Math.round(results[i].percentageOfCO*100)/100)
+
+                }else if(results[i].CONo == 3){
+                    co3.push(Math.round(results[i].percentageOfCO*100)/100)
+
+                }else if(results[i].CONo == 4){
+                    co4.push(Math.round(results[i].percentageOfCO*100)/100)
+
+                }
             }
-            console.log(sem)
-            res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents, co1: co1, co2:co2, co3:co3, co4:co4, PLONo: PLONo,listCourses:listCourses })
-        }) }) })
+            console.log(co1)
+            console.log(co2)
+            console.log(co3)
+            console.log(co4)
+
+            db.all("SELECT DISTINCT(e.EnrolledSem),p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID GROUP BY e.EnrolledSem,p.ProgramID", async(error, results) => {
+                console.log(results)
+                let sem = []
+                let countStudents = []
+                for(let i=0;i<results.length;++i){
+                    sem[i] = results[i].EnrolledSem;
+                    countStudents[i]=results[i].c;
+
+                }
+                console.log(sem)
+                res.render(`StudentCourses`,{StdentID: User.StdentID, S_fname: User.S_fname, S_lName: User.S_lName, S_Gender:User.S_Gender, S_DateOfBirth:User.S_DateOfBirth, S_Email:User.S_Email, S_Phone:User.S_Phone,S_Address:User.S_Address, StudentProfile:User.StudentProfile, Major:User.Major, Minor:User.Minor, data: sem, count: countStudents, co1: co1, co2:co2, co3:co3, co4:co4, PLONo: PLONo,listCourses:listCourses })
+            }) }) })
 
 });
 Router.get("/studentReports", (req,res) => {
@@ -842,7 +900,7 @@ Router.get("/studentReports", (req,res) => {
             GROUP BY stepOne.CourseID,stepOne.PLONo`, async(error, results) => {
         console.log('Etai ki sheta?')
         console.log(results)
-        let CSE101PLO = [], CSE104PLO = [], CSE203PLO= [], CSE204PLO= [], CSE211PLO= [], CSE213PLO= [], CSE214PLO= [], CSE303PLO= [], CSE309PLO= [], CSE450PLO= [], CSE460PLO= [], CSE464PLO= []
+        let CSE101PLO = [], CSE104PLO = [], CSE203PLO= [], CSE204PLO= [], CSE211PLO= [], CSE213PLO= [], CSE214PLO= [], CSE303PLO= [], CSE309PLO= [],CSE343PLO = [], CSE450PLO= [], CSE460PLO= [], CSE464PLO= []
         let sumPLO1 = 0, sumPLO2= 0 ,sumPLO3= 0 ,sumPLO4= 0 ,sumPLO5= 0 ,sumPLO6= 0 ,sumPLO7= 0 ,sumPLO8= 0 ,sumPLO12= 0
         for(let i=0;i<results.length; ++i){
             if(results[i].PLONo == 1){
@@ -1131,7 +1189,28 @@ Router.get("/studentReports", (req,res) => {
                     CSE309PLO[i] = ((results[i].PloPercentage)/sumPLO12)*100
                 }
 
-            } else if(results[i].CourseID == 'CSE450'){
+            } else if(results[i].CourseID == 'CSE343'){
+                if(results[i].PLONo == 1){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
+                }
+                if(results[i].PLONo == 2){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+                if(results[i].PLONo == 3){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+                if(results[i].PLONo == 4){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+                if(results[i].PLONo == 5){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+                if(results[i].PLONo == 6){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+                if(results[i].PLONo == 7){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+                if(results[i].PLONo == 8){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+                if(results[i].PLONo == 12){
+                    CSE343PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100                }
+
+            }else if(results[i].CourseID == 'CSE450'){
                 if(results[i].PLONo == 1){
                     CSE450PLO[i] = ((results[i].PloPercentage)/sumPLO1)*100
                 }
@@ -1318,6 +1397,7 @@ Router.get("/studentReports", (req,res) => {
                         CSE450PLO:CSE450PLO,
                         CSE460PLO:CSE460PLO,
                         CSE464PLO:CSE464PLO,
+                        CSE343PLO:CSE343PLO
                     })
                 }) }) }) })
 });
@@ -2588,25 +2668,25 @@ Router.get("/VCProgramReports", (req,res) => {
 });
 Router.get("/VCSchoolReports", (req,res) => {
     db.all(`SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A,
-       (SUM(PLOrawMarks.achievedMark)/SUM(PLOrawMarks.total))*100 PLOpercentage
-FROM
-    (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-            p.PLONo
-     FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Enrollment_T en,
-          Program_T pr,Mapping_T m,PLO_T p,Department_T d
-     WHERE c.AssessmentID=a.AssessmentID
-       AND c.AssessmentID= e.AssessmentID
-       AND e.RegistrationID=r.RegistrationID
-       AND r.StudentID=en.StudentID
-       AND en.ProgramID=pr.ProgramID
-       AND m.PLOID=p.PLOID
-       AND m.COID=c.COID
-       AND pr.DepartmentID=d.DepartmentID
-       AND d.SchoolID='SETS'
-     GROUP BY p.PLONo,c.CONo,r.StudentID,c.CourseID) PLOrawMarks,CO_T C,PLO_T pl
-WHERE  C.CONo =PLOrawMarks.coNo
-  AND pl.PLONo=PLOrawMarks.PLONo
-GROUP BY PLOrawMarks.PLONo`, async(error, results) => {
+                   (SUM(PLOrawMarks.achievedMark)/SUM(PLOrawMarks.total))*100 PLOpercentage
+            FROM
+                (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                        p.PLONo
+                 FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Enrollment_T en,
+                      Program_T pr,Mapping_T m,PLO_T p,Department_T d
+                 WHERE c.AssessmentID=a.AssessmentID
+                   AND c.AssessmentID= e.AssessmentID
+                   AND e.RegistrationID=r.RegistrationID
+                   AND r.StudentID=en.StudentID
+                   AND en.ProgramID=pr.ProgramID
+                   AND m.PLOID=p.PLOID
+                   AND m.COID=c.COID
+                   AND pr.DepartmentID=d.DepartmentID
+                   AND d.SchoolID='SETS'
+                 GROUP BY p.PLONo,c.CONo,r.StudentID,c.CourseID) PLOrawMarks,CO_T C,PLO_T pl
+            WHERE  C.CONo =PLOrawMarks.coNo
+              AND pl.PLONo=PLOrawMarks.PLONo
+            GROUP BY PLOrawMarks.PLONo`, async(error, results) => {
         console.log(results)
         let PLOPercentageSETS = []
 
@@ -2616,25 +2696,25 @@ GROUP BY PLOrawMarks.PLONo`, async(error, results) => {
         }
 
         db.all(`SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A,
-       (SUM(PLOrawMarks.achievedMark)/SUM(PLOrawMarks.total))*100 PLOpercentage
-FROM
-    (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
-            p.PLONo
-     FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Enrollment_T en,
-          Program_T pr,Mapping_T m,PLO_T p,Department_T d
-     WHERE c.AssessmentID=a.AssessmentID
-       AND c.AssessmentID= e.AssessmentID
-       AND e.RegistrationID=r.RegistrationID
-       AND r.StudentID=en.StudentID
-       AND en.ProgramID=pr.ProgramID
-       AND m.PLOID=p.PLOID
-       AND m.COID=c.COID
-       AND pr.DepartmentID=d.DepartmentID
-       AND d.SchoolID='SB'
-     GROUP BY p.PLONo,c.CONo,r.StudentID,c.CourseID) PLOrawMarks,CO_T C,PLO_T pl
-WHERE  C.CONo =PLOrawMarks.coNo
-  AND pl.PLONo=PLOrawMarks.PLONo
-GROUP BY PLOrawMarks.PLONo`, async(error, results) => {
+                       (SUM(PLOrawMarks.achievedMark)/SUM(PLOrawMarks.total))*100 PLOpercentage
+                FROM
+                    (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,
+                            p.PLONo
+                     FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r,Enrollment_T en,
+                          Program_T pr,Mapping_T m,PLO_T p,Department_T d
+                     WHERE c.AssessmentID=a.AssessmentID
+                       AND c.AssessmentID= e.AssessmentID
+                       AND e.RegistrationID=r.RegistrationID
+                       AND r.StudentID=en.StudentID
+                       AND en.ProgramID=pr.ProgramID
+                       AND m.PLOID=p.PLOID
+                       AND m.COID=c.COID
+                       AND pr.DepartmentID=d.DepartmentID
+                       AND d.SchoolID='SB'
+                     GROUP BY p.PLONo,c.CONo,r.StudentID,c.CourseID) PLOrawMarks,CO_T C,PLO_T pl
+                WHERE  C.CONo =PLOrawMarks.coNo
+                  AND pl.PLONo=PLOrawMarks.PLONo
+                GROUP BY PLOrawMarks.PLONo`, async(error, results) => {
             console.log(results)
             let PLOPercentageSB = []
 
@@ -3135,5 +3215,25 @@ Router.get("/adminStudentEnrolled", (req,res) => {
 
     res.render(`adminStudentEnrolled`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
 });
+
+Router.get("/headevaluation2", (req,res) => {
+
+    res.render(`headevaluation2`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
+});
+Router.get("/headevaluation3", (req,res) => {
+
+    res.render(`headevaluation3`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
+});
+
+Router.get("/headassesment2.hbs", (req,res) => {
+
+    res.render(`headassesment2.hbs`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
+});
+
+Router.get("/headassesment1.hbs", (req,res) => {
+
+    res.render(`headassesment1.hbs`, {AdminID:User.AdminID, A_F_Name:User.A_F_Name, A_L_Name:User.A_L_Name, A_Gender:User.A_Gender, A_DateOfBirth:User.A_DateOfBirth, A_Email:User.A_Email, A_Phone:User.A_Phone,A_Address:User.A_Address, AdminProfile:User.AdminProfile})
+});
+
 
 module.exports = Router;

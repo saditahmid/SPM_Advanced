@@ -145,14 +145,14 @@
     </main>
 </div>
 <script>
-    let SchchartName = ["SETS","SB"];
-    let SchchartLabel = [30,70];
+    let SchchartName = [{{#each school}}"{{this}}",{{/each}}];
+    let SchchartLabel = [{{#each schoolcountStudents}}{{this}},{{/each}}];
     pieChart("SchWise", "Program Wise Student Enrollment", SchchartName, SchchartLabel)
-    let DpchartName = ["CSE","EEE","PHY"];
-    let DpchartLabel = [100,200,300];
+    let DpchartName = [{{#each department}}"{{this}}",{{/each}}];
+    let DpchartLabel = [{{#each DeptcountStudents}}{{this}},{{/each}}];
     pieChart("DeptWise", "Program Wise Student Enrollment", DpchartName, DpchartLabel)
-    let PchartName = ["CSC","CSE","CEN"];
-    let PchartLabel = [100,100,100];
+    let PchartName = [{{#each program}}"{{this}}",{{/each}}];
+    let PchartLabel = [{{#each progcountStudents}}{{this}},{{/each}}];
     pieChart("ProgWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
 
     function pieChart(ctx,

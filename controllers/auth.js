@@ -65,123 +65,123 @@ exports.login = async(req, res) =>{
 
 
 
-                    db.all(`SELECT COUNT(s1.SectionID) noOfSem
-                            FROM
-                                (SELECT s.SectionID,s.Year,s.Semester
-                                 FROM Section_T s,Registration_T r
-                                 WHERE r.StudentID=100
-                                   AND s.SectionID=r.SectionID
-                                 GROUP BY s.Semester,s.Year) s1`, async(error, results) => {
-                        console.log("hello, the results: ")
-                        console.log(results)
-                        let noOfSem = results[0].noOfSem
-
-
-
-
-
-
-                    db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,  COResult.achievedMark achievedMark ,p.PLONo  FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
-                        console.log("hello, the results: ")
-                        console.log(results)
-                        let PLONo = []
-                        let PLOpercentage = []
-                        for(let i=0;i<results.length;++i){
-                            PLONo[i] = results[i].PLONo;
-                            PLOpercentage[i]=results[i].PLOpercentage;
-
-                        }
-
-
-
-
-                        db.all("SELECT COUNT(CountOfAchieved.PLONo) AS c FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo HAVING (PLOpercentage>=40)) CountOfAchieved", async(error, results) => {
+                        db.all(`SELECT COUNT(s1.SectionID) noOfSem
+                                FROM
+                                    (SELECT s.SectionID,s.Year,s.Semester
+                                     FROM Section_T s,Registration_T r
+                                     WHERE r.StudentID=100
+                                       AND s.SectionID=r.SectionID
+                                     GROUP BY s.Semester,s.Year) s1`, async(error, results) => {
+                            console.log("hello, the results: ")
                             console.log(results)
-                            let achievedPLO = results[0].c;
-                            console.log(achievedPLO)
+                            let noOfSem = results[0].noOfSem
 
-                            db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM(SELECT PLOrawMarks.PLONo FROM (SELECT COResult.CourseID courseID,COResult.CONo coNo,p.PLONo FROM (SELECT c.CourseID,c.CONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOCount", async(error, results) => {
+
+
+
+
+
+                            db.all("SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,  COResult.achievedMark achievedMark ,p.PLONo  FROM (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo", async(error, results) => {
+                                console.log("hello, the results: ")
                                 console.log(results)
-                                let attemptedPLO = results[0].c;
-                                console.log(attemptedPLO)
-                                let successRate = (achievedPLO/attemptedPLO)*100;
-                                console.log(successRate + "%");
+                                let PLONo = []
+                                let PLOpercentage = []
+                                for(let i=0;i<results.length;++i){
+                                    PLONo[i] = results[i].PLONo;
+                                    PLOpercentage[i]=results[i].PLOpercentage;
 
-                                db.all("SELECT minT.PLONo,MIN(minT.PLOpercentage),ploT.PLOName FROM (SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A  FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID  AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) minT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=minT.PLONo", async(error, results) => {
+                                }
+
+
+
+
+                                db.all("SELECT COUNT(CountOfAchieved.PLONo) AS c FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage  FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r  WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl  WHERE M.COID=C.COID AND M.PLOID=pl.PLOID  AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo HAVING (PLOpercentage>=40)) CountOfAchieved", async(error, results) => {
                                     console.log(results)
-                                    let MinPloNo = results[0].PLONo;
-                                    let MinPloName = results[0].PLOName;
-                                    console.log(MinPloNo)
-                                    console.log(MinPloName)
+                                    let achievedPLO = results[0].c;
+                                    console.log(achievedPLO)
 
-                                    db.all("SELECT maxT.PLONo,Max(maxT.PLOpercentage),ploT.PLOName FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) maxT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=maxT.PLONo", async(error, results) => {
+                                    db.all("SELECT COUNT(PLOCount.PLONo) AS c FROM(SELECT PLOrawMarks.PLONo FROM (SELECT COResult.CourseID courseID,COResult.CONo coNo,p.PLONo FROM (SELECT c.CourseID,c.CONo FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID  AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOCount", async(error, results) => {
                                         console.log(results)
-                                        let MaxPloNo = results[0].PLONo;
-                                        let MaxPloName = results[0].PLOName;
-                                        console.log(MaxPloNo)
-                                        console.log(MaxPloName)
+                                        let attemptedPLO = results[0].c;
+                                        console.log(attemptedPLO)
+                                        let successRate = (achievedPLO/attemptedPLO)*100;
+                                        console.log(successRate + "%");
 
-
-                                        db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+                                        db.all("SELECT minT.PLONo,MIN(minT.PLOpercentage),ploT.PLOName FROM (SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A  FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total ,   COResult.achievedMark achievedMark ,p.PLONo  FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark,  ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID  AND e.RegistrationID=r.RegistrationID  AND r.StudentID=100 GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p  WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID  AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) minT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=minT.PLONo", async(error, results) => {
                                             console.log(results)
-                                            let CurrentCgPA = Math.round(results[0].CGPA*100)/100;
-                                            console.log(CurrentCgPA)
-                                            let ScholarshipPercentage = 0;
-                                            if((CurrentCgPA >= 3.51) && (CurrentCgPA <= 3.69)  )
-                                            {
-                                                ScholarshipPercentage = 30
-                                            }else if((CurrentCgPA >= 3.70) && (CurrentCgPA <= 3.79)  )
-                                            {
-                                                ScholarshipPercentage = 50
-                                            }else if((CurrentCgPA >= 3.80) && (CurrentCgPA <= 3.84)  )
-                                            {
-                                                ScholarshipPercentage = 75
-                                            }else if((CurrentCgPA >= 3.85) && (CurrentCgPA <= 4.00)  )
-                                            {
-                                                ScholarshipPercentage = 100
-                                            }else if((CurrentCgPA < 3.51))
-                                            {
-                                                ScholarshipPercentage = 0
-                                            }
-                                            module.exports.ScholarshipPercentage = ScholarshipPercentage
+                                            let MinPloNo = results[0].PLONo;
+                                            let MinPloName = results[0].PLOName;
+                                            console.log(MinPloNo)
+                                            console.log(MinPloName)
+
+                                            db.all("SELECT maxT.PLONo,Max(maxT.PLOpercentage),ploT.PLOName FROM(SELECT PLOWiseRawMarks.PLONo,((PLOWiseRawMarks.A/PLOWiseRawMarks.T)*100) PLOpercentage FROM (SELECT PLOrawMarks.PLONo,SUM(PLOrawMarks.total) T,SUM(PLOrawMarks.achievedMark) A FROM  (SELECT COResult.CourseID courseID,COResult.StudentID stuID,COResult.CONo coNo,COResult.total total , COResult.achievedMark achievedMark ,p.PLONo FROM  (SELECT c.CourseID,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,SUM(e.AchievedMark) achievedMark, ((SUM(e.AchievedMark)/SUM(a.AllocatedMark))*100) CoPercentage FROM Evaluation_T e, CO_T c,Assessment_T a,Registration_T r WHERE c.AssessmentID=a.AssessmentID AND c.AssessmentID= e.AssessmentID AND e.RegistrationID=r.RegistrationID AND r.StudentID=100  GROUP BY c.CourseID ,c.CONo) COResult, Mapping_T m,PLO_T p WHERE m.PLOID=p.PLOID  GROUP BY m.PLOID,COResult.CONo,COResult.CourseID) PLOrawMarks,CO_T C,Mapping_T M,PLO_T pl WHERE M.COID=C.COID AND M.PLOID=pl.PLOID AND C.CONo =PLOrawMarks.coNo AND pl.PLONo=PLOrawMarks.PLONo GROUP BY PLOrawMarks.PLONo) PLOWiseRawMarks GROUP BY PLOWiseRawMarks.PLONo) maxT, PLO_T ploT,Mapping_T mapT WHERE mapT.PLOID=ploT.PLOID AND ploT.PLONo=maxT.PLONo", async(error, results) => {
+                                                console.log(results)
+                                                let MaxPloNo = results[0].PLONo;
+                                                let MaxPloName = results[0].PLOName;
+                                                console.log(MaxPloNo)
+                                                console.log(MaxPloName)
+
+
+                                                db.all("SELECT SUM(procsssA.stepOne)/SUM(R.AchievedCredit) CGPA FROM(SELECT (r.GradePoint*r.AchievedCredit) stepOne FROM Registration_T r WHERE r.StudentID=100) procsssA,Registration_T R WHERE R.StudentID=100", async(error, results) => {
+                                                    console.log(results)
+                                                    let CurrentCgPA = Math.round(results[0].CGPA*100)/100;
+                                                    console.log(CurrentCgPA)
+                                                    let ScholarshipPercentage = 0;
+                                                    if((CurrentCgPA >= 3.51) && (CurrentCgPA <= 3.69)  )
+                                                    {
+                                                        ScholarshipPercentage = 30
+                                                    }else if((CurrentCgPA >= 3.70) && (CurrentCgPA <= 3.79)  )
+                                                    {
+                                                        ScholarshipPercentage = 50
+                                                    }else if((CurrentCgPA >= 3.80) && (CurrentCgPA <= 3.84)  )
+                                                    {
+                                                        ScholarshipPercentage = 75
+                                                    }else if((CurrentCgPA >= 3.85) && (CurrentCgPA <= 4.00)  )
+                                                    {
+                                                        ScholarshipPercentage = 100
+                                                    }else if((CurrentCgPA < 3.51))
+                                                    {
+                                                        ScholarshipPercentage = 0
+                                                    }
+                                                    module.exports.ScholarshipPercentage = ScholarshipPercentage
 
 
 
-                                            db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[id], async(error, results) => {
-                                                if(error){
-                                                    console.log(error)
-                                                }else{
-                                                    console.log(results.StdentID);
-                                                    module.exports.StdentID = results.StdentID;
-                                                    module.exports.S_fname = results.S_fname;
-                                                    module.exports.S_lName = results.S_lName;
-                                                    module.exports.S_Gender = results.S_Gender;
-                                                    module.exports.S_DateOfBirth = results.S_DateOfBirth;
-                                                    module.exports.S_Email = results.S_Email;
-                                                    module.exports.S_Phone = results.S_Phone;
-                                                    module.exports.S_Address = results.S_Address;
-                                                    module.exports.StudentProfile = results.StudentProfile;
-                                                    module.exports.Major = results.Major;
-                                                    module.exports.Minor = results.Minor;
-                                                    res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName,
-                                                        S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth,
-                                                        S_Email:results.S_Email, S_Phone:results.S_Phone,
-                                                        S_Address:results.S_Address, StudentProfile:results.StudentProfile,
-                                                        Major:results.Major, Minor:results.Minor,
-                                                        CurrentCgPA:CurrentCgPA,
-                                                        achievedPLO: achievedPLO,
-                                                        attemptedPLO: attemptedPLO,
-                                                        successRate: successRate,
-                                                        MinPloNo: MinPloNo,
-                                                        MinPloName: MinPloName,
-                                                        MaxPloNo: MaxPloNo,
-                                                        MaxPloName: MaxPloName,
-                                                        PLONo:PLONo,
-                                                        PLOpercentage:PLOpercentage,
-                                                        ScholarshipPercentage:ScholarshipPercentage,
-                                                        currentyear:currentyear,
-                                                        currentSem: currentSem,
-                                                        noOfSem: noOfSem
+                                                    db.get("SELECT StdentID, S_fname, S_lName, S_Gender, S_DateOfBirth, S_Email, S_Phone,S_Address, StudentProfile, Major, Minor from student_T WHERE StdentID = ?",[id], async(error, results) => {
+                                                        if(error){
+                                                            console.log(error)
+                                                        }else{
+                                                            console.log(results.StdentID);
+                                                            module.exports.StdentID = results.StdentID;
+                                                            module.exports.S_fname = results.S_fname;
+                                                            module.exports.S_lName = results.S_lName;
+                                                            module.exports.S_Gender = results.S_Gender;
+                                                            module.exports.S_DateOfBirth = results.S_DateOfBirth;
+                                                            module.exports.S_Email = results.S_Email;
+                                                            module.exports.S_Phone = results.S_Phone;
+                                                            module.exports.S_Address = results.S_Address;
+                                                            module.exports.StudentProfile = results.StudentProfile;
+                                                            module.exports.Major = results.Major;
+                                                            module.exports.Minor = results.Minor;
+                                                            res.render("\student", {StdentID: results.StdentID, S_fname: results.S_fname, S_lName: results.S_lName,
+                                                                S_Gender:results.S_Gender, S_DateOfBirth:results.S_DateOfBirth,
+                                                                S_Email:results.S_Email, S_Phone:results.S_Phone,
+                                                                S_Address:results.S_Address, StudentProfile:results.StudentProfile,
+                                                                Major:results.Major, Minor:results.Minor,
+                                                                CurrentCgPA:CurrentCgPA,
+                                                                achievedPLO: achievedPLO,
+                                                                attemptedPLO: attemptedPLO,
+                                                                successRate: successRate,
+                                                                MinPloNo: MinPloNo,
+                                                                MinPloName: MinPloName,
+                                                                MaxPloNo: MaxPloNo,
+                                                                MaxPloName: MaxPloName,
+                                                                PLONo:PLONo,
+                                                                PLOpercentage:PLOpercentage,
+                                                                ScholarshipPercentage:ScholarshipPercentage,
+                                                                currentyear:currentyear,
+                                                                currentSem: currentSem,
+                                                                noOfSem: noOfSem
 
 
 
@@ -191,12 +191,12 @@ exports.login = async(req, res) =>{
 
 
 
-                                                    });
+                                                            });
 
 
-                                                }
+                                                        }
 
-                                            }) }) }) }) }) }) }) }) })
+                                                    }) }) }) }) }) }) }) }) })
 
 
 
@@ -317,7 +317,48 @@ exports.login = async(req, res) =>{
                             Date.now() + process.env.JWT_COOKIE_EXPIRES*24*60*60*1000
                         ), httpOnly: true}
                     res.cookie('jwt', token, cookieOptions);
-                    db.get("SELECT AdminID, A_F_Name, A_L_Name, A_Gender, A_DateOfBirth, A_Email, A_Phone,A_Address, AdminProfile from Admin_T WHERE AdminID = ?",[results.UserID], async(error, results) => {
+                    db.all("SELECT p.ProgramID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p WHERE e.ProgramID=p.ProgramID AND p.DepartmentID='CSE' GROUP BY p.ProgramID", async(error, results) => {
+                        console.log(results)
+                        let program = []
+                        let progcountStudents = []
+                        for(let i=0;i<results.length;++i){
+                            program[i] = results[i].ProgramID;
+                            progcountStudents[i]=results[i].c;
+
+                        }
+                        console.log(program)
+                        console.log(progcountStudents)
+
+
+                        db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                            console.log(results)
+                            let department = []
+                            let DeptcountStudents = []
+                            for(let i=0;i<results.length;++i){
+                                department[i] = results[i].DepartmentID;
+                                DeptcountStudents[i]=results[i].c;
+
+                            }
+                            console.log(department)
+                            console.log(DeptcountStudents)
+
+
+                            db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c  FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
+                                console.log(results)
+                                let school = []
+                                let schoolcountStudents = []
+                                for (let i = 0; i < results.length; ++i) {
+                                    school[i] = results[i].SchoolID;
+                                    schoolcountStudents[i] = results[i].c;
+
+                                }
+                                console.log(school)
+                                console.log(schoolcountStudents)
+
+
+
+
+                    db.get("SELECT AdminID, A_F_Name, A_L_Name, A_Gender, A_DateOfBirth, A_Email, A_Phone,A_Address, AdminProfile from Admin_T WHERE AdminID = ?",[id], async(error, results) => {
                         if(error){
                             console.log(error)
                         }else{
@@ -332,12 +373,19 @@ exports.login = async(req, res) =>{
                             module.exports.A_Address = results.A_Address;
                             module.exports.AdminProfile = results.AdminProfile;
 
-                            res.render("\Admin", {AdminID:results.AdminID, A_F_Name:results.A_F_Name, A_L_Name:results.A_L_Name, A_Gender:results.A_Gender, A_DateOfBirth:results.A_DateOfBirth, A_Email:results.A_Email, A_Phone:results.A_Phone,A_Address:results.A_Address, AdminProfile:results.AdminProfile});
 
 
-                        }
+                            res.render("\Admin", {AdminID:results.AdminID, A_F_Name:results.A_F_Name, A_L_Name:results.A_L_Name, A_Gender:results.A_Gender, A_DateOfBirth:results.A_DateOfBirth, A_Email:results.A_Email, A_Phone:results.A_Phone,A_Address:results.A_Address, AdminProfile:results.AdminProfile, schoolcountStudents:schoolcountStudents,
+                                school:school,
+                                department:department,
+                                DeptcountStudents:DeptcountStudents,
+                                program:program,
+                                progcountStudents:progcountStudents});
 
-                    })
+
+                          }
+
+                    }) }) }) })
 
 
                 }else if((results.UserType) == "Higher Authority" ){
@@ -368,22 +416,22 @@ exports.login = async(req, res) =>{
                                 ), httpOnly: true}
                             res.cookie('jwt', token, cookieOptions);
                             db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-                            FROM
-                                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                                        SUM(e.AchievedMark) achievedMark,
-                                        p.PLONo
-                                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                                      Mapping_T m,PLO_T p,Enrollment_T en
-                                 WHERE s.FacultyID=1011
-                                   AND s.Year=2021
-                                   AND s.SectionID=r.SectionID
-                                   AND c.AssessmentID=a.AssessmentID
-                                   AND c.AssessmentID= e.AssessmentID
-                                   AND m.PLOID=p.PLOID
-                                   AND c.COID=m.COID
-                                   AND en.StudentID=r.StudentID
-                                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-                            GROUP BY stepOne.PLONo`, async(error, results) => {
+                                    FROM
+                                        (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                                                SUM(e.AchievedMark) achievedMark,
+                                                p.PLONo
+                                         FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                                              Mapping_T m,PLO_T p,Enrollment_T en
+                                         WHERE s.FacultyID=1011
+                                           AND s.Year=2021
+                                           AND s.SectionID=r.SectionID
+                                           AND c.AssessmentID=a.AssessmentID
+                                           AND c.AssessmentID= e.AssessmentID
+                                           AND m.PLOID=p.PLOID
+                                           AND c.COID=m.COID
+                                           AND en.StudentID=r.StudentID
+                                         GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+                                    GROUP BY stepOne.PLONo`, async(error, results) => {
                                 console.log(results)
                                 let PLONo = []
                                 let PLOPercentage = []
@@ -490,22 +538,22 @@ exports.login = async(req, res) =>{
                             res.cookie('jwt', token, cookieOptions);
 
                             db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-                            FROM
-                                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                                        SUM(e.AchievedMark) achievedMark,
-                                        p.PLONo
-                                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                                      Mapping_T m,PLO_T p,Enrollment_T en
-                                 WHERE s.FacultyID=1234
-                                   AND s.Year=2021
-                                   AND s.SectionID=r.SectionID
-                                   AND c.AssessmentID=a.AssessmentID
-                                   AND c.AssessmentID= e.AssessmentID
-                                   AND m.PLOID=p.PLOID
-                                   AND c.COID=m.COID
-                                   AND en.StudentID=r.StudentID
-                                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-                            GROUP BY stepOne.PLONo`, async(error, results) => {
+                                    FROM
+                                        (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                                                SUM(e.AchievedMark) achievedMark,
+                                                p.PLONo
+                                         FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                                              Mapping_T m,PLO_T p,Enrollment_T en
+                                         WHERE s.FacultyID=1234
+                                           AND s.Year=2021
+                                           AND s.SectionID=r.SectionID
+                                           AND c.AssessmentID=a.AssessmentID
+                                           AND c.AssessmentID= e.AssessmentID
+                                           AND m.PLOID=p.PLOID
+                                           AND c.COID=m.COID
+                                           AND en.StudentID=r.StudentID
+                                         GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+                                    GROUP BY stepOne.PLONo`, async(error, results) => {
                                 console.log(results)
                                 let PLONo = []
                                 let PLOPercentage = []
@@ -598,22 +646,22 @@ exports.login = async(req, res) =>{
                             res.cookie('jwt', token, cookieOptions);
 
                             db.all(`SELECT stepOne.PLONo,(SUM(stepOne.achievedMark)/SUM(stepOne.total)*100) PloPercentage
-                            FROM
-                                (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
-                                        SUM(e.AchievedMark) achievedMark,
-                                        p.PLONo
-                                 FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
-                                      Mapping_T m,PLO_T p,Enrollment_T en
-                                 WHERE s.FacultyID=5678
-                                   AND s.Year=2021
-                                   AND s.SectionID=r.SectionID
-                                   AND c.AssessmentID=a.AssessmentID
-                                   AND c.AssessmentID= e.AssessmentID
-                                   AND m.PLOID=p.PLOID
-                                   AND c.COID=m.COID
-                                   AND en.StudentID=r.StudentID
-                                 GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
-                            GROUP BY stepOne.PLONo`, async(error, results) => {
+                                    FROM
+                                        (SELECT s.FacultyID,s.CourseID,s.Year,r.StudentID,c.CONo,SUM(a.AllocatedMark) total ,
+                                                SUM(e.AchievedMark) achievedMark,
+                                                p.PLONo
+                                         FROM Section_T s,Registration_T r,Evaluation_T e, CO_T c,Assessment_T a,
+                                              Mapping_T m,PLO_T p,Enrollment_T en
+                                         WHERE s.FacultyID=5678
+                                           AND s.Year=2021
+                                           AND s.SectionID=r.SectionID
+                                           AND c.AssessmentID=a.AssessmentID
+                                           AND c.AssessmentID= e.AssessmentID
+                                           AND m.PLOID=p.PLOID
+                                           AND c.COID=m.COID
+                                           AND en.StudentID=r.StudentID
+                                         GROUP BY m.PLOID,c.CONo,r.StudentID)  stepOne
+                                    GROUP BY stepOne.PLONo`, async(error, results) => {
                                 console.log(results)
                                 let PLONo = []
                                 let PLOPercentage = []
