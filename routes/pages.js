@@ -21,7 +21,15 @@ Router.get("/", (req,res) => {
 });
 Router.get("/register", (req,res) => {
 
-    res.render(`register`)
+    res.render(`register`,{AdminID: User.AdminID,
+        A_F_Name: User.A_F_Name,
+        A_L_Name: User.A_L_Name,
+        A_Gender: User.A_Gender,
+        A_DateOfBirth: User.A_DateOfBirth,
+        A_Email: User.A_Email,
+        A_Phone: User.A_Phone,
+        A_Address: User.A_Address,
+        AdminProfile: User.AdminProfile})
 });
 Router.get("/login", (req,res) => {
 
