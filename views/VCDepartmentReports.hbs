@@ -82,30 +82,7 @@
         </div>
     </header>
     <main>
-        <h2>CSE Department Overall Progress </h2>
 
-        <div class="chart customcard">
-            <canvas id="CourseProgressView" width="800" height="500"></canvas>
-        </div>
-        <h2>CSE Department Progress  </h2>
-
-
-        <div class="chart customcard">
-            <canvas id="CSEProgressView" width="800" height="500"></canvas>
-        </div>
-
-        <h2>EEE Department Progress View </h2>
-
-
-        <div class="chart customcard">
-            <canvas id="CSCProgressView" width="800" height="500"></canvas>
-        </div>
-        <h2>PHY Department Progress View </h2>
-
-
-        <div class="chart customcard">
-            <canvas id="CENProgressView" width="800" height="500"></canvas>
-        </div>
 
         <div  class="chart customcard">
             <h2>CSE Department Student Performance</h2>
@@ -120,11 +97,9 @@
         <div  class="chart customcard"></div>
 
         <div  class="chart customcard">
-            <h2>PHY Department Student Performance</h2>
-            <canvas id="CENWiseCGPA" width="1000" height="500"></canvas>
-        </div>
+
         <div  class="chart customcard">
-            <h2>Department-Wise Student Performance (GPA)</h2>
+            <h2>Department-Wise Student Performance (CGPA)</h2>
             <canvas id="DeptWiseCGPA" width="300" height="300"></canvas>
         </div>
         <div  class="chart customcard"></div>
@@ -150,8 +125,8 @@
     </main>
 </div>
 <script>
-    let PrchartName = ['CSE','EEE','PHY'];
-    let PrchartLabel = [3.5,4,3.3];
+    let PrchartName = ['CSE','EEE'];
+    let PrchartLabel = [{{CGPACSE}},{{CGPAEEE}}];
     barChart("DeptWiseCGPA", "Department-Wise Student Performance", PrchartName, PrchartLabel,"","#EB5057")
 
     let semester1 = [ 'Spring',  'Summer',  'Autumn', ];
@@ -174,26 +149,21 @@
 
 
 
-    let semester2 = [ 'Spring',  'Summer',  'Autumn', ];
+    let semester2 = [ 'Spring2021' ];
 
     datasetlist = [{
         label: 'EEE',
-        data: [2, 4, 6],
+        data: [{{EEEPLOPERCENTAGE}}],
         backgroundColor: '#962323'
     },
         {
             label: 'CSE',
-            data: [3, 6, 5],
+            data: [{{CSEPLOPERCENTAGE}}],
             backgroundColor: '#78A7DC'
 
         },{
-            label: 'PHY',
-            data: [4, 5, 3],
-            backgroundColor: '#5BE74A'
-
-        },{
             label: 'Dept Average',
-            data: [4, 7, 5],
+            data: [{{programAVG}}],
             backgroundColor: '#094480'
 
         }];
@@ -228,11 +198,11 @@
     stackedChart("DiscreteProgressView", plo2, datasetlist, false);
 
 
-    let CSEchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
-    let CSEchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    let CSEchartName = [{{#each PLONoCSE}}"PLO{{this}}",{{/each}}];
+    let CSEchartLabel = [{{#each PLOPercentageCSE}}"{{this}}",{{/each}}];
     barChart("CSEWiseCGPA", "Average PLO", CSEchartName, CSEchartLabel)
-    let CSCchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
-    let CSCchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    let CSCchartName = [{{#each PLONoEEE}}"PLO{{this}}",{{/each}}];
+    let CSCchartLabel = [{{#each PLOPercentageEEE}}"{{this}}",{{/each}}];
     barChart("CSCWiseCGPA", "Average PLO", CSCchartName, CSCchartLabel,"","#C78CBC")
     let CENchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
     let CENchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
@@ -359,7 +329,10 @@
                         stacked: isTrue // this should be set to make the bars stacked
                     }],
                     yAxes: [{
-                        stacked: isTrue // this also..
+                        stacked: isTrue, // this also..
+                        ticks:{
+                            beginAtZero: true
+                        }
                     }]
                 }
             }

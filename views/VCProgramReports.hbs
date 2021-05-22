@@ -84,42 +84,11 @@
     <main>
 
 
-        <!--        <h2>Average PLO of my courses </h2>-->
-        <!--        <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">-->
-        <!--            <canvas id="CourseWisePLO" width="800px" height="500px"></canvas>-->
-        <!--        </div>-->
-        <!--        <h2>Average PLO of Database Management Systems</h2>-->
-
-        <!--        <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">-->
-        <!--            <canvas id="DBMSPLO" width="800" height="500"></canvas>-->
-        <!--        </div>-->
-        <!--        <h2>Average PLO of Discrete Mathematics </h2>-->
-
-        <!--        <div style="width: 1200px; height: 800px;display: inline-block;" class="chart">-->
-        <!--            <canvas id="DiscretePLO" width="800" height="500"></canvas>-->
-        <!--        </div>-->
-        <h2>Program Progress View </h2>
-
-        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
-            <canvas id="CourseProgressView" width="800" height="500"></canvas>
-        </div>
-        <h2>CSE Program Progress View </h2>
+        <h2>Individual Student Overall Progress </h2>
 
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
-            <canvas id="CSEProgressView" width="800" height="500"></canvas>
-        </div>
-        <h2>CSC Program Progress View </h2>
-
-
-        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
-            <canvas id="CSCProgressView" width="800" height="500"></canvas>
-        </div>
-        <h2>CEN Program Progress View </h2>
-
-
-        <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
-            <canvas id="CENProgressView" width="800" height="500"></canvas>
+            <canvas id="radar" width="800" height="500"></canvas>
         </div>
         <div style="width: 1000px; height: 500px;display: inline-block;" class="chart">
             <h2>CSE Program Student Performance</h2>
@@ -166,6 +135,52 @@
     </main>
 </div>
 <script>
+
+    radarChart("radar")
+    function radarChart(ctx) {
+        Chart.defaults.global.defaultFontFamily = "Oxygen";
+        Chart.defaults.global.defaultFontColor = "black";
+        var chart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    {{#each PLONo}}"PLO{{this}}",{{/each}}
+                ],
+                datasets: [{
+                    label: 'Achieved PLO',
+                    data: [{{#each PLOpercentage}}{{this}},{{/each}}],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }, {
+                    label: 'Attempted',
+                    data: [100,100,100,100,100,100,100,100,100],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            },
+        });
+    }
+
+
+
+
     let semester1 = [ 'Spring',  'Summer',  'Autumn', ];
     let semesterActual = [3, 6, 6];
     let semesterAttempted = [4, 7, 8];
@@ -184,14 +199,14 @@
     lineChartObject("CSCProgressView", semester1, chartObjects);
     lineChartObject("CENProgressView", semester1, chartObjects);
 
-    let CSEchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
-    let CSEchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    let CSEchartName = [{{#each CSEPLONO}}"PLO{{this}}",{{/each}}];
+    let CSEchartLabel = [{{#each CSEPLOPERCENT}}"{{this}}",{{/each}}];
     barChart("CSEWiseCGPA", "Average PLO", CSEchartName, CSEchartLabel)
-    let CSCchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
-    let CSCchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    let CSCchartName = [{{#each CSCPLONO}}"PLO{{this}}",{{/each}}];
+    let CSCchartLabel = [{{#each CSCPLOPERCENT}}"{{this}}",{{/each}}];
     barChart("CSCWiseCGPA", "Average PLO", CSCchartName, CSCchartLabel,"","#C78CBC")
-    let CENchartName = ['PLO1','PLO2','PLO3','PLO4','PLO5','PLO6','PLO7','PLO8','PLO9','PLO10','PLO11','PLO12','PLO13',];
-    let CENchartLabel = ['70','90','77','75','87','93','54','64','80','50','45','70','60',];
+    let CENchartName = [{{#each CENPLONO}}"PLO{{this}}",{{/each}}];
+    let CENchartLabel = [{{#each CENPLOPERCENT}}"{{this}}",{{/each}}];
     barChart("CENWiseCGPA", "Average PLO", CENchartName, CENchartLabel,"","#C7B78C")
 
 
@@ -203,7 +218,7 @@
     },
         {
             label: 'Expected',
-            data: [{{attempted343}},{{attempted343}},{{attempted343}},],
+            data: [{{attempted343}},{{attempted343}},{{attempted343}},{{attempted343}},],
             backgroundColor: '#094480'
 
         }];
@@ -216,34 +231,30 @@
     },
         {
             label: 'Expected',
-            data: [{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},],
+            data: [{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},{{attempted460}},],
             backgroundColor: '#094480'
 
         }];
     stackedChart("DiscreteProgressView", plo2, datasetlist, false);
 
-    let semester2 = [ 'Spring',  'Summer',  'Autumn', ];
-
+    let semester2 = [ 'Spring2021' ];
     datasetlist = [{
         label: 'CSE',
-        data: [2, 4, 6],
+        data: [{{CSEPLOPERCENTAGE}}],
         backgroundColor: '#962323'
     },
         {
             label: 'CEN',
-            data: [3, 6, 5],
+            data: [{{CENPLOPERCENTAGE}}],
             backgroundColor: '#78A7DC'
-
         },{
             label: 'CSC',
-            data: [4, 5, 3],
+            data: [{{CSCPLOPERCENTAGE}}],
             backgroundColor: '#5BE74A'
-
         },{
             label: 'Program Average',
-            data: [4, 7, 5],
+            data: [{{programAVG}}],
             backgroundColor: '#094480'
-
         }];
     stackedChart("comp", semester2, datasetlist, false);
     let PrchartName = ['CSE','CEN','CSC'];

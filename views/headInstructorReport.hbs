@@ -85,27 +85,27 @@
             </div>
 
         <div style="width: 1000px; height: 700px;display: inline-block;" class="chart">
-
-            <canvas id="FacultyProgressView" width="1000" height="500"></canvas>
             <h2>Instructor Report Of CSC401</h2>
+            <canvas id="FacultyProgressView" width="1000" height="500"></canvas>
+
         </div>
     </main>
 </div>
 <script>
-    let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO09',  'PLO10',  'PLO11',  'PLO12', ];
+    let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO12', ];
     datasetlist = [{
-        label: 'Faculty A',
-        data: [91, 89, 88, 72, 92, 94, 80, 86, 93, 79, 68, 78],
-        backgroundColor: '#094480'
+        label: 'Sabrina Masum',
+        data: [{{#each PLOPercentage1234}}{{this}},{{/each}}],
+        backgroundColor: '#377549'
 
     }, {
-        label: 'Faculty B',
-        data: [70, 90, 75, 64, 79, 83, 75, 84, 89, 66, 61, 56],
-        backgroundColor: '#962323'
+        label: 'Shakil Ahmed',
+        data: [{{#each PLOPercentage5678}}{{this}},{{/each}}],
+        backgroundColor: '#3DD435'
     },    {
-        label: 'Faculty C',
-        data: [50, 70, 45, 55, 49, 77, 64, 54, 79, 76, 51, 49],
-        backgroundColor: '#1CBF46'
+        label: 'Nawar Anzara',
+        data: [{{#each PLOPercentage4321}}{{this}},{{/each}}],
+        backgroundColor: '#ADE12E'
     }];
 
     stackedChart("FacultyProgressView", plo2, datasetlist, false );

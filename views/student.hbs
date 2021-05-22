@@ -110,11 +110,38 @@
                     <span class="las la-chart-bar"></span>
                 </div>
             </div>
+            <div class="card-single">
+                <div>
+                    <h1>{{ScholarshipPercentage}}%</h1>
+                    <span> Merit Scholarship </span>
+                </div>
+                <div>
+                    <span class="las la-chart-bar"></span>
+                </div>
+            </div>
 
             <div class="card-single">
                 <div>
                     <h1> {{CurrentCgPA}}</h1>
                     <span>Current CGPA</span>
+                </div>
+                <div>
+                    <span class="las la-chart-bar"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1> {{currentSem}}{{currentyear}}</h1>
+                    <span>Ongoing Semester</span>
+                </div>
+                <div>
+                    <span class="las la-chart-bar"></span>
+                </div>
+            </div>
+            <div class="card-single">
+                <div>
+                    <h1> {{noOfSem}}</h1>
+                    <span>No. of Semesters completed</span>
                 </div>
                 <div>
                     <span class="las la-chart-bar"></span>
@@ -134,7 +161,7 @@
             <div class="projects">
                 <div class="card">
                     <div class="card-header">
-                        <h3>{{User}} Program Learning Outcomes (PLO) for Department of CSE</h3>
+                        <h3> Program Learning Outcomes (PLO) for Department of CSE</h3>
                         <button> See Courses <span class="las.la-arrow-right"></span></button>
                     </div>
                     <div class="card-body">
@@ -143,7 +170,7 @@
                             <thead>
                             <tr>
                                 <td> PLO1:</td>
-                                <td> Knowledge: {{#each data}}{{@index}}{{this}}{{/each}} An ability to select and apply the knowledge, techniques, skills, and modern tools of the
+                                <td> Knowledge: An ability to select and apply the knowledge, techniques, skills, and modern tools of the
                                     computer science and engineering discipline.</td>
 
                             </tr>
@@ -255,7 +282,6 @@
 </div>
 
 <script>
-
 
     radarChart("radar")
     function radarChart(ctx) {

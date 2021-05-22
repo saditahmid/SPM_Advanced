@@ -350,37 +350,71 @@ OVERALL REPORT
     },];
     stackedChart("StudProgressView", plo3, datasetlist, false);    // radarChart("radar")
 
-    let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06','PLO07', 'PLO08', 'PLO09', 'PLO10', 'PLO11', 'PLO12',];
+    let plo2 = ['PLO01', 'PLO02', 'PLO03', 'PLO04', 'PLO05', 'PLO06','PLO07', 'PLO08', 'PLO12',];
     datasetlist = [{
         label: 'CSC101',
-        data: [100,52,27,41,0,0,0,0,0,0,0,0,],
+        data: [{{#each CSE101PLO}}{{this}},{{/each}},0,0,0,0,0,],
         backgroundColor: '#094480'
 
     }, {
-        label: 'CSE203',
-        data: [0,23,36,30,70,0,0,0,0,0,0,0],
+        label: 'CSE104',
+        data: [{{#each CSE104PLO}}{{this}},{{/each}},0,0,0,0,],
         backgroundColor: '#962323'
     },
         {
-            label: 'CSE211',
-            data: [0,25,37,29,0,42,0,0,0,0,0,0],
+            label: 'CSE203',
+            data: [{{#each CSE203PLO}}{{this}},{{/each}},0,0,0,0,0,],
             backgroundColor: '#22aa99'
         },
         {
-            label: 'CSE213',
-            data: [0,0,0,0,0,0,0,29,30,100,100,100],
+            label: 'CSE204',
+            data: [{{#each CSE204PLO}}{{this}},{{/each}},0,0,0,0,0,],
             backgroundColor: '#dd4477'
         },
         {
-            label: 'CSE104',
-            data: [0,0,0,0,30,29,42,41,0,0,0,0],
+            label: 'CSE211',
+            data: [0,0,{{#each CSE211PLO}}{{this}},{{/each}},0,0,0],
             backgroundColor: '#5881BD'
         },
         {
-            label: 'CSC401',
-            data: [0,0,0,0,0,29,58,30,70,0,0,0,],
+            label: 'CSC213',
+            data: [0,0,{{#each CSE213PLO}}{{this}},{{/each}},0,0,0],
             backgroundColor: '#B4B615'
-        }
+        },
+        {
+            label: 'CSE214',
+            data: [0,0,{{#each CSE214PLO}}{{this}},{{/each}},0,0,0],
+            backgroundColor: '#53993D'
+        },
+
+        {
+            label: 'CSE303',
+            data: [{{#each CSE303PLO}}{{this}},{{/each}},0,0,0,0],
+            backgroundColor: '#338129'
+        },
+
+        {
+            label: 'CSE309',
+            data: [0,{{#each CSE309PLO}}{{this}},{{/each}},0,0,0],
+            backgroundColor: '#CF87B8'
+        },
+
+        {
+            label: 'CSE450',
+            data: [{{#each CSE450PLO}}{{this}},{{/each}},0,0,0],
+            backgroundColor: '#6A696C'
+        },
+        {
+            label: 'CSE460',
+            data: [0,0,0,{{#each CSE460PLO}}{{this}},{{/each}}],
+            backgroundColor: '#222955'
+        },
+
+        {
+            label: 'CSE464',
+            data: [{{#each CSE464PLO}}{{this}},{{/each}}],
+            backgroundColor: '#8C0662'
+        },
     ];
     stackedChart("FacultyProgressView", plo2, datasetlist, true);
 

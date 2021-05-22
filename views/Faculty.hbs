@@ -393,8 +393,8 @@
 
 //Active graph
 <script>
-    let CchartName = ['PLO1', 'PLO2', 'PLO2', 'PLO4', 'PLO5', 'PLO6', 'PLO7', 'PLO8', 'PLO9', 'PLO10', 'PLO11', 'PLO12', 'PLO13',];
-    let CchartLabel = [80, 70, 85, 50, 64, 49, 50, 66, 65, 43, 52, 46, 75];
+    let CchartName = [{{#each PLONo}}"PLO{{this}}",{{/each}}];
+    let CchartLabel = [{{#each PLOPercentage}}"{{this}}",{{/each}}];
     barChart("CourseWisePLO", "Course Student Performance", CchartName, CchartLabel)
 
 
@@ -485,6 +485,39 @@
         })
 
     }
+
+    //
+    // var chart = new CanvasJS.Chart("chartContainer4",
+    //         {
+    //             animationEnabled: true,
+    //             title: {
+    //                 text: "Column Chart"
+    //             },
+    //             axisX: {
+    //                 interval: 10,
+    //             },
+    //             data: [
+    //                 {
+    //                     type: "column",
+    //                     legendMarkerType: "triangle",
+    //                     legendMarkerColor: "green",
+    //                     color: "rgba(255,12,32,.3)",
+    //                     showInLegend: true,
+    //                     legendText: "Country wise population",
+    //                     dataPoints: [
+    //                         {x: 10, y: 297571, label: "India"},
+    //                         {x: 20, y: 267017, label: "Saudi"},
+    //                         {x: 30, y: 175200, label: "Canada"},
+    //                         {x: 40, y: 154580, label: "Iran"},
+    //                         {x: 50, y: 116000, label: "Russia"},
+    //                         {x: 60, y: 97800, label: "UAE"},
+    //                         {x: 70, y: 20682, label: "US"},
+    //                         {x: 80, y: 20350, label: "China"}
+    //                     ]
+    //                 },
+    //             ]
+    //         });
+    // chart.render();
 
     //
     // var chart = new CanvasJS.Chart("chartContainer4",

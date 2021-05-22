@@ -91,20 +91,20 @@
     </main>
 </div>
 <script>
-    let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO09',  'PLO10',  'PLO11',  'PLO12', ];
+    let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO12', ];
     datasetlist = [{
-        label: 'Faculty A',
-        data: [91, 89, 88, 72, 92, 94, 80, 86, 93, 79, 68, 78],
-        backgroundColor: '#094480'
+        label: 'Sabrina Masum',
+        data: [{{#each PLOPercentage1234}}{{this}},{{/each}}],
+        backgroundColor: '#F62B22'
 
     }, {
-        label: 'Faculty B',
-        data: [70, 90, 75, 64, 79, 83, 75, 84, 89, 66, 61, 56],
-        backgroundColor: '#962323'
+        label: 'Shakil Ahmed',
+        data: [{{#each PLOPercentage5678}}{{this}},{{/each}}],
+        backgroundColor: '#E89537'
     },    {
-        label: 'Faculty C',
-        data: [50, 70, 45, 55, 49, 77, 64, 54, 79, 76, 51, 49],
-        backgroundColor: '#1CBF46'
+        label: 'Nawar Anzara',
+        data: [{{#each PLOPercentage4321}}{{this}},{{/each}}],
+        backgroundColor: '#E8DD37'
     }];
 
     stackedChart("FacultyProgressView", plo2, datasetlist, false );
@@ -135,7 +135,6 @@
             }
         });
     }
-
 </script>
 
 </body>

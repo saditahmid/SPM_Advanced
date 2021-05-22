@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title> SPM Independent University,Dhaka  </title>
     <link rel="stylesheet" href = "/facultyStudentReport.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
     <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 </head>
@@ -72,12 +73,61 @@
     </header>
     <main>
         <div>
-            hello
+            <h2>Individual Student Overall Progress </h2>
+
+            <div style="width: 600px; height: 400px;display: inline-block;" class="chart">
+                <canvas id="radar" width="600" height="400"></canvas>
+            </div>
+
 
         </div>
     </main>
 </div>
+<script>
+    radarChart("radar")
+    function radarChart(ctx) {
+        Chart.defaults.global.defaultFontFamily = "Oxygen";
+        Chart.defaults.global.defaultFontColor = "black";
+        var chart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: [
+                    {{#each PLONo}}"PLO{{this}}",{{/each}}
+                ],
+                datasets: [{
+                    label: 'Achieved PLO',
+                    data: [{{#each PLOpercentage}}{{this}},{{/each}}],
+                    fill: true,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    pointBackgroundColor: 'rgb(255, 99, 132)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(255, 99, 132)'
+                }, {
+                    label: 'Attempted',
+                    data: [100,100,100,100,100,100,100,100,100],
+                    fill: true,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgb(54, 162, 235)',
+                    pointBackgroundColor: 'rgb(54, 162, 235)',
+                    pointBorderColor: '#fff',
+                    pointHoverBackgroundColor: '#fff',
+                    pointHoverBorderColor: 'rgb(54, 162, 235)'
+                }]
+            },
+            options: {
+                elements: {
+                    line: {
+                        borderWidth: 3
+                    }
+                }
+            },
+        });
+    }
 
+
+</script>
 </body>
 
 </html>
