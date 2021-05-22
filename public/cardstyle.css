@@ -1,9 +1,14 @@
 .customcard{
     float: left;
-    width: 50%;
-    padding: 40px 10px;
+    width: 48%;
+    padding: 33px 3px;
     margin: -10px -5px;
-
+    border:5px ;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
 }
 .customcardb{
     float: left;
@@ -32,6 +37,90 @@
 .customcardb-90{
     float: left;
     width: 90%;
+    padding: 33px 3px;
+    margin: -10px -5px;
+    border: 5px;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+}
+.customcardb-80{
+    float: left;
+    width: 80%;
+    padding: 33px 3px;
+    margin: -10px -5px;
+    border: 5px;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+}
+.customcardb-70{
+    float: left;
+    width: 70%;
+    padding: 33px 3px;
+    margin: -10px -5px;
+    border: 5px;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+}
+.customcardb-50{
+    float: left;
+    width: 50%;
+    padding: 33px 3px;
+    margin: -10px -5px;
+    border: 5px;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+}
+.customcardb-40{
+    float: left;
+    width: 40%;
+    padding: 33px 3px;
+    margin: -10px -5px;
+    border: 5px;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+}
+.customcardb-30{
+    float: left;
+    width: 30%;
+    padding: 33px 3px;
+    margin: -10px -5px;
+    border: 5px;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+}
+.customcardb-20{
+    float: left;
+    width: 20%;
+    padding: 33px 3px;
+    margin: -10px -5px;
+    border: 5px;
+    border-radius: 15px;
+    border-color: #b7c8e0;
+    margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+}
+.customcardb-10{
+    float: left;
+    width: 10%;
     padding: 33px 3px;
     margin: -10px -5px;
     border: 5px;
