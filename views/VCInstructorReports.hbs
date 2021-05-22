@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href = "/VCInstructorReports.css">
     <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
-
+        <link rel="stylesheet" href = "/cardstyle.css">
 </head>
 
 <body>
@@ -82,13 +82,14 @@
             </div>
         </div>
     </header>
-    <main>
+    {{!-- <main> --}}
+<br><br><br><br><br>
 
-<h2> Instructor Report of CSC460</h2>
-        <div style="width: 1500px; height: 500px;display: inline-block;" class="chart">
+        <div style="width: 99%;padding: 5px;" class="chart customcardb">
+            <h2 style="padding: 5px;"> Instructor Report of CSC460</h2>
             <canvas id="FacultyProgressView" width="1500" height="500"></canvas>
         </div>
-    </main>
+    {{!-- </main> --}}
 </div>
 <script>
     let plo2 = [ 'PLO01',  'PLO02',  'PLO03',  'PLO04',  'PLO05',  'PLO06',  'PLO07',  'PLO08',  'PLO12', ];

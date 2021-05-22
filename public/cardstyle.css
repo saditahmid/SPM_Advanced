@@ -10,7 +10,12 @@
     width: 48%;
     padding: 33px 3px;
     margin: -10px -5px;
-    border: 2px solid;
+    /* border: 2px solid; */
+    border-radius: 15px;
     border-color: #b7c8e0;
     margin: 5px;
+    margin-top: 15px;
+    box-shadow: 2px 5px 8px #888888;
+
+    
 }
