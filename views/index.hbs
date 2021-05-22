@@ -7,7 +7,7 @@
     <style>
         body, html {
             height: 100%;
-            margin: 0;
+          padding-top:  0;
             font-family: Poppins;
         }
 
@@ -15,7 +15,8 @@
 
         .bg-image {
             /* The image used */
-            background: -webkit-linear-gradient(rgba(186, 232, 158, 0.8), rgba(210, 119, 115, 0.8), rgba(96, 118, 198, 0.8)), url("https://bit.ly/2rlzaXi");
+            /*/background: -webkit-linear-gradient(rgba(186, 232, 158, 0.8), rgba(210, 119, 115, 0.8), rgba(96, 118, 198, 0.8)), url("https://bit.ly/2rlzaXi");*/
+
             /*object-fit: cover;*/
             opacity: 1;
             /* Add the blur effect */
@@ -52,6 +53,7 @@
             opacity: 1;
         }
         .tab {
+             height: 60px;
             overflow: hidden;
             border: none;
             background-color: #0b223b;
@@ -112,14 +114,13 @@
 
     }
 </style>
-
 <div class="tab">
 
     <button class="tablinks" onclick="openCity(event, 'CONTACT US')"><a href="/contactUs">CONTACT US</a></button>
     <button class="/login"  onclick="openCity(event, 'LOGIN')"><a href="/login">LOGIN</a></button>
-    <button class="/register" onclick="openCity(event, 'REGISTER')"><a href="/register">REGISTER</a></button>
     <button class="/login"  onclick="openCity(event, 'HOME')"><a href="/index">HOME</a></button>
 </div>
+
 
 <!-- Tab content -->
 <div class="bg-image"></div>
