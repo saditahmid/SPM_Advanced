@@ -129,15 +129,12 @@ main{
 }
 .card-single div:last-child span{
     font-size: 2rem;
-    color:var(--main-color);
+  ;
 }
 .card-single div:first-child span{
     color:#126e82;
 }
 
-.card-single:last-child{
-    background:var(--main-color)
-}
 .card-single:last-child h1,
 .card-single :last-child div:first-child span,
 .card-single :last-child div:last-child span{
