@@ -1,45 +1,264 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
-
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="/login.css" rel="stylesheet" type="text/css">
     <script src ="/jquery.js"></script>
 
+	<style>
+        body, html {
+            height: 100%;
+          padding-top:  0;
+            font-family: Poppins;
+        }
+
+
+
+        .bg-image {
+            /* The image used */
+            /*/background: -webkit-linear-gradient(rgba(186, 232, 158, 0.8), rgba(210, 119, 115, 0.8), rgba(96, 118, 198, 0.8)), url("https://bit.ly/2rlzaXi");*/
+
+            /*object-fit: cover;*/
+            opacity: 1;
+            /* Add the blur effect */
+
+            filter: blur(5px);
+            -webkit-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px); /* apply the blur */
+            backdrop-filter: none;
+            /*transform: scale(1.1);*/
+
+            /* Full height */
+            height: 100%;
+
+            /* Center and scale the image nicely */
+            background: rgb(0, 0, 0) url('graphs6.png') no-repeat center;
+            background-size: cover;
+        }
+
+        /* Position text in the middle of the page/image */
+        .bg-text {
+            /*background-color: rgb(201, 12, 12); !* Fallback color *!*/
+            /*background-color: rgba(0, 0, 0, 0.4); !* Black w/opacity/see-through *!*/
+            color: #d0dec9;
+            font-weight:bolder;
+            border: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+            width: 60%;
+            padding: 80px;
+            text-align: center;
+            opacity: 1;
+        }
+        .tab {
+             height: 60px;
+            overflow: hidden;
+            border: none;
+            background-color: #0b223b;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: right;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+            color: white;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+            color:#0b223b;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #0b223b;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+
+		a:link, a:visited {
+
+			color: white;
+
+			text-align: center;
+			text-decoration: none;
+
+		}
+
+		a:hover, a:active {
+			color: #0b223b;
+
+			text-align: center;
+			text-decoration: none;
+
+		}
+	</style>
+
+<style>
+    body, html {
+        height: 100%;
+      padding-top:  0;
+        font-family: Poppins;
+    }
+
+
+
+    .bg-image {
+        /* The image used */
+        /*/background: -webkit-linear-gradient(rgba(186, 232, 158, 0.8), rgba(210, 119, 115, 0.8), rgba(96, 118, 198, 0.8)), url("https://bit.ly/2rlzaXi");*/
+
+        /*object-fit: cover;*/
+        opacity: 1;
+        /* Add the blur effect */
+
+        filter: blur(5px);
+        -webkit-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px); /* apply the blur */
+        backdrop-filter: none;
+        /*transform: scale(1.1);*/
+
+        /* Full height */
+        height: 100%;
+
+        /* Center and scale the image nicely */
+        background: rgb(3, 3, 3) url('graphs6.png') no-repeat center;
+        background-size: cover;
+    }
+
+    /* Position text in the middle of the page/image */
+    .bg-text {
+        /*background-color: rgb(201, 12, 12); !* Fallback color *!*/
+        /*background-color: rgba(0, 0, 0, 0.4); !* Black w/opacity/see-through *!*/
+        color: #d0dec9;
+        font-weight:bolder;
+        border: none;
+        position: absolute;
+        top: 75%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
+        width: 100%;
+        padding: 0;
+        text-align: center;
+        opacity: 1;
+    }
+    .tab {
+         height: 60px;
+        overflow: hidden;
+        border: none;
+        background-color: #0b223b;
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        background-color: inherit;
+        float: right;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        color: white;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+        color:#0b223b;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #0b223b;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
 </head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF" crossorigin="anonymous"></script>
+
 <body>
 
-<div class="login-reg-panel">
-    <div class="register-info-box">
-        <h2>Welcome to Student Performance Monitor Advanced </h2>
-        <p>Use your authenticated id to signin</p>
-    </div>
+<style>
+a:link, a:visited {
 
-    <div class="white-panel">
-        <div class="login-show">
-            <h2>Login</h2>
-            <form action="/auth/login" method="POST">
-                <label>
-                    <input type="text" name="userId" id="userId" placeholder="Enter Id">
-                </label>
-                <label>
-                    <input type="password" name="password" id="password" placeholder="Password">
-                </label>
-                    <input type="submit" value="Login" id="submit">
-                <small><a href="" onclick="forgotpassword();">Forgot your password?</a></small>
-                <script>
-                    function forgotpassword() {
-                        alert("Please contact the Registrar's Office.");
-                    }
-                </script>
-            </form>
-        </div>
-    </div>
-    new
+    color: white;
+
+    text-align: center;
+    text-decoration: none;
+
+}
+
+a:hover, a:active {
+    color: #0b223b;
+
+    text-align: center;
+    text-decoration: none;
+
+}
+</style>
+
+
+<div class="tab">
+
+    <button class="tablinks" onclick="openCity(event, 'CONTACT US')"><a href="/contactUs">CONTACT US</a></button>
+    <button class="/login"  onclick="openCity(event, 'LOGIN')"><a href="/login">LOGIN</a></button>
+    <button class="/login"  onclick="openCity(event, 'HOME')"><a href="/index">HOME</a></button>
 </div>
-{{#if message}}
-    <h4 class="alert alert-danger mt-4">{{message}}</h4>
-{{/if}}
+<div class="bg-image"></div>
+<div style="display: block;">
+<div style="width: 100%" class="bg-text">
+    <div class="login-reg-panel">
+        <div style="padding-left: 0;" class="register-info-box">
+            <h2>Welcome to Student Performance Monitor Advanced </h2>
+            <p>Use your authenticated id to signin</p>
+        </div>
+    
+        <div class="white-panel">
+            <div class="login-show">
+                <h2>Login</h2>
+                <form action="/auth/login" method="POST">
+                    <label style="width: 100%;">
+                        <input type="text" name="userId" id="userId" placeholder="Enter Id">
+                    </label>
+                    <label style="width: 100%;">
+                        <input type="password" name="password" id="password" placeholder="Password">
+                    </label>
+                        <input type="submit" value="Login" id="submit">
+                    <small><a href="" onclick="forgotpassword();" style="color: black;">Forgot your password?</a></small>
+                    <script>
+                        function forgotpassword() {
+                            alert("Please contact the Registrar's Office.");
+                        }
+                    </script>
+                </form>
+            </div>
+        </div>
+  
+    </div>
+</div>
+</div>
 </body>
-</html>
