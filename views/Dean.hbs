@@ -268,8 +268,8 @@
     let PchartName = [{{#each program}}"{{this}}",{{/each}}];
     let PchartLabel = [{{#each progcountStudents}}{{this}},{{/each}}];
     pieChart("ProgramWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
-    let DchartName = [{{#each department}}"{{this}}",{{/each}}];
-    let DchartLabel = [{{#each DeptcountStudents}}{{this}},{{/each}}];
+    let DchartName = ['CSE','EEE'];
+    let DchartLabel = [{{CSECount}},{{EEECount}}];
     pieChart("DeptWise", "Department Wise Student Enrollment", DchartName, DchartLabel)
 
     function pieChart(ctx,
