@@ -10,6 +10,7 @@ This is a cloud based application written in Node (Express) to monitor the perfo
 
 ## Login Credentials
 Visit : https://spmv2.azurewebsites.net/
+
 A few dummy users have already been created in the database. Information of 6 such users from 6 different user categories are shown below.
 * Student:
     - Username: 100
