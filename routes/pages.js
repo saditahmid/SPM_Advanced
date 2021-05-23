@@ -2337,10 +2337,7 @@ Router.get("/DeanProgramReports", (req,res) => {
                                                             })
                                                         }) }) }) }) }) }) }) }) }) }) }) }) }) })
 });
-Router.get("/VCDataEntry", (req,res) => {
 
-    res.render(`VCDataEntry`, {FacultyID: User.FacultyID,  F_fname: User.F_fname, F_lName:User.F_lName, F_Gender:User.F_Gender, F_DateOfBirth:User.F_DateOfBirth, F_Email:User.F_Email, F_Phone:User.F_Phone,F_Address:User.F_Address, FacultyProfile:User.FacultyProfile, DepartmentID:User.DepartmentID})
-});
 
 Router.get("/VCDownloads", (req,res) => {
 
