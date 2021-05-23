@@ -330,17 +330,32 @@ exports.login = async(req, res) =>{
                         console.log(progcountStudents)
 
 
-                        db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                        db.all( `SELECT p.DepartmentID,COUNT(e.StudentID) c
+                                             FROM Enrollment_T e,Program_T p,Department_T d
+                                             WHERE e.ProgramID=p.ProgramID
+                                               AND e.EnrolledYear=2021
+                                               AND e.EnrolledSem='Spring'
+                                               AND d.SchoolID='SETS'
+                                             GROUP BY p.DepartmentID`, async(error, results) => {
                             console.log(results)
-                            let department = []
-                            let DeptcountStudents = []
+                            let  CSECount,  EEECount, ACCCount, ECOCount, MISCount
                             for(let i=0;i<results.length;++i){
-                                department[i] = results[i].DepartmentID;
-                                DeptcountStudents[i]=results[i].c;
+                                if(results[i].DepartmentID == 'CSE' ){
+                                    CSECount=results[i].c
+                                }else if (results[i].DepartmentID == 'EEE'){
+                                    EEECount=results[i].c
+                                }
+                                else if (results[i].DepartmentID == 'ACC'){
+                                    ACCCount=results[i].c
+                                }
+                                else if (results[i].DepartmentID == 'ECO'){
+                                    ECOCount=results[i].c
+                                }
+                                else if (results[i].DepartmentID == 'MIS'){
+                                    MISCount=results[i].c
+                                }
 
                             }
-                            console.log(department)
-                            console.log(DeptcountStudents)
 
 
                             db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c  FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
@@ -377,8 +392,11 @@ exports.login = async(req, res) =>{
 
                             res.render("\Admin", {AdminID:results.AdminID, A_F_Name:results.A_F_Name, A_L_Name:results.A_L_Name, A_Gender:results.A_Gender, A_DateOfBirth:results.A_DateOfBirth, A_Email:results.A_Email, A_Phone:results.A_Phone,A_Address:results.A_Address, AdminProfile:results.AdminProfile, schoolcountStudents:schoolcountStudents,
                                 school:school,
-                                department:department,
-                                DeptcountStudents:DeptcountStudents,
+                                CSECount:CSECount,
+                                EEECount:EEECount,
+                                ACCCount:ACCCount,
+                                ECOCount:ECOCount,
+                                MISCount:MISCount,
                                 program:program,
                                 progcountStudents:progcountStudents});
 
@@ -455,17 +473,34 @@ exports.login = async(req, res) =>{
                                     }
                                     console.log(program)
                                     console.log(progcountStudents)
-                                    db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                    db.all( `SELECT p.DepartmentID,COUNT(e.StudentID) c
+                                             FROM Enrollment_T e,Program_T p,Department_T d
+                                             WHERE e.ProgramID=p.ProgramID
+                                               AND e.EnrolledYear=2021
+                                               AND e.EnrolledSem='Spring'
+                                               AND d.SchoolID='SETS'
+                                             GROUP BY p.DepartmentID`, async(error, results) => {
                                         console.log(results)
-                                        let department = []
-                                        let DeptcountStudents = []
+                                        let  CSECount,  EEECount, ACCCount, ECOCount, MISCount
                                         for(let i=0;i<results.length;++i){
-                                            department[i] = results[i].DepartmentID;
-                                            DeptcountStudents[i]=results[i].c;
+                                            if(results[i].DepartmentID == 'CSE' ){
+                                                CSECount=results[i].c
+                                            }else if (results[i].DepartmentID == 'EEE'){
+                                                EEECount=results[i].c
+                                            }
+                                            else if (results[i].DepartmentID == 'ACC'){
+                                                ACCCount=results[i].c
+                                            }
+                                            else if (results[i].DepartmentID == 'ECO'){
+                                                ECOCount=results[i].c
+                                            }
+                                            else if (results[i].DepartmentID == 'MIS'){
+                                                MISCount=results[i].c
+                                            }
 
                                         }
-                                        console.log(department)
-                                        console.log(DeptcountStudents)
+
+
                                         db.all("SELECT d.SchoolID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d,School_T s WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID=s.SchoolID GROUP BY d.SchoolID", async(error, results) => {
                                             console.log(results)
                                             let school = []
@@ -508,8 +543,11 @@ exports.login = async(req, res) =>{
                                                         schoolcountStudents: schoolcountStudents,
                                                         program: program,
                                                         progcountStudents: progcountStudents,
-                                                        department: department,
-                                                        DeptcountStudents: DeptcountStudents,
+                                                        EEECount:EEECount,
+                                                        CSECount:CSECount,
+                                                        ACCCount:ACCCount,
+                                                        ECOCount:ECOCount,
+                                                        MISCount:MISCount,
                                                         PLONo:PLONo,
                                                         PLOPercentage:PLOPercentage
                                                     });
@@ -577,17 +615,25 @@ exports.login = async(req, res) =>{
                                     }
                                     console.log(program)
                                     console.log(progcountStudents)
-                                    db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                    db.all( `SELECT p.DepartmentID,COUNT(e.StudentID) c
+                                             FROM Enrollment_T e,Program_T p,Department_T d
+                                             WHERE e.ProgramID=p.ProgramID
+                                               AND e.EnrolledYear=2021
+                                               AND e.EnrolledSem='Spring'
+                                               AND d.SchoolID='SETS'
+                                             GROUP BY p.DepartmentID`, async(error, results) => {
                                         console.log(results)
-                                        let department = []
-                                        let DeptcountStudents = []
+                                        let CSE, CSECount, EEE , EEECount
+
                                         for(let i=0;i<results.length;++i){
-                                            department[i] = results[i].DepartmentID;
-                                            DeptcountStudents[i]=results[i].c;
+                                            if(results[i].DepartmentID == 'CSE' ){
+                                                CSECount=results[i].c
+                                            }else if (results[i].DepartmentID == 'EEE'){
+                                                EEECount=results[i].c
+                                            }
 
                                         }
-                                        console.log(department)
-                                        console.log(DeptcountStudents)
+
 
                                         db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
                                             if(error){
@@ -617,8 +663,8 @@ exports.login = async(req, res) =>{
                                                     DepartmentID: results.DepartmentID,
                                                     program: program,
                                                     progcountStudents: progcountStudents,
-                                                    department: department,
-                                                    DeptcountStudents: DeptcountStudents,
+                                                    EEECount: EEECount,
+                                                    CSECount: CSECount,
                                                     H_Position: H_Position,
                                                     PLONo:PLONo,
                                                     PLOPercentage:PLOPercentage
@@ -685,17 +731,24 @@ exports.login = async(req, res) =>{
                                     }
                                     console.log(program)
                                     console.log(progcountStudents)
-                                    db.all("SELECT d.DepartmentID,COUNT(e.StudentID) AS c FROM Enrollment_T e,Program_T p, Department_T d WHERE e.ProgramID=p.ProgramID AND d.DepartmentID=p.DepartmentID AND d.SchoolID='SETS' GROUP BY d.DepartmentID", async(error, results) => {
+                                    db.all( `SELECT p.DepartmentID,COUNT(e.StudentID) c
+                                             FROM Enrollment_T e,Program_T p,Department_T d
+                                             WHERE e.ProgramID=p.ProgramID
+                                               AND e.EnrolledYear=2021
+                                               AND e.EnrolledSem='Spring'
+                                               AND d.SchoolID='SETS'
+                                             GROUP BY p.DepartmentID`, async(error, results) => {
                                         console.log(results)
-                                        let department = []
-                                        let DeptcountStudents = []
-                                        for (let i = 0; i < results.length; ++i) {
-                                            department[i] = results[i].DepartmentID;
-                                            DeptcountStudents[i] = results[i].c;
+                                        let CSE, CSECount, EEE , EEECount
+
+                                        for(let i=0;i<results.length;++i){
+                                            if(results[i].DepartmentID == 'CSE' ){
+                                                CSECount=results[i].c
+                                            }else if (results[i].DepartmentID == 'EEE'){
+                                                EEECount=results[i].c
+                                            }
 
                                         }
-                                        console.log(department)
-                                        console.log(DeptcountStudents)
                                         db.get("SELECT FacultyID, F_fname, F_lName, F_Gender, F_DateOfBirth, F_Email, F_Phone,F_Address, FacultyProfile, DepartmentID from Faculty_T WHERE FacultyID = ?",[id], async(error, results) => {
                                             if(error){
                                                 console.log(error)
@@ -725,8 +778,8 @@ exports.login = async(req, res) =>{
                                                     Term_start_date: results.Term_start_date,
                                                     Term_end_date: results.Term_end_date,
                                                     H_Position: results.H_Position,
-                                                    department: department,
-                                                    DeptcountStudents: DeptcountStudents,
+                                                    EEECount:EEECount,
+                                                    CSECount:CSECount,
                                                     program: program,
                                                     progcountStudents: progcountStudents,
                                                     PLONo:PLONo,

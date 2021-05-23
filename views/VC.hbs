@@ -98,12 +98,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h3> Program Learning Outcomes (PLO) for Department of CSE</h3>
-
-                        <button>  <a href="http://www.cse.iub.edu.bd/">See Courses </a><span class="las.la-arrow-right"></span></button>
-                        <button>  <a href="">Question Bank</a><span class="las.la-arrow-right"></span></button>
-                        <button> <a href="https://irasv1.iub.edu.bd/#/">Go to IRAS <span class="las.la-arrow-right"></span></button>
-                        <button> <a href="">IUB Mail <span class="las.la-arrow-right"></span></button>
-
+                        <button> See Courses <span class="las.la-arrow-right"></span></button>
                     </div>
                     <div class="card-body">
                         <table width="100%">
@@ -209,7 +204,7 @@
                     <div class="card-header">
                         <h3>Enrollment Analysis</h3>
                         <h3>(2017-Recent)</h3>
-
+                        <button> Go to IRAS <span class="las.la-arrow-right"></span></button>
                     </div>
 
                     <div class="card-body">
@@ -286,8 +281,8 @@
     let SchchartName = [{{#each school}}"{{this}}",{{/each}}];
     let SchchartLabel = [{{#each schoolcountStudents}}{{this}},{{/each}}];
     pieChart("SchWise", "Program Wise Student Enrollment", SchchartName, SchchartLabel)
-    let DpchartName = [{{#each department}}"{{this}}",{{/each}}];
-    let DpchartLabel = [{{#each DeptcountStudents}}{{this}},{{/each}}];
+    let DchartName = ['CSE','EEE','ACC','ECO','MIS'];
+    let DchartLabel = [{{CSECount}},{{EEECount}},{{ACCCount}},{{ECOCount}},{{MISCount}}];
     pieChart("DeptWise", "Program Wise Student Enrollment", DpchartName, DpchartLabel)
     let PchartName = [{{#each program}}"{{this}}",{{/each}}];
     let PchartLabel = [{{#each progcountStudents}}{{this}},{{/each}}];

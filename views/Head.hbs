@@ -271,8 +271,8 @@
             }
         });
     }
-    let DchartName = [{{#each department}}"{{this}}",{{/each}}];
-    let DchartLabel = [{{#each DeptcountStudents}}{{this}},{{/each}}];
+    let DchartName = ['CSE','EEE'];
+    let DchartLabel = [{{CSECount}},{{EEECount}}];
     pieChart("DeptWise", "Program Wise Student Enrollment", DchartName, DchartLabel)
 
 
