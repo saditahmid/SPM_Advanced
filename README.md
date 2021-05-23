@@ -38,4 +38,3 @@ A few dummy users have already been created in the database. Information of 6 su
 * Farhan Ahsan Adib
 * Shakil Ahmed
 
-# বি: দ্র: "চুরি করা থেকে বিরত থাকুন, নিজের মস্তিষ্ক ব্যাবহার করুন"
