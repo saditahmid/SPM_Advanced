@@ -1,5 +1,6 @@
 # Student Performance Monitoring System
 This is a cloud based application written in Node (Express) to monitor the performances of students from Independent University, Bangladesh. 
+Visit : https://spmv2.azurewebsites.net/
 
 
 ![SPM Screenshot](images/Screenshot_Student.png)
