@@ -1,6 +1,5 @@
 # Student Performance Monitoring System
 This is a cloud based application written in Node (Express) to monitor the performances of students from Independent University, Bangladesh. 
-Visit : https://spmv2.azurewebsites.net/
 
 
 ![SPM Screenshot](images/Screenshot_Student.png)
@@ -10,6 +9,7 @@ Visit : https://spmv2.azurewebsites.net/
 2. NPM
 
 ## Login Credentials
+Visit : https://spmv2.azurewebsites.net/
 A few dummy users have already been created in the database. Information of 6 such users from 6 different user categories are shown below.
 * Student:
     - Username: 100
