@@ -131,9 +131,6 @@ main{
     font-size: 2rem;
     color:var(--main-color);
 }
-.card-single div:first-child span{
-    color:#126e82;
-}
 
 
 .card-single:last-child h1,
@@ -162,7 +159,7 @@ main{
 }
 
 .card-header button{
-    background :var(--main-color);
+
     border-radius:10px;
     color:#fff;
     font-size:.8rem;
