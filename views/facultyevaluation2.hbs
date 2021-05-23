@@ -2,9 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title> SPM Independent University,Dhaka  </title>
-    <link rel="stylesheet" href = "/facultyDataEntry.css">
-    <link rel="stylesheet" href =  "https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
+    <title> SPM Independent University,Dhaka </title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <!--  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+
+
+    <link rel="stylesheet" href="/faculty.css">
+    <link rel="stylesheet"
+          href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
 
 </head>
 
@@ -12,23 +22,21 @@
 <input type="checkbox" id="nav-toggle">
 <div class="sidebar">
     <div class="sidebar-brand">
-        <h2> <span class="lab la-accusoft"> </span> <span> SPM</span></h2>
-        <p>
+        <h2><span class="lab la-accusoft"> </span> <span> SPM</span></h2>
 
-        </p>
     </div>
     <div class="sidebar-menu">
         <ul>
             <li>
-                <a href="/Faculty" ><span class="las la-igloo"></span>
+                <a href="/Faculty" class="active"><span class="las la-igloo"></span>
                     <span>Student Performance Monitor</span></a>
             </li>
             <li>
-                <a href="/facultyCourses"><span  class="las la-school"></span>
+                <a href="/facultyCourses"><span class="las la-school"></span>
                     <span> My Courses</span></a>
             </li>
             <li>
-                <a href="/facultyDataEntry" class="active"><span class="las la-database"></span>
+                <a href="/facultyDataEntry"><span class="las la-database"></span>
                     <span> Data Entry</span></a>
             </li>
 
@@ -52,15 +60,12 @@
         </ul>
     </div>
 </div>
-
 <div class="main-content">
     <header>
         <h2>
             <label for="nav-toggle">
                 <span class="las la-bars"></span>
             </label>
-
-
             Evaluation
         </h2>
         <div class="user-wrapper">
@@ -72,3 +77,359 @@
             </div>
         </div>
     </header>
+<table>
+    <div class="flex-container blockwise">
+        <!--CO Mapping-->
+        <div class="box-section">
+            <div class="box-section-head"></div>
+            <style>
+                .content-table {
+
+                    border-collapse: collapse;
+                    width:calc(100% - 40px);
+                    right:70px;
+                    margin: 30px 30px 30px 30px ;
+                    font-size: 0.9em;
+                    min-width: px;
+                    border-radius: 2px 2px 0 0;
+                    overflow: hidden;
+                    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+                }
+
+                .content-table thead tr {
+                    background-color: #132c33;
+                    color: #ffffff;
+                    text-align: right;
+                    font-weight: bold;
+                }
+
+                .content-table th,
+                .content-table td {
+                    padding: 10px 8px;
+                }
+
+                .content-table tbody tr {
+                    border-bottom: 1px solid #dddddd;
+                }
+
+                .content-table tbody tr:nth-of-type(even) {
+                    background-color: #f3f3f3;
+                }
+
+                .content-table tbody tr:last-of-type {
+                    border-bottom: 2px solid #009879;
+                }
+
+                .content-table tbody tr.active-row {
+                    font-weight: bold;
+                    color: #009879;
+                }
+
+
+
+            </style>
+
+
+
+            <table class="content-table">
+
+                <td class="form-field">
+                    <select class="form-control" id="section-id-assessment" name="section-id-assessment">
+
+                        <option style="display: none;" value="" disabled selected>Question Type :</option>
+                        <option value="1">Mid-Term</option>
+                        <option value="2">Final</option>
+                        <option value="3">Project</option>
+                        <option value="3">Quiz 1</option>
+                        <option value="3">Quiz-2</option>
+                        <option value="3">Assignment 1</option>
+                        <option value="3">Assignment 2</option>
+                        <option value="3">Create New</option>
+
+                    </select></td></td>
+                </th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>  <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>  <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+                <th></th>
+
+
+                </tr>
+                </thead>
+
+
+        </div>
+        <table class="content-table">
+            <thead>
+
+            <th> <input type="text" placeholder="Student ID: "> </th>
+            <th><input type="text" placeholder="Name : "></th>
+            <td class="form-field">
+                <select class="form-control" id="section-id-assessment" name="section-id-assessment">
+
+                    <option style="display: none;" value="" disabled selected> <b>Question Type</b>:</option>
+                    <option value="1">Mid-Term</option>
+                    <option value="2">Final</option>
+                    <option value="3">Project</option>
+                    <option value="3">Quiz 1</option>
+                    <option value="3">Quiz-2</option>
+                    <option value="3">Assignment 1</option>
+                    <option value="3">Assignment 2</option>
+                    <option value="3">Create New</option>
+
+                </select></td></td>
+
+
+            <th><input type="text" placeholder="COURSE ID : CSE 464 "></th>
+            <th><input type="text" placeholder="SECTION ID : 01 "></th>
+
+
+
+
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>  100</td>
+                <td> Farhan Hasan Adib</td>
+
+
+
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 10px;">
+                <td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Save</button></td>
+
+
+
+
+
+
+
+
+            <tr class="active-row">
+                <td>    101  </td>
+                <td>Arpita Sarkar</td>
+
+
+
+
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 10px;">
+
+
+                <td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Save</button></td>
+
+
+
+            </tr>
+            <tr>
+                <td>    234  </td>
+                <td>Azhar Sunny</td>
+
+
+
+
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 4px;">
+                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
+                    <select class="form-control" id="coMaps" name="coMaps">
+                        <option value="Q1">Question</option>
+                        <option value="Q1">Q1</option>
+                        <option value="Q2">Q2</option>
+                        <option value="Q3">Q3</option>
+                        <option value="Q4">Q4</option>
+                        <option value="Q5">Q5</option>
+                        <option value="Q6">Q6</option>
+                        <option value="Q7">Q7</option>
+                        <option value="Q8">Q8</option>
+                        <option value="Q9">Q9</option>
+                        <option value="Q10">Q10</option>
+                <td class="form-field" style="width: 10px;">
+                <td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Save</button></td>
+
+            </tr>
+
+
+
+
+            </tr>
+            <tr>
+
+                <td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Calculate & Save</button></td>
+        </table>
+
+    </div>
+</table>
+</main>
+</div>
+
+</body>
+
+</html>
+
