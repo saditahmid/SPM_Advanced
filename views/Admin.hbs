@@ -154,7 +154,7 @@
     pieChart("SchWise", "Program Wise Student Enrollment", SchchartName, SchchartLabel)
     let DchartName = ['CSE','EEE','ACC','ECO','MIS'];
     let DchartLabel = [{{CSECount}},{{EEECount}},{{ACCCount}},{{ECOCount}},{{MISCount}}];
-    pieChart("DeptWise", "Program Wise Student Enrollment", DpchartName, DpchartLabel)
+    pieChart("DeptWise", "Program Wise Student Enrollment", DchartName, DchartLabel)
     let PchartName = [{{#each program}}"{{this}}",{{/each}}];
     let PchartLabel = [{{#each progcountStudents}}{{this}},{{/each}}];
     pieChart("ProgWise", "Program Wise Student Enrollment", PchartName, PchartLabel)
