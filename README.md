@@ -3,8 +3,7 @@
 
 ## Dependencies
 1. Node.js
-2. Express
-3. Handlebars
+2. NPM
 
 ## Contributers
 * Tahmid Hossain
