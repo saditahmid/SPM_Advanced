@@ -169,6 +169,25 @@
                 <th> <input type="text" placeholder="Student ID: "> </th>
                 <th><input type="text" placeholder="Name : "></th>
                 <th><input type="text" placeholder="Total Marks : "></th>
+                <td class="form-field">
+                    <select class="form-control" id="section-id-assessment" name="section-id-assessment">
+
+                        <option style="display: none;" value="" disabled selected> <b>Question Type</b>:</option>
+                        <option value="1">Mid-Term</option>
+                        <option value="2">Final</option>
+                        <option value="3">Project</option>
+                        <option value="3">Quiz 1</option>
+                        <option value="3">Quiz-2</option>
+                        <option value="3">Assignment 1</option>
+                        <option value="3">Assignment 2</option>
+                        <option value="3">Create New</option>
+
+                    </select></td></td>
+
+
+                <th><input type="text" placeholder="COURSE ID : CSE 303 "></th>
+                <th><input type="text" placeholder="SECTION ID : 03 "></th>
+
                 <th></th>
                 <th></th>
                 <th></th>
@@ -182,8 +201,9 @@
             </thead>
             <tbody>
             <tr>
-                <td> 100 </td>
-                <td>Farhan Hasan Adib </td>
+                <td>    102 </td>
+                <td>Rohit Agarwal </td>
+
 
 
                 <td class="form-field" style="width: 4px;">
@@ -237,8 +257,9 @@
 
 
             <tr class="active-row">
-                <td>104 </td>
-                <td> Rabika Hasan</td>
+                <td>  113  </td>
+                <td> Sanyal Arid</td>
+
 
 
                 <td class="form-field" style="width: 4px;">
@@ -288,8 +309,9 @@
 
             </tr>
             <tr>
-                <td> 110</td>
-                <td>Maisha Anjum</td>
+                <td> 114 </td>
+                <td>Sadman Nafi</td>
+
                 <td class="form-field" style="width: 4px;">
                     <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
                 <td class="form-field">
@@ -336,102 +358,6 @@
                 <td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Save</button></td>
 
             </tr>
-            <tr>
-                <td> 230</td>
-                <td>Sherin Ordi</td>
-                <td class="form-field" style="width: 4px;">
-                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
-                <td class="form-field">
-                    <select class="form-control" id="section-id-assessment" name="section-id-assessment">
-
-                        <option style="display: none;" value="" disabled selected>Grade:</option>
-                        <option value="1">A</option>
-                        <option value="2">A-</option>
-                        <option value="3">B+</option>
-                        <option value="4">B</option>
-                        <option value="5">B-</option>
-                        <option value="6">C+</option>
-                        <option value="7">C</option>
-                        <option value="8">C-</option>
-                        <option value="9">D+</option>
-                        <option value="10">D</option>
-                        <option value="11">I</option>
-                        <option value="12">W</option </select>
-                </td>
-                <td class="form-field">
-                    <select class="form-control" id="section-id-assessment" name="section-id-assessment">
-
-                        <option style="display: none;" value="" disabled selected>Grade Point: </option>
-                        <option value="1">4.0</option>
-                        <option value="2">3.7</option>
-                        <option value="3">3.3</option>
-                        <option value="4">3.0</option>
-                        <option value="5">2.7</option>
-                        <option value="6">2.3</option>
-                        <option value="7">2.0</option>
-                        <option value="8">1.7</option>
-                        <option value="9">1.3</option>
-                        <option value="10">1.0</option>
-                        <option value="11">0.0</option>
-
-                    </select>
-                </td>
-
-                <td class="form-field" style="width: 10px;">
-                <td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Save</button></td>
-            </tr>
-            <tr>
-                <td>231</td>
-                <td> Rabiul Hassan</td>
-                <td class="form-field" style="width: 4px;">
-                    <input type="text" id="mapping${i + 1}" name="mapping${i + 1}" class="form-control" placeholder="Marks Obtained" />
-
-
-                <td class="form-field">
-                    <select class="form-control" id="section-id-assessment" name="section-id-assessment">
-
-                        <option style="display: none;" value="" disabled selected>Grade:</option>
-                        <option value="1">A</option>
-                        <option value="2">A-</option>
-                        <option value="3">B+</option>
-                        <option value="4">B</option>
-                        <option value="5">B-</option>
-                        <option value="6">C+</option>
-                        <option value="7">C</option>
-                        <option value="8">C-</option>
-                        <option value="9">D+</option>
-                        <option value="10">D</option>
-                        <option value="11">I</option>
-                        <option value="12">W</option>
-                    </select>
-                </td>
-                <td class="form-field">
-                    <select class="form-control" id="section-id-assessment" name="section-id-assessment">
-
-                        <option style="display: none;" value="" disabled selected>Grade Point: </option>
-                        <option value="1">4.0</option>
-                        <option value="2">3.7</option>
-                        <option value="3">3.3</option>
-                        <option value="4">3.0</option>
-                        <option value="5">2.7</option>
-                        <option value="6">2.3</option>
-                        <option value="7">2.0</option>
-                        <option value="8">1.7</option>
-                        <option value="9">1.3</option>
-                        <option value="10">1.0</option>
-                        <option value="11">0.0</option>
-
-                    </select>
-                </td>
-
-                <td class="form-field" style="width: 10px;">
-                <td style="text-align: center;" class="last-row" colspan="2"><button class="btn btn-primary">Save</button></td>
-            </tr>
-
-
-
-
-
 
             </tbody>
 
