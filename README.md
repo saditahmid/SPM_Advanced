@@ -4,12 +4,28 @@ This is a cloud based application written in Node (Express) to monitor the perfo
 
 ![SPM Screenshot](images/Screenshot_Student.png)
 
-## Dependencies
+## **DEPENDENCIES**
 1. Node.js
 2. NPM
 
+## **Run SPM Server**
+#### 1. Install Node.js and NPM on your computer.
+
+#### 2. Clone this repo and open it using VS Code or Webstorm:
+#### 3. Open the terminal and run the following commands:
+
+
+        npm install
+
+#### 3. Now, To run the the following command to start the server
+
+        npm start
+
+#### 4. In the browser open http://localhost:3033/, and you should see the index page
+#### 5. As the application is hosted on Azure, you can also visit : https://spmv2.azurewebsites.net/
+
 ## Login Credentials
-Visit : https://spmv2.azurewebsites.net/
+
 
 A few dummy users have already been created in the database. Information of 6 such users from 6 different user categories are shown below.
 * Student:
@@ -32,7 +48,7 @@ A few dummy users have already been created in the database. Information of 6 su
     - Password: 12345
 
 
-## Contributers
+## **Contributers**
 * Tahmid Hossain
 * Nawar Anzara
 * Sabrina Masum Meem
